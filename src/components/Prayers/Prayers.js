@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {usePrayer} from './api';
@@ -20,17 +20,26 @@ const Prayers = (props) => {
     console.log(data)
     debugger;    
     const classes = useStyles();
-
+    // 
+    const monthList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let dt = new Date();
+    let day = ('0'+dt.getDate()).slice(-2);
+    let mon = monthList[dt.getMonth()];
+    let yr = dt.getFullYear();
+    console.log(`${day} ${mon} ${yr}`)
+    // 
+    useEffect(() => {
+        if (prayerdata && Object.keys(prayerdata).length) {
+            //localStorage.setItem()
+        }
+        
+    })
     
     return (
         <div className="pdnContainer">
         {(typeof data === "object" && code === 200 && Object.keys(prayerdata).length)
             ?<>
-                <Prayer pdata={prayerdata.timings}/>
-                <Prayer pdata={prayerdata}/> 
-                <Prayer pdata={prayerdata}/> 
-                <Prayer pdata={prayerdata}/> 
-                <Prayer pdata={prayerdata}/>               
+                <Prayer pdata={prayerdata}/>                           
             </>
             :<CircularProgress className={classes.progress} color="secondary" />
         }        

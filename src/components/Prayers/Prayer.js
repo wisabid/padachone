@@ -31,9 +31,7 @@ const Prayer = (props) => {
     const { pdata:{timings, date} } = props;
     const classes = useStyles();
 
-    console.log('TIMINGS', timings)
-    // let timingsdata = Object.keys(timings)
-    //console.table(timingsdata)
+    
 
     
     if (timings) {
