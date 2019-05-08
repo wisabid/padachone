@@ -8,7 +8,7 @@ const Layout = (props) => {
     
     return (
         <>
-            <Header />
+            <Header timezone="Europe/Amsterdam"/>
                 <Prayers />
             <Footer />
         </>        

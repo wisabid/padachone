@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import Layout from '../Layout'
+import 'typeface-roboto';
+import Layout from '../Layout';
 
 function App() {  
   return (

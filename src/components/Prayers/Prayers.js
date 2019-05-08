@@ -1,35 +1,40 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import {usePrayer} from './api';
+import Prayer from './Prayer';
+import './prayers.css';
 
+const useStyles = makeStyles(theme => ({
+    progress: {
+      margin: theme.spacing(2),
+    },
+    secondary: {
+        color:'#4caf50'
+    }
+  }));
 
 const Prayers = (props) => {
-    const [data, setData] = usePrayer();
+    const [data, setData] = usePrayer('Amsterdam');
+    const {data:prayerdata, code, status} = data;
     console.log(data)
-    debugger;
-    const { classes } = {classes : {root : 'test'}};
+    debugger;    
+    const classes = useStyles();
 
     
     return (
-        <>
-        {(typeof data === "object" && Object.keys(data).length)
-            ?data.data.map(item => {
-                return (
-                    <Paper className={classes.root} elevation={1} rounded style={{marginBottom:"10px" }}>
-                        <Typography variant="h4" component="h4" gutterBottom>
-                            {item.timings.Maghrib}
-                        </Typography>
-                        <Typography component="p">
-                            {item.date.readable}
-                        </Typography>
-                    </Paper>
-                )
-            })
-            :null
-
+        <div className="pdnContainer">
+        {(typeof data === "object" && code === 200 && Object.keys(prayerdata).length)
+            ?<>
+                <Prayer pdata={prayerdata.timings}/>
+                <Prayer pdata={prayerdata}/> 
+                <Prayer pdata={prayerdata}/> 
+                <Prayer pdata={prayerdata}/> 
+                <Prayer pdata={prayerdata}/>               
+            </>
+            :<CircularProgress className={classes.progress} color="secondary" />
         }        
-        </>
+        </div>
     )
 }
 
