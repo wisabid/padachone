@@ -20,9 +20,9 @@ const Header = ({timezone}) => {
 
     return (
         <div className={{flexGrow: 1}}>
-        <AppBar position="fixed" color="primary" style={{backgroundColor:'#4caf50'}}>
+        <AppBar position="fixed" color="primary">
             <Toolbar>
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h6" color="inherit" style={{color: 'white'}}>
                 {timezone}
             </Typography>
             </Toolbar>

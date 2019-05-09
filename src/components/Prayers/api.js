@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-export const usePrayer = (city) => {
-    const API = `https://api.aladhan.com/v1/timingsByCity?city=Amsterdam&country=Netherlands&method=8`;
+export const usePrayer = ({country, city}) => {
+    debugger;
+    const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=8`;
     const [data, setData] = useState({})
     async function fetchPrayerTimes() {
         const res = await fetch(API, {

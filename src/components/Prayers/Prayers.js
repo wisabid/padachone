@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import green from '@material-ui/core/colors/green';
+import Grow from '@material-ui/core/Grow';
 import {usePrayer} from './api';
 import Prayer from './Prayer';
 import './prayers.css';
@@ -8,6 +10,7 @@ import './prayers.css';
 const useStyles = makeStyles(theme => ({
     progress: {
       margin: theme.spacing(2),
+      color: green[500]
     },
     secondary: {
         color:'#4caf50'
@@ -15,10 +18,10 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const Prayers = (props) => {
-    const [data, setData] = usePrayer('Amsterdam');
+    // const [data, setData] = usePrayer('Amsterdam');
+    const {prdata: data} = props;
     const {data:prayerdata, code, status} = data;
     console.log(data)
-    debugger;    
     const classes = useStyles();
     // 
     const monthList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -39,7 +42,9 @@ const Prayers = (props) => {
         <div className="pdnContainer">
         {(typeof data === "object" && code === 200 && Object.keys(prayerdata).length)
             ?<>
-                <Prayer pdata={prayerdata}/>                           
+               <Grow in="true">
+                    <Prayer pdata={prayerdata}/>
+               </Grow>                           
             </>
             :<CircularProgress className={classes.progress} color="secondary" />
         }        
