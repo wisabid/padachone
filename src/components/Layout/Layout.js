@@ -19,14 +19,14 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-const Layout = ({country, city, pdate, startup}) => {
+const Layout = ({country=localStorage.getItem('padachone:country'), city=localStorage.getItem('padachone:city'), pdate, startup}) => {
     const [data, setData] = usePrayer({city: city, country: country, date : pdate});
     const {timezone} = (data && data.data && data.data.meta)?data.data.meta:'Europe/AmsterDAM';
     const classes = useStyles();
     if (data && data.data && data.data.meta && data.code === 200) {
         return (
             <>
-                <Header timezone={timezone} startup={startup} city={localStorage.getItem(`padachone:location`)}/>
+                <Header timezone={timezone} startup={startup} city={localStorage.getItem(`padachone:city`)}/>
                <Prayers prdata={data}/>    
                
                 <Footer />

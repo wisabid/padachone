@@ -36,9 +36,11 @@ function App() {
     setState({...state, finished, country, city: region});
   }
 
-  useEffect(() => {
+  
 
-    if (localStorage.getItem(`padachone:${pdtodaysDate}`)) {
+  useEffect(() => {
+    const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:'));
+    if (padachon_lsfind.length) {
       setState({...state, finished : true})
     }
   }, [])

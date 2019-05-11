@@ -11,16 +11,22 @@ export const usePrayer = ({country='Netherlands', city='Amsterdam', date}) => {
                 }
             });
             const data = await res.json();
-            localStorage.clear();
+            Object.keys(localStorage).map(key => {
+                if (key.startsWith('padachone:')) {
+                    localStorage.removeItem(key);
+                }
+                return;
+            })
+            
             if (data && data.data && data.data.meta) {
-                localStorage.setItem(`padachone:location`, city);
+                localStorage.setItem(`padachone:city`, city);
+                localStorage.setItem(`padachone:country`, country);
                 localStorage.setItem(`padachone:${date}`, JSON.stringify(data))
             }
             setData(data);
         }
         catch(e) {
             //
-            debugger;
             setData({error: e.message});
             return false
         }   

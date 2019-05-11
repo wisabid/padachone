@@ -108,7 +108,7 @@ function Setup(props) {
 
   const handleChange = name => event => {
     let val = event.target.value;
-    if (val.match(/^[a-zA-Z]*$/)) {
+    if (val.match(/^[a-z A-Z]*$/)) {
       setState({ ...state, place: val });
     }
   };
