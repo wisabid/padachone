@@ -83,9 +83,7 @@ const Footer = (props) => {
           <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>
                 P  A  D  A  C  H  O  N  E
           </Typography>
-          <Typography variant="caption" display="block" gutterBottom color="secondary">
-            "Worries end when Salah begins!"
-          </Typography>
+          
           {/* <IconButton color="inherit">
             <SearchIcon />
           </IconButton> */}

@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['P A D A C H O N E !', 'Almost there!', 'Setup your Secondary Preferance - Coming Soon!'];
+  return ['P A D A C H O N E !  - "Worries end when Salah begins!"', 'Almost there!', 'Setup your Secondary Preferance - Coming Soon!'];
 }
 
 function getStepContent(step) {
