@@ -26,11 +26,14 @@ const useStyles = makeStyles(theme => ({
   },
   label: {
     color: 'red'
+  },
+  selfont: {
+    fontSize:'25px'
   }
 }));
 
 function getSteps() {
-  return ['P A D A C H O N E !  - "Worries end when Salah begins!"', 'Almost there!', 'Setup your Secondary Preferance - Coming Soon!'];
+  return ['P A D A C H O N E !  "Worries end when Salah begins!"', 'Almost there!', 'Setup your Secondary Preferance - Coming Soon!'];
 }
 
 function getStepContent(step) {
@@ -102,12 +105,12 @@ function Setup(props) {
 
               {(activeStep === 0) && <CountryDropdown
               value={country}
-              onChange={(val) => selectCountry(val)} />}
+              onChange={(val) => selectCountry(val)} className={classes.selfont}/>}
 
               {(activeStep === 1) && <RegionDropdown
               country={country}
               value={region}
-              onChange={(val) => selectRegion(val)} />}
+              onChange={(val) => selectRegion(val)} className={classes.selfont}/>}
             
               <Typography color="textSecondary" variant="body2" component="p">{getStepContent(index)}</Typography>
               <div className={classes.actionsContainer}>

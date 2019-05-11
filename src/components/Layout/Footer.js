@@ -92,7 +92,7 @@ const Footer = (props) => {
           </IconButton> */}
         </Toolbar>
         <Typography variant="caption" display="block" gutterBottom color="secondary">
-            version 1.0 - Copyright © 2019 WISMIM. All rights reserved.
+            Copyright © 2019 WISMIM.
           </Typography>
       </AppBar>
     )
