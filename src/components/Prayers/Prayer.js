@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 
 const Prayer = (props) => {
     const { pdata:{timings, date, meta} } = props;
+    
     const classes = useStyles();
 
     
