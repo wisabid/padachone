@@ -9,11 +9,14 @@ import green from '@material-ui/core/colors/green';
 import Location from '../Location/Location'
 import Setup from '../Setup/Setup';
 import stepperData from '../Setup/setup-stepper-data.json';
-
+import {getPDdata} from '../../utils'
 
 const theme = createMuiTheme({
   palette: {
     primary: green,
+    secondary : {
+      main: '#fff',
+    },
     text: {
       // primary: "#000000",
       // secondary: "#ffffff"
@@ -24,18 +27,18 @@ const theme = createMuiTheme({
   }
 });
 function App() {  
-  const [state, setState] = useState({finished : false});
-  const {finished, country, city} = state;
-  
+  const [state, setState] = useState({finished : false, pdtodaysDate: getPDdata().split(' ').join('')});
+  const {finished, country, city, pdtodaysDate, prayerdata} = state;
   const handlefinished = (obj) => {
-    const {country, region} = obj;
+    const {country, region, finished} = obj;
     
-    setState({...state, finished: true, country, city: region});
+    setState({...state, finished, country, city: region});
   }
 
   useEffect(() => {
-    if (localStorage.getItem('padachone')) {
-      setState({...state, finished : true, country: 'Netherlands', city: 'Amsterdam'})
+
+    if (localStorage.getItem(`padachone:${pdtodaysDate}`)) {
+      setState({...state, finished : true})
     }
   }, [])
   return (
@@ -43,7 +46,7 @@ function App() {
       <div className="App">
         <CssBaseline />
         {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)}/>}
-        {finished && <Layout country={country} city={city}/>} 
+        {finished && <Layout country={country} city={city} pdate={pdtodaysDate} startup={(resetstate) => handlefinished(resetstate)}/>} 
       </div>
     </ThemeProvider>
   );

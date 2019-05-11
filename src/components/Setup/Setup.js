@@ -24,10 +24,13 @@ const useStyles = makeStyles(theme => ({
   resetContainer: {
     padding: theme.spacing(3),
   },
+  label: {
+    color: 'red'
+  }
 }));
 
 function getSteps() {
-  return ['Padchone !', 'Almost there!', 'Setup your Secondary Preferance'];
+  return ['P A D A C H O N E !', 'Almost there!', 'Setup your Secondary Preferance - Coming Soon!'];
 }
 
 function getStepContent(step) {
@@ -80,7 +83,12 @@ function Setup(props) {
 
   useEffect(() => {
     if (activeStep === 3) {
-      props.finished(state);
+      setState(() => {
+        let newState = {...state, secregion, finished : true};
+        props.finished(newState);
+        return newState;
+      })
+      
     }
   })
 
@@ -89,17 +97,17 @@ function Setup(props) {
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label} style={{color: "white"}}>
-            <StepLabel>{label}</StepLabel>
+            <StepLabel classes={classes.label}>{label}</StepLabel>
             <StepContent>
+
               {(activeStep === 0) && <CountryDropdown
               value={country}
               onChange={(val) => selectCountry(val)} />}
 
-            {(activeStep === 1) && <RegionDropdown
-            country={country}
-            value={region}
-            onChange={(val) => selectRegion(val)} />}
-
+              {(activeStep === 1) && <RegionDropdown
+              country={country}
+              value={region}
+              onChange={(val) => selectRegion(val)} />}
             
               <Typography color="textSecondary" variant="body2" component="p">{getStepContent(index)}</Typography>
               <div className={classes.actionsContainer}>

@@ -12,6 +12,7 @@
     "react-dom": "^16.8.6",
     "react-geolocated": "^2.4.1",
     "react-scripts": "3.0.0",
+    "react-sound": "^1.2.0",
     "typeface-roboto": "0.0.54"
   },
   "scripts": {

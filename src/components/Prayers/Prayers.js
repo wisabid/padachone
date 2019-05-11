@@ -43,7 +43,10 @@ const Prayers = (props) => {
         {(typeof data === "object" && code === 200 && Object.keys(prayerdata).length)
             ?<>
                <Grow in="true">
+                    <div>
                     <Prayer pdata={prayerdata}/>
+                    
+                    </div>
                </Grow>                           
             </>
             :<CircularProgress className={classes.progress} color="secondary" />
