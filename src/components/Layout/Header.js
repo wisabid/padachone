@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
+import Slide from '@material-ui/core/Slide';
 import Clock from 'react-live-clock';
 import logo from '../../assets/images/logo.png';
 
@@ -47,13 +48,17 @@ const Header = ({timezone, startup, city}) => {
             <Toolbar>
             <img src={logo} width="150" height="30" alt="logo" className="App-logo"/>
           <div className={classes.grow} />
-            <Typography variant="caption" color="inherit" style={{color: 'white'}}>
-              {city}
-            </Typography>
-            <span style={{color:'#fff', padding: '0 0 0 3px'}}>( <Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /> )</span>
+           
+            <span style={{color:'#fff', padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>
             <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/>
             </Toolbar>
+            <Slide direction="up" in="true" mountOnEnter unmountOnExit>  
+              <Typography variant="caption" color="textSecondary" style={{color: 'white', fontStyle:'italic'}}>
+                <strong>{city}</strong>
+              </Typography>
+            </Slide>
         </AppBar>
+        
         </div>
     )
 }
