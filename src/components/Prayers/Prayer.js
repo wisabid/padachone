@@ -6,9 +6,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { EventEmitter } from 'events';
-import Icon from '@material-ui/core/Icon';
-import sunrise from '../../assets/images/Sunrise.svg'
-import sunset from '../../assets/images/sunset.svg'
 
 const useStyles = makeStyles({
     card: {
@@ -49,8 +46,6 @@ const Prayer = (props) => {
                             </Typography>
                             <Typography variant="h3" component="h2">
                             {timings[prayer]}
-                            {(prayer === 'Sunrise') && <img src={sunrise} alt="Sunrise" style={{marginLeft:'10px'}}/>}
-                            {(prayer === 'Sunset') && <img src={sunset} alt="Sunrise" style={{marginLeft:'10px'}}/>}
                             </Typography>
                             <Typography className={classes.pos} color="textSecondary">
                             {date.readable} ( {meta.timezone} )
