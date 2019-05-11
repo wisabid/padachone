@@ -72,6 +72,7 @@ const Footer = (props) => {
         <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center'}}>
                 A  L  L  A  H
             </Typography>
+           
           {/* <IconButton edge="start" color="inherit" aria-label="Open drawer">
             <MenuIcon />
           </IconButton> */}
@@ -79,9 +80,12 @@ const Footer = (props) => {
             <AddIcon />
           </Fab> */}
           <div className={classes.grow} />
-          <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center'}}>
+          <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>
                 P  A  D  A  C  H  O  N  E
-            </Typography>
+          </Typography>
+          <Typography variant="caption" display="block" gutterBottom color="secondary">
+            "Worries end when Salah begins!"
+          </Typography>
           {/* <IconButton color="inherit">
             <SearchIcon />
           </IconButton> */}
@@ -89,6 +93,9 @@ const Footer = (props) => {
             <MoreIcon />
           </IconButton> */}
         </Toolbar>
+        <Typography variant="caption" display="block" gutterBottom color="secondary">
+            version 1.0 - Copyright © 2019 WISMIM. All rights reserved.
+          </Typography>
       </AppBar>
     )
 }

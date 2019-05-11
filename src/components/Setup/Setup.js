@@ -36,12 +36,12 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return `Please Select your Country`;
+      return `This will Set up your timezone preferance to appear on top of the screen`;
     case 1:
-      return 'Choose your Region';
+      return 'You can always re-configure these settings on click of a button appearing next to timezone display';
     case 2:
-      return `Setting up a secondary preferance would always come handy whenever you want to make a 
-              comparison between your second home and main`;
+      return `Do you think Setting up a secondary preferance would always come handy whenever you want to make a 
+              comparison between your second home and main?`;
     default:
       return 'Unknown step';
   }
