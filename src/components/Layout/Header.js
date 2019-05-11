@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     
 
 
-const Header = ({timezone, startup}) => {
+const Header = ({timezone, startup, city}) => {
     const classes = useStyles();
     const [state, setState] = React.useState({
         checkedA: true
@@ -38,9 +38,10 @@ const Header = ({timezone, startup}) => {
                 P  A  D  A  C  H  O  N  E
           </Typography>
           <div className={classes.grow} />
-            <Typography variant="h7" color="inherit" style={{color: 'white'}}>
-                {timezone}
+            <Typography variant="caption" color="inherit" style={{color: 'white'}}>
+                {timezone}  ( {city} )
             </Typography>
+            
             <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/>
             </Toolbar>
         </AppBar>

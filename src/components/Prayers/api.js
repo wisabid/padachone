@@ -4,19 +4,30 @@ export const usePrayer = ({country='Netherlands', city='Amsterdam', date}) => {
     const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=8`;
     const [data, setData] = useState({})
     async function fetchPrayerTimes() {
-        const res = await fetch(API, {
-            headers : {
-                Accept : 'application/json'
+        try {
+            const res = await fetch(API, {
+                headers : {
+                    Accept : 'application/json'
+                }
+            });
+            const data = await res.json();
+            localStorage.clear();
+            if (data && data.data && data.data.meta) {
+                localStorage.setItem(`padachone:location`, city);
+                localStorage.setItem(`padachone:${date}`, JSON.stringify(data))
             }
-        });
-        const data = await res.json();
-        localStorage.clear();
-        localStorage.setItem(`padachone:${date}`, JSON.stringify(data))
-        setData(data);
+            setData(data);
+        }
+        catch(e) {
+            //
+            debugger;
+            setData({error: e.message});
+            return false
+        }   
     }
     useEffect(() => {
         if (localStorage.getItem(`padachone:${date}`)) {
-            setData(JSON.parse(localStorage.getItem(`padachone:${date}`)))
+            setData(JSON.parse(localStorage.getItem(`padachone:${date}`)))           
         }
         else {
             fetchPrayerTimes();

@@ -7,6 +7,7 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 
 
@@ -29,11 +30,15 @@ const useStyles = makeStyles(theme => ({
   },
   selfont: {
     // fontSize:'25px'
-  }
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
 }));
 
 function getSteps() {
-  return ['P A D A C H O N E !  "Worries end when Salah begins!"', 'Almost there!', 'Setup your Secondary Preferance - Coming Soon!'];
+  return ['P A D A C H O N E !  "Worries end when Salah begins!"', 'Almost there!', 'More Accuracy?', 'Setup your Secondary Preferance - Coming Soon!'];
 }
 
 function getStepContent(step) {
@@ -43,6 +48,8 @@ function getStepContent(step) {
     case 1:
       return 'You can always re-configure these settings on click of a button appearing next to timezone display';
     case 2:
+      return 'Key in your Place name for more accurate results'
+    case 3:
       return `Do you think Setting up a secondary preferance would always come handy whenever you want to make a 
               comparison between your second home and main?`;
     default:
@@ -53,8 +60,8 @@ function getStepContent(step) {
 function Setup(props) {
   const {setupdata} = props;
   const classes = useStyles();
-  const [state, setState] = React.useState({activeStep : 0})
-  const {activeStep, country, region, seccountry, secregion } = state;
+  const [state, setState] = React.useState({activeStep : 0, place: ''})
+  const {activeStep, country, region, seccountry, secregion, place } = state;
   // const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
@@ -80,20 +87,31 @@ function Setup(props) {
   const selectsecCountry = (seccountry) => {
     setState({...state, country})
   }
-  const selectsecRegion = (secregion) => {
-      setState({...state, secregion})
-  }
+ 
 
   useEffect(() => {
-    if (activeStep === 3) {
-      setState(() => {
-        let newState = {...state, secregion, finished : true};
+    if (activeStep === steps.length) {
+      let newState;
+      if (place) {
+        newState = {...state, region: place, finished : true};
+      }
+      else {
+        newState = {...state, finished : true};
+      }
+      setState(() => {        
         props.finished(newState);
         return newState;
       })
       
     }
   })
+
+  const handleChange = name => event => {
+    let val = event.target.value;
+    if (val.match(/^[a-zA-Z]*$/)) {
+      setState({ ...state, place: val });
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -112,6 +130,16 @@ function Setup(props) {
               value={region}
               onChange={(val) => selectRegion(val)} className={classes.selfont}/>}
             
+            {(activeStep === 2) && <TextField
+              id="place-name"
+              label="Place"
+              className={classes.textField}
+              value={place}
+              onChange={handleChange('place-name')}
+              margin="normal"
+              variant="outlined"
+            />}
+                
               <Typography color="textSecondary" variant="body2" component="p">{getStepContent(index)}</Typography>
               <div className={classes.actionsContainer}>
                 <div>
