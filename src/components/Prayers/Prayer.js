@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   });
 
 const Prayer = (props) => {
-    const { pdata:{timings, date} } = props;
+    const { pdata:{timings, date, meta} } = props;
     const classes = useStyles();
 
     
@@ -47,7 +47,7 @@ const Prayer = (props) => {
                             {timings[prayer]}
                             </Typography>
                             <Typography className={classes.pos} color="textSecondary">
-                            {date.readable}
+                            {date.readable} ( {meta.timezone} )
                             </Typography>
                             <Typography variant="body2" component="p">
                             {date.hijri.month.ar}
