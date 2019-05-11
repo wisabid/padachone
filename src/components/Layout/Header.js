@@ -38,7 +38,7 @@ const Header = ({timezone, startup}) => {
                 P  A  D  A  C  H  O  N  E
           </Typography>
           <div className={classes.grow} />
-            <Typography variant="h6" color="inherit" style={{color: 'white'}}>
+            <Typography variant="h7" color="inherit" style={{color: 'white'}}>
                 {timezone}
             </Typography>
             <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/>
