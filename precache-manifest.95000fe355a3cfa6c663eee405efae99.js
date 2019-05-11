@@ -1,31 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4df72f1929693a530aa616b474f04054",
+    "revision": "9a359bce31562a7665048459e054aa3f",
     "url": "/padachone/index.html"
   },
   {
-    "revision": "572c36bffda0832804bc",
+    "revision": "704f99431f5e29870cb3",
     "url": "/padachone/static/css/2.ccaddf43.chunk.css"
   },
   {
-    "revision": "76863837fbb564e29c24",
+    "revision": "c5ef2d6bae358a8eda83",
     "url": "/padachone/static/css/main.5f252a37.chunk.css"
   },
   {
-    "revision": "572c36bffda0832804bc",
-    "url": "/padachone/static/js/2.c6704fdb.chunk.js"
+    "revision": "704f99431f5e29870cb3",
+    "url": "/padachone/static/js/2.8566c0a4.chunk.js"
   },
   {
-    "revision": "76863837fbb564e29c24",
-    "url": "/padachone/static/js/main.98e0539a.chunk.js"
+    "revision": "c5ef2d6bae358a8eda83",
+    "url": "/padachone/static/js/main.c68e48df.chunk.js"
   },
   {
     "revision": "4629501c6c658ccf3226",
     "url": "/padachone/static/js/runtime~main.a34078d7.js"
-  },
-  {
-    "revision": "9b2d2e3d64b415a1ca288cb0ae8f64e4",
-    "url": "/padachone/static/media/Sunrise.9b2d2e3d.svg"
   },
   {
     "revision": "a299d8fad98d1bad140f135e9c6bb68a",
@@ -126,9 +122,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "bc833e725c137257c2c42a789845d82f",
     "url": "/padachone/static/media/roboto-latin-900italic.bc833e72.woff"
-  },
-  {
-    "revision": "31e97555909a0c8a26fbbc5521639055",
-    "url": "/padachone/static/media/sunset.31e97555.svg"
   }
 ]);

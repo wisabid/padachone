@@ -1,21 +1,19 @@
 {
   "files": {
     "main.css": "/padachone/static/css/main.5f252a37.chunk.css",
-    "main.js": "/padachone/static/js/main.98e0539a.chunk.js",
-    "main.js.map": "/padachone/static/js/main.98e0539a.chunk.js.map",
+    "main.js": "/padachone/static/js/main.c68e48df.chunk.js",
+    "main.js.map": "/padachone/static/js/main.c68e48df.chunk.js.map",
     "runtime~main.js": "/padachone/static/js/runtime~main.a34078d7.js",
     "runtime~main.js.map": "/padachone/static/js/runtime~main.a34078d7.js.map",
     "static/css/2.ccaddf43.chunk.css": "/padachone/static/css/2.ccaddf43.chunk.css",
-    "static/js/2.c6704fdb.chunk.js": "/padachone/static/js/2.c6704fdb.chunk.js",
-    "static/js/2.c6704fdb.chunk.js.map": "/padachone/static/js/2.c6704fdb.chunk.js.map",
+    "static/js/2.8566c0a4.chunk.js": "/padachone/static/js/2.8566c0a4.chunk.js",
+    "static/js/2.8566c0a4.chunk.js.map": "/padachone/static/js/2.8566c0a4.chunk.js.map",
     "index.html": "/padachone/index.html",
-    "precache-manifest.a2f953ebbb6d7379e3ef7205197946bd.js": "/padachone/precache-manifest.a2f953ebbb6d7379e3ef7205197946bd.js",
+    "precache-manifest.95000fe355a3cfa6c663eee405efae99.js": "/padachone/precache-manifest.95000fe355a3cfa6c663eee405efae99.js",
     "service-worker.js": "/padachone/service-worker.js",
     "static/css/2.ccaddf43.chunk.css.map": "/padachone/static/css/2.ccaddf43.chunk.css.map",
     "static/css/main.5f252a37.chunk.css.map": "/padachone/static/css/main.5f252a37.chunk.css.map",
-    "static/media/Sunrise.svg": "/padachone/static/media/Sunrise.9b2d2e3d.svg",
     "static/media/logo.png": "/padachone/static/media/logo.a299d8fa.png",
-    "static/media/index.css": "/padachone/static/media/roboto-latin-900italic.bc833e72.woff",
-    "static/media/sunset.svg": "/padachone/static/media/sunset.31e97555.svg"
+    "static/media/index.css": "/padachone/static/media/roboto-latin-900italic.bc833e72.woff"
   }
 }
