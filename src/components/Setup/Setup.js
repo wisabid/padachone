@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     color: 'red'
   },
   selfont: {
-    fontSize:'25px'
+    // fontSize:'25px'
   }
 }));
 

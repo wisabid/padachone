@@ -34,6 +34,7 @@ const Prayers = (props) => {
     useEffect(() => {
         if (prayerdata && Object.keys(prayerdata).length) {
             //localStorage.setItem()
+            //throw new Error('Uncaught');
         }
         
     })

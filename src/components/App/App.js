@@ -9,7 +9,8 @@ import green from '@material-ui/core/colors/green';
 import Location from '../Location/Location'
 import Setup from '../Setup/Setup';
 import stepperData from '../Setup/setup-stepper-data.json';
-import {getPDdata} from '../../utils'
+import {getPDdata} from '../../utils';
+import ErrorBoundary from '../Error/ErrorBoundary';
 
 const theme = createMuiTheme({
   palette: {
@@ -42,13 +43,17 @@ function App() {
     }
   }, [])
   return (
+    
     <ThemeProvider theme={theme}>
       <div className="App">
         <CssBaseline />
-        {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)}/>}
-        {finished && <Layout country={country} city={city} pdate={pdtodaysDate} startup={(resetstate) => handlefinished(resetstate)}/>} 
+        <ErrorBoundary>
+          {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)}/>}
+          {finished && <Layout country={country} city={city} pdate={pdtodaysDate} startup={(resetstate) => handlefinished(resetstate)}/>}
+        </ErrorBoundary> 
       </div>
     </ThemeProvider>
+    
   );
 }
 
