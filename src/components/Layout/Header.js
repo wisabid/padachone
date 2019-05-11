@@ -13,11 +13,16 @@ import Switch from '@material-ui/core/Switch';
 // });
 
 
-
+const useStyles = makeStyles({
+      grow: {
+        flexGrow: 1,
+      },
+    });
+    
 
 
 const Header = ({timezone, startup}) => {
-    //const classes = useStyles();
+    const classes = useStyles();
     const [state, setState] = React.useState({
         checkedA: true
       });
@@ -29,6 +34,10 @@ const Header = ({timezone, startup}) => {
         <div className={{flexGrow: 1}}>
         <AppBar position="fixed" color="primary">
             <Toolbar>
+            <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>
+                P  A  D  A  C  H  O  N  E
+          </Typography>
+          <div className={classes.grow} />
             <Typography variant="h6" color="inherit" style={{color: 'white'}}>
                 {timezone}
             </Typography>

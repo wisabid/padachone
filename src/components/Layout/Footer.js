@@ -68,10 +68,10 @@ const Footer = (props) => {
         //     {/* <BottomNavigationAction label="Folder" value="folder" icon={<Icon>...</Icon>} /> */}
         // </BottomNavigation>
         <AppBar position="fixed" color="primary" className={classes.appBar}>
-        <Toolbar>
-        <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center'}}>
+        {/* <Toolbar> */}
+        {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center'}}>
                 A  L  L  A  H
-            </Typography>
+            </Typography> */}
            
           {/* <IconButton edge="start" color="inherit" aria-label="Open drawer">
             <MenuIcon />
@@ -80,9 +80,9 @@ const Footer = (props) => {
             <AddIcon />
           </Fab> */}
           <div className={classes.grow} />
-          <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>
+          {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>
                 P  A  D  A  C  H  O  N  E
-          </Typography>
+          </Typography> */}
           
           {/* <IconButton color="inherit">
             <SearchIcon />
@@ -90,8 +90,8 @@ const Footer = (props) => {
           {/* <IconButton edge="end" color="inherit">
             <MoreIcon />
           </IconButton> */}
-        </Toolbar>
-        <Typography variant="caption" display="block" gutterBottom color="secondary">
+        {/* </Toolbar> */}
+        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px'}}>
             Copyright © 2019 WISMIM.
           </Typography>
       </AppBar>
