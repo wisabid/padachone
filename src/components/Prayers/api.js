@@ -57,7 +57,7 @@ export const useLab_1 = ({lat, lon}) => {
             const data = await res.json();         
             
            
-            setData(data);
+            setData(data.data[0]);
         }
         catch(e) {
             //

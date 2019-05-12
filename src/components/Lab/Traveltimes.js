@@ -3,10 +3,10 @@ import {useLab_1} from '../Prayers/api';
 
 const Traveltimes = ({lat, lon}) => {
     const [data, setData] = useLab_1({lat: lat, lon: lon});
-    if (data && data.data) {
+    if (data) {
         debugger;
         return (
-            <div>{data.data[0].timings.Maghrib}</div>
+            <div>{JSON.stringify(data)}</div>
         //     {
         //     data.data.map(item => {
         //         return (
