@@ -38,7 +38,6 @@ const Lab = (props) => {
                     </div>
                     : <div>Getting the location data&hellip; </div>
                 }
-                <Traveltimes lat="52.37275104452866" lon="4.9632149461322195" />
         </>
     )
 }

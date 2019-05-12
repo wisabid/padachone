@@ -45,7 +45,7 @@ export const usePrayer = ({country='Netherlands', city='Amsterdam', date}) => {
 
 export const useLab_1 = ({lat, lon}) => {
     debugger;
-    const API = `http://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=2&month=5&year=2019`;
+    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=2&month=5&year=2019`;
     const [data, setData] = useState({})
     async function fetchTravelPrayerTimes() {
         try {
@@ -57,7 +57,7 @@ export const useLab_1 = ({lat, lon}) => {
             const data = await res.json();         
             
            
-            setData(data.data[0]);
+            setData(data);
         }
         catch(e) {
             //
