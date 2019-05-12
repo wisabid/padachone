@@ -41,3 +41,33 @@ export const usePrayer = ({country='Netherlands', city='Amsterdam', date}) => {
     }, [])
     return [data, setData]
 }
+
+
+export const useLab_1 = ({lat, lon}) => {
+    debugger;
+    const API = `http://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=2&month=5&year=2019`;
+    const [data, setData] = useState({})
+    async function fetchTravelPrayerTimes() {
+        try {
+            const res = await fetch(API, {
+                headers : {
+                    Accept : 'application/json'
+                }
+            });
+            const data = await res.json();         
+            
+           
+            setData(data);
+        }
+        catch(e) {
+            //
+            setData({error: e.message});
+            return false
+        }   
+    }
+    useEffect(() => {
+       
+            fetchTravelPrayerTimes();
+    }, [])
+    return [data, setData]
+}

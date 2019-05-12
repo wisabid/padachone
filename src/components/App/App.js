@@ -11,6 +11,7 @@ import Setup from '../Setup/Setup';
 import stepperData from '../Setup/setup-stepper-data.json';
 import {getPDdata} from '../../utils';
 import ErrorBoundary from '../Error/ErrorBoundary';
+import CookieConsent from "react-cookie-consent";
 
 const theme = createMuiTheme({
   palette: {
@@ -50,6 +51,9 @@ function App() {
       <div className="App">
         <CssBaseline />
         <ErrorBoundary>
+          <CookieConsent location="bottom" style={{ background: "#4caf50" }} buttonStyle={{borderRadius: '10px'}}>
+            This website uses cookies to enhance the user experience.
+        </CookieConsent>
           {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)}/>}
           {finished && <Layout country={country} city={city} pdate={pdtodaysDate} startup={(resetstate) => handlefinished(resetstate)}/>}
         </ErrorBoundary> 

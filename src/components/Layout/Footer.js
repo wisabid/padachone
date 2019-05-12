@@ -60,6 +60,8 @@ const Footer = (props) => {
     // function handleChange(event, newValue) {
     //     setValue(newValue);
     //   }
+
+    
     return (
         // <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
         //     {/* <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} /> */}

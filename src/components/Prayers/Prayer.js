@@ -5,7 +5,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { EventEmitter } from 'events';
+import Lab from '../Lab/Lab';
 
 const useStyles = makeStyles({
     card: {
@@ -32,39 +34,50 @@ const Prayer = (props) => {
     
     const classes = useStyles();
 
-    
+    const [alpha, setAlpha] = React.useState(false);
+
+    const handleAlpha = () =>{
+      setAlpha(true)
+    }
 
     
     if (timings) {
-        return (
-            Object.keys(timings).map((prayer, index) => {
-                return (
-                    <Card className={classes.card} key={index}>
-                        <CardContent>
-                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                            {prayer}
-                            </Typography>
-                            <Typography variant="h3" component="h2">
-                            {timings[prayer]}
-                            </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
-                            {date.readable} ( {meta.timezone} )
-                            </Typography>
-                            <Typography variant="body2" component="p">
-                            {date.hijri.month.ar}
-                            <br />
-                            {`"${date.hijri.weekday.en}"`}
-                            </Typography>
-                        </CardContent>
-                        {/* <CardActions className={classes.buttonaction}>
-                            <Button size="small">Learn More</Button>
-                        </CardActions> */}
-                    </Card> 
-                )
-            })
+        if (!alpha) {
+            return (
+                Object.keys(timings).map((prayer, index) => {
+                    return (
+                        <Card className={classes.card} key={index}>
+                            <CardContent>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                {prayer}
+                                </Typography>
+                                <Typography variant="h3" component="h2">
+                                {timings[prayer]}
+                                </Typography>
+                                <Typography className={classes.pos} color="textSecondary">
+                                {date.readable} ( {meta.timezone} <ClickAwayListener onClickAway={handleAlpha}><span>)</span></ClickAwayListener>
+                                </Typography>
+                                <Typography variant="body2" component="p">
+                                {date.hijri.month.ar}
+                                <br />
+                                {`"${date.hijri.weekday.en}"`}
+                                </Typography>
+                            </CardContent>
+                            {/* <CardActions className={classes.buttonaction}>
+                                <Button size="small">Learn More</Button>
+                            </CardActions> */}
+                        </Card> 
+                    )
+                })
 
-            
-        )
+                
+            )
+        }
+        else {
+            return (
+                <Lab />
+            )
+        }
     }
     else {
         return null
