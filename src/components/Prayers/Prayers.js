@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import green from '@material-ui/core/colors/green';
 import Grow from '@material-ui/core/Grow';
-import {usePrayer} from './api';
 import Prayer from './Prayer';
 import './prayers.css';
 

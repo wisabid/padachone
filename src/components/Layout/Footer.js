@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Fab from '@material-ui/core/Fab';
 
 import MenuIcon from '@material-ui/icons/Menu';
-import AddIcon from '@material-ui/icons/Add';
+import SettingsIcon from '@material-ui/icons/Settings';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
@@ -54,13 +54,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Footer = (props) => {
+const Footer = ({startup}) => {
     const classes = useStyles();
     // const [value, setValue] = React.useState('recents');
     // function handleChange(event, newValue) {
     //     setValue(newValue);
     //   }
 
+    const handleChange = () => {
+        Object.keys(localStorage).map(key => {
+          if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
+              localStorage.removeItem(key);
+          }
+          return;
+        });
+      
+      startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+    };
     
     return (
         // <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
@@ -78,9 +88,9 @@ const Footer = (props) => {
           {/* <IconButton edge="start" color="inherit" aria-label="Open drawer">
             <MenuIcon />
           </IconButton> */}
-          {/* <Fab color="secondary" aria-label="Add" className={classes.fabButton}>
-            <AddIcon />
-          </Fab> */}
+          <Fab color="secondary" aria-label="Add" className={classes.fabButton}>
+            <SettingsIcon fontSize="large" onClick={handleChange}/>
+          </Fab>
           <div className={classes.grow} />
           {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>
                 P  A  D  A  C  H  O  N  E
@@ -93,7 +103,7 @@ const Footer = (props) => {
             <MoreIcon />
           </IconButton> */}
         {/* </Toolbar> */}
-        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px'}}>
+        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px'}} align="right">
             Copyright © 2019 WISMIM.
           </Typography>
       </AppBar>

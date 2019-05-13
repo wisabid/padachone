@@ -55,8 +55,8 @@ const Prayer = (props) => {
                                 {timings[prayer]}
                                 </Typography>
                                 <Typography className={classes.pos} color="textSecondary">
-                                {date.readable} ( {meta.timezone} 
-                                <span onClick={handleAlpha}>)</span>
+                                {date.readable} 
+                                <span onClick={handleAlpha}>.</span>
                                 </Typography>
                                 <Typography variant="body2" component="p">
                                 {date.hijri.month.ar}

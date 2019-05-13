@@ -5,7 +5,7 @@ import lightBlue from '@material-ui/core/colors/lightBlue';
 import Header from './Header';
 import Footer from './Footer';
 import Prayers from '../Prayers';
-import {usePrayer} from '../Prayers/api';
+import {usePrayer} from '../../hooks/api-hooks';
 import Sound from 'react-sound';
 
 
@@ -19,17 +19,17 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-const Layout = ({country=localStorage.getItem('padachone:country'), city=localStorage.getItem('padachone:city'), pdate, startup}) => {
-    const [data, setData] = usePrayer({city: city, country: country, date : pdate});
+const Layout = ({country, region, place, pdate, startup}) => {
+    const [data, setData] = usePrayer({region: region, country: country, place : place, date : pdate});
     const {timezone} = (data && data.data && data.data.meta)?data.data.meta:'Europe/AmsterDAM';
     const classes = useStyles();
     if (data && data.data && data.data.meta && data.code === 200) {
         return (
             <>
-                <Header timezone={timezone} startup={startup} city={localStorage.getItem(`padachone:city`)}/>
+                <Header timezone={timezone} startup={startup} place={localStorage.getItem(`padachone:place`)}/>
                <Prayers prdata={data}/>    
                
-                <Footer />
+                <Footer startup={startup}/>
             </>        
         )
     }

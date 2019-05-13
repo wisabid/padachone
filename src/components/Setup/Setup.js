@@ -61,9 +61,10 @@ function getStepContent(step) {
 }
 
 function Setup(props) {
-  const {setupdata} = props;
+  debugger;
+  const {setupdata, country:country_alt, region:region_alt, place: place_alt} = props;
   const classes = useStyles();
-  const [state, setState] = React.useState({activeStep : 0, place: ''})
+  const [state, setState] = React.useState({activeStep : 0, place: place_alt, country : country_alt, region: region_alt})
   const {activeStep, country, region, seccountry, secregion, place } = state;
   // const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -95,12 +96,7 @@ function Setup(props) {
   useEffect(() => {
     if (activeStep === steps.length) {
       let newState;
-      if (place) {
-        newState = {...state, region: place, finished : true};
-      }
-      else {
         newState = {...state, finished : true};
-      }
       setState(() => {        
         props.finished(newState);
         return newState;

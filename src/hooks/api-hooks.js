@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
-export const usePrayer = ({country='Netherlands', city='Amsterdam', date}) => {
-    debugger;
+export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date}) => {
+    let city;
+    if (place) {
+        city = place;
+    }
+    else {
+        city=region
+    }
     const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=8`;
     const [data, setData] = useState({})
     async function fetchPrayerTimes() {
@@ -19,8 +25,9 @@ export const usePrayer = ({country='Netherlands', city='Amsterdam', date}) => {
             })
             
             if (data && data.data && data.data.meta) {
-                localStorage.setItem(`padachone:city`, city);
+                localStorage.setItem(`padachone:region`, region);
                 localStorage.setItem(`padachone:country`, country);
+                localStorage.setItem(`padachone:place`, place);
                 localStorage.setItem(`padachone:${date}`, JSON.stringify(data))
             }
             setData(data);

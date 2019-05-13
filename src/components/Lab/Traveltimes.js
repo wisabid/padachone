@@ -1,5 +1,5 @@
 import React from 'react';
-import {useLab_1} from '../Prayers/api';
+import {useLab_1} from '../../hooks/api-hooks'
 
 const Traveltimes = ({lat, lon}) => {
     const [data, setData] = useLab_1({lat: lat, lon: lon});

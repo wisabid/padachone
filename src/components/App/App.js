@@ -30,18 +30,22 @@ const theme = createMuiTheme({
   }
 });
 function App() {  
-  const [state, setState] = useState({finished : false, pdtodaysDate: getPDdata().split(' ').join('')});
-  const {finished, country, city, pdtodaysDate, prayerdata} = state;
+  const [state, setState] = useState({finished : false, 
+    pdtodaysDate: getPDdata().split(' ').join(''), 
+    place :localStorage.getItem('padachone:place') , 
+    country : localStorage.getItem('padachone:country'), 
+    region: localStorage.getItem('padachone:region')});
+  const {finished, country, region, pdtodaysDate, prayerdata, place} = state;
   const handlefinished = (obj) => {
-    const {country, region, finished} = obj;
-    
-    setState({...state, finished, country, city: region});
+    const {country, region, finished, place} = obj;
+    debugger;
+    setState({...state, finished, country, region: region, place : place});
   }
 
   
 
   useEffect(() => {
-    const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:'));
+    const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place');
     if (padachon_lsfind.length) {
       setState({...state, finished : true})
     }
@@ -55,8 +59,8 @@ function App() {
           <CookieConsent location="bottom" style={{ background: "#4caf50",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
             This website uses cookies to enhance the user experience.
         </CookieConsent>
-          {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)}/>}
-          {finished && <Layout country={country} city={city} pdate={pdtodaysDate} startup={(resetstate) => handlefinished(resetstate)}/>}
+          {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
+          {finished && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
         </ErrorBoundary> 
       </div>
     </ThemeProvider>

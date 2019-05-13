@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     
 
 
-const Header = ({timezone, startup, city}) => {
+const Header = ({timezone, startup, place}) => {
     const classes = useStyles();
     const [state, setState] = React.useState({
         checkedA: true
@@ -33,12 +33,13 @@ const Header = ({timezone, startup, city}) => {
       const handleChange = name => event => {
         setState(() => {
           Object.keys(localStorage).map(key => {
-            if (key.startsWith('padachone:')) {
+            if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
                 localStorage.removeItem(key);
             }
             return;
         });
-        startup({country: '' , region: '' , finished : false});
+        
+        startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
         return { ...state, [name]: event.target.checked }
       });
       };
@@ -46,15 +47,15 @@ const Header = ({timezone, startup, city}) => {
         <div className={{flexGrow: 1}}>
         <AppBar position="fixed" color="primary">
             <Toolbar>
-            <img src={logo} width="150" height="30" alt="logo" className="App-logo" style={{marginLeft:'-38px'}}/>
+            <img src={logo} width="150" height="30" alt="logo" className="App-logo" style={{marginLeft:'-38px'}} />
           <div className={classes.grow} />
            
             <span style={{color:'#fff', padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>
-            <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/>
+            {/* <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/> */}
             </Toolbar>
             <Slide direction="up" in="true" mountOnEnter unmountOnExit>  
               <Typography variant="caption" color="textSecondary" style={{color: 'white', fontStyle:'italic'}}>
-                <strong>{city}</strong>
+                <strong>{place}</strong> ( {timezone}  )
               </Typography>
             </Slide>
         </AppBar>
