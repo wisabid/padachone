@@ -56,7 +56,7 @@ function App() {
       <div className="App">
         <CssBaseline />
         <ErrorBoundary>
-          <CookieConsent location="bottom" style={{ background: "#4caf50",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
+          <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
             This website uses cookies to enhance the user experience.
         </CookieConsent>
           {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
