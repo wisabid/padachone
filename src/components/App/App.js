@@ -6,6 +6,7 @@ import Layout from '../Layout';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import green from '@material-ui/core/colors/green';
+import lightBlue from '@material-ui/core/colors/lightBlue';
 import Location from '../Location/Location'
 import Setup from '../Setup/Setup';
 import stepperData from '../Setup/setup-stepper-data.json';
@@ -15,7 +16,7 @@ import CookieConsent from "react-cookie-consent";
 
 const theme = createMuiTheme({
   palette: {
-    primary: green,
+    primary: lightBlue,
     secondary : {
       main: '#fff',
     },

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import green from '@material-ui/core/colors/green';
+import lightBlue from '@material-ui/core/colors/lightBlue';
 import Header from './Header';
 import Footer from './Footer';
 import Prayers from '../Prayers';
@@ -12,7 +12,7 @@ import Sound from 'react-sound';
 const useStyles = makeStyles(theme => ({
     progress: {
       margin: theme.spacing(2),
-      color: green[500]
+      color: lightBlue[500]
     },
     secondary: {
         color:'#4caf50'

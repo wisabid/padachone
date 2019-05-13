@@ -46,7 +46,7 @@ const Header = ({timezone, startup, city}) => {
         <div className={{flexGrow: 1}}>
         <AppBar position="fixed" color="primary">
             <Toolbar>
-            <img src={logo} width="150" height="30" alt="logo" className="App-logo"/>
+            <img src={logo} width="150" height="30" alt="logo" className="App-logo" style={{marginLeft:'-38px'}}/>
           <div className={classes.grow} />
            
             <span style={{color:'#fff', padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>

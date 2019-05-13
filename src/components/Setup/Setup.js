@@ -26,7 +26,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
   },
   label: {
-    color: 'red'
+    color: 'red',
+    fontSize: '2rem'
   },
   selfont: {
     // fontSize:'25px'
@@ -35,10 +36,13 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  h1: {
+    fontWeight:'bold'
+  }
 }));
 
 function getSteps() {
-  return ['P A D A C H O N E !  "Worries end when Salah begins!"', 'Almost there!', 'More Accuracy?', 'Setup your Secondary Preferance - Coming Soon!'];
+  return ['Where on earth are you ?', 'Almost there!', 'Need More Accuracy?', 'Are you a traveller? - Coming Soon!'];
 }
 
 function getStepContent(step) {
@@ -48,10 +52,9 @@ function getStepContent(step) {
     case 1:
       return 'You can always re-configure these settings on click of a button appearing next to timezone display';
     case 2:
-      return 'Key in your Place name for more accurate results'
+      return 'Key in your Place name for more accurate results.'
     case 3:
-      return `Do you think Setting up a secondary preferance would always come handy whenever you want to make a 
-              comparison between your second home and main?`;
+      return `Wanna know your Ifthar/Prayer time while moving ? Coming Soon!`;
     default:
       return 'Unknown step';
   }
@@ -115,20 +118,23 @@ function Setup(props) {
 
   return (
     <div className={classes.root}>
+    <Typography color="textPrimary" variant="h1" component="h1" align="left" style={{fontWeight:'bold', fontSize:'5rem', padding:'24px'}} gutterBottom>
+                Know Your Prayer times
+    </Typography>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label} style={{color: "white"}}>
-            <StepLabel classes={classes.label}>{label}</StepLabel>
-            <StepContent>
-
+            <StepLabel classes={classes.label} align="left"><span style={{fontSize:'1.5rem'}}>{label}</span></StepLabel>
+            <StepContent align="left">
+              
               {(activeStep === 0) && <CountryDropdown
               value={country}
-              onChange={(val) => selectCountry(val)} className={classes.selfont}/>}
+              onChange={(val) => selectCountry(val)} className={classes.selfont} style={{maxWidth: '100%', fontSize: '1rem', borderRadius: '5px', marginBottom:'10px'}}/>}
 
               {(activeStep === 1) && <RegionDropdown
               country={country}
               value={region}
-              onChange={(val) => selectRegion(val)} className={classes.selfont}/>}
+              onChange={(val) => selectRegion(val)} className={classes.selfont} style={{maxWidth: '100%', fontSize: '1rem', borderRadius: '5px', marginBottom:'10px'}}/>}
             
             {(activeStep === 2) && <TextField
               id="place-name"
@@ -140,7 +146,7 @@ function Setup(props) {
               variant="outlined"
             />}
                 
-              <Typography color="textSecondary" variant="body2" component="p">{getStepContent(index)}</Typography>
+              <Typography color="textSecondary" variant="body2" component="p" style={{fontStyle:'italic', fontSize: '1rem'}} gutterBottom>{getStepContent(index)}</Typography>
               <div className={classes.actionsContainer}>
                 <div>
                   <Button
@@ -157,7 +163,7 @@ function Setup(props) {
                     className={classes.button}
                     style={{color: "white"}}
                   >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Finish' : (activeStep === 2 && !place) ? 'Skip' : 'Next'}
                   </Button>
                 </div>
               </div>
