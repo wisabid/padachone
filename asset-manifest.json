@@ -1,19 +1,16 @@
 {
   "files": {
-    "main.css": "/padachone/static/css/main.596ccf67.chunk.css",
-    "main.js": "/padachone/static/js/main.bcefefd6.chunk.js",
-    "main.js.map": "/padachone/static/js/main.bcefefd6.chunk.js.map",
+    "main.css": "/padachone/static/css/main.8868407a.chunk.css",
+    "main.js": "/padachone/static/js/main.420be679.chunk.js",
+    "main.js.map": "/padachone/static/js/main.420be679.chunk.js.map",
     "runtime~main.js": "/padachone/static/js/runtime~main.a34078d7.js",
     "runtime~main.js.map": "/padachone/static/js/runtime~main.a34078d7.js.map",
-    "static/css/2.ccaddf43.chunk.css": "/padachone/static/css/2.ccaddf43.chunk.css",
-    "static/js/2.b8ba69ca.chunk.js": "/padachone/static/js/2.b8ba69ca.chunk.js",
-    "static/js/2.b8ba69ca.chunk.js.map": "/padachone/static/js/2.b8ba69ca.chunk.js.map",
+    "static/js/2.7ce77ace.chunk.js": "/padachone/static/js/2.7ce77ace.chunk.js",
+    "static/js/2.7ce77ace.chunk.js.map": "/padachone/static/js/2.7ce77ace.chunk.js.map",
     "index.html": "/padachone/index.html",
-    "precache-manifest.23086ddfa43b76dfc8be8db0dd6e4a80.js": "/padachone/precache-manifest.23086ddfa43b76dfc8be8db0dd6e4a80.js",
+    "precache-manifest.566fe8f5b71f5dae3a85fba5aaba30fb.js": "/padachone/precache-manifest.566fe8f5b71f5dae3a85fba5aaba30fb.js",
     "service-worker.js": "/padachone/service-worker.js",
-    "static/css/2.ccaddf43.chunk.css.map": "/padachone/static/css/2.ccaddf43.chunk.css.map",
-    "static/css/main.596ccf67.chunk.css.map": "/padachone/static/css/main.596ccf67.chunk.css.map",
-    "static/media/logo.png": "/padachone/static/media/logo.a299d8fa.png",
-    "static/media/index.css": "/padachone/static/media/roboto-latin-900italic.bc833e72.woff"
+    "static/css/main.8868407a.chunk.css.map": "/padachone/static/css/main.8868407a.chunk.css.map",
+    "static/media/logo.png": "/padachone/static/media/logo.a299d8fa.png"
   }
 }
