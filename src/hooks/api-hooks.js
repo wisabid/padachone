@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {getPDdata} from '../utils/index'
 export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date}) => {
     let city;
     if (place) {
@@ -51,8 +52,11 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
 
 
 export const useLab_1 = ({lat, lon}) => {
-    debugger;
-    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=2&month=5&year=2019`;
+    const dte = getPDdata();
+    const tdate = new Date();
+    const month = tdate.getMonth()+1;
+    const year = tdate.getFullYear();
+    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=2&month=${month}&year=${year}`;
     const [data, setData] = useState({})
     async function fetchTravelPrayerTimes() {
         try {
@@ -63,8 +67,8 @@ export const useLab_1 = ({lat, lon}) => {
             });
             const data = await res.json();         
             
-           
-            setData(data);
+            const todaysdata = data.data.filter(item => item.date.readable === dte);
+            setData(todaysdata);
         }
         catch(e) {
             //

@@ -8,6 +8,7 @@ import Switch from '@material-ui/core/Switch';
 import Slide from '@material-ui/core/Slide';
 import Clock from 'react-live-clock';
 import Avatar from '@material-ui/core/Avatar';
+import Paper from '@material-ui/core/Paper';
 import SettingsIcon from '@material-ui/icons/Settings';
 import logo from '../../assets/images/logo.png';
 import './layout.css'
@@ -19,12 +20,26 @@ import './layout.css'
 // });
 
 
-const useStyles = makeStyles({
+
+
+    const useStyles = makeStyles(theme => ({
+      progress: {
+        margin: theme.spacing(2),
+      },
+      secondary: {
+          color:'#4caf50'
+      },
       grow: {
         flexGrow: 1,
-      }
-     
-    });
+      },
+      root: {
+        padding: theme.spacing(3, 2),
+        borderRadius: 0,
+        padding:0,
+        background: '#f5f5f5',
+    },
+    }));
+  
     
 
 
@@ -51,21 +66,22 @@ const Header = ({timezone, startup, place, pdate}) => {
         <div className={{flexGrow: 1}}>
         <AppBar position="fixed" color="primary">
             <Toolbar style={{minHeight: '45px'}}>
-            <img src={logo} width="150" height="30" alt="logo" className="App-logo" style={{marginLeft:'-38px'}} />                        
+            <img src={logo} width="150" height="30" alt="logo" className="App-logo" style={{marginLeft:'-48px'}} />                        
           <div className={classes.grow} />
            
-            <span style={{color:'#fff', padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>
+            
             {/* <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/> */}
             {/* <Avatar className={classes.avatar}> */}
             <SettingsIcon fontSize="large" className="settings" onClick={handleChange}/>
           {/* </Avatar> */}
             </Toolbar>
-            <Slide direction="down" in="true" mountOnEnter unmountOnExit style={{color: 'white', fontStyle:'italic'}}>  
+            {/* <Slide direction="down" in="true" mountOnEnter unmountOnExit style={{color: 'white', fontStyle:'italic'}}>  
             <Typography variant="subtitle1" color="textSecondary">
               <strong>{pdate}</strong>
-                         
+              <span style={{color:'#fff', padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>       
               </Typography>
               </Slide>
+              
             <Slide direction="up" in="true" mountOnEnter unmountOnExit>  
               <Typography variant="caption" color="textSecondary" style={{color: 'white', fontStyle:'italic'}}>
                 <strong>{(place)
@@ -74,10 +90,28 @@ const Header = ({timezone, startup, place, pdate}) => {
                           }</strong> ( {timezone}  )
               </Typography>
               
-            </Slide>
+            </Slide> */}
+            <Paper className={classes.root}>
             
+              
+            <Slide direction="up" in="true" mountOnEnter unmountOnExit>  
+              <Typography variant="caption" color="textSecondary" style={{fontStyle:'italic', color: 'rgb(3, 155, 229)'}}>
+                <strong>{(place)
+                          ?place
+                          :''
+                          }</strong> ( {timezone}  )
+              </Typography>
+              
+            </Slide>
+            <Slide direction="down" in="true" mountOnEnter unmountOnExit style={{fontStyle:'italic'}}>  
+            <Typography variant="caption" color="textSecondary" style={{display: 'flex', justifyContent:'space-between', fontWeight: 'bold', fontStyle:'normal'}}>
+              <strong>{pdate}</strong>
+              <span style={{padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>       
+              </Typography>
+              </Slide>
+                    </Paper>
         </AppBar>
-        
+                  
         </div>
     )
 }

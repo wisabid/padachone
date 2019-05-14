@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-
+import Lab from '../Lab/Lab';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['Where on earth are you ?', 'Almost there!', 'Need More Accuracy?', 'Are you a traveller? - Coming Soon!'];
+  return ['Where on earth are you ?', 'Almost there!', 'Need More Accuracy?', 'Are you a traveller? (Just Released!)'];
 }
 
 function getStepContent(step) {
@@ -50,7 +50,7 @@ function getStepContent(step) {
     case 0:
       return `This will Set up your timezone preferance to appear on top of the screen`;
     case 1:
-      return 'You can always re-configure these settings on click of a button appearing next to timezone display';
+      return 'You can always re-configure these settings on click of a button';
     case 2:
       return 'Key in your Place name for more accurate results.'
     case 3:
@@ -96,7 +96,7 @@ function Setup(props) {
   useEffect(() => {
     if (activeStep === steps.length) {
       let newState;
-        newState = {...state, finished : true};
+        newState = {...state, finished : true, travel: false};
       setState(() => {        
         props.finished(newState);
         return newState;
@@ -112,71 +112,89 @@ function Setup(props) {
     }
   };
 
-  return (
-    <div className={classes.root}>
-    <Typography color="textPrimary" variant="h1" component="h1" align="left" style={{fontWeight:'bold', fontSize:'5rem', padding:'24px', background:'#81d4fa'}} gutterBottom>
-                Know Your Prayer times
-    </Typography>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label} style={{color: "white"}}>
-            <StepLabel classes={classes.label} align="left"><span style={{fontSize:'1.5rem'}}>{label}</span></StepLabel>
-            <StepContent align="left">
-              
-              {(activeStep === 0) && <CountryDropdown
-              value={country}
-              onChange={(val) => selectCountry(val)} className={classes.selfont} style={{maxWidth: '100%', fontSize: '1rem', borderRadius: '5px', marginBottom:'10px'}}/>}
-
-              {(activeStep === 1) && <RegionDropdown
-              country={country}
-              value={region}
-              onChange={(val) => selectRegion(val)} className={classes.selfont} style={{maxWidth: '100%', fontSize: '1rem', borderRadius: '5px', marginBottom:'10px'}}/>}
-            
-            {(activeStep === 2) && <TextField
-              id="place-name"
-              label="Place"
-              className={classes.textField}
-              value={place}
-              onChange={handleChange('place-name')}
-              margin="normal"
-              variant="outlined"
-            />}
+  const handleTravel = () => {
+    setState({ ...state, travel: true });
+  }
+  if (state.travel) {
+    return (
+      
+      <Lab />
+    )
+  }
+  else {
+    return (
+      <div className={classes.root}>
+      <Typography color="textPrimary" variant="h1" component="h1" align="left" style={{fontWeight:'bold', fontSize:'5rem', padding:'24px', background:'#fff', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
+                  Know Your Prayer times
+      </Typography>
+      <Typography color="textSecondary" align="left" variant="body2" component="p" 
+        style={{padding:'0 24px',fontStyle:'italic', fontSize: '1rem'}} gutterBottom>
+          Are you in a moving train/bus?  
+         
+                      <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release)
+        </Typography>
+        <Stepper activeStep={activeStep} orientation="vertical" >
+          {steps.map((label, index) => (
+            <Step key={label} style={{color: "white", background: '#f5f5f5',borderRadius: '15px', padding:'10px'}}>
+              <StepLabel classes={classes.label} align="left"><span style={{fontSize:'1.5rem', color: 'rgb(3, 155, 229)', fontWeight:'bold'}}>{label}</span></StepLabel>
+              <StepContent align="left" style={{}}>
                 
-              <Typography color="textSecondary" variant="body2" component="p" style={{fontStyle:'italic', fontSize: '1rem'}} gutterBottom>{getStepContent(index)}</Typography>
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                    style={{color: "white"}}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finish' : (activeStep === 2 && !place) ? 'Skip' : 'Next'}
-                  </Button>
+                {(activeStep === 0) && <CountryDropdown
+                value={country}
+                onChange={(val) => selectCountry(val)} className={classes.selfont} style={{maxWidth: '100%', fontSize: '1rem', borderRadius: '5px', marginBottom:'10px'}}/>}
+  
+                {(activeStep === 1) && <RegionDropdown
+                country={country}
+                value={region}
+                onChange={(val) => selectRegion(val)} className={classes.selfont} style={{maxWidth: '100%', fontSize: '1rem', borderRadius: '5px', marginBottom:'10px'}}/>}
+              
+              {(activeStep === 2) && <TextField
+                id="place-name"
+                label="Place"
+                className={classes.textField}
+                value={place}
+                onChange={handleChange('place-name')}
+                margin="normal"
+                variant="outlined"
+              />}
+                  
+                <Typography color="textSecondary" variant="body2" component="p" style={{fontStyle:'italic', fontSize: '1rem'}} gutterBottom>{getStepContent(index)}</Typography>
+                <div className={classes.actionsContainer}>
+                  <div>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      className={classes.button}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}
+                      style={{color: "white"}}
+                    >
+                      {activeStep === steps.length - 1 ? 'Finish' : (activeStep === 2 && !place) ? 'Skip' : 'Next'}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} className={classes.button}>
-            Reset
-          </Button>
-        </Paper>
-      )}
-    </div>
-  );
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+        {activeStep === steps.length && (
+          <Paper square elevation={0} className={classes.resetContainer}>
+            <Typography>All steps completed - you&apos;re finished</Typography>
+            <Button onClick={handleReset} className={classes.button}>
+              Reset
+            </Button>
+          </Paper>
+        )}
+      </div>
+    );
+  }
+  
 }
 
 export default Setup;
