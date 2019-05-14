@@ -88,9 +88,9 @@ const Footer = ({startup}) => {
           {/* <IconButton edge="start" color="inherit" aria-label="Open drawer">
             <MenuIcon />
           </IconButton> */}
-          <Fab color="secondary" aria-label="Add" className={classes.fabButton}>
+          {/* <Fab color="secondary" aria-label="Add" className={classes.fabButton}>
             <SettingsIcon fontSize="large" onClick={handleChange}/>
-          </Fab>
+          </Fab> */}
           <div className={classes.grow} />
           {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>
                 P  A  D  A  C  H  O  N  E
@@ -103,7 +103,7 @@ const Footer = ({startup}) => {
             <MoreIcon />
           </IconButton> */}
         {/* </Toolbar> */}
-        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px'}} align="right">
+        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px'}} align="center">
             Copyright © 2019 WISMIM.
           </Typography>
       </AppBar>

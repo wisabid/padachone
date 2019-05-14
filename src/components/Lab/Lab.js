@@ -34,10 +34,11 @@ const Lab = (props) => {
                         <tr><td>speed</td><td>{props.coords.speed}</td></tr>
                     </tbody>
                     </table>
-                    <Traveltimes lat={props.coords.latitude} lon={props.coords.longitude} />
+                    {/* <Traveltimes lat={props.coords.latitude} lon={props.coords.longitude} /> */}
                     </div>
                     : <div>Getting the location data&hellip; </div>
                 }
+              <Traveltimes lat="52.31406610552598" lon="4.946411339519716" />
         </>
     )
 }

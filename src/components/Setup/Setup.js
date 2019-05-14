@@ -114,7 +114,7 @@ function Setup(props) {
 
   return (
     <div className={classes.root}>
-    <Typography color="textPrimary" variant="h1" component="h1" align="left" style={{fontWeight:'bold', fontSize:'5rem', padding:'24px'}} gutterBottom>
+    <Typography color="textPrimary" variant="h1" component="h1" align="left" style={{fontWeight:'bold', fontSize:'5rem', padding:'24px', background:'#81d4fa'}} gutterBottom>
                 Know Your Prayer times
     </Typography>
       <Stepper activeStep={activeStep} orientation="vertical">

@@ -25,9 +25,9 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
             })
             
             if (data && data.data && data.data.meta) {
-                localStorage.setItem(`padachone:region`, region);
-                localStorage.setItem(`padachone:country`, country);
-                localStorage.setItem(`padachone:place`, place);
+                region && localStorage.setItem(`padachone:region`, region);
+                country && localStorage.setItem(`padachone:country`, country);
+                place && localStorage.setItem(`padachone:place`, place);
                 localStorage.setItem(`padachone:${date}`, JSON.stringify(data))
             }
             setData(data);

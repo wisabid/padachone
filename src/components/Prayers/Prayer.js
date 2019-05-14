@@ -52,16 +52,16 @@ const Prayer = (props) => {
                                 {prayer}
                                 </Typography>
                                 <Typography variant="h3" component="h2">
-                                {timings[prayer]}
+                                <strong style={{color:'#039be5'}}>{timings[prayer]}</strong>
                                 </Typography>
-                                <Typography className={classes.pos} color="textSecondary">
+                                {/* <Typography className={classes.pos} color="textSecondary">
                                 {date.readable} 
                                 <span onClick={handleAlpha}>.</span>
-                                </Typography>
-                                <Typography variant="body2" component="p">
-                                {date.hijri.month.ar}
-                                <br />
-                                {`"${date.hijri.weekday.en}"`}
+                                </Typography> */}
+                                <Typography variant="body2" component="p" color="textSecondary">
+                                <span onClick={handleAlpha} className="arab-month">{date.hijri.month.ar}</span>
+                                {/* <br />
+                                {`"${date.hijri.weekday.en}"`} */}
                                 </Typography>
                             </CardContent>
                             {/* <CardActions className={classes.buttonaction}>
