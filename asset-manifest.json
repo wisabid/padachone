@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/padachone/static/css/main.8868407a.chunk.css",
-    "main.js": "/padachone/static/js/main.420be679.chunk.js",
-    "main.js.map": "/padachone/static/js/main.420be679.chunk.js.map",
+    "main.js": "/padachone/static/js/main.80b55b33.chunk.js",
+    "main.js.map": "/padachone/static/js/main.80b55b33.chunk.js.map",
     "runtime~main.js": "/padachone/static/js/runtime~main.a34078d7.js",
     "runtime~main.js.map": "/padachone/static/js/runtime~main.a34078d7.js.map",
-    "static/js/2.7ce77ace.chunk.js": "/padachone/static/js/2.7ce77ace.chunk.js",
-    "static/js/2.7ce77ace.chunk.js.map": "/padachone/static/js/2.7ce77ace.chunk.js.map",
+    "static/js/2.c724a089.chunk.js": "/padachone/static/js/2.c724a089.chunk.js",
+    "static/js/2.c724a089.chunk.js.map": "/padachone/static/js/2.c724a089.chunk.js.map",
     "index.html": "/padachone/index.html",
-    "precache-manifest.566fe8f5b71f5dae3a85fba5aaba30fb.js": "/padachone/precache-manifest.566fe8f5b71f5dae3a85fba5aaba30fb.js",
+    "precache-manifest.a3a169c277f3e70d5efa32a64bbda00e.js": "/padachone/precache-manifest.a3a169c277f3e70d5efa32a64bbda00e.js",
     "service-worker.js": "/padachone/service-worker.js",
     "static/css/main.8868407a.chunk.css.map": "/padachone/static/css/main.8868407a.chunk.css.map",
     "static/media/logo.png": "/padachone/static/media/logo.a299d8fa.png"
