@@ -95,17 +95,18 @@ const Header = ({timezone, startup, place, pdate}) => {
             
               
             <Slide direction="up" in="true" mountOnEnter unmountOnExit>  
-              <Typography variant="caption" color="textSecondary" style={{fontStyle:'italic', color: 'rgb(3, 155, 229)'}}>
-                <strong>{(place)
-                          ?place
-                          :''
-                          }</strong> ( {timezone}  )
+              <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px', fontStyle:'normal', display: 'flex', justifyContent:'space-between'}}>
+                 <span>{timezone}</span>
+                          <span style={{fontWeight:'bold'}}>{pdate}</span>
               </Typography>
               
             </Slide>
             <Slide direction="down" in="true" mountOnEnter unmountOnExit style={{fontStyle:'italic'}}>  
-            <Typography variant="caption" color="textSecondary" style={{display: 'flex', justifyContent:'space-between', fontWeight: 'bold', fontStyle:'normal'}}>
-              <strong>{pdate}</strong>
+            <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px',display: 'flex', justifyContent:'space-between', fontStyle:'normal'}}>
+            <strong>{(place)
+                          ?`'${place}'`
+                          :''
+                          }</strong>
               <span style={{padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>       
               </Typography>
               </Slide>
