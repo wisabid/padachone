@@ -25,7 +25,8 @@ const Lab = (props) => {
             :!props.isGeolocationEnabled
                 ?<div style={{marginTop:'150px'}}><h5 >Message from Lab : "Geolocation is not enabled. Please enable location. Please refresh to go back"</h5></div>
                 :props.coords
-                    ? <div><table>
+                    ? <div>
+                      {/* <table>
                     <tbody>
                         <tr><td>latitude</td><td>{props.coords.latitude}</td></tr>
                         <tr><td>longitude</td><td>{props.coords.longitude}</td></tr>
@@ -33,7 +34,7 @@ const Lab = (props) => {
                         <tr><td>heading</td><td>{props.coords.heading}</td></tr>
                         <tr><td>speed</td><td>{props.coords.speed}</td></tr>
                     </tbody>
-                    </table>
+                    </table> */}
                     <Traveltimes lat={props.coords.latitude} lon={props.coords.longitude} />
                     </div>
                     : <div>Getting the location data&hellip; </div>
