@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['Where on earth are you ?', 'Almost there!', 'Need More Accuracy?', 'Are you a traveller? (Just Released!)'];
+  return ['Where on earth are you ?', 'Almost there!', 'Need More Accuracy?', 'Are you a traveller? (Coming Soon!)'];
 }
 
 function getStepContent(step) {
@@ -127,12 +127,12 @@ function Setup(props) {
       <Typography color="textPrimary" variant="h1" component="h1" align="left" style={{fontWeight:'bold', fontSize:'5rem', padding:'24px', background:'#fff', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
                   Know Your Prayer times
       </Typography>
-      <Typography color="textSecondary" align="left" variant="body2" component="p" 
+      {/* <Typography color="textSecondary" align="left" variant="body2" component="p" 
         style={{padding:'0 24px',fontStyle:'italic', fontSize: '1rem'}} gutterBottom>
           Are you in a moving train/bus?  
          
                       <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release)
-        </Typography>
+        </Typography> */}
         <Stepper activeStep={activeStep} orientation="vertical" >
           {steps.map((label, index) => (
             <Step key={label} style={{color: "white", background: '#f5f5f5',borderRadius: '15px', padding:'10px'}}>
