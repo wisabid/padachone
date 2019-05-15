@@ -72,7 +72,6 @@ const tutorialSteps = [
 
 const Traveltimes = ({lat, lon}) => {
     const [data, setData] = useLab_1({lat: lat, lon: lon});
-    console.log('CURR', data)
     const classes = useStyles();
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -90,7 +89,6 @@ const Traveltimes = ({lat, lon}) => {
         setActiveStep(step);
     }
     if (data.length && data[0].timings) {
-        debugger;
         return (
             // <div>
             //     {/* {data.data[0].timings.Maghrib} */}

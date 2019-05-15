@@ -38,7 +38,6 @@ function App() {
   const {finished, country, region, pdtodaysDate, prayerdata, place} = state;
   const handlefinished = (obj) => {
     const {country, region, finished, place} = obj;
-    debugger;
     setState({...state, finished, country, region: region, place : place});
   }
 

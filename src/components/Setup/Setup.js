@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import Lab from '../Lab/Lab';
+import bg from '../../assets/images/bg.jpg';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['Where on earth are you ?', 'Almost there!', 'Need More Accuracy?', 'Are you a traveller? (Coming Soon!)'];
+  return ['Where on earth are you?', 'Almost there!', 'Need More Accuracy?', 'Are you a traveller? (Coming Soon!)'];
 }
 
 function getStepContent(step) {
@@ -61,7 +62,6 @@ function getStepContent(step) {
 }
 
 function Setup(props) {
-  debugger;
   const {setupdata, country:country_alt, region:region_alt, place: place_alt} = props;
   const classes = useStyles();
   const [state, setState] = React.useState({activeStep : 0, place: place_alt, country : country_alt, region: region_alt})
@@ -123,8 +123,8 @@ function Setup(props) {
   }
   else {
     return (
-      <div className={classes.root}>
-      <Typography color="textPrimary" variant="h1" component="h1" align="left" style={{fontWeight:'bold', fontSize:'5rem', padding:'24px', background:'#fff', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
+      <div className={classes.root} style={{backgroundImage:`url(${bg})`, backgroundPosition: '200px -17px', backgroundRepeat: 'no-repeat'}}>
+      <Typography color="textPrimary" variant="h1" component="h1" align="left" style={{fontWeight:'bold', fontSize:'5rem', padding:'24px', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
                   Know Your Prayer times
       </Typography>
       {/* <Typography color="textSecondary" align="left" variant="body2" component="p" 

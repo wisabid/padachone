@@ -104,7 +104,7 @@ const Footer = ({startup}) => {
             <MoreIcon />
           </IconButton> */}
         {/* </Toolbar> */}
-        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px', fontWeight:'bold', color: 'rgba(0, 0, 0, 0.54)'
+        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px', fontSize:'10px', color: 'rgba(0, 0, 0, 0.54)'
 }} align="center">
             Copyright © 2019 WISMIM.
           </Typography>

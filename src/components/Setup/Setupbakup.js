@@ -7,7 +7,6 @@ const Location = (props) => {
     const [state, setState] = useState({});
     const { country, region } = state;
     const selectCountry = (country) => {
-        debugger;
         setState({...state, country})
     }
     const selectRegion = (region) => {

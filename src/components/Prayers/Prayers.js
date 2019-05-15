@@ -20,7 +20,6 @@ const Prayers = (props) => {
     // const [data, setData] = usePrayer('Amsterdam');
     const {prdata: data} = props;
     const {data:prayerdata, code, status} = data;
-    console.log(data)
     const classes = useStyles();
     // 
     const monthList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -28,7 +27,6 @@ const Prayers = (props) => {
     let day = ('0'+dt.getDate()).slice(-2);
     let mon = monthList[dt.getMonth()];
     let yr = dt.getFullYear();
-    console.log(`${day} ${mon} ${yr}`)
     // 
     useEffect(() => {
         if (prayerdata && Object.keys(prayerdata).length) {
