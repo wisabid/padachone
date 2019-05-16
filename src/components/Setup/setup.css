@@ -1,0 +1,10 @@
+.MuiStepConnector-line.MuiStepConnector-lineVertical {
+    border-color:#fff;
+}
+
+.MuiStep-root .MuiStepIcon-text {
+    fill:#fff ;
+}
+.MuiStep-root .Mui-disabled .MuiStepIcon-root{
+color: #bdbdbd;
+}

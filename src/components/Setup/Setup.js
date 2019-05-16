@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import Lab from '../Lab/Lab';
 import bg from '../../assets/images/bg.jpg';
+import './setup.css'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,6 +40,12 @@ const useStyles = makeStyles(theme => ({
   },
   h1: {
     fontWeight:'bold'
+  },
+  vertical: {
+    color : '#fff'
+  },
+  iconContainer : {
+    fontStyle:'italic'
   }
 }));
 
@@ -133,11 +140,11 @@ function Setup(props) {
          
                       <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release)
         </Typography> */}
-        <Stepper activeStep={activeStep} orientation="vertical" >
+        <Stepper activeStep={activeStep} orientation="vertical" classes={classes.vertical} >
           {steps.map((label, index) => (
             <Step key={label} style={{color: "white", background: '#f5f5f5',borderRadius: '15px', padding:'10px'}}>
-              <StepLabel classes={classes.label} align="left"><span style={{fontSize:'1.5rem', color: 'rgb(3, 155, 229)', fontWeight:'bold'}}>{label}</span></StepLabel>
-              <StepContent align="left" style={{}}>
+              <StepLabel classes={classes.label} align="left" iconContainer={classes.iconContainer}><span style={{fontSize:'1.5rem', color: 'rgb(3, 155, 229)', fontWeight:'bold'}}>{label}</span></StepLabel>
+              <StepContent align="left" style={{border:'none'}}>
                 
                 {(activeStep === 0) && <CountryDropdown
                 value={country}
