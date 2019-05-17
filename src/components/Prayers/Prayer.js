@@ -59,7 +59,7 @@ const Prayer = (props) => {
                                 <span onClick={handleAlpha}>.</span>
                                 </Typography> */}
                                 <Typography variant="body2" component="p" color="textSecondary">
-                                <span onClick={handleAlpha} className="arab-month">{date.hijri.month.ar}</span>
+                                    {date.hijri.month.ar}<span onClick={handleAlpha} className="arab-month">.</span>
                                 {/* <br />
                                 {`"${date.hijri.weekday.en}"`} */}
                                 </Typography>

@@ -66,13 +66,13 @@ const Header = ({timezone, startup, place, pdate}) => {
         <div className={{flexGrow: 1}}>
         <AppBar position="fixed" color="primary">
             <Toolbar style={{minHeight: '45px'}}>
-            <img src={logo} width="150" height="30" alt="logo" className="App-logo"  />                        
+            <a href="/"><img src={logo} width="150" height="30" alt="logo" className="App-logo"  /></a>
           <div className={classes.grow} />
            
             
             {/* <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/> */}
             {/* <Avatar className={classes.avatar}> */}
-            <SettingsIcon fontSize="large" className="settings" onClick={handleChange} style={{color:'#fff'}}/>
+            <SettingsIcon fontSize="default" className="settings" onClick={handleChange} style={{color:'#fff'}}/>
           {/* </Avatar> */}
             </Toolbar>
             {/* <Slide direction="down" in="true" mountOnEnter unmountOnExit style={{color: 'white', fontStyle:'italic'}}>  

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {geolocated} from 'react-geolocated';
 
 import Traveltimes from './Traveltimes'
+import Map from '../Lab/Map'
 
 
 const Lab = (props) => {
@@ -37,10 +38,12 @@ const Lab = (props) => {
                     </table> */}
                     
                     <Traveltimes lat={props.coords.latitude} lon={props.coords.longitude} />
+                    <div style={{width: '100%', height:'90vh'}}><Map lat={props.coords.latitude} lon={props.coords.longitude} /></div>
                     </div>
                     : <div>Getting the location data&hellip; </div>
                 }
               {/* <Traveltimes lat="52.31406610552598" lon="4.946411339519716" /> */}
+              {/* <div style={{width: '100%', height:'90vh'}}><Map lat="52.31406610552598" lon="4.946411339519716" /></div> */}
         </>
     )
 }
