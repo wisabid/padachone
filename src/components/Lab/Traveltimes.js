@@ -103,9 +103,9 @@ const Traveltimes = ({lat, lon}) => {
         // }
 
             <div className={classes.root}>
-                <Paper square elevation={0} className={classes.header}>
+                {/* <Paper square elevation={0} className={classes.header}> */}
                 {/* <Typography>tutorialSteps[activeStep].label{data.data[0].timings.Maghrib}</Typography> */}
-                </Paper>
+                {/* </Paper> */}
                 <AutoPlaySwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                 index={activeStep}
@@ -117,6 +117,9 @@ const Traveltimes = ({lat, lon}) => {
                     {Math.abs(activeStep - index) <= 2 ? (
                         // <img className={classes.img} src={step.imgPath} alt={step.label} />
                         Object.keys(data[0].timings).map((prayer, ind) => {
+                          let splitdt = data[0].timings[prayer].split(' '),
+                            timing = splitdt[0],
+                            tzone = splitdt[1];
                           return (
                             <Card className={classes.card} key={ind}>
                             <CardContent>
@@ -124,11 +127,13 @@ const Traveltimes = ({lat, lon}) => {
                                 {prayer}
                                 </Typography>
                                 <Typography variant="h3" component="h2">
-                                  <strong style={{color:'#039be5'}}>{data[0].timings[prayer]}</strong>
+                                  <strong style={{color:'#039be5'}}>{timing}</strong>
                                 </Typography>
                                
                                 <Typography variant="body2" component="p" color="textSecondary">
-                                Ramdan
+                                  {tzone}
+                                  <br />
+                                {data[0].date.hijri.month.ar}
                                
                                 </Typography>
                             </CardContent>                           

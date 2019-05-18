@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import Lab from '../Lab/Lab';
-import bg from '../../assets/images/bg.jpg';
+import bg from '../../assets/images/bg-img.png';
 import './setup.css'
 
 const useStyles = makeStyles(theme => ({
@@ -50,19 +50,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['Where on earth are you?', 'Almost there!', 'Need More Accuracy?', 'Are you a traveller? (Coming Soon!)'];
+  return ['Where on earth are you?', 'Almost there!', 'Need More Accuracy?'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return `This will Set up your timezone preferance to appear on top of the screen`;
+      return `This will Set up your timezone preferance`;
     case 1:
       return 'You can always re-configure these settings on click of a button';
     case 2:
       return 'Key in your Place name for more accurate results.'
-    case 3:
-      return `Wanna know your Ifthar/Prayer time while moving ? Coming Soon!`;
+    // case 3:
+    //   return `Wanna know your Ifthar/Prayer time while moving ? Coming Soon!`;
     default:
       return 'Unknown step';
   }
@@ -130,16 +130,19 @@ function Setup(props) {
   }
   else {
     return (
-      <div className={classes.root} style={{backgroundImage:`url(${bg})`, backgroundPosition: '200px -17px', backgroundRepeat: 'no-repeat'}}>
-      <Typography color="textPrimary" variant="h1" component="h1" align="left" style={{fontWeight:'bold', fontSize:'5rem', padding:'24px', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
-                  Know Your Prayer times
+      <div className={classes.root}>
+      <Typography color="textPrimary" variant="h1" component="h1" align="left" 
+      style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#00023f', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
+                  Know Your Prayer times <br/>
       </Typography>
-      {/* <Typography color="textSecondary" align="left" variant="body2" component="p" 
-        style={{padding:'0 24px',fontStyle:'italic', fontSize: '1rem'}} gutterBottom>
-          Are you in a moving train/bus?  
-         
-                      <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release)
-        </Typography> */}
+      
+      { <Typography color="textSecondary" align="left" variant="body2" component="p" 
+        style={{padding:'0 24px',fontStyle:'italic', fontSize: '0.9rem', marginTop:'10px'}} gutterBottom>
+          {/* Are you in a moving train/bus?   */}
+          An easy to use light weight application for noting down your Fajr, Dhuhr, Asr, Maghrib & Isha timings of the day. 
+          <br/> "Worries end when Salah begins"
+                      {/* <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release) */}
+        </Typography> }
         <Stepper activeStep={activeStep} orientation="vertical" classes={classes.vertical} >
           {steps.map((label, index) => (
             <Step key={label} style={{color: "white", background: '#f5f5f5',borderRadius: '15px', padding:'10px'}}>
@@ -148,12 +151,14 @@ function Setup(props) {
                 
                 {(activeStep === 0) && <CountryDropdown
                 value={country}
-                onChange={(val) => selectCountry(val)} className={classes.selfont} style={{maxWidth: '100%', fontSize: '1rem', borderRadius: '5px', marginBottom:'10px'}}/>}
+                onChange={(val) => selectCountry(val)} className={classes.selfont} 
+                style={{maxWidth: '100%', fontSize: '1rem', marginBottom:'10px', minHeight:'30px'}}/>}
   
                 {(activeStep === 1) && <RegionDropdown
                 country={country}
                 value={region}
-                onChange={(val) => selectRegion(val)} className={classes.selfont} style={{maxWidth: '100%', fontSize: '1rem', borderRadius: '5px', marginBottom:'10px'}}/>}
+                onChange={(val) => selectRegion(val)} className={classes.selfont} 
+                style={{maxWidth: '100%', fontSize: '1rem', minHeight:'30px', marginBottom:'10px'}}/>}
               
               {(activeStep === 2) && <TextField
                 id="place-name"
