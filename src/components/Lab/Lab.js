@@ -39,8 +39,9 @@ const Lab = (props) => {
                     </table> */}
                     <h4>Lab Alpha Releases</h4>
                     <h5>Travel Times</h5>
-                    {/* <Traveltimes lat={props.coords.latitude} lon={props.coords.longitude} /> */}
-                    {/* <Search lat={props.coords.latitude} lon={props.coords.longitude}/> */}
+                    <Traveltimes lat={props.coords.latitude} lon={props.coords.longitude} />
+                    <h5>Travel Times</h5>
+                    <Search lat={props.coords.latitude} lon={props.coords.longitude}/>
                     
                     <h5>Mosque Map</h5>
                     <div style={{width: '100%', height:'90vh'}}><Map lat={props.coords.latitude} lon={props.coords.longitude} /></div>
