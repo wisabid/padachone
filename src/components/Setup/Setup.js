@@ -153,7 +153,7 @@ function Setup(props) {
     return (
       <div className={classes.root}>
       <Typography color="textPrimary" variant="h1" component="h1" align="left" 
-      style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#0c39e3', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgb(255, 255, 255, 0.7)', marginBottom:0}} gutterBottom>
+      style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#0c39e3', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgba(255, 255, 255, 0.7)', marginBottom:0}} gutterBottom>
                   Know Your Prayer times <br/>
       </Typography>
       
