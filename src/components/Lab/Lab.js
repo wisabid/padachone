@@ -40,7 +40,7 @@ const Lab = (props) => {
                     <h4>Lab Alpha Releases</h4>
                     <h5>Travel Times</h5>
                     <Traveltimes lat={props.coords.latitude} lon={props.coords.longitude} />
-                    <h5>Travel Times</h5>
+                    <h5>Custom Search</h5>
                     <Search lat={props.coords.latitude} lon={props.coords.longitude}/>
                     
                     <h5>Mosque Map</h5>

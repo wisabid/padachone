@@ -139,7 +139,7 @@ function Setup(props) {
       { <Typography color="textSecondary" align="left" variant="body2" component="p" 
         style={{padding:'0 24px',fontStyle:'italic', fontSize: '0.9rem', marginTop:'10px'}} gutterBottom>
           {/* Are you in a moving train/bus?   */}
-          An easy to use light weight application for noting down your Fajr, Dhuhr, Asr, Maghrib & Isha timings of the day. 
+          An easy to use light weight application for knowing your Fajr, Dhuhr, Asr, Maghrib & Isha timings of the day. 
           <br/> "Worries end when Salah begins"
                       {/* <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release) */}
         </Typography> }

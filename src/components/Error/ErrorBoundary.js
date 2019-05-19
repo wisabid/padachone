@@ -29,7 +29,7 @@ class ErrorBoundary extends Component {
                 <>
               <a onClick={() => Sentry.showReportDialog({ eventId: this.state.eventId })}>Report feedback</a>
               <p>We're sorry — something's gone wrong.</p>
-              <p>Our team has been notified, but click here fill out a report.</p>
+              <p>Our team has been notified, but send us an email to admirer@padachone.com with your suggestions/feedback.</p>
               </>
             );
         } else {
