@@ -30,6 +30,34 @@ const theme = createMuiTheme({
   }
 });
 function App() {  
+  
+  const [prevScrollpos, setprevScrollpos] = useState(window.pageYOffset);
+
+  useEffect(() => {
+   console.log(prevScrollpos) 
+  })
+
+  const hideHdrFtr = () => {
+    let currentScrollPos = window.pageYOffset;
+      if (prevScrollpos >= currentScrollPos) {
+        // document.getElementById("navbar").style.top = "0";
+        // document.querySelector('.MuiToolbar-gutters').style.display = "flex";
+        document.querySelector('.padachone-ftr').style.visibility = "visible";
+      } else {
+        // document.getElementById("navbar").style.top = "-50px";
+        // document.querySelector('.MuiToolbar-gutters').style.display = "none";
+        document.querySelector('.padachone-ftr').style.visibility = "hidden";
+        
+      }
+      setprevScrollpos(currentScrollPos)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', hideHdrFtr);  
+    return () => {
+      window.removeEventListener('scroll', hideHdrFtr)
+    }  
+  }, [])
   const [state, setState] = useState({finished : false, 
     pdtodaysDate: getPDdata().split(' ').join(''), 
     place :localStorage.getItem('padachone:place') , 

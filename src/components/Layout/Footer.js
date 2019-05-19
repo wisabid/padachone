@@ -40,7 +40,8 @@ const useStyles = makeStyles(theme => ({
   appBar: {
     top: 'auto',
     bottom: 0,
-    background: '#f5f5f5',
+    background: '#efefef',
+    transition: 'display 0.5s ease-in-out'
   },
   grow: {
     flexGrow: 1,
@@ -80,7 +81,7 @@ const Footer = ({startup}) => {
         //     <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} />
         //     {/* <BottomNavigationAction label="Folder" value="folder" icon={<Icon>...</Icon>} /> */}
         // </BottomNavigation>
-        <AppBar position="fixed" color="primary" className={classes.appBar}>
+        <AppBar position="fixed" color="primary" className={`${classes.appBar} padachone-ftr`}>
         {/* <Toolbar> */}
         {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center'}}>
                 A  L  L  A  H
@@ -104,7 +105,7 @@ const Footer = ({startup}) => {
             <MoreIcon />
           </IconButton> */}
         {/* </Toolbar> */}
-        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px', fontSize:'10px', color: 'rgba(0, 0, 0, 0.54)'
+        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px', fontSize:'10px', color: '#555555'
 }} align="center">
             Copyright © 2019 WISMIM.
           </Typography>

@@ -37,6 +37,7 @@ import './layout.css'
         borderRadius: 0,
         padding:0,
         background: '#efefef',
+        transition: 'display 0.5s ease-in-out'
     },
     }));
   

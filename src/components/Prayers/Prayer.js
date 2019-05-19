@@ -44,34 +44,37 @@ const Prayer = (props) => {
     if (timings) {
         if (!alpha) {
             return (
-                Object.keys(timings).map((prayer, index) => {
-                    return (
-                        <Card className={classes.card} key={index}>
-                            <CardContent>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom style={{fontSize:'17px'}}>
-                                {prayer}
-                                </Typography>
-                                <Typography variant="h3" component="h2">
-                                <strong style={{color:'#039be5'}}>{timings[prayer]}</strong>
-                                </Typography>
-                                {/* <Typography className={classes.pos} color="textSecondary">
-                                {date.readable} 
-                                <span onClick={handleAlpha}>.</span>
-                                </Typography> */}
-                                <Typography variant="body2" component="p" color="textSecondary">
-                                    {date.hijri.month.ar}<span onClick={handleAlpha} className="arab-month">.</span>
-                                {/* <br />
-                                {`"${date.hijri.weekday.en}"`} */}
-                                </Typography>
-                            </CardContent>
-                            {/* <CardActions className={classes.buttonaction}>
-                                <Button size="small">Learn More</Button>
-                            </CardActions> */}
-                        </Card> 
-                    )
-                })
+                <>
+                {
+                    Object.keys(timings).map((prayer, index) => {
+                        return (
+                            <Card className={classes.card} key={index}>
+                                <CardContent>
+                                    <Typography className={classes.title} color="textSecondary" gutterBottom style={{fontSize:'17px'}}>
+                                    {prayer}<span onClick={handleAlpha} className="arab-month" style={{color:'#fff'}}>.</span>
 
-                
+                                    </Typography>
+                                    <Typography variant="h3" component="h2">
+                                    <strong style={{color:'#039be5'}}>{timings[prayer]}</strong>
+                                    </Typography>
+                                    {/* <Typography className={classes.pos} color="textSecondary">
+                                    {date.readable} 
+                                    <span onClick={handleAlpha}>.</span>
+                                    </Typography> */}
+                                    <Typography variant="body2" component="p" color="textSecondary">
+                                        {date.hijri.month.ar}
+                                    {/* <br />
+                                    {`"${date.hijri.weekday.en}"`} */}
+                                    </Typography>
+                                </CardContent>
+                                {/* <CardActions className={classes.buttonaction}>
+                                    <Button size="small">Learn More</Button>
+                                </CardActions> */}
+                            </Card> 
+                        )
+                    })
+                }
+                </>
             )
         }
         else {
