@@ -36,7 +36,7 @@ import './layout.css'
         padding: theme.spacing(3, 2),
         borderRadius: 0,
         padding:0,
-        background: '#f5f5f5',
+        background: '#efefef',
     },
     }));
   
@@ -95,19 +95,19 @@ const Header = ({timezone, startup, place, pdate}) => {
             
               
             <Slide direction="up" in="true" mountOnEnter unmountOnExit>  
-              <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px', fontStyle:'normal', display: 'flex', justifyContent:'space-between'}}>
+              <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px', fontStyle:'normal', display: 'flex', justifyContent:'space-between', color: '#555555'}}>
                  <span>{timezone}</span>
-                          <span style={{fontWeight:'bold'}}>{pdate}</span>
+                          <span style={{fontWeight:'normal'}}>{pdate}</span>
               </Typography>
               
             </Slide>
             <Slide direction="down" in="true" mountOnEnter unmountOnExit style={{fontStyle:'italic'}}>  
-            <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px',display: 'flex', justifyContent:'space-between', fontStyle:'normal'}}>
-            <strong>{(place)
-                          ?`'${place}'`
+            <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px',display: 'flex', justifyContent:'space-between', fontStyle:'normal', color: '#555555', fontSize: '1rem'}}>
+            {(place)
+                          ?`${place}`
                           :''
-                          }</strong>
-              <span style={{padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>       
+                          }
+              <span style={{padding: '0 0 0 3px', fontWeight:'normal'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>       
               </Typography>
               </Slide>
                     </Paper>

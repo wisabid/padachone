@@ -48,7 +48,7 @@ const Prayer = (props) => {
                     return (
                         <Card className={classes.card} key={index}>
                             <CardContent>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom style={{fontSize:'17px'}}>
                                 {prayer}
                                 </Typography>
                                 <Typography variant="h3" component="h2">

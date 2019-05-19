@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import Lab from '../Lab/Lab';
-import bg from '../../assets/images/bg-img.png';
+import bg from '../../assets/images/bg-new.png';
 import './setup.css'
 
 const useStyles = makeStyles(theme => ({
@@ -74,13 +74,25 @@ function Setup(props) {
   const [state, setState] = React.useState({activeStep : 0, place: place_alt, country : country_alt, region: region_alt})
   const {activeStep, country, region, seccountry, secregion, place } = state;
   // const [activeStep, setActiveStep] = React.useState(0);
+
+  const [colorCode, SetColorCode] = React.useState('rgba(0, 0, 0, 0.54)')
   const steps = getSteps();
 
   function handleNext() {
+    if (state.activeStep === 0 && !country) {
+      SetColorCode('red');
+      return 
+    }
+    else if (state.activeStep === 1 && !region) {
+      SetColorCode('red');
+      return 
+    }
+    SetColorCode('rgba(0, 0, 0, 0.54)');
     setState({...state, activeStep : state.activeStep + 1});
   }
 
   function handleBack() {
+    SetColorCode('rgba(0, 0, 0, 0.54)');
     setState({...state, activeStep : state.activeStep - 1});
   }
 
@@ -91,6 +103,15 @@ function Setup(props) {
   const selectCountry = (country) => {
     setState({...state, country})
   }
+
+  useEffect(() => {
+    if (country)
+    setState({...state, region: '', place : ''})
+  }, [country])
+
+  useEffect(() => {
+    setState({...state, country : country_alt, region: region_alt})
+  }, [])
   const selectRegion = (region) => {
       setState({...state, region})
   }
@@ -132,7 +153,7 @@ function Setup(props) {
     return (
       <div className={classes.root}>
       <Typography color="textPrimary" variant="h1" component="h1" align="left" 
-      style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#00023f', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
+      style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#0c39e3', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: '#fff', marginBottom:0}} gutterBottom>
                   Know Your Prayer times <br/>
       </Typography>
       
@@ -152,7 +173,7 @@ function Setup(props) {
                 {(activeStep === 0) && <CountryDropdown
                 value={country}
                 onChange={(val) => selectCountry(val)} className={classes.selfont} 
-                style={{maxWidth: '100%', fontSize: '1rem', marginBottom:'10px', minHeight:'30px'}}/>}
+                style={{maxWidth: '100%', fontSize: '1rem', marginBottom:'10px', minHeight:'40px'}}/>}
   
                 {(activeStep === 1) && <RegionDropdown
                 country={country}
@@ -170,7 +191,7 @@ function Setup(props) {
                 variant="outlined"
               />}
                   
-                <Typography color="textSecondary" variant="body2" component="p" style={{fontStyle:'italic', fontSize: '1rem'}} gutterBottom>{getStepContent(index)}</Typography>
+                <Typography color="textSecondary" variant="body2" component="p" style={{fontStyle:'italic', fontSize: '1rem', color: colorCode}} gutterBottom>{getStepContent(index)}</Typography>
                 <div className={classes.actionsContainer}>
                   <div>
                     <Button
