@@ -164,10 +164,10 @@ function Setup(props) {
           <br/> "Worries end when Salah begins"
                       {/* <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release) */}
         </Typography> }
-        <Stepper activeStep={activeStep} orientation="vertical" classes={classes.vertical} >
+        <Stepper activeStep={activeStep} orientation="vertical" >
           {steps.map((label, index) => (
             <Step key={label} style={{color: "white", background: '#f5f5f5',borderRadius: '15px', padding:'10px'}}>
-              <StepLabel classes={classes.label} align="left" iconContainer={classes.iconContainer}><span style={{fontSize:'1.5rem', color: 'rgb(3, 155, 229)', fontWeight:'bold'}}>{label}</span></StepLabel>
+              <StepLabel align="left"><span style={{fontSize:'1.5rem', color: 'rgb(3, 155, 229)', fontWeight:'bold'}}>{label}</span></StepLabel>
               <StepContent align="left" style={{border:'none'}}>
                 
                 {(activeStep === 0) && <CountryDropdown

@@ -8,19 +8,19 @@ const Bing = ({lat, lon}) => {
     const [pushpin, setPushpin] = useState([{
       "location":[lat, lon], "option":{ color: 'blue' }, "addHandler": {"type" : "click", callback: callBackMethod }
   }])
-    const [dir, setDir] = useState({
+    // const [dir, setDir] = useState({
       
-        "renderOptions": {"itineraryContainer": "itineraryContainer" },
-        "requestOptions": {"routeMode": "walking", "maxRoutes": 2},
-        "wayPoints": [
-              {
-                address: 'Bijlmer'
-              },
-              {
-                address: 'Ijburg'
-              }
-            ]
-      })
+    //     "renderOptions": {"itineraryContainer": "itineraryContainer" },
+    //     "requestOptions": {"routeMode": "walking", "maxRoutes": 2},
+    //     "wayPoints": [
+    //           {
+    //             address: 'Bijlmer'
+    //           },
+    //           {
+    //             address: 'Ijburg'
+    //           }
+    //         ]
+    //   })
 
       const [boundary, setBoundary] = useState({
         "search" : "Ijburg",

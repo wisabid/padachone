@@ -7,8 +7,6 @@ import Search from '../Lab/Search'
 
 
 const Lab = (props) => {
-    const [state, setState] = useState({});
-    const { country, region } = state;
     
     
     return (

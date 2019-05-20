@@ -15,4 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Homepage with Prayer times listing
 - Settings button for altering the set up configurations
 
+## [1.0.1] - 2019-05-20
+### Changed
+- Removed errors and aligned time to the right
+
 

@@ -40,7 +40,7 @@ const Prayers = (props) => {
         <div className="pdnContainer">
         {(typeof data === "object" && code === 200 && Object.keys(prayerdata).length)
             ?<>
-               <Grow in="true">
+               <Grow in={true}>
                     <div>
                     <Prayer pdata={prayerdata}/>
                     
