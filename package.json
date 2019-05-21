@@ -11,6 +11,7 @@
     "react": "^16.8.6",
     "react-bingmaps": "^3.6.1",
     "react-cookie-consent": "^2.3.1",
+    "react-count-down": "^1.2.0",
     "react-country-region-selector": "^1.4.3",
     "react-dom": "^16.8.6",
     "react-geolocated": "^2.4.1",

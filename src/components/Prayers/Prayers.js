@@ -42,7 +42,7 @@ const Prayers = (props) => {
             ?<>
                <Grow in={true}>
                     <div>
-                    <Prayer pdata={prayerdata}/>
+                    <Prayer pdata={prayerdata} timezone={props.timezone}/>
                     
                     </div>
                </Grow>                           

@@ -86,7 +86,6 @@ function Messages({msg}) {
   }
 
   function handleClose(event, reason) {
-      debugger;
     if (reason === 'clickaway') {
       return;
     }

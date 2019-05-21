@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prayer times with lat lon
 - Map showing mosque locations
 - Custom Search Results
+- Time left for Prayer
 
 ## [1.0.0] - 2019-05-19
 ### Added

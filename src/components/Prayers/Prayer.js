@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { EventEmitter } from 'events';
 import Lab from '../Lab/Lab';
+
 
 const useStyles = makeStyles({
     card: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
 
 const Prayer = (props) => {
     const { pdata:{timings, date, meta} } = props;
-    
+    console.table(Object.entries(timings))
     const classes = useStyles();
 
     const [alpha, setAlpha] = React.useState(false);
@@ -40,6 +41,7 @@ const Prayer = (props) => {
       setAlpha(true)
     }
 
+    
     
     if (timings) {
         if (!alpha) {
@@ -79,7 +81,7 @@ const Prayer = (props) => {
         }
         else {
             return (
-                <Lab />
+                <Lab timings={timings}/>
             )
         }
     }

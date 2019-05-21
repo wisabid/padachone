@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {geolocated} from 'react-geolocated';
 
 import Traveltimes from './Traveltimes'
 import Map from '../Lab/Map'
-import Search from '../Lab/Search'
+import Search from '../Lab/Search';
+import Timer from '../Timer/Timer';
+import { tConvert } from '../../utils';
 
 
 const Lab = (props) => {
+    const {timings} = props;
+    const [onlyPrayers, setOnlyPrayers] = useState({})
     
+    useEffect(() => {
+        if (timings.hasOwnProperty('Fajr')) {
+            let justPrayers = Object.keys(timings).reduce((all, item) => { 
+                if (['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].indexOf(item) !== -1) {
+                    all[item] = timings[item];              
+                }
+                return all;          
+              }, {});
+            setOnlyPrayers(justPrayers)
+        }
+    }, [timings])
     
     return (
         <>
+        <h4 style={{marginTop: '40px'}}>Lab (Alpha Releases)</h4>
+        <h5>Time left</h5>
+        {onlyPrayers.hasOwnProperty('Fajr') && <Timer timezone={props.timezone} prayers={onlyPrayers}/>}
         {/* <h1>Welcome Alfie</h1>
           <CountryDropdown
           value={country}
@@ -35,7 +53,7 @@ const Lab = (props) => {
                         <tr><td>speed</td><td>{props.coords.speed}</td></tr>
                     </tbody>
                     </table> */}
-                    <h4>Lab Alpha Releases</h4>
+                    
                     <h5>Travel Times</h5>
                     <Traveltimes lat={props.coords.latitude} lon={props.coords.longitude} />
                     <h5>Custom Search</h5>

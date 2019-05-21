@@ -33,7 +33,7 @@ const Layout = ({country, region, place, pdate, startup}) => {
                     place={localStorage.getItem(`padachone:place`)}
                     pdate={data.data.date.readable}
                 />
-               <Prayers prdata={data}/>    
+               <Prayers prdata={data} timezone={timezone}/>    
                
                 <Footer startup={startup}/>
             </>        
