@@ -13,6 +13,7 @@ import stepperData from '../Setup/setup-stepper-data.json';
 import {getPDdata} from '../../utils';
 import ErrorBoundary from '../Error/ErrorBoundary';
 import CookieConsent from "react-cookie-consent";
+import Messages from '../Messages'
 
 const theme = createMuiTheme({
   palette: {
@@ -71,9 +72,19 @@ function App() {
     setState({...state, finished, country, region: region, place : place});
   }
 
-  
+  const [msg, setMsg] = useState([false, '']);
 
   useEffect(() => {
+    // Logic for displaying Messages
+    if (!localStorage.getItem('padachone_msg')) {
+      const message = "Quick Tip: Use 'Add to Homescreen'";
+      setMsg(() => {
+        localStorage.setItem('padachone_msg', message)
+        return [true, message]
+      });
+      
+    }
+    // Logic for displaying Messages end here
     const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place');
     if (padachon_lsfind.length) {
       setState({...state, finished : true})
@@ -88,6 +99,7 @@ function App() {
           <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
             This website uses cookies to enhance the user experience.
         </CookieConsent>
+          {msg[0] && <Messages msg={msg[1]}/>}
           {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
           {finished && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
         </ErrorBoundary> 
