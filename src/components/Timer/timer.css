@@ -1,0 +1,11 @@
+.timerComp .MuiSnackbarContent-root .MuiSnackbarContent-message div {
+    display: flex;
+    flex-direction: column;
+}
+.timerComp .MuiSnackbarContent-root .MuiSnackbarContent-message div span {
+    font-size: 1rem !important;
+    color:#fff !important;
+}
+.timerComp .MuiSnackbarContent-root .MuiSnackbarContent-message div span:nth-child(1) {
+    font-size: 1.4rem !important;
+}
