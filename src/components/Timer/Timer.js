@@ -25,8 +25,8 @@ const Timer = (props) => {
         let timeopt = document.querySelector('.timerComp time').innerHTML;
         const currTime = timeopt.split(' ')[1];
         const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {
-            if (parseInt(item[1].split(':')[0]) > parseInt(currTime.split(':')[0])) {
-                all.push(item)
+            if (parseInt(item[1].split(':')[0]) >= parseInt(currTime.split(':')[0])) { //hours checking
+                all.push(item);
                 }  
             return all
         }, [])
