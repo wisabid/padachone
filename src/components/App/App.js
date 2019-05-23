@@ -77,7 +77,7 @@ function App() {
   useEffect(() => {
     // Logic for displaying Messages
     if (!localStorage.getItem('padachone_msg')) {
-      const message = "Quick Tip: Use 'Add to Homescreen'";
+      const message = "Would you like a count down timer?";
       setMsg(() => {
         localStorage.setItem('padachone_msg', message)
         return [true, message]
