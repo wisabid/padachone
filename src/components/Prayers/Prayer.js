@@ -81,7 +81,7 @@ const Prayer = (props) => {
         }
         else {
             return (
-                <Lab timings={timings}/>
+                <Lab timings={timings} timezone={props.timezone}/>
             )
         }
     }

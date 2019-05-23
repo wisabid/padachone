@@ -1,10 +1,18 @@
+.timerComp .MuiSnackbarContent-root {
+    min-height: 100px;
+}
 .timerComp .MuiSnackbarContent-root .MuiSnackbarContent-message div {
     display: flex;
     flex-direction: column;
+    padding:0 !important;
+}
+.timerComp .MuiSnackbarContent-root .MuiSnackbarContent-message {
+    padding:0;
 }
 .timerComp .MuiSnackbarContent-root .MuiSnackbarContent-message div span {
     font-size: 1rem !important;
     color:#fff !important;
+    min-width: 335px;
 }
 .timerComp .MuiSnackbarContent-root .MuiSnackbarContent-message div span:nth-child(1) {
     font-size: 1.4rem !important;
