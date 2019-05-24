@@ -76,13 +76,13 @@ function App() {
 
   useEffect(() => {
     // Logic for displaying Messages
-    if (!localStorage.getItem('padachone_msg')) {
-      const message = "Would you like a count down timer?";
+    localStorage.removeItem('padachone_msg');
+    if (!localStorage.getItem('padachone_msg1')) {
+      const message = 'admirer@padachone.com';
       setMsg(() => {
-        localStorage.setItem('padachone_msg', message)
+        localStorage.setItem('padachone_msg1', message)
         return [true, message]
-      });
-      
+      });      
     }
     // Logic for displaying Messages end here
     const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place');
