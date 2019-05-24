@@ -53,7 +53,7 @@ const Timer = (props) => {
         const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {
             if (parseInt(item[1].split(':')[0]) >= parseInt(currTime.split(':')[0])) { //hours checking
                 if (parseInt(item[1].split(':')[0]) === parseInt(currTime.split(':')[0])) {
-                    if (parseInt(item[1].split(':')[1]) < parseInt(currTime.split(':')[1])) {
+                    if (parseInt(item[1].split(':')[1]) > parseInt(currTime.split(':')[1])) {
                         all.push(item);
                     }
                 }
@@ -68,6 +68,7 @@ const Timer = (props) => {
         console.log('TZ', props.timezone)
         if (upcomingPs.length) {
             timeopt = timeopt.replace(currTime, upcomingPs[0][1]); //upcomingPs[0][1]
+            console.log('timeopt', timeopt)
             setOpts({
                 endDate: timeopt,
                 prefix: 'Left for '+upcomingPs[0][0],
@@ -82,8 +83,24 @@ const Timer = (props) => {
 
     const classes = useStyles();
     const [timerdisplay, setTimerdisplay] = useState(true);
+    const [dismissMsg, setdismissMsg] = useState('Dismiss')
     const onClose1 = () => {
-        setTimerdisplay(false)
+        const timeleftEl = document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)').innerText.split(' ');
+        if (timeleftEl[1] === "minutes" || timeleftEl[1] === "seconds") {
+            if (timeleftEl[1] === "minutes" && parseInt(timeleftEl[0]) <= 5) {
+                setdismissMsg('Not Allowed!')
+            }
+            else  if(timeleftEl[1] === "seconds" && parseInt(timeleftEl[0]) <= 30) {
+                setdismissMsg('Line up!') 
+            }
+            else  if(timeleftEl[1] === "seconds" && parseInt(timeleftEl[0]) <= 60) {
+                setdismissMsg('No Way you can miss!') 
+            }
+            else {
+                setTimerdisplay(false)
+            }
+        }
+        
     }
     return (
         <div className="timerComp">
@@ -94,7 +111,7 @@ const Timer = (props) => {
                     options={opts} 
                     />}
                 action={<Button color="secondary" size="small" onClick={onClose1}>
-                Dismiss
+                {dismissMsg}
                 </Button>}
                 style={{backgroundColor: '#1976d2', display : timerdisplay?'flex':'none' }}
             />
