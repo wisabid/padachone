@@ -86,19 +86,24 @@ const Timer = (props) => {
     const [dismissMsg, setdismissMsg] = useState('Dismiss')
     const onClose1 = () => {
         const timeleftEl = document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)').innerText.split(' ');
-        if (timeleftEl[1] === "minutes" || timeleftEl[1] === "seconds") {
-            if (timeleftEl[1] === "minutes" && parseInt(timeleftEl[0]) <= 5) {
+        const minsorsecs = timeleftEl[1];
+        const minsorsecsVal = parseInt(timeleftEl[0]);
+        if (minsorsecs === "minutes" || minsorsecs === "seconds") {
+            if (minsorsecs === "minutes" && minsorsecsVal <= 5) {
                 setdismissMsg('Not Allowed!')
             }
-            else  if(timeleftEl[1] === "seconds" && parseInt(timeleftEl[0]) <= 30) {
+            else  if(minsorsecs === "seconds" && minsorsecsVal <= 30) {
                 setdismissMsg('Line up!') 
             }
-            else  if(timeleftEl[1] === "seconds" && parseInt(timeleftEl[0]) <= 60) {
+            else  if(minsorsecs === "seconds" && minsorsecsVal <= 60) {
                 setdismissMsg('No Way you can miss!') 
             }
             else {
                 setTimerdisplay(false)
             }
+        }
+        else {
+            setTimerdisplay(false)
         }
         
     }
