@@ -21,14 +21,14 @@ const DismissTimer  = ({dismissMsg, setdismissMsg, anchorEl, setAnchorEl, timerd
         const timeleftEl = document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)').innerText.split(' ');
         const minsorsecs = timeleftEl[1];
         const minsorsecsVal = parseInt(timeleftEl[0]);
-        if (minsorsecs === "minutes" || minsorsecs === "seconds") {
-            if (minsorsecs === "minutes" && minsorsecsVal <= 5) {
+        if (minsorsecs === "minutes" || minsorsecs === "minute" || minsorsecs === "seconds" || minsorsecs === "second") {
+            if ((minsorsecs === "minutes" || minsorsecs === "minute") && minsorsecsVal <= 5) {
                 setdismissMsg(['Not Allowed !', goofy])
             }
-            else  if(minsorsecs === "seconds" && minsorsecsVal <= 30) {
+            else  if((minsorsecs === "seconds" || minsorsecs === "second") && minsorsecsVal <= 30) {
                 setdismissMsg(['Line up and be ready !', cool]) 
             }
-            else  if(minsorsecs === "seconds" && minsorsecsVal <= 60) {
+            else  if((minsorsecs === "seconds" || minsorsecs === "second") && minsorsecsVal <= 60) {
                 setdismissMsg(['Forbidden !', boo]) 
             }
             else {
