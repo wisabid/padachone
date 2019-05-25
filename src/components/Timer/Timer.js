@@ -1,13 +1,17 @@
 import React, { Component, PropTypes, useEffect, useState } from 'react'
 import Countdown from 'react-count-down'
-import Clock from 'react-live-clock';
+
 import {getPDdata} from '../../utils'
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
+import Zoom from '@material-ui/core/Zoom';
+
 import './timer.css';
 
+import CurrentTime from './CurrentTime';
+import DismissTimer from './DismissTimer';
 
 // const OPTIONS = {
 //     endDate: '09/20/2019 10:55 AM',
@@ -29,9 +33,13 @@ const useStyles = makeStyles(theme => ({
     snackbar: {
       margin: theme.spacing(1),
     },
+    typography: {
+        padding: theme.spacing(2),
+    },
   }));
 
 const Timer = (props) => {
+    const [dt, setdt] = useState(getPDdata('iso'))
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const [opts, setOpts] = useState({
         // endDate: '05/21/2019 18:42',
@@ -42,12 +50,18 @@ const Timer = (props) => {
     const cb = () => {
         console.log('expired callback', opts);
         const newmsg = (opts.prefix)?(opts.prefix).replace("Left", "Time"):'';
-        setOpts({});
+        
         setTimerdisplay(false)
-        setTimeout(startTimer, 50000);
+        setTimeout(startTimer, 2000);
+        
     }
-
+    const [dismissMsg, setdismissMsg] = useState(['Dismiss']);
+    const [anchorEl, setAnchorEl] = React.useState(null);
     const startTimer = () => {
+        setOpts({});
+        setdt(getPDdata('iso'));
+        setdismissMsg(['Dismiss']);
+        setTimerdisplay(true)
         let timeopt = document.querySelector('.timerComp time').innerHTML;
         const currTime = timeopt.split(' ')[1];
         const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {
@@ -78,56 +92,47 @@ const Timer = (props) => {
     }
 
     useEffect(() => {
-        startTimer();
+        startTimer(); 
     }, [])
 
     const classes = useStyles();
     const [timerdisplay, setTimerdisplay] = useState(true);
-    const [dismissMsg, setdismissMsg] = useState('Dismiss')
-    const onClose1 = () => {
-        const timeleftEl = document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)').innerText.split(' ');
-        const minsorsecs = timeleftEl[1];
-        const minsorsecsVal = parseInt(timeleftEl[0]);
-        if (minsorsecs === "minutes" || minsorsecs === "seconds") {
-            if (minsorsecs === "minutes" && minsorsecsVal <= 5) {
-                setdismissMsg('Not Allowed!')
-            }
-            else  if(minsorsecs === "seconds" && minsorsecsVal <= 30) {
-                setdismissMsg('Line up!') 
-            }
-            else  if(minsorsecs === "seconds" && minsorsecsVal <= 60) {
-                setdismissMsg('No Way you can miss!') 
-            }
-            else {
-                setTimerdisplay(false)
-            }
+    
+    
+
+    useEffect(() => {
+        if (!timerdisplay) {
+            setAnchorEl(null);
+            setTimeout(() => {
+                setTimerdisplay(true)
+            }, 60000)
         }
-        else {
-            setTimerdisplay(false)
-        }
-        
-    }
+
+    }, [timerdisplay])
+
+    
     return (
-        <div className="timerComp">
-           {(userTimezone === props.timezone) && <SnackbarContent
-                align="left"
-                className={classes.snackbar}
-                message={opts.hasOwnProperty('endDate') && <Countdown 
-                    options={opts} 
-                    />}
-                action={<Button color="secondary" size="small" onClick={onClose1}>
-                {dismissMsg}
-                </Button>}
-                style={{backgroundColor: '#1976d2', display : timerdisplay?'flex':'none' }}
-            />
-            }
-            
-            {/* {opts.hasOwnProperty('endDate') && <Countdown options={opts} />} */}
-            <Clock
-            // date={getPDdata('iso')}
-            timezone={props.timezone}
-            format={'MM/D/YYYY HH:mm'} style={{display: 'block'}}/>
-        </div>
+        <Zoom in={timerdisplay}>
+            <div className="timerComp">
+            {(userTimezone === props.timezone) && <SnackbarContent
+                    align="left"
+                    className={classes.snackbar}
+                    message={opts.hasOwnProperty('endDate') && <Countdown 
+                        options={opts} 
+                        />}
+                    action={<DismissTimer dismissMsg={dismissMsg} setdismissMsg={setdismissMsg} 
+                    anchorEl={anchorEl} 
+                    setAnchorEl={setAnchorEl}
+                    timerdisplay={timerdisplay} 
+                    setTimerdisplay={setTimerdisplay}/>}
+                    style={{backgroundColor: '#1976d2', display : timerdisplay?'flex':'none' }}
+                />
+                }
+                
+                {/* {opts.hasOwnProperty('endDate') && <Countdown options={opts} />} */}
+                <CurrentTime dt={dt} timezone={props.timezone}/>                
+            </div>
+        </Zoom>
     )
 }
 
