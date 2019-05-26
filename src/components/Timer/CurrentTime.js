@@ -4,11 +4,11 @@ import Clock from 'react-live-clock';
 const CurrentTime = ({dt, timezone}) => {
 
     useEffect(() => {
-        console.log('Now....')
+        // console.log('Now....')
     }, [dt])
     
     useEffect(() => {
-        console.log('Redering....')
+        // console.log('Redering....')
     }, [])
     return (
         <Clock

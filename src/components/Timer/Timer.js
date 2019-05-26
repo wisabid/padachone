@@ -59,7 +59,7 @@ const Timer = (props) => {
     }
     const [dismissMsg, setdismissMsg] = useState(['Dismiss']);
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const startTimer = () => {
+    const startTimer = (flg) => {
         setAnim([null, anim[1]])
         setOpts({});
         setdt(getPDdata('iso'));
@@ -80,13 +80,13 @@ const Timer = (props) => {
                 
             }
             else {
-                if ( (parseInt(currTime.split(':')[0]) - parseInt(item[1].split(':')[0]) ) <= 2) {
+                if ( ((parseInt(currTime.split(':')[0]) - parseInt(item[1].split(':')[0]) ) <= 2) && flg === 'init') {
                     all.push(item);
                 }
             }  
             return all
         }, [])
-        // console.table(upcomingPs);
+        // console.table('now', upcomingPs);
         // console.log('TZ', props.timezone)
         if (upcomingPs.length) {
             timeopt = timeopt.replace(currTime, upcomingPs[0][1]); //upcomingPs[0][1]
@@ -101,7 +101,7 @@ const Timer = (props) => {
     }
 
     useEffect(() => {
-        startTimer() 
+        startTimer('init') 
     }, [])
 
     const classes = useStyles();
@@ -148,7 +148,7 @@ const Timer = (props) => {
         </Zoom>
         <Zoom in={!timerdisplay}>
             <div>
-                {anim[0] && <div style={{backgroundImage:`url(${angel})`, height:'250px', backgroundSize: 'auto 100%', backgroundRepeat:'no-repeat', width: '100%', backgroundPosition: 'center', padding: '50% 0', fontSize: '3rem', fontWeight: 'bold', color: 'rgb(3, 155, 229)'}}>{anim[1]} Time</div>}
+                {anim[0] && <div className="Prayer-time" style={{backgroundImage:`url(${angel})`, height:'250px', backgroundSize: 'auto 100%', backgroundRepeat:'no-repeat', width: '100%', backgroundPosition: 'center', padding: '50% 0', fontSize: '3rem', fontWeight: 'bold', color: 'rgb(3, 155, 229)'}}>{anim[1]} Time</div>}
             </div>
         </Zoom>
         </>
