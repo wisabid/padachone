@@ -7,9 +7,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Zoom from '@material-ui/core/Zoom';
-
 import './timer.css';
-
+import angel from '../../assets/images/Prayer-time.jpg'
 import CurrentTime from './CurrentTime';
 import DismissTimer from './DismissTimer';
 
@@ -46,18 +45,23 @@ const Timer = (props) => {
         // prefix: 'Left for Fajr',
         // cb
     })
-
+    const [anim, setAnim] = useState([null])
     const cb = () => {
+       
         console.log('expired callback', opts);
         const newmsg = (opts.prefix)?(opts.prefix).replace("Left", "Time"):'';
-        
+        // const prName = newmsg.split(' ')[2];
+        debugger;
+        console.log('PT', anim[1])
         setTimerdisplay(false)
-        setTimeout(startTimer, 2000);
+        //setAnim([angel, anim[1]])
+        setTimeout(startTimer, 60000);
         
     }
     const [dismissMsg, setdismissMsg] = useState(['Dismiss']);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const startTimer = () => {
+        setAnim([null, anim[1]])
         setOpts({});
         setdt(getPDdata('iso'));
         setdismissMsg(['Dismiss']);
@@ -87,12 +91,13 @@ const Timer = (props) => {
                 endDate: timeopt,
                 prefix: 'Left for '+upcomingPs[0][0],
                 cb
-            })
+            });
+            setAnim([null, upcomingPs[0][0]])
         }      
     }
 
     useEffect(() => {
-        startTimer(); 
+        startTimer() 
     }, [])
 
     const classes = useStyles();
@@ -102,7 +107,10 @@ const Timer = (props) => {
 
     useEffect(() => {
         if (!timerdisplay) {
-            setAnchorEl(null);
+            setAnchorEl(null);   
+            if (document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)').innerText === " time expired") {
+                setAnim(() => [angel, anim[1]])      
+            }   
             setTimeout(() => {
                 setTimerdisplay(true)
             }, 60000)
@@ -112,6 +120,7 @@ const Timer = (props) => {
 
     
     return (
+        <>
         <Zoom in={timerdisplay}>
             <div className="timerComp">
             {(userTimezone === props.timezone) && <SnackbarContent
@@ -131,9 +140,16 @@ const Timer = (props) => {
                 
                 {/* {opts.hasOwnProperty('endDate') && <Countdown options={opts} />} */}
                 <CurrentTime dt={dt} timezone={props.timezone}/>                
+            </div>            
+        </Zoom>
+        <Zoom in={!timerdisplay}>
+            <div>
+                {anim[0] && <div style={{backgroundImage:`url(${angel})`, height:'250px', backgroundSize: 'auto 100%', backgroundRepeat:'no-repeat', width: '100%', backgroundPosition: 'center', padding: '50% 0', fontSize: '3rem', fontWeight: 'bold', color: 'rgb(3, 155, 229)'}}>{anim[1]} Time</div>}
             </div>
         </Zoom>
+        </>
     )
 }
 
 export default Timer;
+
