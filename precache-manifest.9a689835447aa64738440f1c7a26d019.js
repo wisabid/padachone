@@ -1,27 +1,31 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b3b1cfca3f83ff9c794fb003fc716174",
+    "revision": "9f11abcdc6d35f84a24b9e7355737c8d",
     "url": "/index.html"
   },
   {
-    "revision": "54eebb50f97c73e78e6c",
+    "revision": "9f6417dc9f85ff2db161",
     "url": "/static/css/2.711045af.chunk.css"
   },
   {
-    "revision": "b9c83520d87b03d4558f",
-    "url": "/static/css/main.8241b168.chunk.css"
+    "revision": "ec8f32dd9d7ee0bf342e",
+    "url": "/static/css/main.199674d8.chunk.css"
   },
   {
-    "revision": "54eebb50f97c73e78e6c",
-    "url": "/static/js/2.71e66e0e.chunk.js"
+    "revision": "9f6417dc9f85ff2db161",
+    "url": "/static/js/2.d8849f1c.chunk.js"
   },
   {
-    "revision": "b9c83520d87b03d4558f",
-    "url": "/static/js/main.ce94480c.chunk.js"
+    "revision": "ec8f32dd9d7ee0bf342e",
+    "url": "/static/js/main.ca7c73fa.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
     "url": "/static/js/runtime~main.a8a9905a.js"
+  },
+  {
+    "revision": "dd3c65418ff56e0c4c4b0fd6f7b24e1a",
+    "url": "/static/media/Prayer-time.dd3c6541.jpg"
   },
   {
     "revision": "d6d84b1951d54e118344294b83805881",
