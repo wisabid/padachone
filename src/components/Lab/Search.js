@@ -10,7 +10,6 @@ const useSearch = (lat, lon) => {
                 Accept : 'application/json'
             }
         });
-        debugger;
         const dataa = await resa.json();
         const query = dataa.resourceSets[0].resources[0].address.addressLine+', '+dataa.resourceSets[0].resources[0].address.adminDistrict+', '+dataa.resourceSets[0].resources[0].address.countryRegion;
         const res = await fetch(`https://www.googleapis.com/customsearch/v1?key=AIzaSyCKmqa7yvpOyK2-XBFLM0ELOjsDmw9jjMM&cx=012395365576153944359:yyj6yr0jgku&q=Muslim mosques near ${query}`, 

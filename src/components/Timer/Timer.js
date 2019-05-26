@@ -48,11 +48,10 @@ const Timer = (props) => {
     const [anim, setAnim] = useState([null])
     const cb = () => {
        
-        console.log('expired callback', opts);
+        // console.log('expired callback', opts);
         const newmsg = (opts.prefix)?(opts.prefix).replace("Left", "Time"):'';
         // const prName = newmsg.split(' ')[2];
-        debugger;
-        console.log('PT', anim[1])
+        // console.log('PT', anim[1])
         setTimerdisplay(false)
         //setAnim([angel, anim[1]])
         setTimeout(startTimer, 60000);
@@ -79,14 +78,19 @@ const Timer = (props) => {
                     all.push(item);
                 }
                 
+            }
+            else {
+                if ( (parseInt(currTime.split(':')[0]) - parseInt(item[1].split(':')[0]) ) <= 2) {
+                    all.push(item);
+                }
             }  
             return all
         }, [])
-        console.table(upcomingPs);
-        console.log('TZ', props.timezone)
+        // console.table(upcomingPs);
+        // console.log('TZ', props.timezone)
         if (upcomingPs.length) {
             timeopt = timeopt.replace(currTime, upcomingPs[0][1]); //upcomingPs[0][1]
-            console.log('timeopt', timeopt)
+            // console.log('timeopt', timeopt)
             setOpts({
                 endDate: timeopt,
                 prefix: 'Left for '+upcomingPs[0][0],
