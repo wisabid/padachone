@@ -1,20 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Clock from 'react-live-clock';
 
 const CurrentTime = ({dt, timezone}) => {
-
-    useEffect(() => {
-        // console.log('Now....')
-    }, [dt])
-    
-    useEffect(() => {
-        // console.log('Redering....')
-    }, [])
     return (
         <Clock
                 date={dt}
                 timezone={timezone}
-                format={'MM/D/YYYY HH:mm'} style={{display: 'block'}}
+                format={'MM/D/YYYY HH:mm'} style={{display: 'none'}}
                 ticking={true}
                 interval={1000}/>
     )

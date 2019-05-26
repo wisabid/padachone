@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import green from '@material-ui/core/colors/green';
 import Grow from '@material-ui/core/Grow';
 import Prayer from './Prayer';
 import './prayers.css';
+import Timer from '../Timer/Timer';
 
 const useStyles = makeStyles(theme => ({
     progress: {
@@ -17,12 +18,26 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const Prayers = (props) => {
-    // const [data, setData] = usePrayer('Amsterdam');
     const {prdata: data} = props;
+    const {data: {timings}} = data;
+    const [onlyPrayers, setOnlyPrayers] = useState({})
+    useEffect(() => {
+        if (timings.hasOwnProperty('Fajr')) {
+            let justPrayers = Object.keys(timings).reduce((all, item) => { 
+                if (['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].indexOf(item) !== -1) {
+                    all[item] = timings[item];              
+                }
+                return all;          
+              }, {});
+            setOnlyPrayers(justPrayers)
+        }
+    }, [timings])
+    // const [data, setData] = usePrayer('Amsterdam');
+    
     const {data:prayerdata, code, status} = data;
     const classes = useStyles();
     // 
-    const monthList = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     let dt = new Date();
     let day = ('0'+dt.getDate()).slice(-2);
     let mon = monthList[dt.getMonth()];
@@ -38,6 +53,7 @@ const Prayers = (props) => {
     
     return (
         <div className="pdnContainer">
+            {onlyPrayers.hasOwnProperty('Fajr') && <Timer timezone={props.timezone} prayers={onlyPrayers}/>}
         {(typeof data === "object" && code === 200 && Object.keys(prayerdata).length)
             ?<>
                <Grow in={true}>

@@ -1,5 +1,6 @@
 .timerComp .MuiSnackbarContent-root {
     min-height: 100px;
+    margin:40px 0px 10px 0;
 }
 .timerComp .MuiSnackbarContent-root .MuiSnackbarContent-message div {
     display: flex;

@@ -98,7 +98,7 @@ function App() {
         <ErrorBoundary>
           <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
             This website uses cookies to enhance the user experience.
-        </CookieConsent>
+          </CookieConsent>
           {msg[0] && <Messages msg={msg[1]}/>}
           {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
           {finished && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}

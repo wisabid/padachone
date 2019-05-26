@@ -1,29 +1,15 @@
 import React, { Component, PropTypes, useEffect, useState } from 'react'
-import Countdown from 'react-count-down'
-
-import {getPDdata} from '../../utils'
-import Button from '@material-ui/core/Button';
+import Countdown from 'react-count-down';
 import { makeStyles } from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Zoom from '@material-ui/core/Zoom';
 import './timer.css';
+import {getPDdata} from '../../utils'
 import angel from '../../assets/images/Prayer-time.jpg'
 import CurrentTime from './CurrentTime';
 import DismissTimer from './DismissTimer';
+import PrayerTime from './PrayerTime';
 
-// const OPTIONS = {
-//     endDate: '09/20/2019 10:55 AM',
-//     prefix: 'Left for Fajr',
-//     cb
-//   }
-
-
-const action = (
-  <Button color="secondary" size="small">
-    Dismiss
-  </Button>
-);
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -45,32 +31,38 @@ const Timer = (props) => {
         // prefix: 'Left for Fajr',
         // cb
     })
-    const [anim, setAnim] = useState([null])
-    const cb = () => {
-       
+    const [anim, setAnim] = useState([null]);
+
+    const cb = () => {       
         // console.log('expired callback', opts);
         const newmsg = (opts.prefix)?(opts.prefix).replace("Left", "Time"):'';
-        // const prName = newmsg.split(' ')[2];
-        // console.log('PT', anim[1])
         setTimerdisplay(false)
-        //setAnim([angel, anim[1]])
         setTimeout(startTimer, 60000);
         
     }
     const [dismissMsg, setdismissMsg] = useState(['Dismiss']);
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const startTimer = (flg) => {
+
+    const resetAll = () => {
         setAnim([null, anim[1]])
         setOpts({});
         setdt(getPDdata('iso'));
         setdismissMsg(['Dismiss']);
         setTimerdisplay(true)
+    }
+
+    const startTimer = (flg) => {
+        resetAll();
         let timeopt = document.querySelector('.timerComp time').innerHTML;
         const currTime = timeopt.split(' ')[1];
         const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {
-            if (parseInt(item[1].split(':')[0]) >= parseInt(currTime.split(':')[0])) { //hours checking
-                if (parseInt(item[1].split(':')[0]) === parseInt(currTime.split(':')[0])) {
-                    if (parseInt(item[1].split(':')[1]) > parseInt(currTime.split(':')[1])) {
+            let firstItemTime = parseInt(item[1].split(':')[0]),
+                currTimeSet = parseInt(currTime.split(':')[0]),
+                secondItemTime = parseInt(item[1].split(':')[1]),
+                currTimeSecSet = parseInt(currTime.split(':')[1]);
+            if (firstItemTime >= currTimeSet) { 
+                if (firstItemTime === currTimeSet) {
+                    if (secondItemTime > currTimeSecSet) {
                         all.push(item);
                     }
                 }
@@ -80,13 +72,13 @@ const Timer = (props) => {
                 
             }
             else {
-                if ( ((parseInt(currTime.split(':')[0]) - parseInt(item[1].split(':')[0]) ) <= 2) && flg === 'init') {
+                if ( ((currTimeSet - firstItemTime ) <= 2) && flg === 'init') {
                     all.push(item);
                 }
             }  
             return all
         }, [])
-        // console.table('now', upcomingPs);
+        console.table('now', upcomingPs);
         // console.log('TZ', props.timezone)
         if (upcomingPs.length) {
             timeopt = timeopt.replace(currTime, upcomingPs[0][1]); //upcomingPs[0][1]
@@ -111,8 +103,9 @@ const Timer = (props) => {
 
     useEffect(() => {
         if (!timerdisplay) {
-            setAnchorEl(null);   
-            if (document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)').innerText === " time expired") {
+            setAnchorEl(null);  
+            let spanEl = document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)');
+            if (spanEl && spanEl.innerText === " time expired") {
                 setAnim(() => [angel, anim[1]])      
             }   
             setTimeout(() => {
@@ -134,12 +127,12 @@ const Timer = (props) => {
                         options={opts} 
                         />}
                     action={<DismissTimer dismissMsg={dismissMsg} setdismissMsg={setdismissMsg} 
-                    anchorEl={anchorEl} 
-                    setAnchorEl={setAnchorEl}
-                    timerdisplay={timerdisplay} 
-                    setTimerdisplay={setTimerdisplay}/>}
-                    style={{backgroundColor: '#1976d2', display : timerdisplay?'flex':'none' }}
-                />
+                                anchorEl={anchorEl} 
+                                setAnchorEl={setAnchorEl}
+                                timerdisplay={timerdisplay} 
+                                setTimerdisplay={setTimerdisplay}/>}
+                                style={{backgroundColor: '#1976d2', display : timerdisplay?'flex':'none' }}
+                            />
                 }
                 
                 {/* {opts.hasOwnProperty('endDate') && <Countdown options={opts} />} */}
@@ -147,13 +140,12 @@ const Timer = (props) => {
             </div>            
         </Zoom>
         <Zoom in={!timerdisplay}>
-            <div>
-                {anim[0] && <div className="Prayer-time" style={{backgroundImage:`url(${angel})`, height:'250px', backgroundSize: 'auto 100%', backgroundRepeat:'no-repeat', width: '100%', backgroundPosition: 'center', padding: '50% 0', fontSize: '3rem', fontWeight: 'bold', color: 'rgb(3, 155, 229)'}}>{anim[1]} Time</div>}
-            </div>
+            <PrayerTime anim={anim} setAnim={setAnim}/>
         </Zoom>
         </>
     )
 }
 
 export default Timer;
+
 
