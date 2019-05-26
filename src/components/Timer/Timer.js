@@ -37,7 +37,7 @@ const Timer = (props) => {
         // console.log('expired callback', opts);
         const newmsg = (opts.prefix)?(opts.prefix).replace("Left", "Time"):'';
         setTimerdisplay(false)
-        setTimeout(startTimer, 60000);
+        setTimeout(startTimer, 30000);
         
     }
     const [dismissMsg, setdismissMsg] = useState(['Dismiss']);
@@ -72,7 +72,7 @@ const Timer = (props) => {
                 
             }
             else {
-                if ( ((currTimeSet - firstItemTime ) <= 2) && flg === 'init') {
+                if ( ((currTimeSet - firstItemTime ) <= 1) && flg === 'init') {
                     all.push(item);
                 }
             }  
