@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {geolocated} from 'react-geolocated';
-
+import moment from 'moment'; 
 import Traveltimes from './Traveltimes'
 import Map from '../Lab/Map'
 import Search from '../Lab/Search';
@@ -27,7 +27,7 @@ const Lab = (props) => {
     return (
         <>
         <h4 style={{marginTop: '40px'}}>Lab (Alpha Releases)</h4>
-        <h5>Time left</h5>
+        <h5>Your TZ : {moment.tz.guess()}</h5>
         {onlyPrayers.hasOwnProperty('Fajr') && <Timer timezone={props.timezone} prayers={onlyPrayers}/>}
         {/* <h1>Welcome Alfie</h1>
           <CountryDropdown

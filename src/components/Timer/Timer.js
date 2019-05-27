@@ -3,6 +3,7 @@ import Countdown from 'react-count-down';
 import { makeStyles } from '@material-ui/core/styles';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Zoom from '@material-ui/core/Zoom';
+import moment from 'moment'; 
 import './timer.css';
 import {getPDdata} from '../../utils'
 import angel from '../../assets/images/Prayer-time.jpg'
@@ -25,7 +26,8 @@ const useStyles = makeStyles(theme => ({
 
 const Timer = (props) => {
     const [dt, setdt] = useState(getPDdata('iso'))
-    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const userTimezone = moment.tz.guess();
     const [opts, setOpts] = useState({
         // endDate: '05/21/2019 18:42',
         // prefix: 'Left for Fajr',
@@ -47,14 +49,14 @@ const Timer = (props) => {
         setAnim([null, anim[1]])
         setOpts({});
         setdt(getPDdata('iso'));
-        setdismissMsg(['Dismiss']);
-        setTimerdisplay(true)
+        
     }
 
     const startTimer = (flg) => {
         resetAll();
         let timeopt = document.querySelector('.timerComp time').innerHTML;
         const currTime = timeopt.split(' ')[1];
+        // const abid = {Fajr: "02:59", Dhuhr: "13:37", Asr: "17:56", Maghrib: "18:46", Isha: "19:58"}
         const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {
             let firstItemTime = parseInt(item[1].split(':')[0]),
                 currTimeSet = parseInt(currTime.split(':')[0]),
@@ -81,6 +83,8 @@ const Timer = (props) => {
         console.table('now', upcomingPs);
         // console.log('TZ', props.timezone)
         if (upcomingPs.length) {
+            setdismissMsg(['Dismiss']);
+            setTimerdisplay(true)
             timeopt = timeopt.replace(currTime, upcomingPs[0][1]); //upcomingPs[0][1]
             // console.log('timeopt', timeopt)
             setOpts({
@@ -102,15 +106,21 @@ const Timer = (props) => {
     
 
     useEffect(() => {
+        let spanEl = document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)');
         if (!timerdisplay) {
             setAnchorEl(null);  
-            let spanEl = document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)');
+            
             if (spanEl && spanEl.innerText === " time expired") {
                 setAnim(() => [angel, anim[1]])      
             }   
             setTimeout(() => {
                 setTimerdisplay(true)
             }, 60000)
+        }
+        else {
+            // if (!spanEl) {
+            //     setTimerdisplay(false)
+            // } 
         }
 
     }, [timerdisplay])
