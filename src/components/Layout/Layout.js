@@ -7,7 +7,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Prayers from '../Prayers';
 import {usePrayer} from '../../hooks/api-hooks';
-import Sound from 'react-sound';
+
 
 
 const useStyles = makeStyles(theme => ({

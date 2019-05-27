@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prayer times with lat lon
 - Map showing mosque locations
 - Custom Search Results
+- Bg Audio 
 
 
 ## [1.0.0] - 2019-05-19
@@ -27,5 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.3] - 2019-05-26
 ### Added
 - Time left for Prayer with design and dismiss;restricted to own time zone users
+
+## [1.0.4] - 2019-05-27
+### Added
+- Better timezone using moment and design change for timer
 
 
