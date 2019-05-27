@@ -64,9 +64,9 @@ const Timer = (props) => {
                 currTimeSecSet = parseInt(currTime.split(':')[1]);
             if (firstItemTime >= currTimeSet) { 
                 if (firstItemTime === currTimeSet) {
-                    if (secondItemTime > currTimeSecSet) {
+                    // if (secondItemTime > currTimeSecSet) {
                         all.push(item);
-                    }
+                    // }
                 }
                 else {
                     all.push(item);
