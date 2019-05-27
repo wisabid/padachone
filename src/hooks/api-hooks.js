@@ -8,7 +8,7 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
     else {
         city=region
     }
-    const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=8`;
+    const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=8&school=0`;
     const [data, setData] = useState({})
     async function fetchPrayerTimes() {
         try {
@@ -56,7 +56,7 @@ export const useLab_1 = ({lat, lon}) => {
     const tdate = new Date();
     const month = tdate.getMonth()+1;
     const year = tdate.getFullYear();
-    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=2&month=${month}&year=${year}`;
+    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=8&month=${month}&year=${year}&school=0`;
     const [data, setData] = useState({})
     async function fetchTravelPrayerTimes() {
         try {

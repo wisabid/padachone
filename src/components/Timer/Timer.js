@@ -129,7 +129,7 @@ const Timer = (props) => {
     return (
         <>
         <Zoom in={timerdisplay}>
-            <div className="timerComp" style={{margin: '0 10px'}}>
+            <div className="timerComp" style={{margin: '0 10px', position: 'static', top: '95px', zIndex: '1'}}>
             {(userTimezone === props.timezone) && <SnackbarContent
                     align="left"
                     className={classes.snackbar}

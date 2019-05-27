@@ -33,4 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Better timezone using moment and design change for timer
 
+### Changed
+- API based on Gulf region & Shafi madhab
+
 
