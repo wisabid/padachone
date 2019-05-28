@@ -1,24 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.bb690701.chunk.css",
-    "main.js": "/static/js/main.1e9f27ae.chunk.js",
-    "main.js.map": "/static/js/main.1e9f27ae.chunk.js.map",
+    "main.css": "/static/css/main.42ed2f35.chunk.css",
+    "main.js": "/static/js/main.5f23811d.chunk.js",
+    "main.js.map": "/static/js/main.5f23811d.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
     "static/css/2.711045af.chunk.css": "/static/css/2.711045af.chunk.css",
-    "static/js/2.0230f457.chunk.js": "/static/js/2.0230f457.chunk.js",
-    "static/js/2.0230f457.chunk.js.map": "/static/js/2.0230f457.chunk.js.map",
+    "static/js/2.4e7c779c.chunk.js": "/static/js/2.4e7c779c.chunk.js",
+    "static/js/2.4e7c779c.chunk.js.map": "/static/js/2.4e7c779c.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.6ea60694d92b0d32b296a390618ad8c9.js": "/precache-manifest.6ea60694d92b0d32b296a390618ad8c9.js",
+    "precache-manifest.87817946fee963fabd01c0636c7e059d.js": "/precache-manifest.87817946fee963fabd01c0636c7e059d.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.711045af.chunk.css.map": "/static/css/2.711045af.chunk.css.map",
-    "static/css/main.bb690701.chunk.css.map": "/static/css/main.bb690701.chunk.css.map",
+    "static/css/main.42ed2f35.chunk.css.map": "/static/css/main.42ed2f35.chunk.css.map",
     "static/media/Prayer-time.jpg": "/static/media/Prayer-time.dd3c6541.jpg",
     "static/media/bg-new.png": "/static/media/bg-new.d6d84b19.png",
     "static/media/bgmusic.mp3": "/static/media/bgmusic.9cee89c2.mp3",
     "static/media/boo.svg": "/static/media/boo.0b13e3dc.svg",
     "static/media/cool.svg": "/static/media/cool.c1619cce.svg",
     "static/media/goofy.svg": "/static/media/goofy.599f38ab.svg",
-    "static/media/logo-sec.png": "/static/media/logo-sec.8be94c12.png"
+    "static/media/logo-sec.png": "/static/media/logo-sec.8be94c12.png",
+    "static/media/peace.mp3": "/static/media/peace.1b3d0b0e.mp3"
   }
 }
