@@ -54,46 +54,49 @@ const Timer = (props) => {
 
     const startTimer = (flg) => {
         resetAll();
-        let timeopt = document.querySelector('.timerComp time').innerHTML;
-        const currTime = timeopt.split(' ')[1];
-        // const abid = {Fajr: "02:59", Dhuhr: "13:37", Asr: "17:56", Maghrib: "18:46", Isha: "19:58"}
-        const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {
-            let firstItemTime = parseInt(item[1].split(':')[0]),
-                currTimeSet = parseInt(currTime.split(':')[0]),
-                secondItemTime = parseInt(item[1].split(':')[1]),
-                currTimeSecSet = parseInt(currTime.split(':')[1]);
-            if (firstItemTime >= currTimeSet) { 
-                if (firstItemTime === currTimeSet) {
-                    // if (secondItemTime > currTimeSecSet) {
+        let timeoptEl = document.querySelector('.timerComp time');
+        if (timeoptEl) {
+            let timeopt = timeoptEl.innerHTML;
+            const currTime = timeopt.split(' ')[1];
+            // const abid = {Fajr: "02:59", Dhuhr: "13:37", Asr: "17:56", Maghrib: "18:46", Isha: "19:58"}
+            const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {
+                let firstItemTime = parseInt(item[1].split(':')[0]),
+                    currTimeSet = parseInt(currTime.split(':')[0]),
+                    secondItemTime = parseInt(item[1].split(':')[1]),
+                    currTimeSecSet = parseInt(currTime.split(':')[1]);
+                if (firstItemTime >= currTimeSet) { 
+                    if (firstItemTime === currTimeSet) {
+                        // if (secondItemTime > currTimeSecSet) {
+                            all.push(item);
+                        // }
+                    }
+                    else {
                         all.push(item);
-                    // }
+                    }
+                    
                 }
                 else {
-                    all.push(item);
-                }
-                
-            }
-            else {
-                if ( ((currTimeSet - firstItemTime ) <= 1) && flg === 'init') {
-                    all.push(item);
-                }
-            }  
-            return all
-        }, [])
-        console.table('now', upcomingPs);
-        // console.log('TZ', props.timezone)
-        if (upcomingPs.length) {
-            setdismissMsg(['Dismiss']);
-            setTimerdisplay(true)
-            timeopt = timeopt.replace(currTime, upcomingPs[0][1]); //upcomingPs[0][1]
-            // console.log('timeopt', timeopt)
-            setOpts({
-                endDate: timeopt,
-                prefix: 'Left for '+upcomingPs[0][0],
-                cb
-            });
-            setAnim([null, upcomingPs[0][0]])
-        }      
+                    if ( ((currTimeSet - firstItemTime ) <= 1) && flg === 'init') {
+                        all.push(item);
+                    }
+                }  
+                return all
+            }, [])
+            console.table('now', upcomingPs);
+            // console.log('TZ', props.timezone)
+            if (upcomingPs.length) {
+                setdismissMsg(['Dismiss']);
+                setTimerdisplay(true)
+                timeopt = timeopt.replace(currTime, upcomingPs[0][1]); //upcomingPs[0][1]
+                // console.log('timeopt', timeopt)
+                setOpts({
+                    endDate: timeopt,
+                    prefix: 'Left for '+upcomingPs[0][0],
+                    cb
+                });
+                setAnim([null, upcomingPs[0][0]])
+            }      
+        }
     }
 
     useEffect(() => {

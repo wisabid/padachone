@@ -90,4 +90,4 @@ const Prayer = (props) => {
     }
 }
 
-export default Prayer;
+export default React.memo(Prayer);

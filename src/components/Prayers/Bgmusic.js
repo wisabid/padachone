@@ -1,16 +1,16 @@
 import React from 'react';
 import Sound from 'react-sound';
-import coolmp3 from '../../assets/mp3/bgmusic.mp3'
 
-const Bgmusic = (props) => {
+
+const Bgmusic = ({bgm}) => {
     return (
         <Sound
           autoLoad={true}
           loop={true}
-          url={coolmp3}
+          url={bgm}
           playStatus={Sound.status.PLAYING}
-          playFromPosition={0 /* in milliseconds */}
-          volume={2}
+          playFromPosition={100 /* in milliseconds */}
+          volume={10}
           // onStop={handleBufferChange}
           // onLoading={this.handleSongLoading}
           // onPlaying={handleBufferChange}

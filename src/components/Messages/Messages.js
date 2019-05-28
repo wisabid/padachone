@@ -94,7 +94,7 @@ function Messages({msg}) {
   }
 
   return (
-    <div>
+    <div className="admirer-msg">
       
       <Snackbar
         anchorOrigin={{

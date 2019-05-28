@@ -77,10 +77,11 @@ function App() {
   useEffect(() => {
     // Logic for displaying Messages
     localStorage.removeItem('padachone_msg');
-    if (!localStorage.getItem('padachone_msg1')) {
-      const message = 'admirer@padachone.com';
+    localStorage.removeItem('padachone_msg1');
+    if (!localStorage.getItem('padachone_msg2')) {
+      const message = `Would you like On-board Prayer times? <admirer@padachone.com>`;
       setMsg(() => {
-        localStorage.setItem('padachone_msg1', message)
+        localStorage.setItem('padachone_msg2', message)
         return [true, message]
       });      
     }

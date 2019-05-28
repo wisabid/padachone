@@ -36,4 +36,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - API based on Gulf region & Shafi madhab
 
+## [1.0.5] - 2019-05-28
+### Added
+- Bgm
+
 

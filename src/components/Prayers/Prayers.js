@@ -37,11 +37,11 @@ const Prayers = (props) => {
     const {data:prayerdata, code, status} = data;
     const classes = useStyles();
     // 
-    const monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    let dt = new Date();
-    let day = ('0'+dt.getDate()).slice(-2);
-    let mon = monthList[dt.getMonth()];
-    let yr = dt.getFullYear();
+    // const monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    // let dt = new Date();
+    // let day = ('0'+dt.getDate()).slice(-2);
+    // let mon = monthList[dt.getMonth()];
+    // let yr = dt.getFullYear();
     // 
     useEffect(() => {
         if (prayerdata && Object.keys(prayerdata).length) {
