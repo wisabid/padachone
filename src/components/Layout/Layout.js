@@ -42,7 +42,7 @@ const Layout = ({country, region, place, pdate, startup}) => {
     else {
         return (
             <>
-            <h5>{data.data || data.error}</h5> 
+            <h5>{data.data || (data.error === 'Failed to fetch')?'Site is down for maintenance! Please try after sometime.':data.error}</h5> 
             {(data.data || data.error)
                 ?<p>Please <Button color="primary" onClick={() => startup({finished: false})}>refresh</Button> to start over!</p>
                 :<CircularProgress className={classes.progress} color="secondary" />

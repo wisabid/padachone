@@ -12,8 +12,8 @@ import Paper from '@material-ui/core/Paper';
 import SettingsIcon from '@material-ui/icons/Settings';
 import logo from '../../assets/images/logo-sec.png';
 import './layout.css'
-import Bgmusic from '../Prayers/Bgmusic'
-import bgm from '../../assets/mp3/peace.mp3'
+// import Bgmusic from '../Prayers/Bgmusic'
+// import bgm from '../../assets/mp3/peace.mp3'
 
 // const useStyles = makeStyles({
 //   root: {
@@ -115,7 +115,7 @@ const Header = ({timezone, startup, place, pdate}) => {
               </Slide>
                     </Paper>
         </AppBar>
-        <Bgmusic bgm={bgm}/>       
+        {/* <Bgmusic bgm={bgm}/>        */}
         </div>
     )
 }
