@@ -14,6 +14,8 @@ import {getPDdata} from '../../utils';
 import ErrorBoundary from '../Error/ErrorBoundary';
 import CookieConsent from "react-cookie-consent";
 import Messages from '../Messages'
+import SpecialDay from '../Messages/SpecialDay';
+import Zoom from '@material-ui/core/Zoom';
 
 const theme = createMuiTheme({
   palette: {
@@ -33,7 +35,7 @@ const theme = createMuiTheme({
 function App() {  
   
   const [prevScrollpos, setprevScrollpos] = useState(window.pageYOffset);
-
+  const [display, setdisplay] = useState(true);
   
 
   const hideHdrFtr = () => {
@@ -79,7 +81,7 @@ function App() {
     localStorage.removeItem('padachone_msg');
     localStorage.removeItem('padachone_msg1');
     if (!localStorage.getItem('padachone_msg2')) {
-      const message = `Would you like On-board Prayer times? <admirer@padachone.com>`;
+      const message = `Write in to <admirer@padachone.com>`;
       setMsg(() => {
         localStorage.setItem('padachone_msg2', message)
         return [true, message]
@@ -100,6 +102,9 @@ function App() {
           <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
             This website uses cookies to enhance the user experience.
           </CookieConsent>
+          <Zoom in={true}>
+              <SpecialDay display={display} setdisplay={setdisplay}/>
+          </Zoom>
           {msg[0] && <Messages msg={msg[1]}/>}
           {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
           {finished && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
