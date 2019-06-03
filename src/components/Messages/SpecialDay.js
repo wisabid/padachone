@@ -23,7 +23,13 @@ const SpecialDay = ({display, setdisplay}) => {
         if ((getPDdata() === '03 Jun 2019' && tz === 'Europe/Amsterdam') || 
         (getPDdata() === '04 Jun 2019' && tz === 'Europe/Amsterdam') ||
         (getPDdata() === '04 Jun 2019' && tz === 'Europe/London') || 
+        (getPDdata() === '03 Jun 2019' && tz === 'Europe/London') || 
         (getPDdata() === '04 Jun 2019' && tz === 'Asia/Dubai') || 
+        (getPDdata() === '03 Jun 2019' && tz === 'Asia/Dubai') || 
+        (getPDdata() === '04 Jun 2019' && tz === 'Asia/Riyadh') || 
+        (getPDdata() === '03 Jun 2019' && tz === 'Asia/Riyadh') || 
+        (getPDdata() === '03 Jun 2019' && tz === 'Asia/Jerusalem') || 
+        (getPDdata() === '04 Jun 2019' && tz === 'Asia/Jerusalem') || 
         (getPDdata() === '05 Jun 2019')) {
             console.log('Amsterdam & Indian fellow bros')
             setTimeout(() => {
