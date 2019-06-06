@@ -8,6 +8,7 @@ import Timer from '../Timer/Timer';
 import { tConvert } from '../../utils';
 import Bgmusic from '../Prayers/Bgmusic'
 import sufi from '../../assets/mp3/bgmusic.mp3'
+import Subscribe from '../Subscribe/Subscribe';
 
 const Lab = (props) => {
     const {timings} = props;
@@ -29,6 +30,9 @@ const Lab = (props) => {
         <>
         <Bgmusic bgm={sufi}/>
         <h4 style={{marginTop: '40px'}}>Lab (Alpha Releases)</h4>
+        <h5>Subscribe</h5>
+        <Subscribe />
+
         <h5>Your TZ : {moment.tz.guess()}</h5>
         {onlyPrayers.hasOwnProperty('Fajr') && <Timer timezone={props.timezone} prayers={onlyPrayers}/>}
         {/* <h1>Welcome Alfie</h1>
