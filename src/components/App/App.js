@@ -80,10 +80,11 @@ function App() {
     // Logic for displaying Messages
     localStorage.removeItem('padachone_msg');
     localStorage.removeItem('padachone_msg1');
-    if (!localStorage.getItem('padachone_msg2')) {
-      const message = `Write in to <admirer@padachone.com>`;
+    localStorage.removeItem('padachone_msg2');
+    if (!localStorage.getItem('padachone_msg3')) {
+      const message = `Would you like an Email Subscribe option? - admirer@padachone.com`;
       setMsg(() => {
-        localStorage.setItem('padachone_msg2', message)
+        localStorage.setItem('padachone_msg3', message)
         return [true, message]
       });      
     }
