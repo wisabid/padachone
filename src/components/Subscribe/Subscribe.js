@@ -46,19 +46,19 @@ function Subscribe({modal, setModal}) {
       setEmail({...email, value : '', button: 'OK', subscribed : true, loading: false});
     }
     else {
-      // sendSubscriptionEmail(email.value)
-      //   .then((res) => {
-      //       console.log(res);
-      //       setEmail({...email, value : '', sent : true, button: 'OK', loading: false});
-      //       handleLocalStorage({name : CONSTANTS.P_EMAIL, value : email.value});
-      //   })
-      //   .catch(err => {
-      //     setEmail({...email, value: '', error : true, errorlabel: 'Please try later'});
-      //   }) 
-      setTimeout(() => {
-        setEmail({...email, value : '', sent : true, button: 'OK', loading: false});
-        handleLocalStorage({name : CONSTANTS.P_EMAIL, value : email.value});
-      }, 2000)    
+      sendSubscriptionEmail(email.value)
+        .then((res) => {
+            console.log(res);
+            setEmail({...email, value : '', sent : true, button: 'OK', loading: false});
+            handleLocalStorage({name : CONSTANTS.P_EMAIL, value : email.value});
+        })
+        .catch(err => {
+          setEmail({...email, value: '', error : true, errorlabel: 'Please try later'});
+        }) 
+      // setTimeout(() => {
+      //   setEmail({...email, value : '', sent : true, button: 'OK', loading: false});
+      //   handleLocalStorage({name : CONSTANTS.P_EMAIL, value : email.value});
+      // }, 2000)    
     } 
   }
 
