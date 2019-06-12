@@ -83,7 +83,7 @@ function App() {
     localStorage.removeItem('padachone_msg2');
     localStorage.removeItem('padachone_msg3');
     if (!localStorage.getItem('padachone_msg4')) {
-      const message = `Email Subscription option is available now! Check homepage footer.`;
+      const message = `Email Subscription option is available now ! Check homepage footer.`;
       setMsg(() => {
         localStorage.setItem('padachone_msg4', message)
         return [true, message]
