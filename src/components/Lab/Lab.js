@@ -34,7 +34,6 @@ const Lab = (props) => {
         <Subscribe />
 
         <h5>Your TZ : {moment.tz.guess()}</h5>
-        {onlyPrayers.hasOwnProperty('Fajr') && <Timer timezone={props.timezone} prayers={onlyPrayers}/>}
         {/* <h1>Welcome Alfie</h1>
           <CountryDropdown
           value={country}

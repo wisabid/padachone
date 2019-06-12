@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -14,9 +14,10 @@ import IconButton from '@material-ui/core/IconButton';
 import Fab from '@material-ui/core/Fab';
 
 import MenuIcon from '@material-ui/icons/Menu';
-import SettingsIcon from '@material-ui/icons/Settings';
+import SettingsIcon from '@material-ui/icons/Subscriptions';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Subscribe from '../Subscribe/Subscribe';
 
 // const useStyles = makeStyles({
 //     root: {
@@ -58,29 +59,34 @@ const useStyles = makeStyles(theme => ({
 
 const Footer = ({startup}) => {
     const classes = useStyles();
+    const [modal, setModal] = useState(false);
     // const [value, setValue] = React.useState('recents');
     // function handleChange(event, newValue) {
     //     setValue(newValue);
     //   }
 
     const handleChange = () => {
-        Object.keys(localStorage).map(key => {
-          if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
-              localStorage.removeItem(key);
-          }
-          return;
-        });
+      setModal(true);
+      //   Object.keys(localStorage).map(key => {
+      //     if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
+      //         localStorage.removeItem(key);
+      //     }
+      //     return;
+      //   });
       
-      startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+      // startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
     };
     
     return (
+      
         // <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
         //     {/* <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} /> */}
         //     <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
         //     <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} />
         //     {/* <BottomNavigationAction label="Folder" value="folder" icon={<Icon>...</Icon>} /> */}
         // </BottomNavigation>
+        <>
+        <Subscribe modal={modal} setModal={setModal}/>
         <AppBar position="fixed" color="primary" className={`${classes.appBar} padachone-ftr`}>
         {/* <Toolbar> */}
         {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center'}}>
@@ -90,9 +96,9 @@ const Footer = ({startup}) => {
           {/* <IconButton edge="start" color="inherit" aria-label="Open drawer">
             <MenuIcon />
           </IconButton> */}
-          {/* <Fab color="secondary" aria-label="Add" className={classes.fabButton}>
-            <SettingsIcon fontSize="large" onClick={handleChange}/>
-          </Fab> */}
+          <Fab color="secondary" aria-label="Add" className={classes.fabButton} title="Subscribe">
+            <SettingsIcon fontSize="large" onClick={handleChange}/>            
+          </Fab>
           <div className={classes.grow} />
           {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>
                 P  A  D  A  C  H  O  N  E
@@ -107,9 +113,11 @@ const Footer = ({startup}) => {
         {/* </Toolbar> */}
         <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px', fontSize:'10px', color: '#555555'
 }} align="center">
-            Copyright © 2019 WISMIM.
+            .
+            {/* Copyright © 2019 WISMIM. */}
           </Typography>
       </AppBar>
+      </>
     )
 }
 

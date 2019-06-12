@@ -1,0 +1,1 @@
+export const P_EMAIL = "padachone_email";

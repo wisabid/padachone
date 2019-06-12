@@ -1,3 +1,4 @@
+import * as emailjs from 'emailjs-com';
 export const getPDdata = (type) => {
     const months =  ["Jan","Feb","Mar","Apr","May","Jun","Jul",
     "Aug","Sep","Oct","Nov","Dec"];
@@ -30,3 +31,28 @@ export function tConvert (time) {
     }
     return time.join (''); // return adjusted time or original string
   }
+
+export function handleLocalStorage({name, value=''}) {
+    if (!value) {
+        return localStorage.getItem(name)
+    }
+    localStorage.setItem(name, value);
+}
+
+export function validateEmail(email) {
+    const emailValidator = /\S+@\S+\.\S+/;
+    return emailValidator.test(email)
+}
+
+export function sendSubscriptionEmail(email) {
+    let template_params = {
+        "reply_to": "admirer@padachone.com",
+        "from_name": "Admirer",
+        "to_name": email,
+        "message_html": "Thank you for Subscribing to Padachone.com. You are Awesome!"
+    }
+    
+    const service_id = "default_service";
+    const template_id = "template_Li3TxnLs";
+    return emailjs.send(service_id, template_id, template_params, 'user_L109OnczphkyI5bvHhcSe');        
+}

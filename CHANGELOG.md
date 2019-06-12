@@ -48,4 +48,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Disabled bgm from layout
 
+## [1.0.7] - 2019-06-12
+### Added
+- Email Subscription option
+
+### Changed
+- Disabled copyright text
+
 
