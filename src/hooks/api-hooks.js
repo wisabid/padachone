@@ -86,7 +86,7 @@ export const usePrayerOnGo = ({lat, lon}) => {
 
 export const useCurrentLocation = ({lat, lon}) => {
     const [currentloc, setCurrentloc] = useState({});
-    const API = `http://dev.virtualearth.net/REST/v1/Locations/${lat},${lon}?o=json&key=${BING_API}`;
+    const API = `https://dev.virtualearth.net/REST/v1/Locations/${lat},${lon}?o=json&key=${BING_API}`;
     async function fetchLocation() {
         try {
             const result = await fetch(API, {
