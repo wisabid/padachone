@@ -48,7 +48,10 @@ const Search = ({lat, lon}) => {
     }
     else {
         return (
+            <>
+            <h5>YOU ARE @ - {currentloc.data} {currentloc.error?currentloc.error:''}</h5>
             <h4>Loading...</h4>
+            </>
         )
     }
 }
