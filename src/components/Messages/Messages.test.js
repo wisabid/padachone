@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Messages from './Messages';
 
-describe('<App />', () => {
+describe('<Messages />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<Messages />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 })

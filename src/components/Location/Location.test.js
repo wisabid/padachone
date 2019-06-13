@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Location from './Location';
 
-describe('<App />', () => {
+describe('<Location />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<Location />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 })

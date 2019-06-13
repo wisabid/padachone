@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Emailbox from './Emailbox';
 
-describe('<App />', () => {
+describe('<Emailbox />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<Emailbox />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 })

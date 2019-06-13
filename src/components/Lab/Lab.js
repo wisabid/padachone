@@ -1,19 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import {geolocated} from 'react-geolocated';
 import moment from 'moment'; 
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import { makeStyles } from '@material-ui/core/styles';
+
 import Traveltimes from './Traveltimes'
 import Map from '../Lab/Map'
 import Search from '../Lab/Search';
-import Timer from '../Timer/Timer';
-import { tConvert } from '../../utils';
 import Bgmusic from '../Prayers/Bgmusic'
 import sufi from '../../assets/mp3/bgmusic.mp3'
-import Subscribe from '../Subscribe/Subscribe';
+import Drawer from './Drawer';
+import {useCurrentLocation} from '../../hooks/api-hooks';
 
+const useStyles = makeStyles(theme => ({
+  progress: {
+    margin: theme.spacing(2),
+  },
+  secondary: {
+      color:'#4caf50'
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  root: {
+    padding: theme.spacing(3, 2),
+    borderRadius: 0,
+    padding:0,
+    background: '#efefef',
+    transition: 'display 0.5s ease-in-out'
+},
+}));
 const Lab = (props) => {
+  const classes = useStyles();
+  const [currentloc, setCurrentloc] = useCurrentLocation({lat:"52.31406610552598", lon:"4.946411339519716"});
+  console.log(currentloc.data);
     const {timings} = props;
     const [onlyPrayers, setOnlyPrayers] = useState({})
-    
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+    function handleDrawerToggle() {
+      setMobileOpen(!mobileOpen);
+    }
     useEffect(() => {
         if (timings.hasOwnProperty('Fajr')) {
             let justPrayers = Object.keys(timings).reduce((all, item) => { 
@@ -30,9 +63,20 @@ const Lab = (props) => {
         <>
         <Bgmusic bgm={sufi}/>
         <h4 style={{marginTop: '40px'}}>Lab (Alpha Releases)</h4>
-        <h5>Subscribe</h5>
-        <Subscribe />
 
+        {/* <h5>YOU ARE @ - {currentloc.data} {currentloc.error?currentloc.error:''}</h5> */}
+        
+        <h5>Drawer</h5>
+        <Drawer mobileOpen={mobileOpen} setMobileOpen={setMobileOpen}/>
+        <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
         <h5>Your TZ : {moment.tz.guess()}</h5>
         {/* <h1>Welcome Alfie</h1>
           <CountryDropdown

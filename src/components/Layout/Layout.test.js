@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Layout from './Layout';
 
-describe('<App />', () => {
+describe('<Layout />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<Layout />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 })

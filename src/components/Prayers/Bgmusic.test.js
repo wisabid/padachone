@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Bgmusic from './Bgmusic';
 
-describe('<App />', () => {
+describe('<Bgmusic />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<Bgmusic />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 })

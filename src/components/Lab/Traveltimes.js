@@ -8,7 +8,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
-import {useLab_1} from '../../hooks/api-hooks';
+import {usePrayerOnGo} from '../../hooks/api-hooks';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Drawer from '../Lab/Drawer'
@@ -71,7 +71,7 @@ const tutorialSteps = [
   }));
 
 const Traveltimes = ({lat, lon}) => {
-    const [data, setData] = useLab_1({lat: lat, lon: lon});
+    const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
     const classes = useStyles();
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);

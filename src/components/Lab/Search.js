@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {useCurrentLocation} from '../../hooks/api-hooks';
 
 const useSearch = (lat, lon) => {
     const [searchResults, setSearchResults] = useState([]);
@@ -28,10 +29,13 @@ const useSearch = (lat, lon) => {
 }
 
 const Search = ({lat, lon}) => {
+    const [currentloc, setCurrentloc] = useCurrentLocation({lat:lat, lon:lon});
+    console.log(currentloc.data);
     const [search, setSearch] = useSearch(lat, lon);
     if (search.length) {
         return (
             <>
+            <h5>YOU ARE @ - {currentloc.data} {currentloc.error?currentloc.error:''}</h5>
             <ul>
             {
             search.map(item => {

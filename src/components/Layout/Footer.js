@@ -17,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SettingsIcon from '@material-ui/icons/Subscriptions';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Subscribe from '../Subscribe/Subscribe';
+import Subscribe from '../Subscribe';
 
 // const useStyles = makeStyles({
 //     root: {

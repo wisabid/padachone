@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Prayer from './Prayer';
 
-describe('<App />', () => {
+describe('<Prayer />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<Prayer />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 })

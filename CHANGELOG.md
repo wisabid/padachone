@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Map showing mosque locations
 - Custom Search Results
 - Bg Audio 
-- Subscribe
-
+- Drawer for menus
+- Current location data
 
 ## [1.0.0] - 2019-05-19
 ### Added

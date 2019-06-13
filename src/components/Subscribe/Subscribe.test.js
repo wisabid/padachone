@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Subscribe from './Subscribe';
 
-describe('<App />', () => {
+describe('<Subscribe />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<Subscribe />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 })

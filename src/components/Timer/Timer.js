@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Countdown from 'react-count-down';
 import { makeStyles } from '@material-ui/core/styles';
 import SnackbarContent from '@material-ui/core/SnackbarContent';

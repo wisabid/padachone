@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {getPDdata} from '../utils/index'
+import { useState, useEffect } from 'react';
+import {getPDdata} from '../utils/index';
+import {BING_API} from '../utils/constants';
 export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date}) => {
     let city;
     if (place) {
@@ -22,7 +23,7 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
                 if (key.startsWith('padachone:')) {
                     localStorage.removeItem(key);
                 }
-                return;
+                return key;
             })
             
             if (data && data.data && data.data.meta) {
@@ -51,7 +52,7 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
 }
 
 
-export const useLab_1 = ({lat, lon}) => {
+export const usePrayerOnGo = ({lat, lon}) => {
     const dte = getPDdata();
     const tdate = new Date();
     const month = tdate.getMonth()+1;
@@ -81,4 +82,32 @@ export const useLab_1 = ({lat, lon}) => {
             fetchTravelPrayerTimes();
     }, [])
     return [data, setData]
+}
+
+export const useCurrentLocation = ({lat, lon}) => {
+    const [currentloc, setCurrentloc] = useState({});
+    const API = `http://dev.virtualearth.net/REST/v1/Locations/${lat},${lon}?o=json&key=${BING_API}`;
+    async function fetchLocation() {
+        try {
+            const result = await fetch(API, {
+                    headers : {
+                        Accept : 'application/json'
+                    }
+            });
+        
+            const data = await result.json();
+            const locationData = data.resourceSets[0].resources[0].address.addressLine+', '+data.resourceSets[0].resources[0].address.adminDistrict+', '+data.resourceSets[0].resources[0].address.countryRegion;
+            // setCurrentloc(data.resourceSets[0].resources[0].address.formattedAddress);
+            setCurrentloc({data : locationData});
+        }
+        catch(e) {
+            setCurrentloc({error: e.message});
+            return false
+        }   
+    }
+    useEffect(() => {
+        fetchLocation();
+    }, []);
+
+    return [currentloc, setCurrentloc];
 }

@@ -5,7 +5,7 @@ import green from '@material-ui/core/colors/green';
 import Grow from '@material-ui/core/Grow';
 import Prayer from './Prayer';
 import './prayers.css';
-import Timer from '../Timer/Timer';
+import Timer from '../Timer';
 
 const useStyles = makeStyles(theme => ({
     progress: {

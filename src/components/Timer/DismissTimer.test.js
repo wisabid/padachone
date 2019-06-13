@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import DismissTimer from './DismissTimer';
 
-describe('<App />', () => {
+describe('<DismissTimer />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
+    ReactDOM.render(<DismissTimer />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 })
