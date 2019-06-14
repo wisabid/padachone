@@ -55,4 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Disabled copyright text
 
+## [1.0.8] - 2019-06-14
+### Changed
+- Timer logic to rectify the defect of prayer times falling within 1 hour gap difference.
+
 

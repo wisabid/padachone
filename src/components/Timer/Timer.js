@@ -58,12 +58,13 @@ const Timer = (props) => {
         if (timeoptEl) {
             let timeopt = timeoptEl.innerHTML;
             const currTime = timeopt.split(' ')[1];
-            // const abid = {Fajr: "02:59", Dhuhr: "13:37", Asr: "17:56", Maghrib: "18:46", Isha: "19:58"}
+            // const abid = {Fajr: "02:59", Dhuhr: "13:37", Asr: "17:56", Maghrib: "18:46", Isha: "21:00"}
             const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {
                 let firstItemTime = parseInt(item[1].split(':')[0]),
                     currTimeSet = parseInt(currTime.split(':')[0]),
                     secondItemTime = parseInt(item[1].split(':')[1]),
                     currTimeSecSet = parseInt(currTime.split(':')[1]);
+                    debugger;
                 if (firstItemTime >= currTimeSet) { 
                     if (firstItemTime === currTimeSet) {
                         // if (secondItemTime > currTimeSecSet) {
@@ -77,8 +78,16 @@ const Timer = (props) => {
                 }
                 else {
                     if ( ((currTimeSet - firstItemTime ) <= 1) && flg === 'init') {
+                        all.length=0; //we do not need 2 prayer times in the array within last 1 hour.
+                        //this logic is put in based on the assumption that times wil b in an increasing order in props.prayers
+                        //so clearing off array if there is any previous entry for picking up only the latest
+                        //eg : Maghrib: "18:46", Isha: "18:58" when current time is 18:59
                         all.push(item);
                     }
+                    // else if ((currTimeSecSet - secondItemTime) <= 59 && flg === 'init') {
+                    //     all.length=0; //we do not need 2 prayer times in the array within last 1 hour.this logic is put in based on the assumption that times wil b in an increasing order in props.prayers
+                    //     all.push(item);
+                    // }
                 }  
                 return all
             }, [])
