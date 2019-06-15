@@ -63,4 +63,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Context API for timezone and page
 
+### Changed
+- Fixed the bug for showing up Isha kid before it ticks 00:00
+
 

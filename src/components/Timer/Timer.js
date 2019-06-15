@@ -65,10 +65,13 @@ const Timer = (props) => {
                     currTimeSet = parseInt(currTime.split(':')[0]),
                     secondItemTime = parseInt(item[1].split(':')[1]),
                     currTimeSecSet = parseInt(currTime.split(':')[1]);
-                    debugger;
                 if (firstItemTime >= currTimeSet) { 
                     if (firstItemTime === currTimeSet) {
                         // if (secondItemTime > currTimeSecSet) {
+                            all.length = 0; //we do not need 2 prayer times in the array within last 1 hour.
+                            //this logic is put in based on the assumption that times wil b in an increasing order in props.prayers
+                            //so clearing off array if there is any previous entry for picking up only the latest
+                            //eg : Maghrib: "18:46", Isha: "18:58" when current time is 18:59
                             all.push(item);
                         // }
                     }
