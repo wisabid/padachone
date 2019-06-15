@@ -59,4 +59,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Timer logic to rectify the defect of prayer times falling within 1 hour gap difference.
 
+## [1.1.0] - 2019-06-15
+### Added
+- Context API for timezone and page
+
 

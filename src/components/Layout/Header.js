@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,7 +11,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import SettingsIcon from '@material-ui/icons/Settings';
 import logo from '../../assets/images/logo-sec.png';
-import './layout.css'
+import './layout.css';
+import {UserContext} from '../../store/context/userContext';
 // import Bgmusic from '../Prayers/Bgmusic'
 // import bgm from '../../assets/mp3/peace.mp3'
 
@@ -46,7 +47,8 @@ import './layout.css'
     
 
 
-const Header = ({timezone, startup, place, pdate}) => {
+const Header = ({startup, place, pdate}) => {
+    const {tz} = useContext(UserContext);
     const classes = useStyles();
     const [state, setState] = React.useState({
         checkedA: true
@@ -81,7 +83,7 @@ const Header = ({timezone, startup, place, pdate}) => {
             {/* <Slide direction="down" in="true" mountOnEnter unmountOnExit style={{color: 'white', fontStyle:'italic'}}>  
             <Typography variant="subtitle1" color="textSecondary">
               <strong>{pdate}</strong>
-              <span style={{color:'#fff', padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>       
+              <span style={{color:'#fff', padding: '0 0 0 3px'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={tz} /></span>       
               </Typography>
               </Slide>
               
@@ -90,7 +92,7 @@ const Header = ({timezone, startup, place, pdate}) => {
                 <strong>{(place)
                           ?place
                           :''
-                          }</strong> ( {timezone}  )
+                          }</strong> ( {tz}  )
               </Typography>
               
             </Slide> */}
@@ -99,7 +101,7 @@ const Header = ({timezone, startup, place, pdate}) => {
               
             <Slide direction="up" in={true} mountOnEnter unmountOnExit>  
               <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px', fontStyle:'normal', display: 'flex', justifyContent:'space-between', color: '#555555'}}>
-                 <span>{timezone}</span>
+                 <span>{tz}</span>
                           <span style={{fontWeight:'normal'}}>{pdate}</span>
               </Typography>
               
@@ -110,7 +112,7 @@ const Header = ({timezone, startup, place, pdate}) => {
                           ?`${place}`
                           :''
                           }</span>
-              <span style={{padding: '0 0 0 3px', fontWeight:'normal'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={timezone} /></span>       
+              <span style={{padding: '0 0 0 3px', fontWeight:'normal'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={tz} /></span>       
               </Typography>
               </Slide>
                     </Paper>

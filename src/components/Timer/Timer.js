@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Countdown from 'react-count-down';
 import { makeStyles } from '@material-ui/core/styles';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
@@ -10,7 +10,7 @@ import angel from '../../assets/images/Prayer-time.jpg'
 import CurrentTime from './CurrentTime';
 import DismissTimer from './DismissTimer';
 import PrayerTime from './PrayerTime';
-
+import {UserContext} from '../../store/context/userContext';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const Timer = (props) => {
+    const {tz, setTz} = useContext(UserContext);
     const [dt, setdt] = useState(getPDdata('iso'))
     // const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const userTimezone = moment.tz.guess();
@@ -142,7 +143,7 @@ const Timer = (props) => {
         <>
         <Zoom in={timerdisplay}>
             <div className="timerComp" style={{margin: '0 10px', position: 'static', top: '95px', zIndex: '1'}}>
-            {(userTimezone === props.timezone) && <SnackbarContent
+            {(userTimezone === tz) && <SnackbarContent
                     align="left"
                     className={classes.snackbar}
                     message={opts.hasOwnProperty('endDate') && <Countdown 
@@ -158,7 +159,7 @@ const Timer = (props) => {
                 }
                 
                 {/* {opts.hasOwnProperty('endDate') && <Countdown options={opts} />} */}
-                <CurrentTime dt={dt} timezone={props.timezone}/>                
+                <CurrentTime dt={dt} />                
             </div>            
         </Zoom>
         <Zoom in={!timerdisplay}>

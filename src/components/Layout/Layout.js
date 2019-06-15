@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import lightBlue from '@material-ui/core/colors/lightBlue';
@@ -7,6 +7,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Prayers from '../Prayers';
 import {usePrayer} from '../../hooks/api-hooks';
+import {UserContext} from '../../store/context/userContext';
 
 
 
@@ -21,19 +22,20 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const Layout = ({country, region, place, pdate, startup}) => {
-    const [data, setData] = usePrayer({region: region, country: country, place : place, date : pdate});
+    const {setTz} = useContext(UserContext);
+    const [data] = usePrayer({region: region, country: country, place : place, date : pdate});
     const {timezone} = (data && data.data && data.data.meta)?data.data.meta:'Europe/AmsterDAM';
+    setTz(timezone);
     const classes = useStyles();
     if (data && data.data && data.data.meta && data.code === 200) {
         return (
             <>
                 <Header 
-                    timezone={timezone} 
                     startup={startup} 
                     place={localStorage.getItem(`padachone:place`)}
                     pdate={data.data.date.readable}
                 />
-               <Prayers prdata={data} timezone={timezone}/>    
+               <Prayers prdata={data} />    
                
                 <Footer startup={startup}/>
             </>        

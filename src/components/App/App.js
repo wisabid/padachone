@@ -14,6 +14,7 @@ import CookieConsent from "react-cookie-consent";
 import Messages from '../Messages'
 import SpecialDay from '../Messages/SpecialDay';
 import Zoom from '@material-ui/core/Zoom';
+import {UserContext} from '../../store/context/userContext';
 
 const theme = createMuiTheme({
   palette: {
@@ -30,8 +31,11 @@ const theme = createMuiTheme({
     // color: '#fff'
   }
 });
-function App() {  
-  
+function App() { 
+  // Global State 
+  const [tz, setTz] = useState('');
+  const [page, setPage] = useState('Setup');
+  // Global State ends here
   const [prevScrollpos, setprevScrollpos] = useState(window.pageYOffset);
   const [display, setdisplay] = useState(true);
   
@@ -70,6 +74,12 @@ function App() {
   const handlefinished = (obj) => {
     const {country, region, finished, place} = obj;
     setState({...state, finished, country, region: region, place : place});
+    if (finished) {
+      setPage('Home')
+    }
+    else {
+      setPage('Setup');
+    }
   }
 
   const [msg, setMsg] = useState([false, '']);
@@ -90,7 +100,8 @@ function App() {
     // Logic for displaying Messages end here
     const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place');
     if (padachon_lsfind.length) {
-      setState({...state, finished : true})
+      setState({...state, finished : true});
+      setPage('Home')
     }
   }, [])
   return (
@@ -98,17 +109,24 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <CssBaseline />
-        <ErrorBoundary>
-          <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
-            This website uses cookies to enhance the user experience.
-          </CookieConsent>
-          <Zoom in={true}>
-              <SpecialDay display={display} setdisplay={setdisplay}/>
-          </Zoom>
-          {msg[0] && <Messages msg={msg[1]}/>}
-          {!finished && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
-          {finished && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
-        </ErrorBoundary> 
+        <UserContext.Provider value={{
+          tz : tz,
+          setTz : setTz,
+          page : page,
+          setPage : setPage
+        }}>
+          <ErrorBoundary>
+            <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
+              This website uses cookies to enhance the user experience.
+            </CookieConsent>
+            <Zoom in={true}>
+                <SpecialDay display={display} setdisplay={setdisplay}/>
+            </Zoom>
+            {msg[0] && <Messages msg={msg[1]}/>}
+            {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
+            {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
+          </ErrorBoundary>
+        </UserContext.Provider> 
       </div>
     </ThemeProvider>
     

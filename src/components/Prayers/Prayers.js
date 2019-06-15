@@ -53,12 +53,12 @@ const Prayers = (props) => {
     
     return (
         <div className="pdnContainer">
-            {onlyPrayers.hasOwnProperty('Fajr') && <Timer timezone={props.timezone} prayers={onlyPrayers}/>}
+            {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>}
         {(typeof data === "object" && code === 200 && Object.keys(prayerdata).length)
             ?<>
                <Grow in={true}>
                     <div>
-                    <Prayer pdata={prayerdata} timezone={props.timezone}/>
+                    <Prayer pdata={prayerdata} />
                     
                     </div>
                </Grow>                           
