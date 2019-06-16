@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const Timer = (props) => {
+    console.log('%c IM THE TIMER', 'font-size:20px;')
     const {tz, setTz} = useContext(UserContext);
     const [dt, setdt] = useState(getPDdata('iso'))
     // const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -60,7 +61,7 @@ const Timer = (props) => {
             let timeopt = timeoptEl.innerHTML;
             const currTime = timeopt.split(' ')[1];
             // const abid = {Fajr: "02:59", Dhuhr: "13:37", Asr: "17:56", Maghrib: "18:46", Isha: "21:00"}
-            const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {
+            const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {                
                 let firstItemTime = parseInt(item[1].split(':')[0]),
                     currTimeSet = parseInt(currTime.split(':')[0]),
                     secondItemTime = parseInt(item[1].split(':')[1]),
@@ -98,6 +99,7 @@ const Timer = (props) => {
             console.table('now', upcomingPs);
             // console.log('TZ', props.timezone)
             if (upcomingPs.length) {
+                // console.log('%c IM THE ABID'+tz, 'font-size:20px;')
                 setdismissMsg(['Dismiss']);
                 setTimerdisplay(true)
                 timeopt = timeopt.replace(currTime, upcomingPs[0][1]); //upcomingPs[0][1]

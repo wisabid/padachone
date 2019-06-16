@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -11,7 +11,8 @@ import TextField from '@material-ui/core/TextField';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import Lab from '../Lab/Lab';
 import bg from '../../assets/images/bg-new.png';
-import './setup.css'
+import './setup.css';
+import {UserContext} from '../../store/context/userContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -69,6 +70,7 @@ function getStepContent(step) {
 }
 
 function Setup(props) {
+  const {setPage} = useContext(UserContext);
   const {setupdata, country:country_alt, region:region_alt, place: place_alt} = props;
   const classes = useStyles();
   const [state, setState] = React.useState({activeStep : 0, place: place_alt, country : country_alt, region: region_alt})
@@ -164,6 +166,12 @@ function Setup(props) {
           <br/> "Worries end when Salah begins"
                       {/* <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release) */}
         </Typography> }
+        {/* <span onClick={() => setPage('Travel')}>
+        <Typography color="textSecondary" variant="h2" component="h2" align="left" 
+      style={{fontWeight:'bold', fontSize:'1rem', padding:'10px 24px', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
+                  Travellers Click here ...
+      </Typography>
+      </span> */}
         <Stepper activeStep={activeStep} orientation="vertical" >
           {steps.map((label, index) => (
             <Step key={label} style={{color: "white", background: '#f5f5f5',borderRadius: '15px', padding:'10px'}}>

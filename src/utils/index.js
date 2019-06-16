@@ -1,4 +1,6 @@
 import * as emailjs from 'emailjs-com';
+import {PRAYERS_ARR} from './constants';
+
 export const getPDdata = (type) => {
     const months =  ["Jan","Feb","Mar","Apr","May","Jun","Jul",
     "Aug","Sep","Oct","Nov","Dec"];
@@ -55,4 +57,14 @@ export function sendSubscriptionEmail(email) {
     const service_id = "default_service";
     const template_id = "template_Li3TxnLs";
     return emailjs.send(service_id, template_id, template_params, 'user_L109OnczphkyI5bvHhcSe');        
+}
+
+export function getJustPrayers({timings}) {
+    let justPrayers = Object.keys(timings).reduce((all, item) => { 
+        if (PRAYERS_ARR.indexOf(item) !== -1) {
+            all[item] = timings[item];              
+        }
+        return all;          
+      }, {});
+    return justPrayers;
 }

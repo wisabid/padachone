@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
@@ -7,11 +7,16 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import blue from '@material-ui/core/colors/blue';
 import { autoPlay } from 'react-swipeable-views-utils';
 import {usePrayerOnGo} from '../../hooks/api-hooks';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Drawer from '../Lab/Drawer'
+import Drawer from '../Lab/Drawer';
+import {getJustPrayers} from '../../utils';
+import Timer from '../Timer';
+import {UserContext} from '../../store/context/userContext';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -68,10 +73,24 @@ const tutorialSteps = [
     title: {
       fontSize: 14,
     },
+    progress: {
+      margin: theme.spacing(2),
+      color: blue[500]
+    },
   }));
 
 const Traveltimes = ({lat, lon}) => {
     const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
+    const {setTz} = useContext(UserContext);
+    let timings;
+    if (data.length) {
+      debugger;
+      timings = data[0].timings;
+      const {timezone} = (data[0].meta)?data[0].meta:'Europe/AmsterDAM';
+      debugger;
+      setTz(timezone)
+
+    } 
     const classes = useStyles();
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -88,7 +107,16 @@ const Traveltimes = ({lat, lon}) => {
     function handleStepChange(step) {
         setActiveStep(step);
     }
+    const [onlyPrayers, setOnlyPrayers] = useState({})
+    useEffect(() => {
+        if (timings && timings.hasOwnProperty('Fajr')) {
+            let justPrayers = getJustPrayers({timings : timings});
+            console.log('%c JUSTP'+JSON.stringify(justPrayers), 'color: purple;font-size:20px;')
+            setOnlyPrayers(justPrayers);
+        }
+    }, [timings])
     if (data.length && data[0].timings) {
+        console.table(data)
         return (
             // <div>
             //     {/* {data.data[0].timings.Maghrib} */}
@@ -112,9 +140,12 @@ const Traveltimes = ({lat, lon}) => {
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
                 >
+                  {/* {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>} */}
                 {tutorialSteps.map((step, index) => (
                     <div key={step.label}>
+                      {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>}
                     {Math.abs(activeStep - index) <= 2 ? (
+                        
                         // <img className={classes.img} src={step.imgPath} alt={step.label} />
                         Object.keys(data[0].timings).map((prayer, ind) => {
                           let splitdt = data[0].timings[prayer].split(' '),
@@ -145,7 +176,7 @@ const Traveltimes = ({lat, lon}) => {
                     </div>
                 ))}
                 </AutoPlaySwipeableViews>
-                <MobileStepper
+                {/* <MobileStepper
                 steps={maxSteps}
                 position="static"
                 variant="text"
@@ -162,13 +193,13 @@ const Traveltimes = ({lat, lon}) => {
                     Back
                     </Button>
                 }
-                />
+                /> */}
             </div>
         )
     }
     else {
         return (
-            <h5>Loading...</h5>
+          <CircularProgress className={classes.progress} color="secondary" />
         )
     }
 }

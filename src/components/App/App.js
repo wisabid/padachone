@@ -15,6 +15,7 @@ import Messages from '../Messages'
 import SpecialDay from '../Messages/SpecialDay';
 import Zoom from '@material-ui/core/Zoom';
 import {UserContext} from '../../store/context/userContext';
+import Traveltimes from '../Lab/Traveltimes';
 
 const theme = createMuiTheme({
   palette: {
@@ -90,10 +91,11 @@ function App() {
     localStorage.removeItem('padachone_msg1');
     localStorage.removeItem('padachone_msg2');
     localStorage.removeItem('padachone_msg3');
-    if (!localStorage.getItem('padachone_msg4')) {
-      const message = `Email Subscription option is available now ! Check homepage footer.`;
+    localStorage.removeItem('padachone_msg4');
+    if (!localStorage.getItem('padachone_msg5')) {
+      const message = `Next up is Prayer-Times-Onboard for travellers. Stay Tuned !`;
       setMsg(() => {
-        localStorage.setItem('padachone_msg4', message)
+        localStorage.setItem('padachone_msg5', message)
         return [true, message]
       });      
     }
@@ -123,8 +125,10 @@ function App() {
                 <SpecialDay display={display} setdisplay={setdisplay}/>
             </Zoom>
             {msg[0] && <Messages msg={msg[1]}/>}
+            {page === 'Travel' && <Traveltimes lat="52.31406610552598" lon="4.946411339519716" />}
             {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
+            
           </ErrorBoundary>
         </UserContext.Provider> 
       </div>

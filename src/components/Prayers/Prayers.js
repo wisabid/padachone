@@ -6,6 +6,7 @@ import Grow from '@material-ui/core/Grow';
 import Prayer from './Prayer';
 import './prayers.css';
 import Timer from '../Timer';
+import {getJustPrayers} from '../../utils'
 
 const useStyles = makeStyles(theme => ({
     progress: {
@@ -23,33 +24,21 @@ const Prayers = (props) => {
     const [onlyPrayers, setOnlyPrayers] = useState({})
     useEffect(() => {
         if (timings.hasOwnProperty('Fajr')) {
-            let justPrayers = Object.keys(timings).reduce((all, item) => { 
-                if (['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].indexOf(item) !== -1) {
-                    all[item] = timings[item];              
-                }
-                return all;          
-              }, {});
-            setOnlyPrayers(justPrayers)
+            let justPrayers = getJustPrayers({timings : timings});
+            setOnlyPrayers(justPrayers);
         }
     }, [timings])
     // const [data, setData] = usePrayer('Amsterdam');
     
     const {data:prayerdata, code, status} = data;
-    const classes = useStyles();
-    // 
-    // const monthList = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    // let dt = new Date();
-    // let day = ('0'+dt.getDate()).slice(-2);
-    // let mon = monthList[dt.getMonth()];
-    // let yr = dt.getFullYear();
-    // 
-    useEffect(() => {
-        if (prayerdata && Object.keys(prayerdata).length) {
-            //localStorage.setItem()
-            //throw new Error('Uncaught');
-        }
+    const classes = useStyles();   
+    // useEffect(() => {
+    //     if (prayerdata && Object.keys(prayerdata).length) {
+    //         //localStorage.setItem()
+    //         //throw new Error('Uncaught');
+    //     }
         
-    })
+    // })
     
     return (
         <div className="pdnContainer">
