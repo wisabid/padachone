@@ -1,5 +1,6 @@
 import React from 'react';
 import angel from '../../assets/images/Prayer-time.jpg';
+import LocationText from './LocationText';
 
 const styles = {
     backgroundImage:`url(${angel})`, 
@@ -13,14 +14,20 @@ const styles = {
     fontWeight: 'bold', 
     color: 'rgb(3, 155, 229)',
     backgroundColor: '#fff'
-}
+};
 
-const PrayerTime = ({anim, setAnim}) => {
+
+
+const PrayerTime = ({anim, setAnim, travel=false}) => {
     return (
         <div>
                 {anim[0] && <div className="Prayer-time" 
                     style={styles}>
                         {anim[1]} Time
+                        {travel && <>
+                            <br />
+                            <LocationText />
+                        </>}
                     </div>
                 }
         </div>

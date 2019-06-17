@@ -17,7 +17,8 @@ import Drawer from '../Lab/Drawer';
 import {getJustPrayers} from '../../utils';
 import Timer from '../Timer';
 import {UserContext} from '../../store/context/userContext';
-
+import Header from '../Layout/Header';
+import './travel.css'
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
@@ -69,9 +70,12 @@ const tutorialSteps = [
     },
     card: {
       minWidth: '100%',
+      background: '#000',
+      marginBottom: '5px'
     },
     title: {
       fontSize: 14,
+      color : '#fff'      
     },
     progress: {
       margin: theme.spacing(2),
@@ -79,7 +83,7 @@ const tutorialSteps = [
     },
   }));
 
-const Traveltimes = ({lat, lon}) => {
+const Traveltimes = ({lat, lon, startup}) => {
     const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
     const {setTz} = useContext(UserContext);
     let timings;
@@ -131,6 +135,12 @@ const Traveltimes = ({lat, lon}) => {
         // }
 
             <div className={classes.root}>
+                <Header 
+                    startup={startup} 
+                    place={localStorage.getItem(`padachone:place`)}
+                    pdate={data[0].date.readable}
+                    travel={true}
+                />
                 {/* <Paper square elevation={0} className={classes.header}> */}
                 {/* <Typography>tutorialSteps[activeStep].label{data.data[0].timings.Maghrib}</Typography> */}
                 {/* </Paper> */}
@@ -139,11 +149,12 @@ const Traveltimes = ({lat, lon}) => {
                 index={activeStep}
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
+                // style={{ marginTop: '22px'}}
                 >
                   {/* {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>} */}
                 {tutorialSteps.map((step, index) => (
-                    <div key={step.label}>
-                      {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>}
+                    <div key={step.label} style={{    marginTop: '35px'}}>
+                      {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers} travel={true}/>}
                     {Math.abs(activeStep - index) <= 2 ? (
                         
                         // <img className={classes.img} src={step.imgPath} alt={step.label} />
@@ -153,15 +164,15 @@ const Traveltimes = ({lat, lon}) => {
                             tzone = splitdt[1];
                           return (
                             <Card className={classes.card} key={ind}>
-                            <CardContent>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                            <CardContent className="travelCard">
+                                <Typography className={classes.title} color="textSecondary" gutterBottom style={{minWidth : '60px', textAlign:'left'}}>
                                 {prayer}
                                 </Typography>
                                 <Typography variant="h3" component="h2">
                                   <strong style={{color:'#039be5'}}>{timing}</strong>
                                 </Typography>
                                
-                                <Typography variant="body2" component="p" color="textSecondary">
+                                <Typography variant="body2" component="p" color="textSecondary" className={classes.title}>
                                   {tzone}
                                   <br />
                                 {data[0].date.hijri.month.ar}

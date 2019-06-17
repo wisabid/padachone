@@ -166,12 +166,12 @@ function Setup(props) {
           <br/> "Worries end when Salah begins"
                       {/* <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release) */}
         </Typography> }
-        {/* <span onClick={() => setPage('Travel')}>
-        <Typography color="textSecondary" variant="h2" component="h2" align="left" 
+        <span onClick={() => setPage('Travel')}>
+        {/* <Typography color="textSecondary" variant="h2" component="h2" align="left" 
       style={{fontWeight:'bold', fontSize:'1rem', padding:'10px 24px', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
                   Travellers Click here ...
-      </Typography>
-      </span> */}
+      </Typography> */}
+      </span>
         <Stepper activeStep={activeStep} orientation="vertical" >
           {steps.map((label, index) => (
             <Step key={label} style={{color: "white", background: '#f5f5f5',borderRadius: '15px', padding:'10px'}}>

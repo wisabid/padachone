@@ -1,0 +1,10 @@
+    .travelCard {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;        
+    }
+    .locationText {
+        font-size: 10px;
+        max-width: 20px;
+    }

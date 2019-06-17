@@ -47,8 +47,8 @@ import {UserContext} from '../../store/context/userContext';
     
 
 
-const Header = ({startup, place, pdate}) => {
-    const {tz} = useContext(UserContext);
+const Header = ({startup, place, pdate, travel=false}) => {
+    const {tz, setPage} = useContext(UserContext);
     const classes = useStyles();
     const [state, setState] = React.useState({
         checkedA: true
@@ -62,14 +62,18 @@ const Header = ({startup, place, pdate}) => {
             }
             return;
         });
-        
-        startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+        if (travel) {
+          // setPage('Setup')
+        }
+        else {
+          startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+        }
         // return { ...state, [name]: event.target.checked }
       });
       };
     return (
         <div className={{flexGrow: 1}}>
-        <AppBar position="fixed" color="primary">
+        <AppBar position="fixed" color="primary" style={travel?{background:'#000'}:null}>
             <Toolbar style={{minHeight: '45px'}}>
             <a href="/"><img src={logo} width="150" height="30" alt="logo" className="App-logo"  /></a>
           <div className={classes.grow} />
@@ -77,7 +81,7 @@ const Header = ({startup, place, pdate}) => {
             
             {/* <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/> */}
             {/* <Avatar className={classes.avatar}> */}
-            <SettingsIcon fontSize="default" className="settings" onClick={handleChange} style={{color:'#fff'}}/>
+            {!travel && <SettingsIcon fontSize="default" className="settings" onClick={handleChange} style={{color:'#fff'}}/>}
           {/* </Avatar> */}
             </Toolbar>
             {/* <Slide direction="down" in="true" mountOnEnter unmountOnExit style={{color: 'white', fontStyle:'italic'}}>  

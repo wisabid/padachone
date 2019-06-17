@@ -92,10 +92,11 @@ function App() {
     localStorage.removeItem('padachone_msg2');
     localStorage.removeItem('padachone_msg3');
     localStorage.removeItem('padachone_msg4');
-    if (!localStorage.getItem('padachone_msg5')) {
-      const message = `Next up is Prayer-Times-Onboard for travellers. Stay Tuned !`;
+    localStorage.removeItem('padachone_msg5');
+    if (!localStorage.getItem('padachone_msg6')) {
+      const message = `Prayer times onboard! Stay Tuned ...`;
       setMsg(() => {
-        localStorage.setItem('padachone_msg5', message)
+        localStorage.setItem('padachone_msg6', message)
         return [true, message]
       });      
     }

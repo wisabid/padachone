@@ -168,7 +168,7 @@ const Timer = (props) => {
             </div>            
         </Zoom>
         <Zoom in={!timerdisplay}>
-            <PrayerTime anim={anim} setAnim={setAnim}/>
+            <PrayerTime anim={anim} setAnim={setAnim} travel={props.travel?props.travel:false}/>
         </Zoom>
         </>
     )
