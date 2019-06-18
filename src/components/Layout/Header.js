@@ -10,9 +10,11 @@ import Clock from 'react-live-clock';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import SettingsIcon from '@material-ui/icons/Settings';
+import InfoIcon from '@material-ui/icons/Info';
 import logo from '../../assets/images/logo-sec.png';
 import './layout.css';
 import {UserContext} from '../../store/context/userContext';
+import InfoMessage from './InfoMessage'
 // import Bgmusic from '../Prayers/Bgmusic'
 // import bgm from '../../assets/mp3/peace.mp3'
 
@@ -47,7 +49,7 @@ import {UserContext} from '../../store/context/userContext';
     
 
 
-const Header = ({startup, place, pdate, travel=false}) => {
+const Header = ({startup, place, pdate, travel=false, address=''}) => {
     const {tz, setPage} = useContext(UserContext);
     const classes = useStyles();
     const [state, setState] = React.useState({
@@ -73,6 +75,7 @@ const Header = ({startup, place, pdate, travel=false}) => {
       };
     return (
         <div className={{flexGrow: 1}}>
+          
         <AppBar position="fixed" color="primary" style={travel?{background:'#000'}:null}>
             <Toolbar style={{minHeight: '45px'}}>
             <a href="/"><img src={logo} width="150" height="30" alt="logo" className="App-logo"  /></a>
@@ -113,7 +116,7 @@ const Header = ({startup, place, pdate, travel=false}) => {
             <Slide direction="down" in={true} mountOnEnter unmountOnExit style={{fontStyle:'italic'}}>  
             <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px',display: 'flex', justifyContent:'space-between', fontStyle:'normal', color: '#555555', fontSize: '1rem'}}>
             <span>{(place)
-                          ?`${place}`
+                          ?<>{place}{travel && address && <InfoMessage message={`You are closer to : ${address}`}/>}</>
                           :''
                           }</span>
               <span style={{padding: '0 0 0 3px', fontWeight:'normal'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={tz} /></span>       

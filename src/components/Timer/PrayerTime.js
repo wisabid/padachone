@@ -18,7 +18,7 @@ const styles = {
 
 
 
-const PrayerTime = ({anim, setAnim, travel=false}) => {
+const PrayerTime = ({anim, setAnim, travel=false, location=''}) => {
     return (
         <div>
                 {anim[0] && <div className="Prayer-time" 
@@ -26,7 +26,7 @@ const PrayerTime = ({anim, setAnim, travel=false}) => {
                         {anim[1]} Time
                         {travel && <>
                             <br />
-                            <LocationText />
+                            <LocationText location={location}/>
                         </>}
                     </div>
                 }

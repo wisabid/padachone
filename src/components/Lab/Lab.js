@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Traveltimes from './Traveltimes'
+import Traveltimes from '../Travel/Traveltimes'
 import Map from '../Lab/Map'
 import Search from '../Lab/Search';
 import Bgmusic from '../Prayers/Bgmusic'

@@ -10,10 +10,9 @@ import SwipeableViews from 'react-swipeable-views';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import blue from '@material-ui/core/colors/blue';
 import { autoPlay } from 'react-swipeable-views-utils';
-import {usePrayerOnGo} from '../../hooks/api-hooks';
+import {usePrayerOnGo, useCurrentLocation} from '../../hooks/api-hooks';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Drawer from '../Lab/Drawer';
 import {getJustPrayers} from '../../utils';
 import Timer from '../Timer';
 import {UserContext} from '../../store/context/userContext';
@@ -85,13 +84,12 @@ const tutorialSteps = [
 
 const Traveltimes = ({lat, lon, startup}) => {
     const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
+    const [loc] = useCurrentLocation({lat: lat, lon: lon})
     const {setTz} = useContext(UserContext);
     let timings;
     if (data.length) {
-      debugger;
       timings = data[0].timings;
       const {timezone} = (data[0].meta)?data[0].meta:'Europe/AmsterDAM';
-      debugger;
       setTz(timezone)
 
     } 
@@ -137,9 +135,10 @@ const Traveltimes = ({lat, lon, startup}) => {
             <div className={classes.root}>
                 <Header 
                     startup={startup} 
-                    place={localStorage.getItem(`padachone:place`)}
+                    place={loc.data.split(',')[0]}
                     pdate={data[0].date.readable}
                     travel={true}
+                    address={loc.formattedaddress}
                 />
                 {/* <Paper square elevation={0} className={classes.header}> */}
                 {/* <Typography>tutorialSteps[activeStep].label{data.data[0].timings.Maghrib}</Typography> */}
@@ -154,7 +153,8 @@ const Traveltimes = ({lat, lon, startup}) => {
                   {/* {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>} */}
                 {tutorialSteps.map((step, index) => (
                     <div key={step.label} style={{    marginTop: '35px'}}>
-                      {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers} travel={true}/>}
+                      {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers} travel={true} location={loc.formattedaddress}/>}
+                      <div>
                     {Math.abs(activeStep - index) <= 2 ? (
                         
                         // <img className={classes.img} src={step.imgPath} alt={step.label} />
@@ -184,6 +184,7 @@ const Traveltimes = ({lat, lon, startup}) => {
                         })
                         
                     ) : null}
+                    </div>
                     </div>
                 ))}
                 </AutoPlaySwipeableViews>
@@ -215,4 +216,4 @@ const Traveltimes = ({lat, lon, startup}) => {
     }
 }
 
-export default Traveltimes;
+export default React.memo(Traveltimes);

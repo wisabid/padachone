@@ -5,7 +5,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- Prayer times with lat lon (integrated Timer,header and modified styles)
 - Map showing mosque locations
 - Custom Search Results
 - Bg Audio 
@@ -65,5 +64,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Fixed the bug for showing up Isha kid before it ticks 00:00
+
+## [1.1.1] - 2019-06-18
+### Added
+- Prayer times with lat lon (integrated Timer,header, current loc and modified styles on alpha release) 
 
 

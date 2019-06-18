@@ -15,7 +15,7 @@ import Messages from '../Messages'
 import SpecialDay from '../Messages/SpecialDay';
 import Zoom from '@material-ui/core/Zoom';
 import {UserContext} from '../../store/context/userContext';
-import Traveltimes from '../Lab/Traveltimes';
+import Travel from '../Travel';
 
 const theme = createMuiTheme({
   palette: {
@@ -94,7 +94,7 @@ function App() {
     localStorage.removeItem('padachone_msg4');
     localStorage.removeItem('padachone_msg5');
     if (!localStorage.getItem('padachone_msg6')) {
-      const message = `Prayer times onboard! Stay Tuned ...`;
+      const message = `The alpha version of Prayer times onboard is live now ! `;
       setMsg(() => {
         localStorage.setItem('padachone_msg6', message)
         return [true, message]
@@ -126,7 +126,7 @@ function App() {
                 <SpecialDay display={display} setdisplay={setdisplay}/>
             </Zoom>
             {msg[0] && <Messages msg={msg[1]}/>}
-            {page === 'Travel' && <Traveltimes lat="52.31406610552598" lon="4.946411339519716" />}
+            {page === 'Travel' && <Travel />}
             {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
             

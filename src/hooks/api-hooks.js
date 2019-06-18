@@ -96,9 +96,10 @@ export const useCurrentLocation = ({lat, lon}) => {
             });
         
             const data = await result.json();
+            console.log('%c LOCATION DATA'+JSON.stringify(data), 'color:blue')
             const locationData = data.resourceSets[0].resources[0].address.addressLine+', '+data.resourceSets[0].resources[0].address.adminDistrict+', '+data.resourceSets[0].resources[0].address.countryRegion;
             // setCurrentloc(data.resourceSets[0].resources[0].address.formattedAddress);
-            setCurrentloc({data : locationData});
+            setCurrentloc({data : locationData, formattedaddress: data.resourceSets[0].resources[0].address.formattedAddress });
         }
         catch(e) {
             setCurrentloc({error: e.message});
