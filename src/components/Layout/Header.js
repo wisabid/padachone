@@ -87,7 +87,8 @@ const Header = ({startup, place, pdate, travel=false, address='', volume=true, s
             {/* <Avatar className={classes.avatar}> */}
             {!travel
               ?<SettingsIcon fontSize="default" className="settings" onClick={handleChange} style={{color:'#fff'}} />
-              :<MusicOption volume={volume} setVolume={setVolume}/>
+              :null
+              // :<MusicOption volume={volume} setVolume={setVolume}/>
             }
           {/* </Avatar> */}
             </Toolbar>
