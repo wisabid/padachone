@@ -14,9 +14,10 @@ import InfoIcon from '@material-ui/icons/Info';
 import logo from '../../assets/images/logo-sec.png';
 import './layout.css';
 import {UserContext} from '../../store/context/userContext';
-import InfoMessage from './InfoMessage'
+import InfoMessage from './InfoMessage';
+import MusicOption from './MusicOption'
 // import Bgmusic from '../Prayers/Bgmusic'
-// import bgm from '../../assets/mp3/peace.mp3'
+// import bgm from '../../assets/mp3/2019-04-20_-_Quiet_Time_-_David_Fesliyan.mp3'
 
 // const useStyles = makeStyles({
 //   root: {
@@ -49,7 +50,7 @@ import InfoMessage from './InfoMessage'
     
 
 
-const Header = ({startup, place, pdate, travel=false, address=''}) => {
+const Header = ({startup, place, pdate, travel=false, address='', volume=true, setVolume}) => {
     const {tz, setPage} = useContext(UserContext);
     const classes = useStyles();
     const [state, setState] = React.useState({
@@ -84,7 +85,10 @@ const Header = ({startup, place, pdate, travel=false, address=''}) => {
             
             {/* <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/> */}
             {/* <Avatar className={classes.avatar}> */}
-            {!travel && <SettingsIcon fontSize="default" className="settings" onClick={handleChange} style={{color:'#fff'}}/>}
+            {!travel
+              ?<SettingsIcon fontSize="default" className="settings" onClick={handleChange} style={{color:'#fff'}} />
+              :<MusicOption volume={volume} setVolume={setVolume}/>
+            }
           {/* </Avatar> */}
             </Toolbar>
             {/* <Slide direction="down" in="true" mountOnEnter unmountOnExit style={{color: 'white', fontStyle:'italic'}}>  
@@ -116,7 +120,7 @@ const Header = ({startup, place, pdate, travel=false, address=''}) => {
             <Slide direction="down" in={true} mountOnEnter unmountOnExit style={{fontStyle:'italic'}}>  
             <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px',display: 'flex', justifyContent:'space-between', fontStyle:'normal', color: '#555555', fontSize: '1rem'}}>
             <span>{(place)
-                          ?<>{place}{travel && address && <InfoMessage message={`You are closer to : ${address}`}/>}</>
+                          ?<>{(place != "undefined")?place:''}{travel && address && <InfoMessage message={`You are closer to : ${address}`}/>}</>
                           :''
                           }</span>
               <span style={{padding: '0 0 0 3px', fontWeight:'normal'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={tz} /></span>       

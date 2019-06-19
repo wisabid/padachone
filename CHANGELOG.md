@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bg Audio 
 - Drawer for menus
 - Current location data
+- Site Message
+
 
 ## [1.0.0] - 2019-05-19
 ### Added
@@ -68,5 +70,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.1] - 2019-06-18
 ### Added
 - Prayer times with lat lon (integrated Timer,header, current loc and modified styles on alpha release) 
+- Music and toggle volume button
 
 

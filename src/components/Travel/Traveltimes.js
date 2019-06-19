@@ -18,6 +18,8 @@ import Timer from '../Timer';
 import {UserContext} from '../../store/context/userContext';
 import Header from '../Layout/Header';
 import './travel.css'
+import Bgmusic from '../Prayers/Bgmusic'
+import bgm from '../../assets/mp3/2019-04-20_-_Quiet_Time_-_David_Fesliyan.mp3'
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
@@ -86,6 +88,7 @@ const Traveltimes = ({lat, lon, startup}) => {
     const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
     const [loc] = useCurrentLocation({lat: lat, lon: lon})
     const {setTz} = useContext(UserContext);
+    const [volume, setVolume] = React.useState(true);
     let timings;
     if (data.length) {
       timings = data[0].timings;
@@ -139,6 +142,8 @@ const Traveltimes = ({lat, lon, startup}) => {
                     pdate={data[0].date.readable}
                     travel={true}
                     address={loc.formattedaddress}
+                    volume={volume}
+                    setVolume={setVolume}
                 />
                 {/* <Paper square elevation={0} className={classes.header}> */}
                 {/* <Typography>tutorialSteps[activeStep].label{data.data[0].timings.Maghrib}</Typography> */}
@@ -154,6 +159,7 @@ const Traveltimes = ({lat, lon, startup}) => {
                 {tutorialSteps.map((step, index) => (
                     <div key={step.label} style={{    marginTop: '35px'}}>
                       {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers} travel={true} location={loc.formattedaddress}/>}
+                      <Bgmusic bgm={bgm} volume={volume}/>
                       <div>
                     {Math.abs(activeStep - index) <= 2 ? (
                         

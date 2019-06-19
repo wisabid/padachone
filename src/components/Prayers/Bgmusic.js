@@ -2,7 +2,7 @@ import React from 'react';
 import Sound from 'react-sound';
 
 
-const Bgmusic = ({bgm}) => {
+const Bgmusic = ({bgm, volume=true}) => {
     return (
         <Sound
           autoLoad={true}
@@ -10,7 +10,7 @@ const Bgmusic = ({bgm}) => {
           url={bgm}
           playStatus={Sound.status.PLAYING}
           playFromPosition={100 /* in milliseconds */}
-          volume={10}
+          volume={volume?10:0}
           // onStop={handleBufferChange}
           // onLoading={this.handleSongLoading}
           // onPlaying={handleBufferChange}
