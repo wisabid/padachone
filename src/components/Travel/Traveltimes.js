@@ -124,7 +124,7 @@ const Traveltimes = ({lat, lon, startup}) => {
     useEffect(() => {
       if (Object.keys(onlyPrayers).length) {
         console.log('Play music plzzz')
-        setMusic({show: true, playing : false});
+        setTimeout(() => {setMusic({show: true, playing : false})}, 2000);
       }
     }, [onlyPrayers])
     if (data.length && data[0].timings) {
