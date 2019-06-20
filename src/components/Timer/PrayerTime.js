@@ -13,14 +13,14 @@ const styles = {
     fontSize: '2rem', 
     fontWeight: 'bold', 
     color: 'rgb(3, 155, 229)',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff'    
 };
 
 
 
 const PrayerTime = ({anim, setAnim, travel=false, location=''}) => {
     return (
-        <div>
+        <div style={{overflow: 'hidden'}}>
                 {anim[0] && <div className="Prayer-time" 
                     style={styles}>
                         {anim[1]} Time

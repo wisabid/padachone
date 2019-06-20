@@ -123,8 +123,8 @@ const Traveltimes = ({lat, lon, startup}) => {
     }, [timings]);
     useEffect(() => {
       if (Object.keys(onlyPrayers).length) {
-        console.log('Play music plzzz')
-        setTimeout(() => {setMusic({show: true, playing : false})}, 2000);
+        // console.log('Play music plzzz')
+        setMusic({show: true, playing : false});
       }
     }, [onlyPrayers])
     if (data.length && data[0].timings) {
