@@ -19,7 +19,7 @@ import {UserContext} from '../../store/context/userContext';
 import Header from '../Layout/Header';
 import './travel.css'
 import Bgmusic from '../Prayers/Bgmusic'
-import bgm from '../../assets/mp3/2019-04-20_-_Quiet_Time_-_David_Fesliyan.mp3'
+import bgm from '../../assets/mp3/bgmusic.mp3'
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
