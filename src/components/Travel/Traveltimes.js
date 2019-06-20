@@ -112,6 +112,7 @@ const Traveltimes = ({lat, lon, startup}) => {
     function handleStepChange(step) {
         setActiveStep(step);
     }
+    const [music, setMusic] = useState({show: false, playing : false})
     const [onlyPrayers, setOnlyPrayers] = useState({})
     useEffect(() => {
         if (timings && timings.hasOwnProperty('Fajr')) {
@@ -119,7 +120,13 @@ const Traveltimes = ({lat, lon, startup}) => {
             console.log('%c JUSTP'+JSON.stringify(justPrayers), 'color: purple;font-size:20px;')
             setOnlyPrayers(justPrayers);
         }
-    }, [timings])
+    }, [timings]);
+    useEffect(() => {
+      if (Object.keys(onlyPrayers).length) {
+        console.log('Play music plzzz')
+        setMusic({show: true, playing : false});
+      }
+    }, [onlyPrayers])
     if (data.length && data[0].timings) {
         console.table(data)
         return (
@@ -144,6 +151,7 @@ const Traveltimes = ({lat, lon, startup}) => {
                     address={loc.formattedaddress}
                     volume={volume}
                     setVolume={setVolume}
+                    playing={music.playing}
                 />
                 {/* <Paper square elevation={0} className={classes.header}> */}
                 {/* <Typography>tutorialSteps[activeStep].label{data.data[0].timings.Maghrib}</Typography> */}
@@ -159,7 +167,7 @@ const Traveltimes = ({lat, lon, startup}) => {
                 {tutorialSteps.map((step, index) => (
                     <div key={step.label} style={{    marginTop: '35px'}}>
                       {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers} travel={true} location={loc.formattedaddress}/>}
-                      <Bgmusic bgm={bgm} volume={volume}/>
+                      {music.show && <Bgmusic bgm={bgm} volume={volume} setPlaying={() => setMusic({show: true, playing : true})}/>}
                       <div>
                     {Math.abs(activeStep - index) <= 2 ? (
                         

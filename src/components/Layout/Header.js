@@ -50,7 +50,7 @@ import MusicOption from './MusicOption'
     
 
 
-const Header = ({startup, place, pdate, travel=false, address='', volume=true, setVolume}) => {
+const Header = ({startup, place, pdate, travel=false, address='', volume=true, setVolume, playing}) => {
     const {tz, setPage} = useContext(UserContext);
     const classes = useStyles();
     const [state, setState] = React.useState({
@@ -87,8 +87,9 @@ const Header = ({startup, place, pdate, travel=false, address='', volume=true, s
             {/* <Avatar className={classes.avatar}> */}
             {!travel
               ?<SettingsIcon fontSize="default" className="settings" onClick={handleChange} style={{color:'#fff'}} />
-              :null
-              // :<MusicOption volume={volume} setVolume={setVolume}/>
+              :(playing)
+                ?<MusicOption volume={volume} setVolume={setVolume}/>
+                :null
             }
           {/* </Avatar> */}
             </Toolbar>
