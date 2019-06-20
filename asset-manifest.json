@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/static/css/main.7af8c5ec.chunk.css",
-    "main.js": "/static/js/main.1a34733b.chunk.js",
-    "main.js.map": "/static/js/main.1a34733b.chunk.js.map",
+    "main.js": "/static/js/main.887e8625.chunk.js",
+    "main.js.map": "/static/js/main.887e8625.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
     "static/css/2.711045af.chunk.css": "/static/css/2.711045af.chunk.css",
     "static/js/2.998a2a42.chunk.js": "/static/js/2.998a2a42.chunk.js",
     "static/js/2.998a2a42.chunk.js.map": "/static/js/2.998a2a42.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.5c32f342903d78a17dc2734a60beda04.js": "/precache-manifest.5c32f342903d78a17dc2734a60beda04.js",
+    "precache-manifest.d1521ef3872af643bf54e2aeb1e964c9.js": "/precache-manifest.d1521ef3872af643bf54e2aeb1e964c9.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.711045af.chunk.css.map": "/static/css/2.711045af.chunk.css.map",
     "static/css/main.7af8c5ec.chunk.css.map": "/static/css/main.7af8c5ec.chunk.css.map",
     "static/media/Prayer-time.jpg": "/static/media/Prayer-time.dd3c6541.jpg",
     "static/media/bg-new.png": "/static/media/bg-new.d6d84b19.png",
-    "static/media/bgmusic.mp3": "/static/media/bgmusic.9cee89c2.mp3",
     "static/media/boo.svg": "/static/media/boo.0b13e3dc.svg",
     "static/media/cool.svg": "/static/media/cool.c1619cce.svg",
     "static/media/eid.gif": "/static/media/eid.9f6c86dd.gif",
     "static/media/goofy.svg": "/static/media/goofy.599f38ab.svg",
-    "static/media/logo-sec.png": "/static/media/logo-sec.8be94c12.png"
+    "static/media/logo-sec.png": "/static/media/logo-sec.8be94c12.png",
+    "static/media/quietTime.mp3": "/static/media/quietTime.a510d8e2.mp3"
   }
 }
