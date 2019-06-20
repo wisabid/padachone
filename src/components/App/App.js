@@ -94,7 +94,7 @@ function App() {
     localStorage.removeItem('padachone_msg4');
     localStorage.removeItem('padachone_msg5');
     if (!localStorage.getItem('padachone_msg6')) {
-      const message = `Traveller's Option is live now ! Help us move from alpha to stable `;
+      const message = `Light soothing music in the bg! Enjoy! `;
       setMsg(() => {
         localStorage.setItem('padachone_msg6', message)
         return [true, message]

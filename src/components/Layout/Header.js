@@ -122,7 +122,7 @@ const Header = ({startup, place, pdate, travel=false, address='', volume=true, s
             <Slide direction="down" in={true} mountOnEnter unmountOnExit style={{fontStyle:'italic'}}>  
             <Typography variant="caption" color="textSecondary" style={{padding:'1px 5px',display: 'flex', justifyContent:'space-between', fontStyle:'normal', color: '#555555', fontSize: '1rem'}}>
             <span>{(place)
-                          ?<>{(place != "undefined")?place:''}{travel && address && <InfoMessage message={`You are closer to : ${address}`}/>}</>
+                          ?<>{(place != "undefined")?place.substr(0,24):''}{travel && address && <InfoMessage message={`You are closer to : ${address}`}/>}</>
                           :''
                           }</span>
               <span style={{padding: '0 0 0 3px', fontWeight:'normal'}}><Clock format={'HH:mm:ss'} ticking={true} timezone={tz} /></span>       
