@@ -8,8 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Traveltimes from '../Travel/Traveltimes'
 import Map from '../Lab/Map'
 import Search from '../Lab/Search';
-// import Bgmusic from '../Prayers/Bgmusic'
-// import sufi from '../../assets/mp3/bgmusic.mp3'
+import Bgmusic from '../Prayers/Bgmusic'
+import sufi from '../../assets/mp3/quietTime.mp3'
 import Drawer from './Drawer';
 import {useCurrentLocation} from '../../hooks/api-hooks';
 
@@ -61,7 +61,7 @@ const Lab = (props) => {
     
     return (
         <>
-        {/* <Bgmusic bgm={sufi}/> */}
+        <Bgmusic bgm={sufi} setPlaying={() => console.log('playing')}/>
         <h4 style={{marginTop: '40px'}}>Lab (Alpha Releases)</h4>
 
         {/* <h5>YOU ARE @ - {currentloc.data} {currentloc.error?currentloc.error:''}</h5> */}

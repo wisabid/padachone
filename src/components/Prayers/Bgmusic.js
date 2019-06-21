@@ -7,10 +7,10 @@ const Bgmusic = ({bgm, volume=true, setPlaying}) => {
     const handleLoad = () => {
       console.log('LOADED')
       setPlaying();
-      setStatus('PAUSED');
-      setTimeout(() => {
-        setStatus('PLAYING');
-      }, 2000)
+      // setStatus('PAUSED');
+      // setTimeout(() => {
+      //   setStatus('PLAYING');
+      // }, 2000)
     }
     return (
         <Sound

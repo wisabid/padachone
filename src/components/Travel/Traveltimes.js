@@ -88,7 +88,7 @@ const Traveltimes = ({lat, lon, startup}) => {
     const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
     const [loc] = useCurrentLocation({lat: lat, lon: lon})
     const {setTz} = useContext(UserContext);
-    const [volume, setVolume] = React.useState(false);
+    const [volume, setVolume] = React.useState(true);
     let timings;
     if (data.length) {
       timings = data[0].timings;
@@ -143,6 +143,7 @@ const Traveltimes = ({lat, lon, startup}) => {
         // }
 
             <div className={classes.root}>
+                <Bgmusic bgm={bgm} volume={volume} setPlaying={() => setMusic({show: true, playing : true})}/>
                 <Header 
                     startup={startup} 
                     place={loc.data.split(',')[0]}
@@ -167,7 +168,7 @@ const Traveltimes = ({lat, lon, startup}) => {
                 {tutorialSteps.map((step, index) => (
                     <div key={step.label} style={{    marginTop: '35px'}}>
                       {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers} travel={true} location={loc.formattedaddress}/>}
-                      {music.show && <Bgmusic bgm={bgm} volume={volume} setPlaying={() => setMusic({show: true, playing : true})}/>}
+                      
                       <div>
                     {Math.abs(activeStep - index) <= 2 ? (
                         
