@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -39,8 +39,13 @@ const DismissTimer  = ({dismissMsg, setdismissMsg, anchorEl, setAnchorEl, timerd
             setTimerdisplay(false);
         }
     }
-    
-    
+    const [mtop, setMtop] = useState('0px');
+    useEffect(() => {
+        console.log(dismissMsg)
+        if (dismissMsg[0] !== 'Dismiss') {
+            setMtop('-38px')
+        }
+    }, [dismissMsg])
     function handleClose() {
         setAnchorEl(null);
     }
@@ -48,7 +53,7 @@ const DismissTimer  = ({dismissMsg, setdismissMsg, anchorEl, setAnchorEl, timerd
     const id = open ? 'simple-popover' : null;
     return (
         <>
-            <Button color="secondary" size="small" onClick={onClose1}>
+            <Button color="secondary" size="small" onClick={onClose1} style={{marginTop:`${mtop}`}}>
             {(dismissMsg[0] === 'Dismiss')?dismissMsg[0]:null}{dismissMsg[0] !== 'Dismiss' && <img src={dismissMsg[1]} width="60" height="60"/>}
             </Button>
             <Popover

@@ -88,7 +88,7 @@ const Traveltimes = ({lat, lon, startup}) => {
     const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
     const [loc] = useCurrentLocation({lat: lat, lon: lon})
     const {setTz} = useContext(UserContext);
-    const [volume, setVolume] = React.useState(true);
+    const [volume, setVolume] = React.useState(false);
     let timings;
     if (data.length) {
       timings = data[0].timings;
