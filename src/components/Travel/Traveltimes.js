@@ -84,11 +84,11 @@ const tutorialSteps = [
     },
   }));
 
-const Traveltimes = ({lat, lon, startup}) => {
+const Traveltimes = ({lat, lon, startup, music, volume, setVolume}) => {
     const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
     const [loc] = useCurrentLocation({lat: lat, lon: lon})
     const {setTz} = useContext(UserContext);
-    const [volume, setVolume] = React.useState(true);
+    // const [volume, setVolume] = React.useState(true);
     let timings;
     if (data.length) {
       timings = data[0].timings;
@@ -112,21 +112,22 @@ const Traveltimes = ({lat, lon, startup}) => {
     function handleStepChange(step) {
         setActiveStep(step);
     }
-    const [music, setMusic] = useState({show: false, playing : false})
+    // const [music, setMusic] = useState({show: false, playing : false})
     const [onlyPrayers, setOnlyPrayers] = useState({})
     useEffect(() => {
         if (timings && timings.hasOwnProperty('Fajr')) {
             let justPrayers = getJustPrayers({timings : timings});
             console.log('%c JUSTP'+JSON.stringify(justPrayers), 'color: purple;font-size:20px;')
             setOnlyPrayers(justPrayers);
+            setVolume(); //play music
         }
     }, [timings]);
-    useEffect(() => {
-      if (Object.keys(onlyPrayers).length) {
-        // console.log('Play music plzzz')
-        setMusic({show: true, playing : false});
-      }
-    }, [onlyPrayers])
+    // useEffect(() => {
+    //   if (Object.keys(onlyPrayers).length) {
+    //     // console.log('Play music plzzz')
+    //     setMusic({show: true, playing : false});
+    //   }
+    // }, [onlyPrayers])
     if (data.length && data[0].timings) {
         console.table(data)
         return (
