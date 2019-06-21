@@ -143,7 +143,7 @@ const Traveltimes = ({lat, lon, startup}) => {
         // }
 
             <div className={classes.root}>
-                <Bgmusic bgm={bgm} volume={volume} setPlaying={() => setMusic({show: true, playing : true})}/>
+                {/* <Bgmusic bgm={bgm} volume={volume} setPlaying={() => setMusic({show: true, playing : true})}/> */}
                 <Header 
                     startup={startup} 
                     place={loc.data.split(',')[0]}

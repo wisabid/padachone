@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {geolocated} from 'react-geolocated';
 import Traveltimes from './Traveltimes';
 // import SiteMessage from '../Messages/SiteMessage'
+import Bgmusic from '../Prayers/Bgmusic'
+import bgm from '../../assets/mp3/quietTime.mp3'
 
 const Travel = (props) => {
+    const [music, setMusic] = useState({show: false, playing : false});
+    const [volume, setVolume] = React.useState(true);
     return (
         <>
+            <Bgmusic bgm={bgm} volume={volume} setPlaying={() => {setMusic({show: true, playing : true})}}/>
             {!props.isGeolocationAvailable
                 ?<div>Your browser does not support Geolocation</div>
                 :!props.isGeolocationEnabled
@@ -18,7 +23,7 @@ const Travel = (props) => {
                         </>
                         :<div>Getting the location data&hellip; </div>
             }           
-            {/* <Traveltimes lat="52.31406610552598" lon="4.946411339519716" /> */}
+            {/* <Traveltimes lat="52.31406610552598" lon="4.946411339519716" music={music} setMusic={setMusic} volume={volume} setVolume={setVolume}/> */}
         </>
     )
 }
