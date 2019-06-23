@@ -61,7 +61,7 @@ const Lab = (props) => {
     
     return (
         <>
-        <Bgmusic bgm={sufi} setPlaying={() => console.log('playing')}/>
+        {/* <Bgmusic bgm={sufi} setPlaying={() => console.log('playing')}/> */}
         <h4 style={{marginTop: '40px'}}>Lab (Alpha Releases)</h4>
 
         {/* <h5>YOU ARE @ - {currentloc.data} {currentloc.error?currentloc.error:''}</h5> */}

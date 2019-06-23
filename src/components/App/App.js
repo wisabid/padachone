@@ -94,7 +94,7 @@ function App() {
     localStorage.removeItem('padachone_msg4');
     localStorage.removeItem('padachone_msg5');
     if (!localStorage.getItem('padachone_msg6')) {
-      const message = `Background music at play ! `;
+      const message = `Traveller Onboard option is live now ! `;
       setMsg(() => {
         localStorage.setItem('padachone_msg6', message)
         return [true, message]
