@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {geolocated} from 'react-geolocated';
 import Traveltimes from './Traveltimes';
-// import SiteMessage from '../Messages/SiteMessage'
+import SiteMessage from '../Messages/SiteMessage'
 import Bgmusic from '../Prayers/Bgmusic'
 import bgm from '../../assets/mp3/quietTime.mp3'
 
@@ -12,11 +12,12 @@ const Travel = (props) => {
         <>
             <Bgmusic bgm={bgm} volume={volume} setPlaying={() => {setMusic({show: true, playing : true})}}/>
             {!props.isGeolocationAvailable
-                ?<div>Your browser does not support Geolocation</div>
+                ?<SiteMessage type="info" message={`Your browser does not support Geolocation. Please refresh to go back`} action="Refresh" />
                 :!props.isGeolocationEnabled
                     ?<div style={{marginTop:'30px'}}>
-                        {/* <SiteMessage message={`Message from Lab : "Geolocation is not enabled. Please enable location. Please <a href="/">refresh</a> to go back"`}/> */}
-                        <h5 >Message from Lab : "Geolocation is not enabled. Please enable location. Please <a href="/">refresh</a> to go back"</h5></div>
+                        <SiteMessage type="info" message={`Geolocation is not enabled. Please enable location. Please refresh to go back`} action="Refresh" />
+                        {/* <h5 >Message from Lab : "Geolocation is not enabled. Please enable location. Please <a href="/">refresh</a> to go back"</h5> */}
+                    </div>
                     :props.coords
                         ?<>
                             <Traveltimes 

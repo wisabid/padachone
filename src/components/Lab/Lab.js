@@ -12,6 +12,7 @@ import Bgmusic from '../Prayers/Bgmusic'
 import sufi from '../../assets/mp3/quietTime.mp3'
 import Drawer from './Drawer';
 import {useCurrentLocation} from '../../hooks/api-hooks';
+import SiteMessage from '../Messages/SiteMessage'
 
 const useStyles = makeStyles(theme => ({
   progress: {
@@ -88,9 +89,9 @@ const Lab = (props) => {
           onChange={(val) => selectRegion(val)} /> */}
 
         {!props.isGeolocationAvailable
-            ?<div>Your browser does not support Geolocation</div>
+            ?<SiteMessage type="info" message={`Your browser does not support Geolocation. Please refresh to go back`} action="Refresh" />
             :!props.isGeolocationEnabled
-                ?<div style={{marginTop:'30px'}}><h5 >Message from Lab : "Geolocation is not enabled. Please enable location. Please refresh to go back"</h5></div>
+                ?<SiteMessage type="info" message={`Geolocation is not enabled. Please enable location. Please refresh to go back`} action="Refresh" />                
                 :props.coords
                     ? <div>
                       {/* <table>

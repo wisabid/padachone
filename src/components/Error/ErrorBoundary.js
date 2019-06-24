@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import * as Sentry from '@sentry/browser';
+import SiteMessage from '../Messages/SiteMessage';
+import {REPORT_FB} from '../../utils/constants'
 
 // Sentry.init({
 //  dsn: "https://bc34e53e67594e09803e8dbbe9e4df5b@sentry.io/1457299"
@@ -22,14 +24,23 @@ class ErrorBoundary extends Component {
       });
     }
 
+    reportCrash = (evObj) => {
+        Sentry.showReportDialog(evObj)
+    }
+
     render() {
         if (this.state.error) {
             //render fallback UI
             return (
                 <>
-              <a onClick={() => Sentry.showReportDialog({ eventId: this.state.eventId })}>Report feedback</a>
-              <p>We're sorry — something's gone wrong.</p>
-              <p>Our team has been notified, but send us an email to admirer@padachone.com with your suggestions/feedback.</p>
+                <SiteMessage type="error" message={<>
+                <p>We're sorry — something's gone wrong.</p>
+                <p>Our team has been notified, but send us an email to admirer@padachone.com with your suggestions/feedback.</p>
+                <a style={{textDecoration:'underline'}} onClick={() => this.reportCrash({ eventId: this.state.eventId })}>{REPORT_FB}</a>
+              </>} action="Refresh" />
+              {/* <a onClick={() => Sentry.showReportDialog({ eventId: this.state.eventId })}>Report feedback</a>               */}
+              {/* <p>We're sorry — something's gone wrong.</p>
+              <p>Our team has been notified, but send us an email to admirer@padachone.com with your suggestions/feedback.</p> */}
               </>
             );
         } else {

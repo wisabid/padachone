@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import Button from '@material-ui/core/Button';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
 import CloseIcon from '@material-ui/icons/Close';
 import { amber, green } from '@material-ui/core/colors';
 import IconButton from '@material-ui/core/IconButton';
-import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { makeStyles } from '@material-ui/core/styles';
+import './messages.css';
+import {REPORT_FB} from '../../utils/constants'
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -84,7 +84,29 @@ const useStyles2 = makeStyles(theme => ({
   },
 }));
 
-export default function CustomizedSnackbars({message}) {
+const Message = ({msg}) => {
+  return (
+    <pre style={{wordBreak: 'break-all',whiteSpace: 'pre-wrap', fontSize: '1.5rem', textAlign: 'left'}}>
+      <div className="sender">Message from our Lab :</div> 
+      “ <i>{msg}</i> ”
+    </pre>
+  )
+}
+
+const Action = ({action, crash}) => {
+  if (action === REPORT_FB) {
+    return (
+      <a onClick={crash} style={{color:'#fff', fontWeight: 'bold', textDecoration:'none'}}>{action}</a>
+    )
+  }
+  else { 
+    return (
+      <a href="/" style={{color:'#fff', fontWeight: 'bold', textDecoration:'none'}}>{action}</a>
+    )
+  }
+}
+
+export default function CustomizedSnackbars({type, message, action, crash}) {
   const classes = useStyles2();
   const [open, setOpen] = React.useState(false);
 
@@ -101,45 +123,13 @@ export default function CustomizedSnackbars({message}) {
   }
 
   return (
-    <div>
-      {/* <Button variant="outlined" className={classes.margin} onClick={handleClick}>
-        Open success snackbar
-      </Button>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-      >
-        <MySnackbarContentWrapper
-          onClose={handleClose}
-          variant="success"
-          message="This is a success message!"
-        />
-      </Snackbar> */}
-      {/* <MySnackbarContentWrapper
-        variant="error"
-        className={classes.margin}
-        message="This is an error message!"
-      />
+    <div>     
       <MySnackbarContentWrapper
-        variant="warning"
+        variant={type}
         className={classes.margin}
-        message="This is a warning message!"
-      /> */}
-      <MySnackbarContentWrapper
-        variant="info"
-        className={classes.margin}
-        message={message}
-      />
-      {/* <MySnackbarContentWrapper
-        variant="success"
-        className={classes.margin}
-        message="This is a success message!"
-      /> */}
+        message={<Message msg={message}/>}
+        action={<Action action={action} crash={crash} />}
+      />     
     </div>
   );
 }
