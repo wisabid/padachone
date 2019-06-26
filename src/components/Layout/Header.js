@@ -9,8 +9,10 @@ import Slide from '@material-ui/core/Slide';
 import Clock from 'react-live-clock';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
-import SettingsIcon from '@material-ui/icons/Settings';
+import SettingsIcon from '@material-ui/icons/PowerSettingsNew';
 import InfoIcon from '@material-ui/icons/Info';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import logo from '../../assets/images/logo-sec.png';
 import './layout.css';
 import {UserContext} from '../../store/context/userContext';
@@ -50,12 +52,14 @@ import MusicOption from './MusicOption'
     
 
 
-const Header = ({startup, place, pdate, travel=false, address='', volume=true, setVolume, playing}) => {
-    const {tz, setPage} = useContext(UserContext);
+const Header = ({startup, place, pdate, travel=false, address='', volume=true, setVolume, playing, handleDrawerToggle}) => {
+    const {tz, setPage, iamin, handleExit} = useContext(UserContext);
     const classes = useStyles();
     const [state, setState] = React.useState({
         checkedA: true
       });
+
+    
     
       const handleChange = () => {
         setState(() => {
@@ -79,6 +83,17 @@ const Header = ({startup, place, pdate, travel=false, address='', volume=true, s
           
         <AppBar position="fixed" color="primary" style={travel?{background:'#000'}:null}>
             <Toolbar style={{minHeight: '45px'}}>
+              {/* me */}
+            {iamin && <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+              style={{color:'#fff'}}
+            >
+              <MenuIcon />
+            </IconButton>}
             <a href="/"><img src={logo} width="150" height="30" alt="logo" className="App-logo"  /></a>
           <div className={classes.grow} />
            
@@ -86,7 +101,7 @@ const Header = ({startup, place, pdate, travel=false, address='', volume=true, s
             {/* <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/> */}
             {/* <Avatar className={classes.avatar}> */}
             {!travel
-              ?<SettingsIcon fontSize="default" className="settings" onClick={handleChange} style={{color:'#fff'}} />
+              ?<SettingsIcon fontSize="default" onClick={handleExit} style={{color:'#fff'}} />
               :(playing)
                 ?<MusicOption volume={volume} setVolume={setVolume}/>
                 :null

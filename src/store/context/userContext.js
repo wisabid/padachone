@@ -4,5 +4,7 @@ export const UserContext = React.createContext({
     tz : '',
     setTz : '',
     page : '',
-    setPage : ''
+    setPage : '',
+    iamin : false,
+    handleExit : ''
 })

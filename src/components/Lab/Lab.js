@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import {geolocated} from 'react-geolocated';
 import moment from 'moment'; 
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+// import IconButton from '@material-ui/core/IconButton';
+// import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Traveltimes from '../Travel/Traveltimes'
 import Map from '../Lab/Map'
 import Search from '../Lab/Search';
-import Bgmusic from '../Prayers/Bgmusic'
-import sufi from '../../assets/mp3/quietTime.mp3'
-import Drawer from './Drawer';
+// import Bgmusic from '../Prayers/Bgmusic'
+// import sufi from '../../assets/mp3/quietTime.mp3'
+// import Drawer from './Drawer';
 import {useCurrentLocation} from '../../hooks/api-hooks';
 import SiteMessage from '../Messages/SiteMessage'
 
@@ -68,7 +68,8 @@ const Lab = (props) => {
         {/* <h5>YOU ARE @ - {currentloc.data} {currentloc.error?currentloc.error:''}</h5> */}
         
         <h5>Drawer</h5>
-        <Drawer mobileOpen={mobileOpen} setMobileOpen={setMobileOpen}/>
+        <p>Live Feature</p>
+        {/* <Drawer mobileOpen={mobileOpen} setMobileOpen={setMobileOpen}/>
         <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -77,7 +78,7 @@ const Lab = (props) => {
               className={classes.menuButton}
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
         <h5>Your TZ : {moment.tz.guess()}</h5>
         {/* <h1>Welcome Alfie</h1>
           <CountryDropdown

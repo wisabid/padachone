@@ -16,6 +16,7 @@ import SpecialDay from '../Messages/SpecialDay';
 import Zoom from '@material-ui/core/Zoom';
 import {UserContext} from '../../store/context/userContext';
 import Travel from '../Travel';
+import Subscribe from '../Subscribe';
 
 const theme = createMuiTheme({
   palette: {
@@ -36,9 +37,12 @@ function App() {
   // Global State 
   const [tz, setTz] = useState('');
   const [page, setPage] = useState('Setup');
+  const [iamin, setIamin] = useState(false);  
+  const [modal, setModal] = useState({show : false, name : ''})
   // Global State ends here
   const [prevScrollpos, setprevScrollpos] = useState(window.pageYOffset);
-  const [display, setdisplay] = useState(true);
+  const [display, setdisplay] = useState(true);  
+
   
 
   const hideHdrFtr = () => {
@@ -72,16 +76,32 @@ function App() {
     country : localStorage.getItem('padachone:country'), 
     region: localStorage.getItem('padachone:region')});
   const {finished, country, region, pdtodaysDate, prayerdata, place} = state;
+
   const handlefinished = (obj) => {
     const {country, region, finished, place} = obj;
     setState({...state, finished, country, region: region, place : place});
     if (finished) {
-      setPage('Home')
+      setPage(() => {
+        setIamin(true);
+        return 'Home'
+      })
     }
     else {
-      setPage('Setup');
+      setPage(() => {
+        setIamin(false);
+        return 'Setup'
+      });
     }
   }
+
+  const handleExit = () => {
+    Object.keys(localStorage).map(key => {
+      if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
+          localStorage.removeItem(key);
+      }
+    });    
+    handlefinished({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+  };
 
   const [msg, setMsg] = useState([false, '']);
 
@@ -93,10 +113,11 @@ function App() {
     localStorage.removeItem('padachone_msg3');
     localStorage.removeItem('padachone_msg4');
     localStorage.removeItem('padachone_msg5');
-    if (!localStorage.getItem('padachone_msg6')) {
-      const message = `Traveller Onboard option is live now ! `;
+    localStorage.removeItem('padachone_msg6');
+    if (!localStorage.getItem('padachone_msg7')) {
+      const message = `All new Side menu options out for you! Check it out! `;
       setMsg(() => {
-        localStorage.setItem('padachone_msg6', message)
+        localStorage.setItem('padachone_msg7', message)
         return [true, message]
       });      
     }
@@ -104,7 +125,10 @@ function App() {
     const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place');
     if (padachon_lsfind.length) {
       setState({...state, finished : true});
-      setPage('Home')
+      setPage(() => {
+        setIamin(true);
+        return 'Home'
+      })
     }
   }, [])
   return (
@@ -116,7 +140,11 @@ function App() {
           tz : tz,
           setTz : setTz,
           page : page,
-          setPage : setPage
+          setPage : setPage,
+          iamin : iamin,
+          handleExit: handleExit,
+          modal : modal, 
+          setModal : setModal
         }}>
           <ErrorBoundary>
             <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
@@ -129,7 +157,7 @@ function App() {
             {page === 'Travel' && <Travel />}
             {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
-            
+            {modal.show && modal.name === 'Subscribe' && <Subscribe modal={modal} setModal={setModal}/>}
           </ErrorBoundary>
         </UserContext.Provider> 
       </div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext, useLayoutEffect, useRef} from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
@@ -10,7 +10,7 @@ import SwipeableViews from 'react-swipeable-views';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import blue from '@material-ui/core/colors/blue';
 import { autoPlay } from 'react-swipeable-views-utils';
-import {usePrayerOnGo, useCurrentLocation} from '../../hooks/api-hooks';
+import {usePrayerOnGo, useCurrentLocation, useDrawer} from '../../hooks/api-hooks';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import {getJustPrayers} from '../../utils';
@@ -18,8 +18,8 @@ import Timer from '../Timer';
 import {UserContext} from '../../store/context/userContext';
 import Header from '../Layout/Header';
 import './travel.css'
-import Bgmusic from '../Prayers/Bgmusic'
-import bgm from '../../assets/mp3/quietTime.mp3'
+import Menus from '../Menus';
+
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
@@ -85,6 +85,11 @@ const tutorialSteps = [
   }));
 
 const Traveltimes = ({lat, lon, startup, music, volume, setVolume}) => {
+    // const locref = useRef()
+    // useLayoutEffect(() => {
+    //   console.log('Iam a layout effect', locref.current)
+    // }, [locref])
+    const [drawerOpen, handleDrawerToggle] = useDrawer();
     const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
     const [loc] = useCurrentLocation({lat: lat, lon: lon})
     const {setTz} = useContext(UserContext);
@@ -145,6 +150,7 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume}) => {
 
             <div className={classes.root}>
                 {/* <Bgmusic bgm={bgm} volume={volume} setPlaying={() => setMusic({show: true, playing : true})}/> */}
+                <Menus drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle}/>
                 <Header 
                     startup={startup} 
                     place={loc.data.split(',')[0]}
@@ -154,6 +160,7 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume}) => {
                     volume={volume}
                     setVolume={setVolume}
                     playing={music.playing}
+                    handleDrawerToggle={handleDrawerToggle}
                 />
                 {/* <Paper square elevation={0} className={classes.header}> */}
                 {/* <Typography>tutorialSteps[activeStep].label{data.data[0].timings.Maghrib}</Typography> */}

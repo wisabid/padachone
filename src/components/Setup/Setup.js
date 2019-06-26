@@ -1,20 +1,14 @@
 import React, {useEffect, useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
-import CloudUploadIcon from '@material-ui/icons/CardTravel';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import Lab from '../Lab/Lab';
 import bg from '../../assets/images/bg-new.png';
 import './setup.css';
 import {UserContext} from '../../store/context/userContext';
-import OptionsButton from '../OptionsButton'
+import OptionsButton from '../OptionsButton';
+import SetupStepper from './SetupStepper';
+// import AppPages from '../App/AppPages'
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -186,66 +180,8 @@ function Setup(props) {
       <OptionsButton options={[{opt : 'Traveller Onboard', page : 'Travel'}, {opt : 'Near by Mosques', page : ''}, {opt : 'Maps', page : ''}]}
        setPage={(pge) => setPage(pge)} />
       {/* </span> */}
-        <Stepper activeStep={activeStep} orientation="vertical" >
-          {steps.map((label, index) => (
-            <Step key={label} style={{color: "white", background: '#f5f5f5',borderRadius: '15px', padding:'10px'}}>
-              <StepLabel align="left"><span style={{fontSize:'1.5rem', color: 'rgb(3, 155, 229)', fontWeight:'bold'}}>{label}</span></StepLabel>
-              <StepContent align="left" style={{border:'none'}}>
-                
-                {(activeStep === 0) && <CountryDropdown
-                value={country}
-                onChange={(val) => selectCountry(val)} className={classes.selfont} 
-                style={{maxWidth: '100%', fontSize: '1rem', marginBottom:'10px', minHeight:'40px'}}/>}
-  
-                {(activeStep === 1) && <RegionDropdown
-                country={country}
-                value={region}
-                onChange={(val) => selectRegion(val)} className={classes.selfont} 
-                style={{maxWidth: '100%', fontSize: '1rem', minHeight:'30px', marginBottom:'10px'}}/>}
-              
-              {(activeStep === 2) && <TextField
-                id="place-name"
-                label="Place"
-                className={classes.textField}
-                value={place}
-                onChange={handleChange('place-name')}
-                margin="normal"
-                variant="outlined"
-              />}
-                  
-                <Typography color="textSecondary" variant="body2" component="p" style={{fontStyle:'italic', fontSize: '1rem', color: colorCode}} gutterBottom>{getStepContent(index)}</Typography>
-                <div className={classes.actionsContainer}>
-                  <div>
-                    <Button
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      className={classes.button}
-                    >
-                      Back
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                      style={{color: "white"}}
-                    >
-                      {activeStep === steps.length - 1 ? 'Finish' : (activeStep === 2 && !place) ? 'Skip' : 'Next'}
-                    </Button>
-                  </div>
-                </div>
-              </StepContent>
-            </Step>
-          ))}
-        </Stepper>
-        {activeStep === steps.length && (
-          <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
-          </Paper>
-        )}
+        {/* <AppPages /> */}
+        <SetupStepper {...props}/>
       </div>
     );
   }

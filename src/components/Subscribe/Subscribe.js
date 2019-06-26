@@ -24,7 +24,9 @@ function Subscribe({modal, setModal}) {
   });
 
   useEffect(() => {
-    setOpen(modal);
+    if (modal.hasOwnProperty('show')) {
+      setOpen(modal.show);
+    }    
   }, [modal])
   
   function handleClickOpen() {
@@ -33,7 +35,7 @@ function Subscribe({modal, setModal}) {
   
   function handleClose() {
     setOpen(false);
-    setModal(false);
+    setModal({show : false, name : ''});
   }
 
   const handleSubscribe = () => {

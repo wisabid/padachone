@@ -73,4 +73,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prayer times with lat lon (integrated Timer,header, current loc and modified styles on alpha release) 
 - Music and toggle volume button
 
+## [1.2.0] - 2019-06-26
+### Added
+- Side menu options for homepage with Travel Onboard feature
+- New icon for starting over Set up 
+
+### Changed
+- Start over action logic by hoisting it to the context level
+- Subscribe modal action by hoisting it to the context level
+
+
 

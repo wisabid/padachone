@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -17,8 +17,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SettingsIcon from '@material-ui/icons/Subscriptions';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Subscribe from '../Subscribe';
-
+// import Subscribe from '../Subscribe';
+import {UserContext} from '../../store/context/userContext';
 // const useStyles = makeStyles({
 //     root: {
 //       display: "flex"
@@ -59,23 +59,24 @@ const useStyles = makeStyles(theme => ({
 
 const Footer = ({startup}) => {
     const classes = useStyles();
-    const [modal, setModal] = useState(false);
+    const {modal, setModal} = useContext(UserContext)
+    // const [modal, setModal] = useState(false);
     // const [value, setValue] = React.useState('recents');
     // function handleChange(event, newValue) {
     //     setValue(newValue);
     //   }
 
-    const handleChange = () => {
-      setModal(true);
-      //   Object.keys(localStorage).map(key => {
-      //     if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
-      //         localStorage.removeItem(key);
-      //     }
-      //     return;
-      //   });
+    // const handleChange = () => {
+    //   setModal(true);
+    //   //   Object.keys(localStorage).map(key => {
+    //   //     if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
+    //   //         localStorage.removeItem(key);
+    //   //     }
+    //   //     return;
+    //   //   });
       
-      // startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
-    };
+    //   // startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+    // };
     
     return (
       
@@ -86,7 +87,7 @@ const Footer = ({startup}) => {
         //     {/* <BottomNavigationAction label="Folder" value="folder" icon={<Icon>...</Icon>} /> */}
         // </BottomNavigation>
         <>
-        <Subscribe modal={modal} setModal={setModal}/>
+        {/* <Subscribe modal={modal} setModal={setModal}/> */}
         <AppBar position="fixed" color="primary" className={`${classes.appBar} padachone-ftr`}>
         {/* <Toolbar> */}
         {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center'}}>
@@ -97,7 +98,7 @@ const Footer = ({startup}) => {
             <MenuIcon />
           </IconButton> */}
           <Fab color="secondary" aria-label="Add" className={classes.fabButton} title="Subscribe">
-            <SettingsIcon fontSize="large" onClick={handleChange}/>            
+            <SettingsIcon fontSize="large" onClick={() => setModal({show: true, name : 'Subscribe'})}/>            
           </Fab>
           <div className={classes.grow} />
           {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>

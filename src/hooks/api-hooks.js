@@ -112,3 +112,11 @@ export const useCurrentLocation = ({lat, lon}) => {
 
     return [currentloc, setCurrentloc];
 }
+
+export const useDrawer = () => {
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    function handleDrawerToggle() {
+        setDrawerOpen(!drawerOpen);
+    }
+    return [drawerOpen, handleDrawerToggle]
+}
