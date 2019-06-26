@@ -12,6 +12,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import TravelIcon from '@material-ui/icons/CardTravel';
 import MailIcon from '@material-ui/icons/Mail';
 import SettingsIcon from '@material-ui/icons/Settings';
+import SubscribeIcon from '@material-ui/icons/Subscriptions';
+import LabIcon from '@material-ui/icons/DirectionsRun';
 import PowerIcon from '@material-ui/icons/PowerSettingsNew';
 import {UserContext} from '../../store/context/userContext';
 import {P_MENUS, P_MENUS_SEC} from '../../utils/constants'
@@ -35,6 +37,14 @@ const Micon = ({icon}) => {
         return (
           <TravelIcon />
         )
+    case 'setmodal':
+          return (
+            <SubscribeIcon />
+          )
+    case 'Lab':
+          return (
+            <LabIcon />
+          )
     case 'callfunc':
         return (
           <PowerIcon />
