@@ -114,10 +114,11 @@ function App() {
     localStorage.removeItem('padachone_msg4');
     localStorage.removeItem('padachone_msg5');
     localStorage.removeItem('padachone_msg6');
-    if (!localStorage.getItem('padachone_msg7')) {
-      const message = `All new Side menu options out for you! Check it out! `;
+    localStorage.removeItem('padachone_msg7');
+    if (!localStorage.getItem('padachone_msg8')) {
+      const message = `Fast Forward your Set up now! `;
       setMsg(() => {
-        localStorage.setItem('padachone_msg7', message)
+        localStorage.setItem('padachone_msg8', message)
         return [true, message]
       });      
     }
