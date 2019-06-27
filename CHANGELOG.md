@@ -83,4 +83,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Subscribe modal action by hoisting it to the context level
 
 
+## [1.2.1] - 2019-06-27
+### Added
+- Fast forward login action
+
+### Changed
+- New icon for starting over
+
+
 

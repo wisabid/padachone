@@ -1,6 +1,7 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import ForwardIcon from '@material-ui/icons/FastForward';
 import Lab from '../Lab/Lab';
 import bg from '../../assets/images/bg-new.png';
 import './setup.css';
@@ -77,6 +78,12 @@ function Setup(props) {
   const [state, setState] = React.useState({activeStep : 0, place: place_alt, country : country_alt, region: region_alt})
   const {activeStep, country, region, seccountry, secregion, place } = state;
   // const [activeStep, setActiveStep] = React.useState(0);
+  const [ffopen, setFfopen] = useState(false);
+  useEffect(() => {
+    if ((country_alt && region_alt)) {
+      setFfopen(true);
+    }
+  }, [country_alt, region_alt, place_alt])
 
   const [colorCode, SetColorCode] = React.useState('rgba(0, 0, 0, 0.54)')
   const steps = getSteps();
@@ -146,6 +153,12 @@ function Setup(props) {
   const handleTravel = () => {
     setState({ ...state, travel: true });
   }
+
+  const handleFF = () => {
+    //hack to fast forward login action..copied from setupstepper;
+    props.finished({...state, activeStep: 3, finished: true, travel: false});
+  }
+
   if (state.travel) {
     return (
       
@@ -157,7 +170,7 @@ function Setup(props) {
       <div className={classes.root}>
       <Typography color="textPrimary" variant="h1" component="h1" align="left" 
       style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#0c39e3', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgba(255, 255, 255, 0.7)', marginBottom:0}} gutterBottom>
-                  Know Your Prayer times <br/>
+                  Know Your Prayer times {ffopen && <ForwardIcon onClick={handleFF} fontSize="large" style={{color:'#fff', fontSize: '2.8rem', top: '5px', position: 'relative'}} />}
       </Typography>
       
       { <Typography color="textSecondary" align="left" variant="body2" component="p" 

@@ -14,7 +14,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import SettingsIcon from '@material-ui/icons/Settings';
 import SubscribeIcon from '@material-ui/icons/Subscriptions';
 import LabIcon from '@material-ui/icons/DirectionsRun';
-import PowerIcon from '@material-ui/icons/PowerSettingsNew';
+import PowerIcon from '@material-ui/icons/SettingsBackupRestore';
 import {UserContext} from '../../store/context/userContext';
 import {P_MENUS, P_MENUS_SEC} from '../../utils/constants'
 

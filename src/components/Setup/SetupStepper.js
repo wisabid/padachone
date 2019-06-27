@@ -123,16 +123,18 @@ const SetupStepper = (props) => {
     setState({...state, country})
   }
  
+  const switchToHome = () => {
+    let newState;
+    newState = {...state, finished : true, travel: false};
+    setState(() => {        
+      props.finished(newState);
+      return newState;
+    })
+  }
 
   useEffect(() => {
     if (activeStep === steps.length) {
-      let newState;
-        newState = {...state, finished : true, travel: false};
-      setState(() => {        
-        props.finished(newState);
-        return newState;
-      })
-      
+      switchToHome();      
     }
   })
 
