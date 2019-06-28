@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Lab from '../Lab/Lab';
+import {UserContext} from '../../store/context/userContext';
 
 
 const useStyles = makeStyles({
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
 
 const Prayer = (props) => {
     const { pdata:{timings, date, meta} } = props;
+    const {setPage} = useContext(UserContext);
     console.table(Object.entries(timings))
     const classes = useStyles();
 
@@ -49,7 +51,7 @@ const Prayer = (props) => {
                             <Card className={classes.card} key={index}>
                                 <CardContent>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom style={{fontSize:'17px'}}>
-                                    {prayer}<span onClick={handleAlpha} className="arab-month" style={{color:'#fff'}}>.</span>
+                                    {prayer}<span onClick={() => setPage('Lab')} className="arab-month" style={{color:'#fff'}}>.</span>
 
                                     </Typography>
                                     <Typography variant="h3" component="h2">
@@ -76,8 +78,17 @@ const Prayer = (props) => {
             )
         }
         else {
+            console.log('ABID', timings)
             return (
-                <Lab timings={timings} />
+                <Lab timings={{Asr: "18:08", 
+                Dhuhr: "13:43",
+                Fajr: "02:59",
+                Imsak: "02:49",
+                Isha: "23:36",
+                Maghrib: "22:06",
+                Midnight: "01:43",
+                Sunrise: "05:20",
+                Sunset: "22:06"}} />
             )
         }
     }

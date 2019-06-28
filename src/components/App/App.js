@@ -18,6 +18,7 @@ import {UserContext} from '../../store/context/userContext';
 import Travel from '../Travel';
 import Subscribe from '../Subscribe';
 import Finetune from '../Finetune';
+import Lab from '../Lab'
 
 const theme = createMuiTheme({
   palette: {
@@ -157,6 +158,15 @@ function App() {
             </Zoom>
             {msg[0] && <Messages msg={msg[1]}/>}
             {page === 'Travel' && <Travel />}
+            {page === 'Lab' && <Lab timings={{Asr: "18:08", 
+                Dhuhr: "13:43",
+                Fajr: "02:59",
+                Imsak: "02:49",
+                Isha: "23:36",
+                Maghrib: "22:06",
+                Midnight: "01:43",
+                Sunrise: "05:20",
+                Sunset: "22:06"}} />}
             {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
             {modal.show && modal.name === 'Subscribe' && <Subscribe modal={modal} setModal={setModal}/>}

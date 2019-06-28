@@ -14,7 +14,9 @@ import Search from '../Lab/Search';
 import {useCurrentLocation} from '../../hooks/api-hooks';
 import SiteMessage from '../Messages/SiteMessage';
 import {UserContext} from '../../store/context/userContext';
-import AppPages from '../App/AppPages'
+import AppPages from '../App/AppPages';
+import Header from '../Layout/Header';
+import Footer from '../Layout/Footer';
 
 const useStyles = makeStyles(theme => ({
   progress: {
@@ -46,30 +48,37 @@ const Lab = (props) => {
   const [currentloc, setCurrentloc] = useCurrentLocation({lat:"52.31406610552598", lon:"4.946411339519716"});
   console.log(currentloc.data);
     const {timings} = props;
-    const [onlyPrayers, setOnlyPrayers] = useState({})
+    // const [onlyPrayers, setOnlyPrayers] = useState({})
     const [mobileOpen, setMobileOpen] = React.useState(false);
     function handleDrawerToggle() {
       setMobileOpen(!mobileOpen);
     }
+
     useEffect(() => {
-        if (timings.hasOwnProperty('Fajr')) {
-            let justPrayers = Object.keys(timings).reduce((all, item) => { 
-                if (['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].indexOf(item) !== -1) {
-                    all[item] = timings[item];              
-                }
-                return all;          
-              }, {});
-            setOnlyPrayers(justPrayers);
+        // if (timings.hasOwnProperty('Fajr')) {
+            // let justPrayers = Object.keys(timings).reduce((all, item) => { 
+            //     if (['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'].indexOf(item) !== -1) {
+            //         all[item] = timings[item];              
+            //     }
+            //     return all;          
+            //   }, {});
+            // setOnlyPrayers(justPrayers);
             // Ask user if he wants to fine tune with School and method
             setModal({show : true, name : 'Finetune'})
-        }
-    }, [timings]);
+        // }
+    }, []);
 
 
    
     
     return (
         <>
+        <Header 
+            startup={() => console.log('....')} 
+            place={localStorage.getItem(`padachone:place`)}
+            pdate="..."
+            handleDrawerToggle={handleDrawerToggle}
+        />
         {/* <Bgmusic bgm={sufi} setPlaying={() => console.log('playing')}/> */}
         <h4 style={{marginTop: '40px'}}>Lab (Alpha Releases)</h4>
 
@@ -127,6 +136,7 @@ const Lab = (props) => {
               {/* <Traveltimes lat="52.31406610552598" lon="4.946411339519716" /> */}
               {/* <div style={{width: '100%', height:'90vh'}}><Map lat="52.31406610552598" lon="4.946411339519716" /></div> */}
               {/* <Search lat="52.31406610552598" lon="4.946411339519716" /> */}
+              <Footer startup={() => console.log('///')}/>
         </>
     )
 }
