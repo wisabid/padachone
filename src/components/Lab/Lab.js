@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {geolocated} from 'react-geolocated';
 import moment from 'moment'; 
 // import IconButton from '@material-ui/core/IconButton';
@@ -12,7 +12,9 @@ import Search from '../Lab/Search';
 // import sufi from '../../assets/mp3/quietTime.mp3'
 // import Drawer from './Drawer';
 import {useCurrentLocation} from '../../hooks/api-hooks';
-import SiteMessage from '../Messages/SiteMessage'
+import SiteMessage from '../Messages/SiteMessage';
+import {UserContext} from '../../store/context/userContext';
+import AppPages from '../App/AppPages'
 
 const useStyles = makeStyles(theme => ({
   progress: {
@@ -39,6 +41,7 @@ const useStyles = makeStyles(theme => ({
 },
 }));
 const Lab = (props) => {
+  const {setModal} = useContext(UserContext);
   const classes = useStyles();
   const [currentloc, setCurrentloc] = useCurrentLocation({lat:"52.31406610552598", lon:"4.946411339519716"});
   console.log(currentloc.data);
@@ -56,15 +59,21 @@ const Lab = (props) => {
                 }
                 return all;          
               }, {});
-            setOnlyPrayers(justPrayers)
+            setOnlyPrayers(justPrayers);
+            // Ask user if he wants to fine tune with School and method
+            setModal({show : true, name : 'Finetune'})
         }
-    }, [timings])
+    }, [timings]);
+
+
+   
     
     return (
         <>
         {/* <Bgmusic bgm={sufi} setPlaying={() => console.log('playing')}/> */}
         <h4 style={{marginTop: '40px'}}>Lab (Alpha Releases)</h4>
 
+        <AppPages />
         {/* <h5>YOU ARE @ - {currentloc.data} {currentloc.error?currentloc.error:''}</h5> */}
         
         <h5>Drawer</h5>
@@ -105,8 +114,7 @@ const Lab = (props) => {
                     </tbody>
                     </table> */}
                     
-                    <h5>Travel Times</h5>
-                    <Traveltimes lat={props.coords.latitude} lon={props.coords.longitude} />
+                    
                     <h5>Custom Search</h5>
                     <Search lat={props.coords.latitude} lon={props.coords.longitude}/>
                     

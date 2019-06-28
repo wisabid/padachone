@@ -17,6 +17,7 @@ import Zoom from '@material-ui/core/Zoom';
 import {UserContext} from '../../store/context/userContext';
 import Travel from '../Travel';
 import Subscribe from '../Subscribe';
+import Finetune from '../Finetune';
 
 const theme = createMuiTheme({
   palette: {
@@ -159,6 +160,7 @@ function App() {
             {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
             {modal.show && modal.name === 'Subscribe' && <Subscribe modal={modal} setModal={setModal}/>}
+            {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal}/>}
           </ErrorBoundary>
         </UserContext.Provider> 
       </div>

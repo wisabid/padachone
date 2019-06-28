@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Current location data
 - Site Message
 - Forbidden, not allowed etc margin top
+- Grid design for page Navigations
+- Fine tuning modal window
 
 
 ## [1.0.0] - 2019-05-19

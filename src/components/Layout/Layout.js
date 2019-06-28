@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import lightBlue from '@material-ui/core/colors/lightBlue';
@@ -23,11 +23,17 @@ const useStyles = makeStyles(theme => ({
 
 const Layout = ({country, region, place, pdate, startup}) => {
     const [drawerOpen, handleDrawerToggle] = useDrawer();
-    const {setTz} = useContext(UserContext);
+    const {setTz, setModal} = useContext(UserContext);
     const [data] = usePrayer({region: region, country: country, place : place, date : pdate});
     const {timezone} = (data && data.data && data.data.meta)?data.data.meta:'Europe/AmsterDAM';
     setTz(timezone);
     const classes = useStyles();
+    // // Ask user if he wants to fine tune with School and method
+    // useEffect(() => {
+    //     if (data.hasOwnProperty('code') && data.code === 200) {
+    //         setModal({show : true, name : 'Finetune'})
+    //     }
+    // }, [data])
     if (data && data.data && data.data.meta && data.code === 200) {
         return (
             <>

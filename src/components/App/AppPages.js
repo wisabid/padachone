@@ -14,6 +14,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 
+// import GridListTile from '@material-ui/core/GridListTile';
+// import GridListTileBar from '@material-ui/core/GridListTileBar';
+// import IconButton from '@material-ui/core/IconButton';
+// import InfoIcon from '@material-ui/icons/Info';
 function MadeWithLove() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -37,6 +41,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(4),
   },
   cardGrid: {
+    padding: 0,
+    marginTop: '12px'
     // paddingTop: theme.spacing(8),
     // paddingBottom: theme.spacing(8),
   },
@@ -44,6 +50,7 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    borderRadius: '0px'
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
@@ -54,6 +61,9 @@ const useStyles = makeStyles(theme => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
+  },
+  icon: {
+    color: 'rgba(255, 255, 255, 0.54)',
   },
 }));
 
@@ -70,7 +80,7 @@ export default function Album() {
           {/* End hero unit */}
           <Grid container spacing={1}>
             {cards.map(card => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+              <Grid item key={card} xs={6} sm={6} md={4} style={{padding:'0px'}}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -86,6 +96,18 @@ export default function Album() {
                     </Typography>
                   </CardContent>                  
                 </Card>
+                {/* <GridListTile key={card}>
+                  <img src="https://source.unsplash.com/random" alt="title" />
+                  <GridListTileBar
+                    title="{tile.title}"
+                    subtitle={<span>by: Author</span>}
+                    actionIcon={
+                      <IconButton aria-label={`info about Title`} className={classes.icon}>
+                        <InfoIcon />
+                      </IconButton>
+                    }
+                  />
+                </GridListTile> */}
               </Grid>
             ))}
           </Grid>

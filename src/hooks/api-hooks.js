@@ -113,6 +113,35 @@ export const useCurrentLocation = ({lat, lon}) => {
     return [currentloc, setCurrentloc];
 }
 
+export const useCalcMethods = () => {
+    const API = 'http://api.aladhan.com/v1/methods';
+    const [methods, setMethods] = useState({})
+    const fetchMethods = async() => {
+        try {
+            const result = await fetch(API, 
+                {
+                    headers : {
+                        Accept : 'application/json'
+                    }
+                })
+                // .catch(e => {
+                //     setMethods({error: e.message})
+                //     return false;
+                // });
+            const data = await result.json();
+            setMethods(data);
+        }
+        catch(e) {
+            setMethods({error: e.message})
+            return false
+        }   
+    }
+    useEffect(() => {
+        fetchMethods();
+    }, [])
+    return [methods, setMethods];
+}
+
 export const useDrawer = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     function handleDrawerToggle() {
