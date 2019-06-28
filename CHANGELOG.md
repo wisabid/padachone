@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Forbidden, not allowed etc margin top
 - Grid design for page Navigations
 - Fine tuning modal window
+- Clean Lab
 
 
 ## [1.0.0] - 2019-05-19
