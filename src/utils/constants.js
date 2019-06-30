@@ -4,6 +4,7 @@ export const PRAYERS_ARR = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
 export const REPORT_FB = "Report Crash";
 export const P_MENUS = [
     {label : 'Home', page : 'Home'}, 
+    {label : 'Finetune', page : 'setFTmodal'},
     {label : 'Traveller Onboard', page : 'Travel'},
     {label : 'Subscribe', page: 'setmodal'},    
     // {label : 'Fine Tune', page : 'Fine Tune'}, 

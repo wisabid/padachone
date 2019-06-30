@@ -41,6 +41,10 @@ const Micon = ({icon}) => {
           return (
             <SubscribeIcon />
           )
+    case 'setFTmodal':
+          return (
+            <SettingsIcon />
+          )
     case 'Lab':
           return (
             <LabIcon />
@@ -91,6 +95,9 @@ export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
       }
       else if (page === 'setmodal') {
         setModal({show : true, name : 'Subscribe'})
+      }
+      else if (page === 'setFTmodal') {
+        setModal({show : true, name : 'Finetune'})
       }
       else {
         setPage(page)

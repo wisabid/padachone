@@ -91,6 +91,7 @@ const Finetune = (props) => {
           return {target: 'api_usePrayer', method : state.age, school : value}
         });
         setModal({show : false, name : ''});
+        //window.location.reload();
         
     }
     return (
