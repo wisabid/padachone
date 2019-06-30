@@ -61,23 +61,23 @@ const Header = ({startup, place, pdate, travel=false, address='', volume=true, s
 
     
     
-      const handleChange = () => {
-        setState(() => {
-          Object.keys(localStorage).map(key => {
-            if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
-                localStorage.removeItem(key);
-            }
-            return;
-        });
-        if (travel) {
-          // setPage('Setup')
-        }
-        else {
-          startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
-        }
-        // return { ...state, [name]: event.target.checked }
-      });
-      };
+      // const handleChange = () => {
+      //   setState(() => {
+      //     Object.keys(localStorage).map(key => {
+      //       if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region' && key !== 'padachone:method' && key !== 'padachone:school') {
+      //           localStorage.removeItem(key);
+      //       }
+      //       return;
+      //   });
+      //   if (travel) {
+      //     // setPage('Setup')
+      //   }
+      //   else {
+      //     startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+      //   }
+      //   // return { ...state, [name]: event.target.checked }
+      // });
+      // };
     return (
         <div className={{flexGrow: 1}}>
           

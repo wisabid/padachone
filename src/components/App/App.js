@@ -44,8 +44,19 @@ function App() {
   // Global State ends here
   const [prevScrollpos, setprevScrollpos] = useState(window.pageYOffset);
   const [display, setdisplay] = useState(true);  
-
+  const [forceTrigger, setForceTrigger] = useState({target : ''});
+  console.log('FT APP.js', forceTrigger)
   
+  useEffect(() => {
+    if (forceTrigger.target === 'api_usePrayer') {
+      debugger;
+      console.log('FT App.js useEffect'+forceTrigger+'Method : '+localStorage.getItem('padachone:method')+' School = '+localStorage.getItem('padachone:school'))
+      setState({...state, 
+        method : localStorage.getItem('padachone:method')?parseInt(localStorage.getItem('padachone:method')):8,
+        school : localStorage.getItem('padachone:school')?parseInt(localStorage.getItem('padachone:school')):0}
+      )
+    }
+  }, [forceTrigger])
 
   const hideHdrFtr = () => {
     let currentScrollPos = window.pageYOffset;
@@ -76,8 +87,13 @@ function App() {
     pdtodaysDate: getPDdata().split(' ').join(''), 
     place :localStorage.getItem('padachone:place') , 
     country : localStorage.getItem('padachone:country'), 
-    region: localStorage.getItem('padachone:region')});
-  const {finished, country, region, pdtodaysDate, prayerdata, place} = state;
+    region: localStorage.getItem('padachone:region'),
+    method : localStorage.getItem('padachone:method')?parseInt(localStorage.getItem('padachone:method')):8,
+    school : localStorage.getItem('padachone:school')?parseInt(localStorage.getItem('padachone:school')):0
+  });
+  console.log('FT App.js state values'+forceTrigger+' State : '+JSON.stringify(state))
+  
+  const {finished, country, region, pdtodaysDate, prayerdata, place, method, school} = state;
 
   const handlefinished = (obj) => {
     const {country, region, finished, place} = obj;
@@ -98,11 +114,11 @@ function App() {
 
   const handleExit = () => {
     Object.keys(localStorage).map(key => {
-      if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
+      if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region' && key !== 'padachone:method' && key !== 'padachone:school' && key !== 'padachone_FT-api_usePrayer') {
           localStorage.removeItem(key);
       }
     });    
-    handlefinished({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+    handlefinished({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), method: localStorage.getItem('padachone:method'), school: localStorage.getItem('padachone:school'), finished : false});
   };
 
   const [msg, setMsg] = useState([false, '']);
@@ -125,7 +141,7 @@ function App() {
       });      
     }
     // Logic for displaying Messages end here
-    const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place');
+    const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place' && key !== 'padachone:method' && key !== 'padachone:school');
     if (padachon_lsfind.length) {
       setState({...state, finished : true});
       setPage(() => {
@@ -147,7 +163,9 @@ function App() {
           iamin : iamin,
           handleExit: handleExit,
           modal : modal, 
-          setModal : setModal
+          setModal : setModal,
+          forceTrigger : forceTrigger, 
+          setForceTrigger : setForceTrigger
         }}>
           <ErrorBoundary>
             <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
@@ -168,9 +186,9 @@ function App() {
                 Sunrise: "05:20",
                 Sunset: "22:06"}} />}
             {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
-            {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
+            {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} method={method} school={school} startup={(resetstate) => handlefinished(resetstate)}/>}
             {modal.show && modal.name === 'Subscribe' && <Subscribe modal={modal} setModal={setModal}/>}
-            {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal}/>}
+            {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal} method={method} school={school}/>}
           </ErrorBoundary>
         </UserContext.Provider> 
       </div>

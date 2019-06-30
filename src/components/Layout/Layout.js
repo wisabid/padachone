@@ -21,20 +21,30 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-const Layout = ({country, region, place, pdate, startup}) => {
+const Layout = ({country, region, place, method, school, pdate, startup}) => {
     const [drawerOpen, handleDrawerToggle] = useDrawer();
-    const {setTz, setModal} = useContext(UserContext);
-    const [data] = usePrayer({region: region, country: country, place : place, date : pdate});
+    const {setTz, setModal, forceTrigger} = useContext(UserContext);
+    console.log('FT Layout.js', forceTrigger);
+    
+    if (forceTrigger.target === 'api_usePrayer') {
+        // usePrayerParams = {...usePrayerParams, method : forceTrigger.method, school : forceTrigger.school};
+        method = forceTrigger.method;
+        school = forceTrigger.school;
+        console.log('FT Layout.js new prayer params'+method, school);
+    }
+    let usePrayerParams = {region: region, country: country, place : place, method : method, school : school, date : pdate, forceTrigger : forceTrigger};
+    const [data] = usePrayer(usePrayerParams);
     const {timezone} = (data && data.data && data.data.meta)?data.data.meta:'Europe/AmsterDAM';
     setTz(timezone);
     const classes = useStyles();
-    // // Ask user if he wants to fine tune with School and method
-    // useEffect(() => {
-    //     if (data.hasOwnProperty('code') && data.code === 200) {
-    //         setModal({show : true, name : 'Finetune'})
-    //     }
-    // }, [data])
+    // Ask user if he wants to fine tune with School and method
+    useEffect(() => {
+        if (data.hasOwnProperty('code') && data.code === 200 && !localStorage.getItem('padachone_FT-api_usePrayer')) {
+            setModal({show : true, name : 'Finetune'})
+        }
+    }, [data])
     if (data && data.data && data.data.meta && data.code === 200) {
+        console.log('FT Layout render : '+forceTrigger+'Method : '+method+' School = '+school)
         return (
             <>
                 <Menus drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle}/>

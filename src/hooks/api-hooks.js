@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import {getPDdata} from '../utils/index';
 import {BING_API} from '../utils/constants';
-export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date}) => {
+export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0, forceTrigger}) => {
+    console.log('FT api hooks'+forceTrigger+'Method : '+method+' School = '+school)
     let city;
     if (place) {
         city = place;
@@ -9,7 +10,7 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
     else {
         city=region
     }
-    const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=8&school=0`;
+    const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}&school=${school}`;
     const [data, setData] = useState({})
     async function fetchPrayerTimes() {
         try {
@@ -30,6 +31,11 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
                 region && localStorage.setItem(`padachone:region`, region);
                 country && localStorage.setItem(`padachone:country`, country);
                 place && localStorage.setItem(`padachone:place`, place);
+                if (forceTrigger.target === 'api_usePrayer') {
+                    localStorage.setItem(`padachone_FT-api_usePrayer`, true);
+                }
+                method && localStorage.setItem(`padachone:method`, method);
+                school !== '' && localStorage.setItem(`padachone:school`, school)
                 localStorage.setItem(`padachone:${date}`, JSON.stringify(data))
             }
             setData(data);
@@ -41,18 +47,28 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
         }   
     }
     useEffect(() => {
-        if (localStorage.getItem(`padachone:${date}`)) {
+        if (localStorage.getItem(`padachone:${date}`) && !forceTrigger.target) {
             setData(JSON.parse(localStorage.getItem(`padachone:${date}`)))           
         }
         else {
+            console.log('FT Fetching on comp did mount'+forceTrigger+'Method : '+method+' School = '+school)
             fetchPrayerTimes();
         }
     }, [])
+
+    useEffect(() => {
+        console.log('FT useEffect on Force trigger'+forceTrigger+'Method : '+method+' School = '+school)
+        if (forceTrigger.target === 'api_usePrayer') {
+            console.log('FT Inside force trigger condition in useeffect'+forceTrigger+'Method : '+method+' School = '+school)
+            fetchPrayerTimes();
+        }
+        
+    }, [forceTrigger])
     return [data, setData]
 }
 
 
-export const usePrayerOnGo = ({lat, lon}) => {
+export const usePrayerOnGo = ({lat, lon, method=8, school=0}) => {
     const dte = getPDdata();
     const tdate = new Date();
     const month = tdate.getMonth()+1;
@@ -77,8 +93,7 @@ export const usePrayerOnGo = ({lat, lon}) => {
             return false
         }   
     }
-    useEffect(() => {
-       
+    useEffect(() => {       
             fetchTravelPrayerTimes();
     }, [])
     return [data, setData]
@@ -129,7 +144,8 @@ export const useCalcMethods = () => {
                 //     return false;
                 // });
             const data = await result.json();
-            setMethods(data);
+            const modifiedData = await Object.entries(data.data).map(item => ({[item[0]] : item[1]}))
+            setMethods({...data, data: modifiedData});
         }
         catch(e) {
             setMethods({error: e.message})
