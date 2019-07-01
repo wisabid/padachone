@@ -12,6 +12,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import TravelIcon from '@material-ui/icons/CardTravel';
 import MailIcon from '@material-ui/icons/Mail';
 import SettingsIcon from '@material-ui/icons/Settings';
+import TuningIcon from '@material-ui/icons/Tune';
 import SubscribeIcon from '@material-ui/icons/Subscriptions';
 import LabIcon from '@material-ui/icons/DirectionsRun';
 import PowerIcon from '@material-ui/icons/SettingsBackupRestore';
@@ -43,7 +44,7 @@ const Micon = ({icon}) => {
           )
     case 'setFTmodal':
           return (
-            <SettingsIcon />
+            <TuningIcon />
           )
     case 'Lab':
           return (
@@ -113,7 +114,7 @@ export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
     >
       <List>
         {P_MENUS.map((nav, index) => (
-          <ListItem button key={`${index}-${nav.page}-main`} disabled={(index !== 0 && index !== 1 && index !== 2) ?true:false} 
+          <ListItem button key={`${index}-${nav.page}-main`} disabled={(index !== 0 && index !== 1 && index !== 2 && index !== 3) ?true:false} 
             onClick={() => handleNav(nav.page)}>
             {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
             <ListItemIcon><Micon icon={nav.page} /></ListItemIcon>

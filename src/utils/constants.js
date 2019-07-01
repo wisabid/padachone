@@ -16,3 +16,4 @@ export const P_MENUS_SEC = [
     {label : 'Messy Lab', page: 'Lab'},
     {label : 'Start Over', page: 'callfunc'}  
 ];
+export const FT_PRAYER = "api_prayer-results";

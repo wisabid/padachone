@@ -18,7 +18,8 @@ import {UserContext} from '../../store/context/userContext';
 import Travel from '../Travel';
 import Subscribe from '../Subscribe';
 import Finetune from '../Finetune';
-import Lab from '../Lab'
+import Lab from '../Lab';
+import {FT_PRAYER} from '../../utils/constants';
 
 const theme = createMuiTheme({
   palette: {
@@ -45,12 +46,20 @@ function App() {
   const [prevScrollpos, setprevScrollpos] = useState(window.pageYOffset);
   const [display, setdisplay] = useState(true);  
   const [forceTrigger, setForceTrigger] = useState({target : ''});
-  console.log('FT APP.js', forceTrigger)
+  console.log('FT APP.js', forceTrigger);
+
+  const handleForceTrigger = ({target, method, school}) => {
+    setForceTrigger(() => {
+      setState({...state, 
+        method : parseInt(method),
+        school : parseInt(school)}
+      )
+      return {target : FT_PRAYER}
+    })
+  }
   
   useEffect(() => {
-    if (forceTrigger.target === 'api_usePrayer') {
-      debugger;
-      console.log('FT App.js useEffect'+forceTrigger+'Method : '+localStorage.getItem('padachone:method')+' School = '+localStorage.getItem('padachone:school'))
+    if (forceTrigger.target === FT_PRAYER) {
       setState({...state, 
         method : localStorage.getItem('padachone:method')?parseInt(localStorage.getItem('padachone:method')):8,
         school : localStorage.getItem('padachone:school')?parseInt(localStorage.getItem('padachone:school')):0}
@@ -114,7 +123,7 @@ function App() {
 
   const handleExit = () => {
     Object.keys(localStorage).map(key => {
-      if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region' && key !== 'padachone:method' && key !== 'padachone:school' && key !== 'padachone_FT-api_usePrayer') {
+      if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region' && key !== 'padachone:method' && key !== 'padachone:school' && key !== `padachone_FT-${FT_PRAYER}`) {
           localStorage.removeItem(key);
       }
     });    
@@ -175,7 +184,7 @@ function App() {
                 <SpecialDay display={display} setdisplay={setdisplay}/>
             </Zoom>
             {msg[0] && <Messages msg={msg[1]}/>}
-            {page === 'Travel' && <Travel />}
+            {page === 'Travel' && <Travel method={method} school={school}/>}
             {page === 'Lab' && <Lab timings={{Asr: "18:08", 
                 Dhuhr: "13:43",
                 Fajr: "02:59",
@@ -188,7 +197,7 @@ function App() {
             {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} method={method} school={school} startup={(resetstate) => handlefinished(resetstate)}/>}
             {modal.show && modal.name === 'Subscribe' && <Subscribe modal={modal} setModal={setModal}/>}
-            {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal} method={method} school={school}/>}
+            {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal} method={method} school={school} handleForceTrigger={(obj) => handleForceTrigger(obj)}/>}
           </ErrorBoundary>
         </UserContext.Provider> 
       </div>

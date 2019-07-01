@@ -7,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-export default function FormDialog({modal, setModal, title, description, children, primaryButton, handlePrimaryAction, secondaryButton, loading}) {
+export default function FormDialog({modal, error, setModal, title, description, children, primaryButton, handlePrimaryAction, secondaryButton, handleSecondaryAction, loading}) {
   const [open, setOpen] = React.useState(false);
   useEffect(() => {
     if (modal.hasOwnProperty('show')) {
@@ -22,6 +22,7 @@ export default function FormDialog({modal, setModal, title, description, childre
   function handleClose() {
     setOpen(false);
     setModal({show : false, name : ''});
+    handleSecondaryAction();
   }
 
   return (
@@ -30,7 +31,7 @@ export default function FormDialog({modal, setModal, title, description, childre
         {loading && <LinearProgress />}
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText style={error?{color:'red'}:null}>
             {description}
           </DialogContentText>
             {children}
@@ -39,9 +40,9 @@ export default function FormDialog({modal, setModal, title, description, childre
           <Button onClick={handleClose} color="primary">
             {secondaryButton}
           </Button>
-          <Button onClick={handlePrimaryAction} color="primary">
+          {primaryButton && <Button onClick={handlePrimaryAction} color="primary">
             {primaryButton}
-          </Button>
+          </Button>}
         </DialogActions>
       </Dialog>
     </div>

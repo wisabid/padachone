@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import {getPDdata} from '../utils/index';
-import {BING_API} from '../utils/constants';
-export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0, forceTrigger}) => {
-    console.log('FT api hooks'+forceTrigger+'Method : '+method+' School = '+school)
+import {BING_API, FT_PRAYER} from '../utils/constants';
+import {UserContext} from '../store/context/userContext';
+export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0}) => {
+    const {forceTrigger} = useContext(UserContext);
     let city;
     if (place) {
         city = place;
@@ -31,8 +32,8 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
                 region && localStorage.setItem(`padachone:region`, region);
                 country && localStorage.setItem(`padachone:country`, country);
                 place && localStorage.setItem(`padachone:place`, place);
-                if (forceTrigger.target === 'api_usePrayer') {
-                    localStorage.setItem(`padachone_FT-api_usePrayer`, true);
+                if (forceTrigger.target === FT_PRAYER) {
+                    localStorage.setItem(`padachone_FT-${FT_PRAYER}`, true);
                 }
                 method && localStorage.setItem(`padachone:method`, method);
                 school !== '' && localStorage.setItem(`padachone:school`, school)
@@ -51,15 +52,12 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
             setData(JSON.parse(localStorage.getItem(`padachone:${date}`)))           
         }
         else {
-            console.log('FT Fetching on comp did mount'+forceTrigger+'Method : '+method+' School = '+school)
             fetchPrayerTimes();
         }
     }, [])
 
     useEffect(() => {
-        console.log('FT useEffect on Force trigger'+forceTrigger+'Method : '+method+' School = '+school)
-        if (forceTrigger.target === 'api_usePrayer') {
-            console.log('FT Inside force trigger condition in useeffect'+forceTrigger+'Method : '+method+' School = '+school)
+        if (forceTrigger.target === FT_PRAYER) {
             fetchPrayerTimes();
         }
         
@@ -69,11 +67,12 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
 
 
 export const usePrayerOnGo = ({lat, lon, method=8, school=0}) => {
+    const {forceTrigger} = useContext(UserContext);
     const dte = getPDdata();
     const tdate = new Date();
     const month = tdate.getMonth()+1;
     const year = tdate.getFullYear();
-    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=8&month=${month}&year=${year}&school=0`;
+    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=${method}&month=${month}&year=${year}&school=${school}`;
     const [data, setData] = useState({})
     async function fetchTravelPrayerTimes() {
         try {
@@ -85,6 +84,9 @@ export const usePrayerOnGo = ({lat, lon, method=8, school=0}) => {
             const data = await res.json();         
             
             const todaysdata = data.data.filter(item => item.date.readable === dte);
+            if (forceTrigger.target === FT_PRAYER) {
+                localStorage.setItem(`padachone_FT-${FT_PRAYER}`, true);
+            }
             setData(todaysdata);
         }
         catch(e) {
@@ -96,6 +98,12 @@ export const usePrayerOnGo = ({lat, lon, method=8, school=0}) => {
     useEffect(() => {       
             fetchTravelPrayerTimes();
     }, [])
+    useEffect(() => {
+        if (forceTrigger.target === FT_PRAYER) {
+            fetchTravelPrayerTimes();
+        }
+        
+    }, [forceTrigger])
     return [data, setData]
 }
 
@@ -144,8 +152,12 @@ export const useCalcMethods = () => {
                 //     return false;
                 // });
             const data = await result.json();
-            const modifiedData = await Object.entries(data.data).map(item => ({[item[0]] : item[1]}))
-            setMethods({...data, data: modifiedData});
+            const modifiedData = await Object.entries(data.data).map(item => ({[item[0]] : item[1]}));
+            const newdata = {...data, data: modifiedData};
+            if (newdata && newdata.data) {
+                localStorage.setItem('padachone-cmethods', JSON.stringify(newdata));
+            }
+            setMethods(newdata);
         }
         catch(e) {
             setMethods({error: e.message})
@@ -153,7 +165,12 @@ export const useCalcMethods = () => {
         }   
     }
     useEffect(() => {
-        fetchMethods();
+        if (localStorage.getItem('padachone-cmethods')) {
+            setMethods(JSON.parse(localStorage.getItem(`padachone-cmethods`)))        
+        }
+        else {
+            fetchMethods();
+        }
     }, [])
     return [methods, setMethods];
 }
@@ -165,3 +182,49 @@ export const useDrawer = () => {
     }
     return [drawerOpen, handleDrawerToggle]
 }
+
+// export const useForceTrigger = ({useParams, data, setData, forceTrigger, ftTarget, setModal}) => {
+//     let method,
+//         school;
+//     useEffect(() => {
+//         if (data.hasOwnProperty('code') && data.code === 200 && !localStorage.getItem(`padachone_FT-${FT_PRAYER}`)) {
+//             console.log('CUSTOM inside data useEffect')
+//             setModal({show : true, name : 'Finetune'})
+//         }
+//     }, [data])
+
+//     useEffect(() => {
+//         if (forceTrigger.target === ftTarget) {
+//             console.log('CUSTOM inside FORCETRRIGGER useEffect')
+//             setData({})
+//             method = forceTrigger.method;
+//             school = forceTrigger.school;
+//         }
+//     }, [forceTrigger]);  
+    
+//     return {...useParams, method : method, school : school}
+// }
+
+export const useRenderCounts = (page) => {
+    const renders = useRef(0);
+    useEffect(() => {
+        console.log('%c FT Renders '+page+' : '+renders.current++, 'font-size: 30px;color: green');
+    })
+}
+
+export const useForceTrigger = ({setModal:setTrigger, params, ftname, setData}) => {
+    const {forceTrigger} = useContext(UserContext);
+    useEffect(() => {
+        if (!localStorage.getItem(`padachone_FT-${ftname}`)) {
+            setTrigger(params)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (forceTrigger.target === ftname) {
+            setData({})
+        }        
+    }, [forceTrigger])
+}
+
+

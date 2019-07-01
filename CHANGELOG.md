@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Grid design for page Navigations
 - Fine tuning modal window
 - Clean Lab
+- Added Fine tune menu in menus
+- removed subscribe from footer
+- cache calc methods
 
 
 ## [1.0.0] - 2019-05-19

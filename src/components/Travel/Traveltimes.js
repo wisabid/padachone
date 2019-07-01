@@ -10,7 +10,7 @@ import SwipeableViews from 'react-swipeable-views';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import blue from '@material-ui/core/colors/blue';
 import { autoPlay } from 'react-swipeable-views-utils';
-import {usePrayerOnGo, useCurrentLocation, useDrawer} from '../../hooks/api-hooks';
+import {usePrayerOnGo, useCurrentLocation, useDrawer, useForceTrigger, useForceTriggerRefresh} from '../../hooks/api-hooks';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import {getJustPrayers} from '../../utils';
@@ -19,6 +19,7 @@ import {UserContext} from '../../store/context/userContext';
 import Header from '../Layout/Header';
 import './travel.css'
 import Menus from '../Menus';
+import {FT_PRAYER} from '../../utils/constants'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -84,15 +85,19 @@ const tutorialSteps = [
     },
   }));
 
-const Traveltimes = ({lat, lon, startup, music, volume, setVolume}) => {
+const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, school}) => {
     // const locref = useRef()
     // useLayoutEffect(() => {
     //   console.log('Iam a layout effect', locref.current)
     // }, [locref])
+    
     const [drawerOpen, handleDrawerToggle] = useDrawer();
-    const [data, setData] = usePrayerOnGo({lat: lat, lon: lon});
+    const [data, setData] = usePrayerOnGo({lat: lat, lon: lon, method: method, school : school});
+    
     const [loc] = useCurrentLocation({lat: lat, lon: lon})
-    const {setTz} = useContext(UserContext);
+    const {setTz, setModal, forceTrigger} = useContext(UserContext);
+    //using same ftname for travel too
+    useForceTrigger({setModal:setModal, params : {show : true, name : 'Finetune'}, ftname : FT_PRAYER, setData: setData});
     // const [volume, setVolume] = React.useState(true);
     let timings;
     if (data.length) {
@@ -120,7 +125,7 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume}) => {
     // const [music, setMusic] = useState({show: false, playing : false})
     const [onlyPrayers, setOnlyPrayers] = useState({})
     useEffect(() => {
-        if (timings && timings.hasOwnProperty('Fajr')) {
+        if (timings && timings.hasOwnProperty('Fajr')) {           
             let justPrayers = getJustPrayers({timings : timings});
             console.log('%c JUSTP'+JSON.stringify(justPrayers), 'color: purple;font-size:20px;')
             setOnlyPrayers(justPrayers);
