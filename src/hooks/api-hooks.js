@@ -183,28 +183,6 @@ export const useDrawer = () => {
     return [drawerOpen, handleDrawerToggle]
 }
 
-// export const useForceTrigger = ({useParams, data, setData, forceTrigger, ftTarget, setModal}) => {
-//     let method,
-//         school;
-//     useEffect(() => {
-//         if (data.hasOwnProperty('code') && data.code === 200 && !localStorage.getItem(`padachone_FT-${FT_PRAYER}`)) {
-//             console.log('CUSTOM inside data useEffect')
-//             setModal({show : true, name : 'Finetune'})
-//         }
-//     }, [data])
-
-//     useEffect(() => {
-//         if (forceTrigger.target === ftTarget) {
-//             console.log('CUSTOM inside FORCETRRIGGER useEffect')
-//             setData({})
-//             method = forceTrigger.method;
-//             school = forceTrigger.school;
-//         }
-//     }, [forceTrigger]);  
-    
-//     return {...useParams, method : method, school : school}
-// }
-
 export const useRenderCounts = (page) => {
     const renders = useRef(0);
     useEffect(() => {

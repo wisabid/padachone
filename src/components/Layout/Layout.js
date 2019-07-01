@@ -29,7 +29,6 @@ const Layout = ({country, region, place, method, school, pdate, startup}) => {
     const [drawerOpen, handleDrawerToggle] = useDrawer();
     const {setTz, setModal, forceTrigger} = useContext(UserContext);
     
-    console.log('%cFT Layout.js methd'+country+region+ place+ method+ school+ pdate+ startup, 'color:red;font-size:30px');
 
     
     

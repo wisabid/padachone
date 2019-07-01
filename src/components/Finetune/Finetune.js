@@ -79,7 +79,6 @@ const Finetune = (props) => {
     
     const handlePrimary = () => {
         setModalConfig({...modalConfig, loading : true})
-        console.log('FT Primary Action in progress....', calcMethod, schoolVal);
         localStorage.setItem('padachone:method', calcMethod)
         localStorage.setItem('padachone:school', schoolVal);
         props.handleForceTrigger({target: FT_PRAYER, method : calcMethod, school : schoolVal});
@@ -119,8 +118,9 @@ const Finetune = (props) => {
                       {/* {methods.hasOwnProperty('data') && methods.data.length && <DDitems methods={methods.data}/>} */}
                       {
                         methods.data.map((item, indx) => {
-                          console.log('AB', Object.keys(item)[0])
-                        return <MenuItem key={indx} value={Object.values(item)[0].id} data-label={Object.keys(item)[0]}>{Object.values(item)[0].name}</MenuItem>
+                          let objVal = Object.values(item)[0],
+                            objKey = Object.keys(item)[0];
+                        return <MenuItem key={indx} value={objVal.id} data-label={objKey}>{objVal.name}</MenuItem>
                       })
                       }
                       {/* <MenuItem value={10}>Ten</MenuItem>

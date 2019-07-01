@@ -46,7 +46,6 @@ function App() {
   const [prevScrollpos, setprevScrollpos] = useState(window.pageYOffset);
   const [display, setdisplay] = useState(true);  
   const [forceTrigger, setForceTrigger] = useState({target : ''});
-  console.log('FT APP.js', forceTrigger);
 
   const handleForceTrigger = ({target, method, school}) => {
     setForceTrigger(() => {
@@ -100,7 +99,6 @@ function App() {
     method : localStorage.getItem('padachone:method')?parseInt(localStorage.getItem('padachone:method')):8,
     school : localStorage.getItem('padachone:school')?parseInt(localStorage.getItem('padachone:school')):0
   });
-  console.log('FT App.js state values'+forceTrigger+' State : '+JSON.stringify(state))
   
   const {finished, country, region, pdtodaysDate, prayerdata, place, method, school} = state;
 
