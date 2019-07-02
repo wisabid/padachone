@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -13,6 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import {P_MENUS} from '../../utils/constants';
+import {UserContext} from '../../store/context/userContext';
+import bg from '../../assets/images/bg-new.png';
 
 // import GridListTile from '@material-ui/core/GridListTile';
 // import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -42,7 +45,10 @@ const useStyles = makeStyles(theme => ({
   },
   cardGrid: {
     padding: 0,
-    marginTop: '12px'
+    marginTop: '12px',
+    padding : '15px'
+    // marginLeft: '10px',
+    // marginRight:'10px'
     // paddingTop: theme.spacing(8),
     // paddingBottom: theme.spacing(8),
   },
@@ -50,13 +56,20 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: '0px'
+    borderRadius: '0px',
+    background: 'transparent'
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
+    paddingTop: '40%',
+    paddingBottom: '5%',
+    color: '#fff',
+    height: '100%',
   },
   cardContent: {
     flexGrow: 1,
+    position: 'relative',
+    bottom: '127px'
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
@@ -65,36 +78,66 @@ const useStyles = makeStyles(theme => ({
   icon: {
     color: 'rgba(255, 255, 255, 0.54)',
   },
+  text: {
+    minHeight: '83px',
+    color: 'rgba(255, 255, 255, 0.7)'
+    // color: '#000'
+  }
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const cards = P_MENUS;
 
 export default function Album() {
   const classes = useStyles();
-
+  const {setPage, handleExit, setModal} = useContext(UserContext);
+  const handleNav = (page) => {
+    if (page === 'callfunc') {
+      handleExit();
+    }
+    else if (page === 'setmodal') {
+      setModal({show : true, name : 'Subscribe'})
+    }
+    else if (page === 'setFTmodal') {
+      setModal({show : true, name : 'Finetune'})
+    }
+    else {
+      setPage(page)
+    }
+  }
   return (
     <React.Fragment>      
       {/* <main> */}
         {/* Hero unit */}        
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={1}>
-            {cards.map(card => (
-              <Grid item key={card} xs={6} sm={6} md={4} style={{padding:'0px'}}>
+          <Grid container spacing={1} style={{backgroundImage: `url(${bg})`, backgroundPosition: 'right bottom',}}>
+            {cards.map((card, indx) => (
+              <Grid item key={`${indx}-${card.page}`} xs={6} sm={6} md={4} style={{padding:'0px', background:'transparent'}}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    // image="https://source.unsplash.com/random"
+                    // image={bg}
                     title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
+                    onClick={() => handleNav(card.page === 'Home'?'SetMeup':card.page)}
+                  >
+                    <Button color="primary" className={`${classes.text} landing-navs`} style={{animationDelay: `${indx}s`}}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {card.label === 'Home'?'Set me up':card.label}
+                      </Typography>
+                    </Button>
+                    {/* <Typography>
+                      This is a media card. You can use this section to describe the content.
+                    </Typography> */}
+                  </CardMedia>
+                  {/* <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
                       Heading
                     </Typography>
                     <Typography>
                       This is a media card. You can use this section to describe the content.
                     </Typography>
-                  </CardContent>                  
+                  </CardContent>                   */}
                 </Card>
                 {/* <GridListTile key={card}>
                   <img src="https://source.unsplash.com/random" alt="title" />

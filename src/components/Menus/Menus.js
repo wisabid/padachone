@@ -125,7 +125,7 @@ export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
       <Divider />
       <List>
         {P_MENUS_SEC.map((nav, index) => (
-          <ListItem button key={`${index}-${nav.page}-sec`} disabled={(index !== 1) ?true:false} 
+          <ListItem button key={`${index}-${nav.page}-sec`} disabled={(index !== 2 && index !== 0) ?true:false} 
             onClick={() => handleNav(nav.page)}>
             <ListItemIcon><Micon icon={nav.page} /></ListItemIcon>
             <ListItemText primary={nav.label} />

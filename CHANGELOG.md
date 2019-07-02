@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Fine tune menu in menus
 - removed subscribe from footer
 - cache calc methods
+- fb chat
+- landing page design change
+- animation on landing navs
 
 
 ## [1.0.0] - 2019-05-19

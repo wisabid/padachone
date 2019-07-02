@@ -137,7 +137,7 @@ export const useCurrentLocation = ({lat, lon}) => {
 }
 
 export const useCalcMethods = () => {
-    const API = 'http://api.aladhan.com/v1/methods';
+    const API = 'https://api.aladhan.com/v1/methods';
     const [methods, setMethods] = useState({})
     const fetchMethods = async() => {
         try {

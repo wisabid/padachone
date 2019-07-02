@@ -4,12 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import ForwardIcon from '@material-ui/icons/FastForward';
 import Lab from '../Lab/Lab';
 import bg from '../../assets/images/bg-new.png';
-import './setup.css';
+// import './setup.css';
 import {UserContext} from '../../store/context/userContext';
 import OptionsButton from '../OptionsButton';
-import SetupStepper from './SetupStepper';
-import AppPages from '../App/AppPages'
-import MIcon from '@material-ui/icons/CardTravel';
+import AppPages from './AppPages'
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -170,7 +169,7 @@ function Setup(props) {
       <div className={classes.root}>
       <Typography color="textPrimary" variant="h1" component="h1" align="left" 
       style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#0c39e3', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgba(255, 255, 255, 0.7)', marginBottom:0}} gutterBottom>
-                  Know You<span onClick={() => { localStorage.clear();return window.location.reload(); }}>r</span> Prayer times {ffopen && <ForwardIcon onClick={handleFF} fontSize="large" style={{color:'#fff', fontSize: '2.8rem', top: '5px', position: 'relative'}} />}
+                  Know You<span onClick={() => { localStorage.clear();return window.location.reload(); }}>r</span> Prayer times {ffopen && <ForwardIcon onClick={handleFF} fontSize="large" style={{color:'#fff', fontSize: '2.8rem', top: '5px', position: 'relative'}} className="landing-navs"/>}
       </Typography>
       
       { <Typography color="textSecondary" align="left" variant="body2" component="p" 
@@ -190,12 +189,10 @@ function Setup(props) {
         {/* This Button uses a Font Icon, see the installation instructions in the docs. */}
         {/* <CloudUploadIcon className={classes.rightIcon} />
       </Button> */}
-      <OptionsButton options={[{opt : 'Back', page : 'Setup'}]} 
-        menuOptIcon={null}
-       setPage={(pge) => setPage(pge)} />
+      {/* <OptionsButton options={[{opt : 'Traveller Onboard', page : 'Travel'}, {opt : 'Near by Mosques', page : ''}, {opt : 'Maps', page : ''}]}
+       setPage={(pge) => setPage(pge)} /> */}
       {/* </span> */}
-        {/* <AppPages /> */}
-        <SetupStepper {...props}/>
+        <AppPages />
       </div>
     );
   }

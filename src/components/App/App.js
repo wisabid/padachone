@@ -20,6 +20,8 @@ import Subscribe from '../Subscribe';
 import Finetune from '../Finetune';
 import Lab from '../Lab';
 import {FT_PRAYER} from '../../utils/constants';
+import LandingPage from './LandingPage'
+// import FbChat from '../FbChat/FbChat'
 
 const theme = createMuiTheme({
   palette: {
@@ -40,6 +42,7 @@ function App() {
   // Global State 
   const [tz, setTz] = useState('');
   const [page, setPage] = useState('Setup');
+  console.log('%c PAGE'+page, 'font-size:40px;')
   const [iamin, setIamin] = useState(false);  
   const [modal, setModal] = useState({show : false, name : ''})
   // Global State ends here
@@ -181,6 +184,7 @@ function App() {
             <Zoom in={true}>
                 <SpecialDay display={display} setdisplay={setdisplay}/>
             </Zoom>
+            {!finished && page === 'Setup' && <LandingPage finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {msg[0] && <Messages msg={msg[1]}/>}
             {page === 'Travel' && <Travel method={method} school={school}/>}
             {page === 'Lab' && <Lab timings={{Asr: "18:08", 
@@ -192,10 +196,11 @@ function App() {
                 Midnight: "01:43",
                 Sunrise: "05:20",
                 Sunset: "22:06"}} />}
-            {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
+            {page === 'SetMeup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} method={method} school={school} startup={(resetstate) => handlefinished(resetstate)}/>}
             {modal.show && modal.name === 'Subscribe' && <Subscribe modal={modal} setModal={setModal}/>}
             {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal} method={method} school={school} handleForceTrigger={(obj) => handleForceTrigger(obj)}/>}
+            {/* <FbChat /> */}
           </ErrorBoundary>
         </UserContext.Provider> 
       </div>
