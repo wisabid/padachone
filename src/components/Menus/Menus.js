@@ -11,7 +11,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import HomeIcon from '@material-ui/icons/Home';
 import TravelIcon from '@material-ui/icons/CardTravel';
 import MailIcon from '@material-ui/icons/Mail';
-import SettingsIcon from '@material-ui/icons/Settings';
+import SettingsPowerIcon from '@material-ui/icons/SettingsPower';
 import TuningIcon from '@material-ui/icons/Tune';
 import SubscribeIcon from '@material-ui/icons/Subscriptions';
 import LabIcon from '@material-ui/icons/DirectionsRun';
@@ -54,6 +54,11 @@ const Micon = ({icon}) => {
         return (
           <PowerIcon />
         )
+    case 'reset':
+        return (
+          <SettingsPowerIcon />
+        )
+          
     default:
         return (
           <HomeIcon />
@@ -99,6 +104,10 @@ export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
       }
       else if (page === 'setFTmodal') {
         setModal({show : true, name : 'Finetune'})
+      }
+      else if (page === 'reset') {
+        localStorage.clear();
+        return window.location.reload();
       }
       else {
         setPage(page)

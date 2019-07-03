@@ -68,3 +68,17 @@ export function getJustPrayers({timings}) {
       }, {});
     return justPrayers;
 }
+
+
+export const getMonthYearNumber = (PDdate) => {
+    const months =  ["Jan","Feb","Mar","Apr","May","Jun","Jul",
+    "Aug","Sep","Oct","Nov","Dec"];
+
+    const month = months.indexOf(PDdate.substr(2,3)) + 1;
+    const monthNumber = ('0'+month).slice(-2);
+    const year = PDdate.substr(5,4)
+    
+    return [monthNumber, year];
+
+    
+}

@@ -2,6 +2,7 @@ import React, {useEffect, useContext, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ForwardIcon from '@material-ui/icons/FastForward';
+import Slide from '@material-ui/core/Slide';
 import Lab from '../Lab/Lab';
 import bg from '../../assets/images/bg-new.png';
 // import './setup.css';
@@ -166,6 +167,7 @@ function Setup(props) {
   }
   else {
     return (
+      <Slide direction="right" in={true} mountOnEnter unmountOnExit>
       <div className={classes.root}>
       <Typography color="textPrimary" variant="h1" component="h1" align="left" 
       style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#0c39e3', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgba(255, 255, 255, 0.7)', marginBottom:0}} gutterBottom>
@@ -194,6 +196,7 @@ function Setup(props) {
       {/* </span> */}
         <AppPages />
       </div>
+      </Slide>
     );
   }
   

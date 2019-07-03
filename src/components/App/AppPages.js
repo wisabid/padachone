@@ -67,9 +67,14 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
   },
   cardContent: {
-    flexGrow: 1,
-    position: 'relative',
-    bottom: '127px'
+    // flexGrow: 1,
+    // position: 'relative',
+    // bottom: '127px'
+    paddingTop: '56.25%', // 16:9
+    paddingTop: '40%',
+    paddingBottom: '5%',
+    color: '#fff',
+    height: '100%',
   },
   footer: {
     backgroundColor: theme.palette.background.paper,
@@ -100,6 +105,10 @@ export default function Album() {
     else if (page === 'setFTmodal') {
       setModal({show : true, name : 'Finetune'})
     }
+    else if (page === 'reset') {
+      localStorage.clear();
+      return window.location.reload();
+    }
     else {
       setPage(page)
     }
@@ -114,22 +123,24 @@ export default function Album() {
             {cards.map((card, indx) => (
               <Grid item key={`${indx}-${card.page}`} xs={6} sm={6} md={4} style={{padding:'0px', background:'transparent'}}>
                 <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    // image="https://source.unsplash.com/random"
-                    // image={bg}
-                    title="Image title"
-                    onClick={() => handleNav(card.page === 'Home'?'SetMeup':card.page)}
-                  >
+                  <CardContent className={classes.cardContent} 
+                    onClick={() => handleNav(card.page === 'Home'?'SetMeup':card.page)}>
+                  {/* // <CardMedia
+                  //   className={classes.cardMedia}
+                  //   // image="https://source.unsplash.com/random"
+                  //   image={''}
+                  //   title="Image title"
+                  //   onClick={() => handleNav(card.page === 'Home'?'SetMeup':card.page)}
+                  // > */}
                     <Button color="primary" className={`${classes.text} landing-navs`} style={{animationDelay: `${indx}s`}}>
                       <Typography gutterBottom variant="h5" component="h2">
                         {card.label === 'Home'?'Set me up':card.label}
                       </Typography>
                     </Button>
-                    {/* <Typography>
-                      This is a media card. You can use this section to describe the content.
-                    </Typography> */}
-                  </CardMedia>
+                    {/* // <Typography>
+                    //   This is a media card. You can use this section to describe the content.
+                    // </Typography> */}
+                  </CardContent>
                   {/* <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
                       Heading

@@ -47,6 +47,9 @@ const Prayer = (props) => {
                 <>
                 {
                     Object.keys(timings).map((prayer, index) => {
+                        let splitdt = timings[prayer].split(' '),
+                            justtiming = splitdt[0],
+                            tzone = splitdt[1];
                         return (
                             <Card className={classes.card} key={index}>
                                 <CardContent>
@@ -55,7 +58,10 @@ const Prayer = (props) => {
 
                                     </Typography>
                                     <Typography variant="h3" component="h2">
-                                    <strong style={{color:'#039be5'}}>{timings[prayer]}</strong>
+                                    <strong style={{color:'#039be5'}}>
+                                        {/* {timings[prayer]} */}
+                                       {justtiming}
+                                    </strong>
                                     </Typography>
                                     {/* <Typography className={classes.pos} color="textSecondary">
                                     {date.readable} 

@@ -1,17 +1,19 @@
 import { useState, useEffect, useRef, useContext } from 'react';
-import {getPDdata} from '../utils/index';
+import {getPDdata, getMonthYearNumber} from '../utils/index';
 import {BING_API, FT_PRAYER} from '../utils/constants';
 import {UserContext} from '../store/context/userContext';
 export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0}) => {
     const {forceTrigger} = useContext(UserContext);
-    let city;
-    if (place) {
-        city = place;
-    }
-    else {
-        city=region
-    }
-    const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}&school=${school}`;
+    const [month, year] = getMonthYearNumber(date)
+    // let city;
+    // if (place) {
+    //     city = place;
+    // }
+    // else {
+    //     city=region
+    // }
+    // const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}&school=${school}`;
+    const API = `https://api.aladhan.com/v1/calendarByAddress?address=${place},${region},${country}&method=${method}&school=${school}&month=${month}&year=${year}`
     const [data, setData] = useState({})
     async function fetchPrayerTimes() {
         try {
@@ -20,13 +22,17 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
                     Accept : 'application/json'
                 }
             });
-            const data = await res.json();
+            const rawdata = await res.json();
             Object.keys(localStorage).map(key => {
                 if (key.startsWith('padachone:')) {
                     localStorage.removeItem(key);
                 }
                 return key;
             })
+            const dte = getPDdata();
+            debugger
+            const timingsData = rawdata.data.filter(item => item.date.readable === dte);
+            const data = {...rawdata, data : {...timingsData[0]}}
             
             if (data && data.data && data.data.meta) {
                 region && localStorage.setItem(`padachone:region`, region);

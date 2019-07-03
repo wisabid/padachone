@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
+import Slide from '@material-ui/core/Slide';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import blue from '@material-ui/core/colors/blue';
 import { autoPlay } from 'react-swipeable-views-utils';
@@ -152,7 +153,7 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, schoo
         //         )
         //     })
         // }
-
+        <Slide direction="left" in={true} mountOnEnter unmountOnExit>
             <div className={classes.root}>
                 {/* <Bgmusic bgm={bgm} volume={volume} setPlaying={() => setMusic({show: true, playing : true})}/> */}
                 <Menus drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle}/>
@@ -179,7 +180,7 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, schoo
                 >
                   {/* {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>} */}
                 {tutorialSteps.map((step, index) => (
-                    <div key={step.label} style={{    marginTop: '35px'}}>
+                    <div key={step.label} style={{    marginTop: '107px'}}>
                       {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers} travel={true} location={loc.formattedaddress}/>}
                       
                       <div>
@@ -235,6 +236,7 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, schoo
                 }
                 /> */}
             </div>
+          </Slide>
         )
     }
     else {

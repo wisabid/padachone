@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import eid from '../../assets/images/eid.gif';
+// import eid from '../../assets/images/eid.gif';
 import {getPDdata} from '../../utils';
 import moment from 'moment'; 
 
 const styles = {
-    backgroundImage:`url(${eid})`, 
+    backgroundImage:`url()`, 
     height:'250px', 
     backgroundSize: 'auto 100%', 
     backgroundRepeat:'no-repeat', 

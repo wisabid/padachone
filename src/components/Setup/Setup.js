@@ -2,6 +2,7 @@ import React, {useEffect, useContext, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ForwardIcon from '@material-ui/icons/FastForward';
+import Slide from '@material-ui/core/Slide';
 import Lab from '../Lab/Lab';
 import bg from '../../assets/images/bg-new.png';
 import './setup.css';
@@ -143,12 +144,7 @@ function Setup(props) {
     }
   })
 
-  const handleChange = name => event => {
-    let val = event.target.value;
-    if (val.match(/^[a-z A-Z]*$/)) {
-      setState({ ...state, place: val });
-    }
-  };
+  
 
   const handleTravel = () => {
     setState({ ...state, travel: true });
@@ -167,36 +163,38 @@ function Setup(props) {
   }
   else {
     return (
-      <div className={classes.root}>
-      <Typography color="textPrimary" variant="h1" component="h1" align="left" 
-      style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#0c39e3', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgba(255, 255, 255, 0.7)', marginBottom:0}} gutterBottom>
-                  Know You<span onClick={() => { localStorage.clear();return window.location.reload(); }}>r</span> Prayer times {ffopen && <ForwardIcon onClick={handleFF} fontSize="large" style={{color:'#fff', fontSize: '2.8rem', top: '5px', position: 'relative'}} />}
-      </Typography>
-      
-      { <Typography color="textSecondary" align="left" variant="body2" component="p" 
-        style={{padding:'0 24px',fontStyle:'italic', fontSize: '0.9rem', marginTop:'10px'}} gutterBottom>
-          {/* Are you in a moving train/bus?   */}
-          An easy to use light weight application for knowing your Fajr, Dhuhr, Asr, Maghrib & Isha timings of the day. 
-          <br/> "Worries end when Salah begins"
-                      {/* <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release) */}
-        </Typography> }
-        {/* <span onClick={() => setPage('Travel')}> */}
-        {/* <Typography color="textSecondary" variant="h2" component="h2" align="left" 
-      style={{fontWeight:'bold', fontSize:'1rem', padding:'10px 24px', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
-                  Travellers click here ... ( in α state)
-      </Typography> */}
-      {/* <Button variant="contained" color="primary" className={classes.button} onClick={() => setPage('Travel')} align="left" style={{color:'#fff'}}>
-        Travellers */}
-        {/* This Button uses a Font Icon, see the installation instructions in the docs. */}
-        {/* <CloudUploadIcon className={classes.rightIcon} />
-      </Button> */}
-      <OptionsButton options={[{opt : 'Back', page : 'Setup'}]} 
-        menuOptIcon={null}
-       setPage={(pge) => setPage(pge)} />
-      {/* </span> */}
-        {/* <AppPages /> */}
-        <SetupStepper {...props}/>
-      </div>
+      <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+        <div className={classes.root}>
+        <Typography color="textPrimary" variant="h1" component="h1" align="left" 
+        style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#0c39e3', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgba(255, 255, 255, 0.7)', marginBottom:0}} gutterBottom>
+                    Know You<span onClick={() => { localStorage.clear();return window.location.reload(); }}>r</span> Prayer times {ffopen && <ForwardIcon onClick={handleFF} fontSize="large" style={{color:'#fff', fontSize: '2.8rem', top: '5px', position: 'relative'}} />}
+        </Typography>
+        
+        { <Typography color="textSecondary" align="left" variant="body2" component="p" 
+          style={{padding:'0 24px',fontStyle:'italic', fontSize: '0.9rem', marginTop:'10px'}} gutterBottom>
+            {/* Are you in a moving train/bus?   */}
+            An easy to use light weight application for knowing your Fajr, Dhuhr, Asr, Maghrib & Isha timings of the day. 
+            <br/> "Worries end when Salah begins"
+                        {/* <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release) */}
+          </Typography> }
+          {/* <span onClick={() => setPage('Travel')}> */}
+          {/* <Typography color="textSecondary" variant="h2" component="h2" align="left" 
+        style={{fontWeight:'bold', fontSize:'1rem', padding:'10px 24px', color: 'rgb(3, 155, 229)', marginBottom:0}} gutterBottom>
+                    Travellers click here ... ( in α state)
+        </Typography> */}
+        {/* <Button variant="contained" color="primary" className={classes.button} onClick={() => setPage('Travel')} align="left" style={{color:'#fff'}}>
+          Travellers */}
+          {/* This Button uses a Font Icon, see the installation instructions in the docs. */}
+          {/* <CloudUploadIcon className={classes.rightIcon} />
+        </Button> */}
+        <OptionsButton options={[{opt : 'Back', page : 'Setup'}]} 
+          menuOptIcon={null}
+        setPage={(pge) => setPage(pge)} />
+        {/* </span> */}
+          {/* <AppPages /> */}
+          <SetupStepper {...props}/>
+        </div>
+      </Slide>
     );
   }
   

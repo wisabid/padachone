@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import green from '@material-ui/core/colors/green';
 import Grow from '@material-ui/core/Grow';
+import Slide from '@material-ui/core/Slide';
 import Prayer from './Prayer';
 import './prayers.css';
 import Timer from '../Timer';
@@ -41,20 +42,22 @@ const Prayers = (props) => {
     // })
     
     return (
-        <div className="pdnContainer">
-            {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>}
-        {(typeof data === "object" && code === 200 && Object.keys(prayerdata).length)
-            ?<>
-               <Grow in={true}>
-                    <div>
-                    <Prayer pdata={prayerdata} />
-                    
-                    </div>
-               </Grow>                           
-            </>
-            :<CircularProgress className={classes.progress} color="secondary" />
-        }        
-        </div>
+        <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+            <div className="pdnContainer">
+                {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>}
+            {(typeof data === "object" && code === 200 && Object.keys(prayerdata).length)
+                ?<>
+                <Grow in={true}>
+                        <div>
+                        <Prayer pdata={prayerdata} />
+                        
+                        </div>
+                </Grow>                           
+                </>
+                :<CircularProgress className={classes.progress} color="secondary" />
+            }        
+            </div>
+        </Slide>
     )
 }
 

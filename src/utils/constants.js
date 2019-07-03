@@ -5,7 +5,8 @@ export const REPORT_FB = "Report Crash";
 export const P_MENUS = [
     {id: 0, label : 'Home', page : 'Home', description: 'Home page'}, 
     {id: 1, label : 'Traveller Onboard', page : 'Travel', description: 'Traveller Onboard page'},
-    {id: 2, label : 'Subscribe', page: 'setmodal', description: 'Subscribe page'},    
+    {id: 2, label : 'Subscribe', page: 'setmodal', description: 'Subscribe page'}, 
+    {id: 3, label : 'Hard Reset', page: 'reset', description: 'Factory Reset'}, 
     // {label : 'Fine Tune', page : 'Fine Tune'}, 
     // {label : 'Travel Times', page : 'Travel'}, 
     // {label : 'Nearest Mosque', page : 'Nearest Mosque'}, 

@@ -143,10 +143,10 @@ function App() {
     localStorage.removeItem('padachone_msg5');
     localStorage.removeItem('padachone_msg6');
     localStorage.removeItem('padachone_msg7');
-    if (!localStorage.getItem('padachone_msg8')) {
-      const message = `Fast Forward your Set up now! `;
+    if (!localStorage.getItem('padachone_msg9')) {
+      const message = `A Bunch of features baked in. Please explore! `;
       setMsg(() => {
-        localStorage.setItem('padachone_msg8', message)
+        localStorage.setItem('padachone_msg9', message)
         return [true, message]
       });      
     }

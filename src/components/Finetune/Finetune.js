@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Select from '@material-ui/core/Select';
+import lightBlue from '@material-ui/core/colors/lightBlue';
 import { makeStyles } from '@material-ui/core/styles';
 import React, { useContext, useEffect, useState } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -28,6 +29,10 @@ const useStyles = makeStyles(theme => ({
     group: {
       margin: theme.spacing(1, 0),
       flexDirection: 'row'
+    },
+    progress: {
+      margin: theme.spacing(2),
+      color: lightBlue[500]
     },
   }));
 
@@ -104,7 +109,7 @@ const Finetune = (props) => {
             handleSecondaryAction={() => handleSecondary()}
             loading={modalConfig.loading}>
                 {(methods.hasOwnProperty('data') && methods.data.length)
-                  ?<div>
+                  ?<div>                   
                   <FormControl className={classes.formControl} style={{maxWidth: '100%', minWidth: '235px'}}>
                   <InputLabel htmlFor="age-simple">Calculation Methods</InputLabel>
                   <Select
@@ -161,7 +166,10 @@ const Finetune = (props) => {
                     </RadioGroup>
                   </FormControl>
                 </div>
-                  :<CircularProgress className={classes.progress} color="secondary" />}
+                  :<div style={{textAlign: 'center'}}>
+                    <CircularProgress className={classes.progress} color="secondary" />
+                  </div>
+                }
         </DialogModal>
     )
 }
