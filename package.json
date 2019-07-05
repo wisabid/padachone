@@ -1,7 +1,7 @@
 {
-  "name": "padachone",
+  "name": "padachone_dev",
   "version": "2.0.0",
-  "homepage": "https://www.padachone.com",
+  "homepage": "https://dev.padachone.com",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.1.1",
@@ -32,7 +32,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "echo 'www.padachone.com' > ./build/CNAME && gh-pages -d build"
+    "deploy": "echo 'DEV.PADACHONE.COM' > ./build/CNAME && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

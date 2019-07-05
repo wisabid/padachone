@@ -2,7 +2,7 @@ import React from 'react';
 // import {useCurrentLocation} from '../../hooks/api-hooks';
 
 const styles = {
-    width: '300px',
+    width: '275px',
     margin: '0 auto',
     lineHeight: '10px', 
     margin: '10px auto',

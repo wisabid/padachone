@@ -153,7 +153,7 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, schoo
         //         )
         //     })
         // }
-        <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+        
             <div className={classes.root}>
                 {/* <Bgmusic bgm={bgm} volume={volume} setPlaying={() => setMusic({show: true, playing : true})}/> */}
                 <Menus drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle}/>
@@ -168,75 +168,76 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, schoo
                     playing={music.playing}
                     handleDrawerToggle={handleDrawerToggle}
                 />
-                {/* <Paper square elevation={0} className={classes.header}> */}
-                {/* <Typography>tutorialSteps[activeStep].label{data.data[0].timings.Maghrib}</Typography> */}
-                {/* </Paper> */}
-                <AutoPlaySwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents
-                // style={{ marginTop: '22px'}}
-                >
-                  {/* {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>} */}
-                {tutorialSteps.map((step, index) => (
-                    <div key={step.label} style={{    marginTop: '107px'}}>
-                      {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers} travel={true} location={loc.formattedaddress}/>}
-                      
-                      <div>
-                    {Math.abs(activeStep - index) <= 2 ? (
+                <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+                  {/* <Paper square elevation={0} className={classes.header}> */}
+                  {/* <Typography>tutorialSteps[activeStep].label{data.data[0].timings.Maghrib}</Typography> */}
+                  {/* </Paper> */}
+                  <AutoPlaySwipeableViews
+                  axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                  index={activeStep}
+                  onChangeIndex={handleStepChange}
+                  enableMouseEvents
+                  // style={{ marginTop: '22px'}}
+                  >
+                    {/* {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers}/>} */}
+                  {tutorialSteps.map((step, index) => (
+                      <div key={step.label} style={{    marginTop: '107px'}}>
+                        {onlyPrayers.hasOwnProperty('Fajr') && <Timer prayers={onlyPrayers} travel={true} location={loc.formattedaddress}/>}
                         
-                        // <img className={classes.img} src={step.imgPath} alt={step.label} />
-                        Object.keys(data[0].timings).map((prayer, ind) => {
-                          let splitdt = data[0].timings[prayer].split(' '),
-                            timing = splitdt[0],
-                            tzone = splitdt[1];
-                          return (
-                            <Card className={classes.card} key={ind}>
-                            <CardContent className="travelCard">
-                                <Typography className={classes.title} color="textSecondary" gutterBottom style={{minWidth : '60px', textAlign:'left'}}>
-                                {prayer}
-                                </Typography>
-                                <Typography variant="h3" component="h2">
-                                  <strong style={{color:'#039be5'}}>{timing}</strong>
-                                </Typography>
-                               
-                                <Typography variant="body2" component="p" color="textSecondary" className={classes.title}>
-                                  {tzone}
-                                  <br />
-                                {data[0].date.hijri.month.ar}
-                               
-                                </Typography>
-                            </CardContent>                           
-                        </Card> 
-                          )
-                        })
-                        
-                    ) : null}
-                    </div>
-                    </div>
-                ))}
-                </AutoPlaySwipeableViews>
-                {/* <MobileStepper
-                steps={maxSteps}
-                position="static"
-                variant="text"
-                activeStep={activeStep}
-                nextButton={
-                    <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-                    Next
-                    {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-                    </Button>
-                }
-                backButton={
-                    <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                    {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-                    Back
-                    </Button>
-                }
-                /> */}
+                        <div>
+                      {Math.abs(activeStep - index) <= 2 ? (
+                          
+                          // <img className={classes.img} src={step.imgPath} alt={step.label} />
+                          Object.keys(data[0].timings).map((prayer, ind) => {
+                            let splitdt = data[0].timings[prayer].split(' '),
+                              timing = splitdt[0],
+                              tzone = splitdt[1];
+                            return (
+                              <Card className={classes.card} key={ind}>
+                              <CardContent className="travelCard">
+                                  <Typography className={classes.title} color="textSecondary" gutterBottom style={{minWidth : '60px', textAlign:'left'}}>
+                                  {prayer}
+                                  </Typography>
+                                  <Typography variant="h3" component="h2">
+                                    <strong style={{color:'#039be5'}}>{timing}</strong>
+                                  </Typography>
+                                
+                                  <Typography variant="body2" component="p" color="textSecondary" className={classes.title}>
+                                    {tzone}
+                                    <br />
+                                  {data[0].date.hijri.month.ar}
+                                
+                                  </Typography>
+                              </CardContent>                           
+                          </Card> 
+                            )
+                          })
+                          
+                      ) : null}
+                      </div>
+                      </div>
+                  ))}
+                  </AutoPlaySwipeableViews>
+                  {/* <MobileStepper
+                  steps={maxSteps}
+                  position="static"
+                  variant="text"
+                  activeStep={activeStep}
+                  nextButton={
+                      <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+                      Next
+                      {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                      </Button>
+                  }
+                  backButton={
+                      <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                      {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                      Back
+                      </Button>
+                  }
+                  /> */}
+                  </Slide>
             </div>
-          </Slide>
         )
     }
     else {

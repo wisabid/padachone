@@ -18,3 +18,4 @@ export const P_MENUS_SEC = [
     {id: 2, label : 'Start Over', page: 'callfunc', description: 'Startover  page'}  
 ];
 export const FT_PRAYER = "api_prayer-results";
+export const FLASH_MESSAGE_DISPLAY_TIME = 2000;

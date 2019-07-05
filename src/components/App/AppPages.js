@@ -94,25 +94,8 @@ const cards = P_MENUS;
 
 export default function Album() {
   const classes = useStyles();
-  const {setPage, handleExit, setModal} = useContext(UserContext);
-  const handleNav = (page) => {
-    if (page === 'callfunc') {
-      handleExit();
-    }
-    else if (page === 'setmodal') {
-      setModal({show : true, name : 'Subscribe'})
-    }
-    else if (page === 'setFTmodal') {
-      setModal({show : true, name : 'Finetune'})
-    }
-    else if (page === 'reset') {
-      localStorage.clear();
-      return window.location.reload();
-    }
-    else {
-      setPage(page)
-    }
-  }
+  const {handleNav} = useContext(UserContext);
+  
   return (
     <React.Fragment>      
       {/* <main> */}

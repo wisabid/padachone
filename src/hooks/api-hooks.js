@@ -4,7 +4,8 @@ import {BING_API, FT_PRAYER} from '../utils/constants';
 import {UserContext} from '../store/context/userContext';
 export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0}) => {
     const {forceTrigger} = useContext(UserContext);
-    const [month, year] = getMonthYearNumber(date)
+    const [month, year] = getMonthYearNumber(date);
+    const [inprocess, setInprocess] = useState(false);
     // let city;
     // if (place) {
     //     city = place;
@@ -17,6 +18,7 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
     const [data, setData] = useState({})
     async function fetchPrayerTimes() {
         try {
+            setInprocess(true);
             const res = await fetch(API, {
                 headers : {
                     Accept : 'application/json'
@@ -35,6 +37,7 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
             const data = {...rawdata, data : {...timingsData[0]}}
             
             if (data && data.data && data.data.meta) {
+                setInprocess(false);
                 region && localStorage.setItem(`padachone:region`, region);
                 country && localStorage.setItem(`padachone:country`, country);
                 place && localStorage.setItem(`padachone:place`, place);
@@ -58,12 +61,18 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
             setData(JSON.parse(localStorage.getItem(`padachone:${date}`)))           
         }
         else {
-            fetchPrayerTimes();
+            if (!inprocess) {
+                fetchPrayerTimes();
+            }
+            else {
+                return false;
+            }
+            
         }
     }, [])
 
     useEffect(() => {
-        if (forceTrigger.target === FT_PRAYER) {
+        if (forceTrigger.target === FT_PRAYER && !inprocess) {
             fetchPrayerTimes();
         }
         

@@ -20,7 +20,8 @@ import Subscribe from '../Subscribe';
 import Finetune from '../Finetune';
 import Lab from '../Lab';
 import {FT_PRAYER} from '../../utils/constants';
-import LandingPage from './LandingPage'
+import LandingPage from './LandingPage';
+import ConfirmAction from '../ConfirmAction/ConfirmAction'
 // import FbChat from '../FbChat/FbChat'
 
 const theme = createMuiTheme({
@@ -122,6 +123,46 @@ function App() {
     }
   }
 
+  const handleNav = (page) => {
+    debugger;
+    if (page === 'callfunc') {
+      handleExit();
+    }
+    else if (page === 'setmodal') {
+      setModal({show : true, name : 'Subscribe'})
+    }
+    else if (page === 'setFTmodal') {
+      setModal({show : true, name : 'Finetune'})
+    }
+    else if (page === 'reset') {
+      setModal({show : true, 
+        name : 'ConfirmAction', 
+        message: `<p style={{margin:0}}>This will reset all your settings which include Country, region & address Selection in addition to wiping out Fine tune preferences if any. Would you like to proceed ?</p>`,
+        handlePrimary : (cb) => {
+          localStorage.clear();
+          cb();
+          return window.location.reload();
+        },
+        handleSecondary : (cb) => {
+          cb();
+          return;
+        },
+        modalconfig : {
+          description : "",
+          title : "Hard Reset Everything", 
+          primaryButton : "Yes",
+          secondaryButton : "No",
+          error : false,
+          loading: false
+        }
+      })
+      
+    }
+    else {
+      setPage(page)
+    }
+  }
+
   const handleExit = () => {
     Object.keys(localStorage).map(key => {
       if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region' && key !== 'padachone:method' && key !== 'padachone:school' && key !== `padachone_FT-${FT_PRAYER}`) {
@@ -144,7 +185,7 @@ function App() {
     localStorage.removeItem('padachone_msg6');
     localStorage.removeItem('padachone_msg7');
     if (!localStorage.getItem('padachone_msg9')) {
-      const message = `A Bunch of features baked in. Please explore! `;
+      const message = `Chat with us and pass in your feedback/comments. `;
       setMsg(() => {
         localStorage.setItem('padachone_msg9', message)
         return [true, message]
@@ -175,7 +216,8 @@ function App() {
           modal : modal, 
           setModal : setModal,
           forceTrigger : forceTrigger, 
-          setForceTrigger : setForceTrigger
+          setForceTrigger : setForceTrigger,
+          handleNav: handleNav
         }}>
           <ErrorBoundary>
             <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
@@ -200,6 +242,10 @@ function App() {
             {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} method={method} school={school} startup={(resetstate) => handlefinished(resetstate)}/>}
             {modal.show && modal.name === 'Subscribe' && <Subscribe modal={modal} setModal={setModal}/>}
             {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal} method={method} school={school} handleForceTrigger={(obj) => handleForceTrigger(obj)}/>}
+            {modal.show && modal.name === 'ConfirmAction' && <ConfirmAction modal={modal} setModal={setModal} message={modal.message} 
+              handlePrimary={modal.handlePrimary} 
+              handleSecondary={modal.handleSecondary}
+              modalconfig={modal.modalconfig}/>}
             {/* <FbChat /> */}
           </ErrorBoundary>
         </UserContext.Provider> 

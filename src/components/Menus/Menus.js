@@ -69,7 +69,7 @@ const Micon = ({icon}) => {
 
 export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
   const classes = useStyles();
-  const {iamin, setPage, handleExit, setModal} = useContext(UserContext);
+  const {iamin, setPage, handleExit, setModal, handleNav} = useContext(UserContext);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -95,24 +95,24 @@ export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
     
 }, [drawerOpen])
 
-  const handleNav = (page) => {
-      if (page === 'callfunc') {
-        handleExit();
-      }
-      else if (page === 'setmodal') {
-        setModal({show : true, name : 'Subscribe'})
-      }
-      else if (page === 'setFTmodal') {
-        setModal({show : true, name : 'Finetune'})
-      }
-      else if (page === 'reset') {
-        localStorage.clear();
-        return window.location.reload();
-      }
-      else {
-        setPage(page)
-      }
-  }
+  // const handleNav = (page) => {
+  //     if (page === 'callfunc') {
+  //       handleExit();
+  //     }
+  //     else if (page === 'setmodal') {
+  //       setModal({show : true, name : 'Subscribe'})
+  //     }
+  //     else if (page === 'setFTmodal') {
+  //       setModal({show : true, name : 'Finetune'})
+  //     }
+  //     else if (page === 'reset') {
+  //       localStorage.clear();
+  //       return window.location.reload();
+  //     }
+  //     else {
+  //       setPage(page)
+  //     }
+  // }
 
   const sideList = side => (
     <div
