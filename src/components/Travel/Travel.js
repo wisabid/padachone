@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {geolocated} from 'react-geolocated';
 import Traveltimes from './Traveltimes';
 import SiteMessage from '../Messages/SiteMessage'
-import Bgmusic from '../Prayers/Bgmusic'
-import bgm from '../../assets/mp3/quietTime.mp3'
+// import Bgmusic from '../Prayers/Bgmusic'
+// import bgm from '../../assets/mp3/quietTime.mp3'
 
 const Travel = (props) => {
     const [music, setMusic] = useState({show: false, playing : false});

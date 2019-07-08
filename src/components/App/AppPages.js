@@ -116,7 +116,7 @@ export default function Album() {
                   //   onClick={() => handleNav(card.page === 'Home'?'SetMeup':card.page)}
                   // > */}
                     <Button color="primary" className={`${classes.text} landing-navs`} style={{animationDelay: `${indx}s`}}>
-                      <Typography gutterBottom variant="h5" component="h2">
+                      <Typography gutterBottom variant="h6" component="h2" style={{fontWeight:'bold'}}>
                         {card.label === 'Home'?'Set me up':card.label}
                       </Typography>
                     </Button>

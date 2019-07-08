@@ -110,7 +110,7 @@ const Finetune = (props) => {
             loading={modalConfig.loading}>
                 {(methods.hasOwnProperty('data') && methods.data.length)
                   ?<div>                   
-                  <FormControl className={classes.formControl} style={{maxWidth: '100%', minWidth: '235px'}}>
+                  <FormControl className={classes.formControl} style={{maxWidth: '100%', minWidth: '220px'}}>
                   <InputLabel htmlFor="age-simple">Calculation Methods</InputLabel>
                   <Select
                       value={calcMethod}

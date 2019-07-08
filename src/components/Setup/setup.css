@@ -8,3 +8,39 @@
 .MuiStep-root .Mui-disabled .MuiStepIcon-root{
 color: #bdbdbd;
 }
+  #spin {
+    min-width: 200px;
+    display: inline;
+  }
+  #spin:after {
+    content:"";
+    animation: spin 5s ease-in-out infinite;
+  }
+  @keyframes spin {
+    0% { content:"Fajr" }
+    10% { color: white }
+    20% { content:"Dhuhr" }
+    30% { color: white }
+    40% { content:"Asr" }
+    50% { color: white }
+    60% { content: "Maghrib" }
+    70% { color: white }
+    80% { content: "Isha" }
+    90% { color: white }
+  }
+
+  /* @keyframes changeLetter {
+    0% {
+      content: "A";
+    }
+    50% {
+      color: white;
+    }
+    100% {
+      content: "B";
+    }
+  }
+  
+  #spin::after {
+    animation: changeLetter 3s linear infinite alternate;
+  } */
