@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {geolocated} from 'react-geolocated';
 import Traveltimes from './Traveltimes';
-import SiteMessage from '../Messages/SiteMessage'
+import SiteMessage from '../Messages/SiteMessage';
+import {useRenderCounts} from '../../hooks/api-hooks';
 // import Bgmusic from '../Prayers/Bgmusic'
 // import bgm from '../../assets/mp3/quietTime.mp3'
 
 const Travel = (props) => {
+    useRenderCounts('Travel.js');
     const [music, setMusic] = useState({show: false, playing : false});
     const [volume, setVolume] = React.useState(false);
     return (

@@ -17,6 +17,7 @@ import {UserContext} from '../../store/context/userContext';
 import AppPages from '../App/AppPages';
 import Header from '../Layout/Header';
 import Footer from '../Layout/Footer';
+import {db} from '../../config/firebase'
 
 const useStyles = makeStyles(theme => ({
   progress: {
@@ -43,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 },
 }));
 const Lab = (props) => {
+  
   const {setModal} = useContext(UserContext);
   const classes = useStyles();
   const [currentloc, setCurrentloc] = useCurrentLocation({lat:"52.31406610552598", lon:"4.946411339519716"});
@@ -66,6 +68,13 @@ const Lab = (props) => {
             // Ask user if he wants to fine tune with School and method
             setModal({show : true, name : 'Finetune'})
         // }
+        db.collection("subscribers")
+          .get()
+          .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+            console.log('DB: ', data); // array of cities objects
+            
+          });
     }, []);
 
 

@@ -11,7 +11,7 @@ import Slide from '@material-ui/core/Slide';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import blue from '@material-ui/core/colors/blue';
 import { autoPlay } from 'react-swipeable-views-utils';
-import {usePrayerOnGo, useCurrentLocation, useDrawer, useForceTrigger, useForceTriggerRefresh} from '../../hooks/api-hooks';
+import {usePrayerOnGo, useCurrentLocation, useDrawer, useForceTrigger, useForceTriggerRefresh, useRenderCounts} from '../../hooks/api-hooks';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import {getJustPrayers} from '../../utils';
@@ -87,6 +87,7 @@ const tutorialSteps = [
   }));
 
 const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, school}) => {
+  useRenderCounts('Traveltimes.js')
     // const locref = useRef()
     // useLayoutEffect(() => {
     //   console.log('Iam a layout effect', locref.current)

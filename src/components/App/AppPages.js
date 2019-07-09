@@ -16,6 +16,7 @@ import Link from '@material-ui/core/Link';
 import {P_MENUS} from '../../utils/constants';
 import {UserContext} from '../../store/context/userContext';
 import bg from '../../assets/images/bg-new.png';
+import {useRenderCounts} from  '../../hooks/api-hooks';
 
 // import GridListTile from '@material-ui/core/GridListTile';
 // import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -93,6 +94,7 @@ const useStyles = makeStyles(theme => ({
 const cards = P_MENUS;
 
 export default function Album() {
+  useRenderCounts('AppPages.js');  
   const classes = useStyles();
   const {handleNav} = useContext(UserContext);
   

@@ -7,7 +7,8 @@ import Slide from '@material-ui/core/Slide';
 import Prayer from './Prayer';
 import './prayers.css';
 import Timer from '../Timer';
-import {getJustPrayers} from '../../utils'
+import {getJustPrayers} from '../../utils';
+import {useRenderCounts} from  '../../hooks/api-hooks';
 
 const useStyles = makeStyles(theme => ({
     progress: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const Prayers = (props) => {
+    useRenderCounts('Prayers.js');
     const {prdata: data} = props;
     const {data: {timings}} = data;
     const [onlyPrayers, setOnlyPrayers] = useState({})

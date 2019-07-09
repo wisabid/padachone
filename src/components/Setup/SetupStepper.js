@@ -11,6 +11,7 @@ import CloudUploadIcon from '@material-ui/icons/CardTravel';
 import Paper from '@material-ui/core/Paper';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import {UserContext} from '../../store/context/userContext';
+import {useRenderCounts} from '../../hooks/api-hooks';
 const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
@@ -73,6 +74,7 @@ const useStyles = makeStyles(theme => ({
   }
 
 const SetupStepper = (props) => {
+  useRenderCounts('SetupStepper.js'); 
     const {setPage} = useContext(UserContext);
   const {setupdata, country:country_alt, region:region_alt, place: place_alt} = props;
     const classes = useStyles();

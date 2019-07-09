@@ -32,7 +32,6 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
                 return key;
             })
             const dte = getPDdata();
-            debugger
             const timingsData = rawdata.data.filter(item => item.date.readable === dte);
             const data = {...rawdata, data : {...timingsData[0]}}
             
@@ -134,7 +133,7 @@ export const useCurrentLocation = ({lat, lon}) => {
             });
         
             const data = await result.json();
-            console.log('%c LOCATION DATA'+JSON.stringify(data), 'color:blue')
+            // console.log('%c LOCATION DATA'+JSON.stringify(data), 'color:blue')
             const locationData = data.resourceSets[0].resources[0].address.addressLine+', '+data.resourceSets[0].resources[0].address.adminDistrict+', '+data.resourceSets[0].resources[0].address.countryRegion;
             // setCurrentloc(data.resourceSets[0].resources[0].address.formattedAddress);
             setCurrentloc({data : locationData, formattedaddress: data.resourceSets[0].resources[0].address.formattedAddress });
@@ -199,9 +198,10 @@ export const useDrawer = () => {
 }
 
 export const useRenderCounts = (page) => {
+    const colors = ['red', 'green', 'lightblue', 'orange', 'grey']
     const renders = useRef(0);
     useEffect(() => {
-        console.log('%c FT Renders '+page+' : '+renders.current++, 'font-size: 30px;color: green');
+        console.log('%c FT Renders '+page+' : '+renders.current++, `font-size: 30px;color: ${colors[Math.floor(Math.random()*5)]}`);
     })
 }
 

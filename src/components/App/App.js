@@ -21,7 +21,8 @@ import Finetune from '../Finetune';
 import Lab from '../Lab';
 import {FT_PRAYER} from '../../utils/constants';
 import LandingPage from './LandingPage';
-import ConfirmAction from '../ConfirmAction/ConfirmAction'
+import ConfirmAction from '../ConfirmAction';
+import {useRenderCounts} from  '../../hooks/api-hooks';
 // import FbChat from '../FbChat/FbChat'
 
 const theme = createMuiTheme({
@@ -40,6 +41,7 @@ const theme = createMuiTheme({
   }
 });
 function App() { 
+  useRenderCounts('App.js'); 
   // Global State 
   const [tz, setTz] = useState('');
   const [page, setPage] = useState('Setup');
@@ -124,7 +126,6 @@ function App() {
   }
 
   const handleNav = (page) => {
-    debugger;
     if (page === 'callfunc') {
       handleExit();
     }

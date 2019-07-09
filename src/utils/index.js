@@ -1,5 +1,6 @@
 import * as emailjs from 'emailjs-com';
 import {PRAYERS_ARR} from './constants';
+import {db} from '../config/firebase';
 
 export const getPDdata = (type) => {
     const months =  ["Jan","Feb","Mar","Apr","May","Jun","Jul",
@@ -78,7 +79,36 @@ export const getMonthYearNumber = (PDdate) => {
     const monthNumber = ('0'+month).slice(-2);
     const year = PDdate.substr(5,4)
     
-    return [monthNumber, year];
+    return [monthNumber, year];   
+}
 
-    
+export const checkSubscription = (email) => {
+    return db.collection("subscribers")
+        .where("email", "==", email)
+        .get()
+        // .then(querySnapshot => {
+        //     const data = querySnapshot.docs.map(doc => doc.data());
+        //     console.log('DB : ',data); // array of cities objects
+        //     // if (data.length) {
+        //     //     return true;
+        //     // }
+        //     // else {
+        //     //     return false;
+        //     // }
+            
+        // });
+}
+
+export const addNewSubscriber = (email) => {
+    return db.collection("subscribers")
+        .doc(new Date().getTime().toString())
+        .set({email : email})
+        // .then(() => {
+        //     NotificationManager.success("A new user has been added", "Success");
+        //     window.location = "/";
+        // })
+        // .catch(error => {
+        //     NotificationManager.error(error.message, "Create user failed");
+        //     this.setState({ isSubmitting: false });
+        // });
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import angel from '../../assets/images/Prayer-time.jpg';
 import LocationText from './LocationText';
+import {useRenderCounts} from '../../hooks/api-hooks';
 
 const styles = {
     backgroundImage:`url(${angel})`, 
@@ -19,6 +20,7 @@ const styles = {
 
 
 const PrayerTime = ({anim, setAnim, travel=false, location=''}) => {
+    useRenderCounts('PrayerTime.js')
     return (
         <div style={{overflow: 'hidden'}}>
                 {anim[0] && <div className="Prayer-time" 

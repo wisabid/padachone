@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Lab from '../Lab/Lab';
 import {UserContext} from '../../store/context/userContext';
+import {useRenderCounts} from  '../../hooks/api-hooks';
 
 
 const useStyles = makeStyles({
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
   });
 
 const Prayer = (props) => {
+    useRenderCounts('Prayer.js');
     const { pdata:{timings, date, meta} } = props;
     const {setPage} = useContext(UserContext);
     console.table(Object.entries(timings))
@@ -84,7 +86,7 @@ const Prayer = (props) => {
             )
         }
         else {
-            console.log('ABID', timings)
+            // console.log('ABID', timings)
             return (
                 <Lab timings={{Asr: "18:08", 
                 Dhuhr: "13:43",

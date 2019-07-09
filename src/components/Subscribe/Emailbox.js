@@ -1,9 +1,10 @@
 import React from 'react';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import TextField from '@material-ui/core/TextField';
+import {useRenderCounts} from '../../hooks/api-hooks';
 
 const Emailbox = ({label='Email Address', email, handleEmail, sent, loading, subscribed, error}) => {
-   
+    useRenderCounts('Emailbox.js'); 
         return (
             <>
                     <DialogContentText>
