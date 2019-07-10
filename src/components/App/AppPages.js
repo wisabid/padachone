@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import {P_MENUS} from '../../utils/constants';
 import {UserContext} from '../../store/context/userContext';
-import bg from '../../assets/images/bg-new.png';
+import bg from '../../assets/images/bgbrandnewnew.gif';
 import {useRenderCounts} from  '../../hooks/api-hooks';
 
 // import GridListTile from '@material-ui/core/GridListTile';
@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => ({
   },
   text: {
     minHeight: '83px',
-    color: 'rgba(255, 255, 255, 0.7)'
+    color: '#03a9f4'
     // color: '#000'
   }
 }));
@@ -104,7 +104,7 @@ export default function Album() {
         {/* Hero unit */}        
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={1} style={{backgroundImage: `url(${bg})`, backgroundPosition: 'right bottom',}}>
+          <Grid container spacing={1} style={{backgroundImage: `url(${bg})`, backgroundPosition: 'center',backgroundRepeat:'no-repeat', backgroundColor: '#fff'}}>
             {cards.map((card, indx) => (
               <Grid item key={`${indx}-${card.page}`} xs={6} sm={6} md={4} style={{padding:'0px', background:'transparent'}}>
                 <Card className={classes.card}>

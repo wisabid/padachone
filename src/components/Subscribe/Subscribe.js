@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,10 +10,12 @@ import Emailbox from './Emailbox';
 import {sendSubscriptionEmail, handleLocalStorage, validateEmail, checkSubscription, addNewSubscriber} from '../../utils';
 import * as CONSTANTS from '../../utils/constants';
 import {useRenderCounts} from '../../hooks/api-hooks';
+import {UserContext} from '../../store/context/userContext';
 
 
 function Subscribe({modal, setModal}) {
-  useRenderCounts('Subscribe.js')
+  useRenderCounts('Subscribe.js');
+  const {visitor} = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState({
     value : '', 
@@ -56,11 +58,10 @@ function Subscribe({modal, setModal}) {
           }
           else {
             console.log('%c SUCCESSS', 'font-size:40px;')
-            debugger;
             sendSubscriptionEmail(email.value)
               .then((res) => {
                   // console.log(res);
-                   addNewSubscriber(email.value)
+                   addNewSubscriber({email : email.value, ip: (visitor.ip)?visitor.ip:''})
                     .then(() => {
                         setEmail({...email, value : '', sent : true, button: 'OK', loading: false});
                         handleLocalStorage({name : CONSTANTS.P_EMAIL, value : email.value});

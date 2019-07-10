@@ -99,10 +99,11 @@ export const checkSubscription = (email) => {
         // });
 }
 
-export const addNewSubscriber = (email) => {
+export const addNewSubscriber = ({email, ip}) => {
     return db.collection("subscribers")
-        .doc(new Date().getTime().toString())
-        .set({email : email})
+        .add({email : email, active: true, ip: ip})
+        // .doc(new Date().getTime().toString())
+        // .set({email : email})
         // .then(() => {
         //     NotificationManager.success("A new user has been added", "Success");
         //     window.location = "/";
@@ -111,4 +112,44 @@ export const addNewSubscriber = (email) => {
         //     NotificationManager.error(error.message, "Create user failed");
         //     this.setState({ isSubmitting: false });
         // });
+}
+export const addUniqueVisitor = (visitor) => {
+    if (visitor.ip) {
+        const dt = getPDdata();
+        db.collection("visitors")
+            .where("date", "==", dt)
+            .where("data.ip", "==", visitor.ip)
+            .get()
+            .then(querySnapshot => {
+                const data = querySnapshot.docs.map(doc => doc.data());
+                console.log('DB : ',data); // array of cities objects
+                if (data.length) {
+                    console.log('Visitor already exists');
+                    return;
+                }
+                else {
+                    db.collection("visitors")
+                        .add({data : visitor, date: dt})
+                        .then(() => {
+                            console.log('Successfully updated visitor data');
+                            return
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            return;
+                        })
+                }
+                
+            })
+            .catch(err => {
+                console.log(err);
+                return;
+            })
+    }
+    else {
+        console.log('NO IP saved')
+        return;
+        
+    }
+    
 }

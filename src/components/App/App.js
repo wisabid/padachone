@@ -22,7 +22,7 @@ import Lab from '../Lab';
 import {FT_PRAYER} from '../../utils/constants';
 import LandingPage from './LandingPage';
 import ConfirmAction from '../ConfirmAction';
-import {useRenderCounts} from  '../../hooks/api-hooks';
+import {useRenderCounts, useVisitorDetails} from  '../../hooks/api-hooks';
 // import FbChat from '../FbChat/FbChat'
 
 const theme = createMuiTheme({
@@ -41,6 +41,7 @@ const theme = createMuiTheme({
   }
 });
 function App() { 
+  const visitor = useVisitorDetails();
   useRenderCounts('App.js'); 
   // Global State 
   const [tz, setTz] = useState('');
@@ -136,11 +137,13 @@ function App() {
       setModal({show : true, name : 'Finetune'})
     }
     else if (page === 'reset') {
+      debugger;
       setModal({show : true, 
         name : 'ConfirmAction', 
         message: `<p style={{margin:0}}>This will reset all your settings which include Country, region & address Selection in addition to wiping out Fine tune preferences if any. Would you like to proceed ?</p>`,
         handlePrimary : (cb) => {
           localStorage.clear();
+          sessionStorage.removeItem('padachone_visitordata');
           cb();
           return window.location.reload();
         },
@@ -167,7 +170,7 @@ function App() {
   const handleExit = () => {
     Object.keys(localStorage).map(key => {
       if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region' && key !== 'padachone:method' && key !== 'padachone:school' && key !== `padachone_FT-${FT_PRAYER}`) {
-          localStorage.removeItem(key);
+          localStorage.removeItem(key);          
       }
     });    
     handlefinished({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), method: localStorage.getItem('padachone:method'), school: localStorage.getItem('padachone:school'), finished : false});
@@ -218,7 +221,8 @@ function App() {
           setModal : setModal,
           forceTrigger : forceTrigger, 
           setForceTrigger : setForceTrigger,
-          handleNav: handleNav
+          handleNav: handleNav,
+          visitor : visitor
         }}>
           <ErrorBoundary>
             <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>

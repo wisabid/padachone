@@ -33,10 +33,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - disbaled fb dialog
 - disabled music off by default
 - contribution guide
+- tracked ip of user while subscribing
 - to do : avoid security leak by hiding credentials
 - to do : optimize bundle, cdn
 - to do : headless cms
-- firebase
+- firebase : https://sebhastian.com/react-firestore
+- to do  : change git email
+- performance monitoring, ip address, active
+- to do : schedule emails using Bull
+- to do : use nice font
+- to do : service worker and ip details for visitors details
+- to do : custom trace and metrics on app using firebase performance monitoring
+- read on https://opensource.guide/
+- flash of all importatn users
+- fallback on ipstack api when geolocation is not enabled
+- tracking users data
 
 
 ## [1.0.0] - 2019-05-19

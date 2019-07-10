@@ -63,6 +63,11 @@
     <title>P A D A C H O N E : Know Your Prayer Times</title>
     <meta name="description" CONTENT="Muslim Prayer times,an easy & simple to use 'Know your prayer times'.Namaz & Ifthar time,with exact Fajr,Dhuhr,Asr,Maghrib & Isha Prayer times.Check Salah times">
     <meta name="robots" content="index, follow">
+    <!-- First Input Delay Script (Performance Monitoring) from Firebase -->
+    <script type="text/javascript">
+    !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
+    </script>
+    <!-- First Input Delay Script from Firebase ends here -->
   </head>
   <body>
     <!-- Load Facebook SDK for JavaScript -->
@@ -137,5 +142,21 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- Performance Monitoring by Firebase -->
+    <script type="text/javascript">
+      // The perfMetrics object is created by the code that goes in <head>.
+      perfMetrics.onFirstInputDelay(function(delay, evt) {
+        ga('send', 'event', {
+          eventCategory: 'Perf Metrics',
+          eventAction: 'first-input-delay',
+          eventLabel: evt.type,
+          // Event values must be an integer.
+          eventValue: Math.round(delay),
+          // Exclude this event from bounce rate calculations.
+          nonInteraction: true,
+        });
+      });
+    </script>
+    <!-- Performance Monitoring by Firebase ends here -->
   </body>
 </html>

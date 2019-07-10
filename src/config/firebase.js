@@ -1,4 +1,6 @@
 import firebase from "firebase";
+// Add the Performance Monitoring library
+import "firebase/performance";
 
 const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyCqASkpIcuegKKvjHtdn5rl4jmZmRzBfwk",
@@ -12,4 +14,7 @@ const firebaseApp = firebase.initializeApp({
 
 const db = firebaseApp.firestore();
 
-export { db };
+// Initialize Performance Monitoring and get a reference to the service
+const perf = firebase.performance();
+
+export { db, perf };
