@@ -19,5 +19,5 @@ export const P_MENUS_SEC = [
 ];
 export const FT_PRAYER = "api_prayer-results";
 export const FLASH_MESSAGE_DISPLAY_TIME = 2000;
-export const IPSTACK_API = "df51b141e303cc845837d68e78adc230";
-export const IGNORE_HOSTS = ["localhost", "dev.padachone.com"];
+// export const IPSTACK_API = "df51b141e303cc845837d68e78adc230"; NOT IN USE AS THEY DONT HAVE SSL ENABLED FOR FREE TIER
+export const IGNORE_HOSTS = ["localhost", ""];

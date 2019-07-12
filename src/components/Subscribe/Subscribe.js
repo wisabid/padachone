@@ -61,7 +61,7 @@ function Subscribe({modal, setModal}) {
             sendSubscriptionEmail(email.value)
               .then((res) => {
                   // console.log(res);
-                   addNewSubscriber({email : email.value, ip: (visitor.ip)?visitor.ip:''})
+                   addNewSubscriber({email : email.value, ip: (visitor.IPv4)?visitor.IPv4:''})
                     .then(() => {
                         setEmail({...email, value : '', sent : true, button: 'OK', loading: false});
                         handleLocalStorage({name : CONSTANTS.P_EMAIL, value : email.value});

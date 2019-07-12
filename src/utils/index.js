@@ -114,11 +114,12 @@ export const addNewSubscriber = ({email, ip}) => {
         // });
 }
 export const addUniqueVisitor = (visitor) => {
-    if (visitor.ip) {
+    if (visitor.IPv4) {
         const dt = getPDdata();
         db.collection("visitors")
             .where("date", "==", dt)
-            .where("data.ip", "==", visitor.ip)
+            .where("data.IPv4", "==", visitor.IPv4)
+            .where("host", "==", window.location.hostname)
             .get()
             .then(querySnapshot => {
                 const data = querySnapshot.docs.map(doc => doc.data());
@@ -129,7 +130,7 @@ export const addUniqueVisitor = (visitor) => {
                 }
                 else {
                     db.collection("visitors")
-                        .add({data : visitor, date: dt})
+                        .add({data : visitor, date: dt, host : window.location.hostname, timestamp : new Date()})
                         .then(() => {
                             console.log('Successfully updated visitor data');
                             return

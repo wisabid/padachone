@@ -1,4 +1,5 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
+import 'firebase/firestore';
 // Add the Performance Monitoring library
 import "firebase/performance";
 

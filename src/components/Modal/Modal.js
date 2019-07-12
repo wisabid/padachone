@@ -15,9 +15,7 @@ export default function FormDialog({htmlmarkup=null, modal, error, setModal, tit
     }    
   }, [modal])
 
-  function handleClickOpen() {
-    setOpen(true);
-  }
+  
 
   function handleClose() {
     setOpen(false);

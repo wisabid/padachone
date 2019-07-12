@@ -220,37 +220,38 @@ export const useForceTrigger = ({setModal:setTrigger, params, ftname, setData}) 
     }, [forceTrigger])
 }
 
-export const useVisitorDetails = () => {
+export const useVisitorDetails = (dte) => {
     const [visitordata, setVisitordata] = useState({});
-    const API = `https://api.ipstack.com/check?access_key=${IPSTACK_API}`;
+    // const API = `https://api.ipstack.com/check?access_key=${IPSTACK_API}`;
+    const API = `https://geoip-db.com/json/`;
     const getVisitorDetails = async() => {
         const results = await fetch(API, {
             headers : {
-                Accept : 'Application/data'
+                Accept : 'application/json'
             }
         });
         const data = await results.json();
         console.log('VS', data);
-        debugger;
-        if (data.ip) {
-            sessionStorage.setItem('padachone_visitordata', JSON.stringify(data));
+        if (data.IPv4) {
+            Object.keys(sessionStorage).map(key => {
+                if (key.startsWith('padachone_visitordata:')) {
+                    sessionStorage.removeItem(key);
+                }
+                return key;
+            })
+            sessionStorage.setItem(`padachone_visitordata:${dte}`, JSON.stringify(data));
             addUniqueVisitor(data);
         }
-        if (data.success) {
-            setVisitordata(data);
-        }       
+        setVisitordata(data);
            
     }
     useEffect(() => {
-        debugger;
-        if (IGNORE_HOSTS.indexOf(window.location.hostname) === -1) {
-            if (sessionStorage.getItem('padachone_visitordata')) {
-                setVisitordata(JSON.parse(sessionStorage.getItem('padachone_visitordata')))
+            if (sessionStorage.getItem(`padachone_visitordata:${dte}`)) {
+                setVisitordata(JSON.parse(sessionStorage.getItem(`padachone_visitordata:${dte}`)))
             }
-            else {
-                getVisitorDetails();
+            else if (IGNORE_HOSTS.indexOf(window.location.hostname) === -1) {
+                    getVisitorDetails();
             }
-        }
     }, []);
 
     return visitordata;

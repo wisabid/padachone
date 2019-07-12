@@ -7,7 +7,7 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import CloudUploadIcon from '@material-ui/icons/CardTravel';
+// import CloudUploadIcon from '@material-ui/icons/CardTravel';
 import Paper from '@material-ui/core/Paper';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import {UserContext} from '../../store/context/userContext';

@@ -46,8 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - to do : custom trace and metrics on app using firebase performance monitoring
 - read on https://opensource.guide/
 - flash of all importatn users
-- fallback on ipstack api when geolocation is not enabled
-- tracking users data
+- to do : fallback on ipstack api when geolocation is not enabled
+- to do: tracking users data
 
 
 ## [1.0.0] - 2019-05-19

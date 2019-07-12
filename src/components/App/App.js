@@ -41,7 +41,7 @@ const theme = createMuiTheme({
   }
 });
 function App() { 
-  const visitor = useVisitorDetails();
+  
   useRenderCounts('App.js'); 
   // Global State 
   const [tz, setTz] = useState('');
@@ -108,7 +108,7 @@ function App() {
   });
   
   const {finished, country, region, pdtodaysDate, prayerdata, place, method, school} = state;
-
+  const visitor = useVisitorDetails(pdtodaysDate);
   const handlefinished = (obj) => {
     const {country, region, finished, place} = obj;
     setState({...state, finished, country, region: region, place : place});
@@ -137,13 +137,12 @@ function App() {
       setModal({show : true, name : 'Finetune'})
     }
     else if (page === 'reset') {
-      debugger;
       setModal({show : true, 
         name : 'ConfirmAction', 
         message: `<p style={{margin:0}}>This will reset all your settings which include Country, region & address Selection in addition to wiping out Fine tune preferences if any. Would you like to proceed ?</p>`,
         handlePrimary : (cb) => {
           localStorage.clear();
-          sessionStorage.removeItem('padachone_visitordata');
+          sessionStorage.clear();
           cb();
           return window.location.reload();
         },

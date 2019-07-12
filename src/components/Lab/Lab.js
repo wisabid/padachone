@@ -75,6 +75,14 @@ const Lab = (props) => {
             console.log('DB: ', data); // array of cities objects
             
           });
+
+        db.collection("visitors")
+          .get()
+          .then(querySnapshot => {
+            const data = querySnapshot.docs.map(doc => doc.data());
+            console.log('DB: ', data); // array of cities objects
+            
+          });
     }, []);
 
 
