@@ -86,7 +86,7 @@ export const usePrayerOnGo = ({lat, lon, method=8, school=0}) => {
     const {forceTrigger} = useContext(UserContext);
     const dte = getPDdata();
     const tdate = new Date();
-    const month = tdate.getMonth()+1;
+    const month = parseInt(tdate.getMonth())+1;
     const year = tdate.getFullYear();
     const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=${method}&month=${month}&year=${year}&school=${school}`;
     const [data, setData] = useState({})
