@@ -97,9 +97,9 @@ const Footer = ({startup}) => {
           {/* <IconButton edge="start" color="inherit" aria-label="Open drawer">
             <MenuIcon />
           </IconButton> */}
-          <Fab color="secondary" aria-label="Add" className={classes.fabButton} title="Subscribe">
+          {/* <Fab color="secondary" aria-label="Add" className={classes.fabButton} title="Subscribe">
             <SettingsIcon fontSize="large" onClick={() => setModal({show: true, name : 'Subscribe'})}/>            
-          </Fab>
+          </Fab> */}
           <div className={classes.grow} />
           {/* <Typography variant="h6" color="inherit" style={{color: 'white', display:'flex', justifyContent: 'center', marginRight:'10px'}}>
                 P  A  D  A  C  H  O  N  E
@@ -114,8 +114,7 @@ const Footer = ({startup}) => {
         {/* </Toolbar> */}
         <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px', fontSize:'10px', color: '#555555'
 }} align="center">
-            .
-            {/* Copyright © 2019 WISMIM. */}
+            Copyright © 2019 WISMIM.
           </Typography>
       </AppBar>
       </>

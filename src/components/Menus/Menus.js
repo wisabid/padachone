@@ -1,7 +1,6 @@
 import React, {useEffect, useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
@@ -11,7 +10,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import HomeIcon from '@material-ui/icons/Home';
 import TravelIcon from '@material-ui/icons/CardTravel';
 import MailIcon from '@material-ui/icons/Mail';
-import SettingsIcon from '@material-ui/icons/Settings';
+import SettingsPowerIcon from '@material-ui/icons/SettingsPower';
+import TuningIcon from '@material-ui/icons/Tune';
 import SubscribeIcon from '@material-ui/icons/Subscriptions';
 import LabIcon from '@material-ui/icons/DirectionsRun';
 import PowerIcon from '@material-ui/icons/SettingsBackupRestore';
@@ -41,6 +41,10 @@ const Micon = ({icon}) => {
           return (
             <SubscribeIcon />
           )
+    case 'setFTmodal':
+          return (
+            <TuningIcon />
+          )
     case 'Lab':
           return (
             <LabIcon />
@@ -49,6 +53,11 @@ const Micon = ({icon}) => {
         return (
           <PowerIcon />
         )
+    case 'reset':
+        return (
+          <SettingsPowerIcon />
+        )
+          
     default:
         return (
           <HomeIcon />
@@ -59,7 +68,7 @@ const Micon = ({icon}) => {
 
 export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
   const classes = useStyles();
-  const {iamin, setPage, handleExit, setModal} = useContext(UserContext);
+  const {iamin, setPage, handleExit, setModal, handleNav} = useContext(UserContext);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -85,17 +94,24 @@ export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
     
 }, [drawerOpen])
 
-  const handleNav = (page) => {
-      if (page === 'callfunc') {
-        handleExit();
-      }
-      else if (page === 'setmodal') {
-        setModal({show : true, name : 'Subscribe'})
-      }
-      else {
-        setPage(page)
-      }
-  }
+  // const handleNav = (page) => {
+  //     if (page === 'callfunc') {
+  //       handleExit();
+  //     }
+  //     else if (page === 'setmodal') {
+  //       setModal({show : true, name : 'Subscribe'})
+  //     }
+  //     else if (page === 'setFTmodal') {
+  //       setModal({show : true, name : 'Finetune'})
+  //     }
+  //     else if (page === 'reset') {
+  //       localStorage.clear();
+  //       return window.location.reload();
+  //     }
+  //     else {
+  //       setPage(page)
+  //     }
+  // }
 
   const sideList = side => (
     <div
@@ -106,7 +122,7 @@ export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
     >
       <List>
         {P_MENUS.map((nav, index) => (
-          <ListItem button key={`${index}-${nav.page}-main`} disabled={(index !== 0 && index !== 1 && index !== 2) ?true:false} 
+          <ListItem button key={`${index}-${nav.page}-main`} disabled={(index !== 0 && index !== 1 && index !== 2 && index !== 3) ?true:false} 
             onClick={() => handleNav(nav.page)}>
             {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
             <ListItemIcon><Micon icon={nav.page} /></ListItemIcon>
@@ -117,7 +133,7 @@ export default function TemporaryDrawer({drawerOpen, handleDrawerToggle}) {
       <Divider />
       <List>
         {P_MENUS_SEC.map((nav, index) => (
-          <ListItem button key={`${index}-${nav.page}-sec`} disabled={(index !== 1) ?true:false} 
+          <ListItem button key={`${index}-${nav.page}-sec`} disabled={(index !== 2 && index !== 0) ?true:false} 
             onClick={() => handleNav(nav.page)}>
             <ListItemIcon><Micon icon={nav.page} /></ListItemIcon>
             <ListItemText primary={nav.label} />

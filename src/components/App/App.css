@@ -9,6 +9,14 @@
   pointer-events: none;
 }
 
+.landing-navs {
+  animation: App-logo-spin 0.5s ease;
+  animation-direction:alternate;
+  /* height: 40vmin; */
+  animation-iteration-count: 2;
+  
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

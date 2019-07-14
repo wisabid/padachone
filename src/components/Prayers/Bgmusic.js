@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Sound from 'react-sound';
+import {useRenderCounts} from '../../hooks/api-hooks';
 
 
 const Bgmusic = ({bgm, volume=true, setPlaying}) => {
+  useRenderCounts('Bgmusic.js')
     const [status, setStatus] = useState('PLAYING');
     const handleLoad = () => {
       console.log('LOADED')

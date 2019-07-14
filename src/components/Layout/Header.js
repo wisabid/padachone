@@ -13,6 +13,7 @@ import SettingsIcon from '@material-ui/icons/SettingsBackupRestore';
 import InfoIcon from '@material-ui/icons/Info';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import logo from '../../assets/images/logo-sec.png';
 import './layout.css';
 import {UserContext} from '../../store/context/userContext';
@@ -61,23 +62,23 @@ const Header = ({startup, place, pdate, travel=false, address='', volume=true, s
 
     
     
-      const handleChange = () => {
-        setState(() => {
-          Object.keys(localStorage).map(key => {
-            if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
-                localStorage.removeItem(key);
-            }
-            return;
-        });
-        if (travel) {
-          // setPage('Setup')
-        }
-        else {
-          startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
-        }
-        // return { ...state, [name]: event.target.checked }
-      });
-      };
+      // const handleChange = () => {
+      //   setState(() => {
+      //     Object.keys(localStorage).map(key => {
+      //       if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region' && key !== 'padachone:method' && key !== 'padachone:school') {
+      //           localStorage.removeItem(key);
+      //       }
+      //       return;
+      //   });
+      //   if (travel) {
+      //     // setPage('Setup')
+      //   }
+      //   else {
+      //     startup({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+      //   }
+      //   // return { ...state, [name]: event.target.checked }
+      // });
+      // };
     return (
         <div className={{flexGrow: 1}}>
           
@@ -102,9 +103,13 @@ const Header = ({startup, place, pdate, travel=false, address='', volume=true, s
             {/* <Avatar className={classes.avatar}> */}
             {!travel
               ?<SettingsIcon fontSize="default" onClick={handleExit} style={{color:'#fff'}} />
-              :(playing)
-                ?<MusicOption volume={volume} setVolume={setVolume}/>
-                :null
+              :<HomeIcon style={{color:'#fff'}} onClick={() => iamin?setPage('Home'):setPage('Setup')}/>
+                // ?<HomeIcon />
+                // :null
+
+                // :(playing)
+              // ?<MusicOption volume={volume} setVolume={setVolume}/>
+              //   :null
             }
           {/* </Avatar> */}
             </Toolbar>

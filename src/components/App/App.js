@@ -18,7 +18,12 @@ import {UserContext} from '../../store/context/userContext';
 import Travel from '../Travel';
 import Subscribe from '../Subscribe';
 import Finetune from '../Finetune';
-import Lab from '../Lab'
+import Lab from '../Lab';
+import {FT_PRAYER} from '../../utils/constants';
+import LandingPage from './LandingPage';
+import ConfirmAction from '../ConfirmAction';
+import {useRenderCounts, useVisitorDetails, useMessageBroadcast} from  '../../hooks/api-hooks';
+// import FbChat from '../FbChat/FbChat'
 
 const theme = createMuiTheme({
   palette: {
@@ -36,16 +41,38 @@ const theme = createMuiTheme({
   }
 });
 function App() { 
+  
+  useRenderCounts('App.js'); 
+  const [msgbroadcast] = useMessageBroadcast();
   // Global State 
   const [tz, setTz] = useState('');
   const [page, setPage] = useState('Setup');
+  console.log('%c PAGE'+page, 'font-size:40px;')
   const [iamin, setIamin] = useState(false);  
   const [modal, setModal] = useState({show : false, name : ''})
   // Global State ends here
   const [prevScrollpos, setprevScrollpos] = useState(window.pageYOffset);
   const [display, setdisplay] = useState(true);  
+  const [forceTrigger, setForceTrigger] = useState({target : ''});
 
+  const handleForceTrigger = ({target, method, school}) => {
+    setForceTrigger(() => {
+      setState({...state, 
+        method : parseInt(method),
+        school : parseInt(school)}
+      )
+      return {target : FT_PRAYER}
+    })
+  }
   
+  useEffect(() => {
+    if (forceTrigger.target === FT_PRAYER) {
+      setState({...state, 
+        method : localStorage.getItem('padachone:method')?parseInt(localStorage.getItem('padachone:method')):8,
+        school : localStorage.getItem('padachone:school')?parseInt(localStorage.getItem('padachone:school')):0}
+      )
+    }
+  }, [forceTrigger])
 
   const hideHdrFtr = () => {
     let currentScrollPos = window.pageYOffset;
@@ -76,9 +103,13 @@ function App() {
     pdtodaysDate: getPDdata().split(' ').join(''), 
     place :localStorage.getItem('padachone:place') , 
     country : localStorage.getItem('padachone:country'), 
-    region: localStorage.getItem('padachone:region')});
-  const {finished, country, region, pdtodaysDate, prayerdata, place} = state;
-
+    region: localStorage.getItem('padachone:region'),
+    method : localStorage.getItem('padachone:method')?parseInt(localStorage.getItem('padachone:method')):8,
+    school : localStorage.getItem('padachone:school')?parseInt(localStorage.getItem('padachone:school')):0
+  });
+  
+  const {finished, country, region, pdtodaysDate, prayerdata, place, method, school} = state;
+  const visitor = useVisitorDetails(pdtodaysDate);
   const handlefinished = (obj) => {
     const {country, region, finished, place} = obj;
     setState({...state, finished, country, region: region, place : place});
@@ -96,13 +127,53 @@ function App() {
     }
   }
 
+  const handleNav = (page) => {
+    if (page === 'callfunc') {
+      handleExit();
+    }
+    else if (page === 'setmodal') {
+      setModal({show : true, name : 'Subscribe'})
+    }
+    else if (page === 'setFTmodal') {
+      setModal({show : true, name : 'Finetune'})
+    }
+    else if (page === 'reset') {
+      setModal({show : true, 
+        name : 'ConfirmAction', 
+        message: `<p style={{margin:0}}>This will reset all your settings which include Country, region & address Selection in addition to wiping out Fine tune preferences if any. Would you like to proceed ?</p>`,
+        handlePrimary : (cb) => {
+          localStorage.clear();
+          sessionStorage.clear();
+          cb();
+          return window.location.reload();
+        },
+        handleSecondary : (cb) => {
+          cb();
+          return;
+        },
+        modalconfig : {
+          description : "",
+          title : "Hard Reset Everything", 
+          primaryButton : "Yes",
+          secondaryButton : "No",
+          error : false,
+          loading: false
+        }
+      })
+      
+    }
+    else {
+      setPage(page)
+    }
+  }
+
   const handleExit = () => {
     Object.keys(localStorage).map(key => {
-      if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region') {
-          localStorage.removeItem(key);
+      if (key !== 'padachone:place' && key !== 'padachone:country' && key !== 'padachone:region' && key !== 'padachone:method' && key !== 'padachone:school' && key !== `padachone_FT-${FT_PRAYER}`) {
+          localStorage.removeItem(key);          
       }
     });    
-    handlefinished({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), finished : false});
+    handlefinished({country: localStorage.getItem('padachone:country') , region: localStorage.getItem('padachone:region') , place: localStorage.getItem('padachone:place'), method: localStorage.getItem('padachone:method'), school: localStorage.getItem('padachone:school'), finished : false});
   };
 
   const [msg, setMsg] = useState([false, '']);
@@ -117,15 +188,15 @@ function App() {
     localStorage.removeItem('padachone_msg5');
     localStorage.removeItem('padachone_msg6');
     localStorage.removeItem('padachone_msg7');
-    if (!localStorage.getItem('padachone_msg8')) {
-      const message = `Fast Forward your Set up now! `;
+    if (msgbroadcast) {
+      // const message = `Chat with us and pass in your feedback/comments. `;
       setMsg(() => {
-        localStorage.setItem('padachone_msg8', message)
-        return [true, message]
+        // localStorage.setItem('padachone_msg9', message)
+        return [true, msgbroadcast]
       });      
     }
     // Logic for displaying Messages end here
-    const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place');
+    const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place' && key !== 'padachone:method' && key !== 'padachone:school');
     if (padachon_lsfind.length) {
       setState({...state, finished : true});
       setPage(() => {
@@ -133,7 +204,7 @@ function App() {
         return 'Home'
       })
     }
-  }, [])
+  }, [msgbroadcast])
   return (
     
     <ThemeProvider theme={theme}>
@@ -147,7 +218,11 @@ function App() {
           iamin : iamin,
           handleExit: handleExit,
           modal : modal, 
-          setModal : setModal
+          setModal : setModal,
+          forceTrigger : forceTrigger, 
+          setForceTrigger : setForceTrigger,
+          handleNav: handleNav,
+          visitor : visitor
         }}>
           <ErrorBoundary>
             <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
@@ -156,8 +231,9 @@ function App() {
             <Zoom in={true}>
                 <SpecialDay display={display} setdisplay={setdisplay}/>
             </Zoom>
+            {!finished && page === 'Setup' && <LandingPage finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {msg[0] && <Messages msg={msg[1]}/>}
-            {page === 'Travel' && <Travel />}
+            {page === 'Travel' && <Travel method={method} school={school}/>}
             {page === 'Lab' && <Lab timings={{Asr: "18:08", 
                 Dhuhr: "13:43",
                 Fajr: "02:59",
@@ -167,10 +243,15 @@ function App() {
                 Midnight: "01:43",
                 Sunrise: "05:20",
                 Sunset: "22:06"}} />}
-            {!finished && page === 'Setup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
-            {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} startup={(resetstate) => handlefinished(resetstate)}/>}
+            {page === 'SetMeup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
+            {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} method={method} school={school} startup={(resetstate) => handlefinished(resetstate)}/>}
             {modal.show && modal.name === 'Subscribe' && <Subscribe modal={modal} setModal={setModal}/>}
-            {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal}/>}
+            {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal} method={method} school={school} handleForceTrigger={(obj) => handleForceTrigger(obj)}/>}
+            {modal.show && modal.name === 'ConfirmAction' && <ConfirmAction modal={modal} setModal={setModal} message={modal.message} 
+              handlePrimary={modal.handlePrimary} 
+              handleSecondary={modal.handleSecondary}
+              modalconfig={modal.modalconfig}/>}
+            {/* <FbChat /> */}
           </ErrorBoundary>
         </UserContext.Provider> 
       </div>

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,11 +7,15 @@ import DialogContent from '@material-ui/core/DialogContent';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Emailbox from './Emailbox';
-import {sendSubscriptionEmail, handleLocalStorage, validateEmail} from '../../utils';
-import * as CONSTANTS from '../../utils/constants'
+import {sendSubscriptionEmail, handleLocalStorage, validateEmail, checkSubscription, addNewSubscriber} from '../../utils';
+import * as CONSTANTS from '../../utils/constants';
+import {useRenderCounts} from '../../hooks/api-hooks';
+import {UserContext} from '../../store/context/userContext';
 
 
 function Subscribe({modal, setModal}) {
+  useRenderCounts('Subscribe.js');
+  const {visitor} = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
   const [email, setEmail] = React.useState({
     value : '', 
@@ -44,28 +48,52 @@ function Subscribe({modal, setModal}) {
     }
     
     setEmail({...email, loading: true});
-    if (handleLocalStorage({name : CONSTANTS.P_EMAIL})) {
-      setEmail({...email, value : '', button: 'OK', subscribed : true, loading: false});
-    }
-    else {
-      sendSubscriptionEmail(email.value)
-        .then((res) => {
-            console.log(res);
-            setEmail({...email, value : '', sent : true, button: 'OK', loading: false});
-            handleLocalStorage({name : CONSTANTS.P_EMAIL, value : email.value});
-        })
-        .catch(err => {
-          setEmail({...email, value: '', error : true, errorlabel: 'Please try later'});
-        }) 
-      // setTimeout(() => {
-      //   setEmail({...email, value : '', sent : true, button: 'OK', loading: false});
-      //   handleLocalStorage({name : CONSTANTS.P_EMAIL, value : email.value});
-      // }, 2000)    
-    } 
+    //checking in firebase
+    checkSubscription(email.value)
+      .then((querySnapshot) => {
+        const data = querySnapshot.docs.map(doc => doc.data());
+        if (!data.length) {
+          if (handleLocalStorage({name : CONSTANTS.P_EMAIL})) {
+            setEmail({...email, value : '', button: 'OK', subscribed : true, loading: false});
+          }
+          else {
+            console.log('%c SUCCESSS', 'font-size:40px;')
+            sendSubscriptionEmail(email.value)
+              .then((res) => {
+                  // console.log(res);
+                   addNewSubscriber({email : email.value, ip: (visitor.IPv4)?visitor.IPv4:''})
+                    .then(() => {
+                        setEmail({...email, value : '', sent : true, button: 'OK', loading: false});
+                        handleLocalStorage({name : CONSTANTS.P_EMAIL, value : email.value});
+                    })
+                    .catch(error => {
+                       throw new Error(error.message);
+                    });                  
+                  
+              })
+              .catch(err => {
+                setEmail({...email, value: '', error : true, errorlabel: 'Please try later'});
+              }) 
+          } 
+        }
+        else {
+          setEmail({...email, value : '', button: 'OK', subscribed : true, loading: false});
+        }
+      })
+      .catch(error => {
+          throw new Error(error.message);
+      });
+    
+    // if (!false) {
+      
+    // }
+    // else {
+      
+    // }
   }
 
   const handleEmail = (event) => {
-    setEmail({...email, value : event.target.value, sent : false, error: false, errorlabel: 'Email Address'});
+    setEmail({...email, value : (event.target.value).toLowerCase(), sent : false, error: false, errorlabel: 'Email Address'});
   }
 
   return (

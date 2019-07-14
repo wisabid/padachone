@@ -11,6 +11,7 @@ import CurrentTime from './CurrentTime';
 import DismissTimer from './DismissTimer';
 import PrayerTime from './PrayerTime';
 import {UserContext} from '../../store/context/userContext';
+import {useRenderCounts} from '../../hooks/api-hooks';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -25,7 +26,12 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const Timer = (props) => {
-    console.log('%c IM THE TIMER', 'font-size:20px;')
+    useRenderCounts('Timer.js'); 
+    // console.log('%c IM THE TIMER', 'font-size:20px;');
+    useEffect(() => {
+        // console.log('TIMER hellooo');
+        startTimer('init');
+    }, [props.prayers])
     const {tz, setTz} = useContext(UserContext);
     const [dt, setdt] = useState(getPDdata('iso'))
     // const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -115,6 +121,7 @@ const Timer = (props) => {
     }
 
     useEffect(() => {
+        console.log('TIMER USEEFFECT')
         startTimer('init') 
     }, [])
 
@@ -124,6 +131,7 @@ const Timer = (props) => {
     
 
     useEffect(() => {
+        console.log('TIMER USEEFFECT buhahaha');
         let spanEl = document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)');
         if (!timerdisplay) {
             setAnchorEl(null);  

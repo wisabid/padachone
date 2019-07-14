@@ -1,5 +1,6 @@
 import * as emailjs from 'emailjs-com';
 import {PRAYERS_ARR} from './constants';
+import {db} from '../config/firebase';
 
 export const getPDdata = (type) => {
     const months =  ["Jan","Feb","Mar","Apr","May","Jun","Jul",
@@ -67,4 +68,89 @@ export function getJustPrayers({timings}) {
         return all;          
       }, {});
     return justPrayers;
+}
+
+
+export const getMonthYearNumber = (PDdate) => {
+    const months =  ["Jan","Feb","Mar","Apr","May","Jun","Jul",
+    "Aug","Sep","Oct","Nov","Dec"];
+
+    const month = months.indexOf(PDdate.substr(2,3)) + 1;
+    const monthNumber = ('0'+month).slice(-2);
+    const year = PDdate.substr(5,4)
+    
+    return [monthNumber, year];   
+}
+
+export const checkSubscription = (email) => {
+    return db.collection("subscribers")
+        .where("email", "==", email)
+        .get()
+        // .then(querySnapshot => {
+        //     const data = querySnapshot.docs.map(doc => doc.data());
+        //     console.log('DB : ',data); // array of cities objects
+        //     // if (data.length) {
+        //     //     return true;
+        //     // }
+        //     // else {
+        //     //     return false;
+        //     // }
+            
+        // });
+}
+
+export const addNewSubscriber = ({email, ip}) => {
+    return db.collection("subscribers")
+        .add({email : email, active: true, ip: ip})
+        // .doc(new Date().getTime().toString())
+        // .set({email : email})
+        // .then(() => {
+        //     NotificationManager.success("A new user has been added", "Success");
+        //     window.location = "/";
+        // })
+        // .catch(error => {
+        //     NotificationManager.error(error.message, "Create user failed");
+        //     this.setState({ isSubmitting: false });
+        // });
+}
+export const addUniqueVisitor = (visitor) => {
+    if (visitor.IPv4) {
+        const dt = getPDdata();
+        db.collection("visitors")
+            .where("date", "==", dt)
+            .where("data.IPv4", "==", visitor.IPv4)
+            .where("host", "==", window.location.hostname)
+            .get()
+            .then(querySnapshot => {
+                const data = querySnapshot.docs.map(doc => doc.data());
+                console.log('DB : ',data); // array of cities objects
+                if (data.length) {
+                    console.log('Visitor already exists');
+                    return;
+                }
+                else {
+                    db.collection("visitors")
+                        .add({data : visitor, date: dt, host : window.location.hostname, timestamp : new Date()})
+                        .then(() => {
+                            console.log('Successfully updated visitor data');
+                            return
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            return;
+                        })
+                }
+                
+            })
+            .catch(err => {
+                console.log(err);
+                return;
+            })
+    }
+    else {
+        console.log('NO IP saved')
+        return;
+        
+    }
+    
 }

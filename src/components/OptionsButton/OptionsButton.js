@@ -9,11 +9,11 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import CloudUploadIcon from '@material-ui/icons/CardTravel';
+
 
 // const options = ['Times Onboard', 'Near by Mosques', 'Maps'];
 
-export default function SplitButton({options, setPage}) {
+export default function SplitButton({options, setPage, menuOptIcon}) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -54,7 +54,7 @@ export default function SplitButton({options, setPage}) {
             aria-owns={open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
             onClick={handleToggle}
-          > <CloudUploadIcon />
+          > {menuOptIcon}
             <ArrowDropDownIcon />
           </Button>
         </ButtonGroup>

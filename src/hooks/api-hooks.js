@@ -1,35 +1,52 @@
-import { useState, useEffect } from 'react';
-import {getPDdata} from '../utils/index';
-import {BING_API} from '../utils/constants';
-export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date}) => {
-    let city;
-    if (place) {
-        city = place;
-    }
-    else {
-        city=region
-    }
-    const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=8&school=0`;
+import { useState, useEffect, useRef, useContext } from 'react';
+import Prismic from 'prismic-javascript';
+import {Link, RichText, Date} from 'prismic-reactjs';
+import {getPDdata, getMonthYearNumber, addUniqueVisitor} from '../utils/index';
+import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS, PRISMIC_TOKEN} from '../utils/constants';
+import {UserContext} from '../store/context/userContext';
+export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0}) => {
+    const {forceTrigger} = useContext(UserContext);
+    const [month, year] = getMonthYearNumber(date);
+    const [inprocess, setInprocess] = useState(false);
+    // let city;
+    // if (place) {
+    //     city = place;
+    // }
+    // else {
+    //     city=region
+    // }
+    // const API = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&method=${method}&school=${school}`;
+    const API = `https://api.aladhan.com/v1/calendarByAddress?address=${place},${region},${country}&method=${method}&school=${school}&month=${month}&year=${year}`
     const [data, setData] = useState({})
     async function fetchPrayerTimes() {
         try {
+            setInprocess(true);
             const res = await fetch(API, {
                 headers : {
                     Accept : 'application/json'
                 }
             });
-            const data = await res.json();
+            const rawdata = await res.json();
             Object.keys(localStorage).map(key => {
                 if (key.startsWith('padachone:')) {
                     localStorage.removeItem(key);
                 }
                 return key;
             })
+            const dte = getPDdata();
+            const timingsData = rawdata.data.filter(item => item.date.readable === dte);
+            const data = {...rawdata, data : {...timingsData[0]}}
             
             if (data && data.data && data.data.meta) {
+                setInprocess(false);
                 region && localStorage.setItem(`padachone:region`, region);
                 country && localStorage.setItem(`padachone:country`, country);
                 place && localStorage.setItem(`padachone:place`, place);
+                if (forceTrigger.target === FT_PRAYER) {
+                    localStorage.setItem(`padachone_FT-${FT_PRAYER}`, true);
+                }
+                method && localStorage.setItem(`padachone:method`, method);
+                school !== '' && localStorage.setItem(`padachone:school`, school)
                 localStorage.setItem(`padachone:${date}`, JSON.stringify(data))
             }
             setData(data);
@@ -41,23 +58,37 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
         }   
     }
     useEffect(() => {
-        if (localStorage.getItem(`padachone:${date}`)) {
+        if (localStorage.getItem(`padachone:${date}`) && !forceTrigger.target) {
             setData(JSON.parse(localStorage.getItem(`padachone:${date}`)))           
         }
         else {
-            fetchPrayerTimes();
+            if (!inprocess) {
+                fetchPrayerTimes();
+            }
+            else {
+                return false;
+            }
+            
         }
     }, [])
+
+    useEffect(() => {
+        if (forceTrigger.target === FT_PRAYER && !inprocess) {
+            fetchPrayerTimes();
+        }
+        
+    }, [forceTrigger])
     return [data, setData]
 }
 
 
-export const usePrayerOnGo = ({lat, lon}) => {
+export const usePrayerOnGo = ({lat, lon, method=8, school=0}) => {
+    const {forceTrigger} = useContext(UserContext);
     const dte = getPDdata();
     const tdate = new Date();
     const month = tdate.getMonth()+1;
     const year = tdate.getFullYear();
-    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=8&month=${month}&year=${year}&school=0`;
+    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=${method}&month=${month}&year=${year}&school=${school}`;
     const [data, setData] = useState({})
     async function fetchTravelPrayerTimes() {
         try {
@@ -69,6 +100,9 @@ export const usePrayerOnGo = ({lat, lon}) => {
             const data = await res.json();         
             
             const todaysdata = data.data.filter(item => item.date.readable === dte);
+            if (forceTrigger.target === FT_PRAYER) {
+                localStorage.setItem(`padachone_FT-${FT_PRAYER}`, true);
+            }
             setData(todaysdata);
         }
         catch(e) {
@@ -77,10 +111,15 @@ export const usePrayerOnGo = ({lat, lon}) => {
             return false
         }   
     }
-    useEffect(() => {
-       
+    useEffect(() => {       
             fetchTravelPrayerTimes();
     }, [])
+    useEffect(() => {
+        if (forceTrigger.target === FT_PRAYER) {
+            fetchTravelPrayerTimes();
+        }
+        
+    }, [forceTrigger])
     return [data, setData]
 }
 
@@ -96,7 +135,7 @@ export const useCurrentLocation = ({lat, lon}) => {
             });
         
             const data = await result.json();
-            console.log('%c LOCATION DATA'+JSON.stringify(data), 'color:blue')
+            // console.log('%c LOCATION DATA'+JSON.stringify(data), 'color:blue')
             const locationData = data.resourceSets[0].resources[0].address.addressLine+', '+data.resourceSets[0].resources[0].address.adminDistrict+', '+data.resourceSets[0].resources[0].address.countryRegion;
             // setCurrentloc(data.resourceSets[0].resources[0].address.formattedAddress);
             setCurrentloc({data : locationData, formattedaddress: data.resourceSets[0].resources[0].address.formattedAddress });
@@ -114,7 +153,7 @@ export const useCurrentLocation = ({lat, lon}) => {
 }
 
 export const useCalcMethods = () => {
-    const API = 'http://api.aladhan.com/v1/methods';
+    const API = 'https://api.aladhan.com/v1/methods';
     const [methods, setMethods] = useState({})
     const fetchMethods = async() => {
         try {
@@ -129,7 +168,12 @@ export const useCalcMethods = () => {
                 //     return false;
                 // });
             const data = await result.json();
-            setMethods(data);
+            const modifiedData = await Object.entries(data.data).map(item => ({[item[0]] : item[1]}));
+            const newdata = {...data, data: modifiedData};
+            if (newdata && newdata.data) {
+                localStorage.setItem('padachone-cmethods', JSON.stringify(newdata));
+            }
+            setMethods(newdata);
         }
         catch(e) {
             setMethods({error: e.message})
@@ -137,7 +181,12 @@ export const useCalcMethods = () => {
         }   
     }
     useEffect(() => {
-        fetchMethods();
+        if (localStorage.getItem('padachone-cmethods')) {
+            setMethods(JSON.parse(localStorage.getItem(`padachone-cmethods`)))        
+        }
+        else {
+            fetchMethods();
+        }
     }, [])
     return [methods, setMethods];
 }
@@ -149,3 +198,89 @@ export const useDrawer = () => {
     }
     return [drawerOpen, handleDrawerToggle]
 }
+
+export const useRenderCounts = (page) => {
+    const colors = ['red', 'green', 'lightblue', 'orange', 'grey']
+    const renders = useRef(0);
+    useEffect(() => {
+        console.log('%c FT Renders '+page+' : '+renders.current++, `font-size: 30px;color: ${colors[Math.floor(Math.random()*5)]}`);
+    })
+}
+
+export const useForceTrigger = ({setModal:setTrigger, params, ftname, setData}) => {
+    const {forceTrigger} = useContext(UserContext);
+    useEffect(() => {
+        if (!localStorage.getItem(`padachone_FT-${ftname}`)) {
+            setTrigger(params)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (forceTrigger.target === ftname) {
+            setData({})
+        }        
+    }, [forceTrigger])
+}
+
+export const useVisitorDetails = (dte) => {
+    const [visitordata, setVisitordata] = useState({});
+    // const API = `https://api.ipstack.com/check?access_key=${IPSTACK_API}`;
+    const API = `https://geoip-db.com/json/`;
+    const getVisitorDetails = async() => {
+        const results = await fetch(API, {
+            headers : {
+                Accept : 'application/json'
+            }
+        });
+        const data = await results.json();
+        console.log('VS', data);
+        if (data.IPv4) {
+            Object.keys(sessionStorage).map(key => {
+                if (key.startsWith('padachone_visitordata:')) {
+                    sessionStorage.removeItem(key);
+                }
+                return key;
+            })
+            sessionStorage.setItem(`padachone_visitordata:${dte}`, JSON.stringify(data));
+            addUniqueVisitor(data);
+        }
+        setVisitordata(data);
+           
+    }
+    useEffect(() => {
+            if (sessionStorage.getItem(`padachone_visitordata:${dte}`)) {
+                setVisitordata(JSON.parse(sessionStorage.getItem(`padachone_visitordata:${dte}`)))
+            }
+            else if (IGNORE_HOSTS.indexOf(window.location.hostname) === -1) {
+                    getVisitorDetails();
+            }
+    }, []);
+
+    return visitordata;
+}
+
+export const useMessageBroadcast = () => {
+    const [msg, setMsg] = useState('');
+    const apiEndpoint = 'https://padachone.prismic.io/api/v2';
+    const fetchMessage = () => {   
+        try {     
+            Prismic.api(apiEndpoint, {accessToken: PRISMIC_TOKEN}).then(api => {
+                api.query(Prismic.Predicates.at('document.type', 'message-broadcast')).then(response => {
+                if (response) {
+                    // console.log('%c '+JSON.stringify(response), 'color:orange;font-size:20px;');
+                    setMsg(RichText.asText(response.results[0].data.message));
+                }
+                });
+            });
+        }
+        catch(err) {
+           return 
+        }
+    }
+    useEffect(() => {
+        fetchMessage();
+    }, []);
+    return [msg];
+}
+
+

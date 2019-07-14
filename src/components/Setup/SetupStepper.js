@@ -7,10 +7,11 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import CloudUploadIcon from '@material-ui/icons/CardTravel';
+// import CloudUploadIcon from '@material-ui/icons/CardTravel';
 import Paper from '@material-ui/core/Paper';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import {UserContext} from '../../store/context/userContext';
+import {useRenderCounts} from '../../hooks/api-hooks';
 const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
@@ -64,7 +65,7 @@ const useStyles = makeStyles(theme => ({
       case 1:
         return 'You can always re-configure these settings on click of a button';
       case 2:
-        return 'Key in your Place name for more accurate results.'
+        return 'Key in your address (eg : XYZ House, Trivandrum)'
       // case 3:
       //   return `Wanna know your Ifthar/Prayer time while moving ? Coming Soon!`;
       default:
@@ -73,6 +74,7 @@ const useStyles = makeStyles(theme => ({
   }
 
 const SetupStepper = (props) => {
+  useRenderCounts('SetupStepper.js'); 
     const {setPage} = useContext(UserContext);
   const {setupdata, country:country_alt, region:region_alt, place: place_alt} = props;
     const classes = useStyles();
@@ -140,7 +142,7 @@ const SetupStepper = (props) => {
 
   const handleChange = name => event => {
     let val = event.target.value;
-    if (val.match(/^[a-z A-Z]*$/)) {
+    if (val.match(/^[a-z A-Z 0-9 ,]*$/)) {
       setState({ ...state, place: val });
     }
   };
@@ -165,7 +167,7 @@ return (
               
               {(activeStep === 2) && <TextField
                 id="place-name"
-                label="Place"
+                label="Address"
                 className={classes.textField}
                 value={place}
                 onChange={handleChange('place-name')}

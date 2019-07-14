@@ -5,16 +5,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 - Map showing mosque locations
 - Custom Search Results
-- Bg Audio 
-- Drawer for menus
 - Current location data
-- Site Message
-- Forbidden, not allowed etc margin top
-- Grid design for page Navigations
-- Fine tuning modal window
 - Clean Lab
+
+- firebase : https://sebhastian.com/react-firestore
+- read on https://opensource.guide/
+- to do : flash of all importatn users
+- to do : custom trace and metrics on app using firebase performance monitoring
+- to do : schedule emails using Bull
+- to do : use nice font
+- to do  : change git email
+- to do : avoid security leak by hiding credentials
+- to do : optimize bundle, cdn
+- to do : headless cms
 
 
 ## [1.0.0] - 2019-05-19
@@ -92,6 +98,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - New icon for starting over
+
+## [2.0.0] - 2019-07-14
+### Added
+- Fine tuning option for setting calculation methods and school preferences
+- Integration of Fine tune with side menus, Travel & homepage
+- Caching of calculation methods
+- Address input acceptance
+- Facebook business chat plugin integration
+- New landing page with grid menus
+- Hard Reset Option integration
+- Confirmation dialog for hard reset
+- Home button in Travel page for navigation
+- Contribution guide for the application
+- Visitor tracking & integration of Firebase firestore
+- Integration of firebase for subscribers data
+- Validation of existing subscribers to avoid duplicates
+- Performance monitoring with firebase
+- Fall back on visitor data for geoposition disabled travel page
+- Integrated headless CMS by automating message broadcasting via Prismic
+
+### Changed
+- Removed subscribe option from homepage footer
+- Slide animation on landingpage navigations and other pages
+- API change to accept address as an input parameter
+- Location container width of prayer time boy image in Travel page
+- Optimization of API call in usePrayer custom hook
+- Fixed travel page header for disabling movement on scoll
+- Decreased message display time 
+- Disabled music in travel page
+
 
 
 

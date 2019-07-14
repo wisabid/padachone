@@ -12,6 +12,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { makeStyles } from '@material-ui/core/styles';
+import {FLASH_MESSAGE_DISPLAY_TIME} from '../../utils/constants'
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -102,7 +103,7 @@ function Messages({msg}) {
           horizontal: 'left',
         }}
         open={open}
-        autoHideDuration={10000}
+        autoHideDuration={FLASH_MESSAGE_DISPLAY_TIME}
         onClose={handleClose}
       >
         <MySnackbarContentWrapper

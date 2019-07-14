@@ -5,7 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import goofy from '../../assets/images/goofy.svg'
 import boo from '../../assets/images/boo.svg'
-import cool from '../../assets/images/cool.svg'
+import cool from '../../assets/images/cool.svg';
+import {useRenderCounts} from '../../hooks/api-hooks';
 
 
 const useStyles = makeStyles(theme => ({
@@ -15,6 +16,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const DismissTimer  = ({dismissMsg, setdismissMsg, anchorEl, setAnchorEl, timerdisplay, setTimerdisplay}) => {    
+    useRenderCounts('DismissTimer.js')
     const classes = useStyles();
     const onClose1 = (event) => {
         setAnchorEl(event.currentTarget);
@@ -41,7 +43,7 @@ const DismissTimer  = ({dismissMsg, setdismissMsg, anchorEl, setAnchorEl, timerd
     }
     const [mtop, setMtop] = useState('0px');
     useEffect(() => {
-        console.log(dismissMsg)
+        // console.log(dismissMsg)
         if (dismissMsg[0] !== 'Dismiss') {
             setMtop('-38px')
         }
