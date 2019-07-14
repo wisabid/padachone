@@ -1,2 +1,2 @@
-# padachone_dev
-Dev Env of padachone
+# padachone
+Production Env of padachone.com

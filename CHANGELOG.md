@@ -99,7 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - New icon for starting over
 
-## [2.0.0] - 2019-07-..
+## [2.0.0] - 2019-07-14
 ### Added
 - Fine tuning option for setting calculation methods and school preferences
 - Integration of Fine tune with side menus, Travel & homepage
