@@ -116,6 +116,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Validation of existing subscribers to avoid duplicates
 - Performance monitoring with firebase
 - Fall back on visitor data for geoposition disabled travel page
+- Integrated headless CMS by automating message broadcasting via Prismic
 
 ### Changed
 - Removed subscribe option from homepage footer

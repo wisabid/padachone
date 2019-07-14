@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useContext } from 'react';
+import Prismic from 'prismic-javascript';
+import {Link, RichText, Date} from 'prismic-reactjs';
 import {getPDdata, getMonthYearNumber, addUniqueVisitor} from '../utils/index';
-import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS} from '../utils/constants';
+import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS, PRISMIC_TOKEN} from '../utils/constants';
 import {UserContext} from '../store/context/userContext';
 export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0}) => {
     const {forceTrigger} = useContext(UserContext);
@@ -255,6 +257,30 @@ export const useVisitorDetails = (dte) => {
     }, []);
 
     return visitordata;
+}
+
+export const useMessageBroadcast = () => {
+    const [msg, setMsg] = useState('');
+    const apiEndpoint = 'https://padachone.prismic.io/api/v2';
+    const fetchMessage = () => {   
+        try {     
+            Prismic.api(apiEndpoint, {accessToken: PRISMIC_TOKEN}).then(api => {
+                api.query(Prismic.Predicates.at('document.type', 'message-broadcast')).then(response => {
+                if (response) {
+                    // console.log('%c '+JSON.stringify(response), 'color:orange;font-size:20px;');
+                    setMsg(RichText.asText(response.results[0].data.message));
+                }
+                });
+            });
+        }
+        catch(err) {
+           return 
+        }
+    }
+    useEffect(() => {
+        fetchMessage();
+    }, []);
+    return [msg];
 }
 
 

@@ -12,6 +12,8 @@
     "firebase": "^6.2.4",
     "moment": "^2.24.0",
     "notistack": "^0.8.6",
+    "prismic-javascript": "^2.0.3",
+    "prismic-reactjs": "^1.0.0",
     "react": "^16.8.6",
     "react-bingmaps": "^3.6.1",
     "react-cookie-consent": "^2.3.1",

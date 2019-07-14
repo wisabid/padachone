@@ -21,3 +21,4 @@ export const FT_PRAYER = "api_prayer-results";
 export const FLASH_MESSAGE_DISPLAY_TIME = 2000;
 // export const IPSTACK_API = "df51b141e303cc845837d68e78adc230"; NOT IN USE AS THEY DONT HAVE SSL ENABLED FOR FREE TIER
 export const IGNORE_HOSTS = ["localhost", ""];
+export const PRISMIC_TOKEN = "MC5YU29vM3hFQUFDVUFJYzZL.77-9QD_vv71L77-977-9K--_ve-_vTtqT--_vWbvv73vv73vv73vv71fTu-_ve-_vTkCC0Jr77-9RO-_vQ4";

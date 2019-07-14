@@ -22,7 +22,7 @@ import Lab from '../Lab';
 import {FT_PRAYER} from '../../utils/constants';
 import LandingPage from './LandingPage';
 import ConfirmAction from '../ConfirmAction';
-import {useRenderCounts, useVisitorDetails} from  '../../hooks/api-hooks';
+import {useRenderCounts, useVisitorDetails, useMessageBroadcast} from  '../../hooks/api-hooks';
 // import FbChat from '../FbChat/FbChat'
 
 const theme = createMuiTheme({
@@ -43,6 +43,7 @@ const theme = createMuiTheme({
 function App() { 
   
   useRenderCounts('App.js'); 
+  const [msgbroadcast] = useMessageBroadcast();
   // Global State 
   const [tz, setTz] = useState('');
   const [page, setPage] = useState('Setup');
@@ -187,11 +188,11 @@ function App() {
     localStorage.removeItem('padachone_msg5');
     localStorage.removeItem('padachone_msg6');
     localStorage.removeItem('padachone_msg7');
-    if (!localStorage.getItem('padachone_msg9')) {
-      const message = `Chat with us and pass in your feedback/comments. `;
+    if (msgbroadcast) {
+      // const message = `Chat with us and pass in your feedback/comments. `;
       setMsg(() => {
-        localStorage.setItem('padachone_msg9', message)
-        return [true, message]
+        // localStorage.setItem('padachone_msg9', message)
+        return [true, msgbroadcast]
       });      
     }
     // Logic for displaying Messages end here
@@ -203,7 +204,7 @@ function App() {
         return 'Home'
       })
     }
-  }, [])
+  }, [msgbroadcast])
   return (
     
     <ThemeProvider theme={theme}>
