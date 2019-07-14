@@ -85,10 +85,10 @@ export const usePrayer = ({country='Netherlands', place, region="Noord-Holland",
 export const usePrayerOnGo = ({lat, lon, method=8, school=0}) => {
     const {forceTrigger} = useContext(UserContext);
     const dte = getPDdata();
-    const tdate = new Date();
-    const month = (new Date().getMonth())+1; //hack
+    const tdate = new Date(dte);
+    const mnth = tdate.getMonth()+1;
     const year = tdate.getFullYear();
-    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=${method}&month=${month}&year=${year}&school=${school}`;
+    const API = `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${lon}&method=${method}&month=${mnth}&year=${year}&school=${school}`;
     const [data, setData] = useState({})
     async function fetchTravelPrayerTimes() {
         try {
