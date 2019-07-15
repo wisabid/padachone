@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef, useContext } from 'react';
 import Prismic from 'prismic-javascript';
 import {Link, RichText, Date} from 'prismic-reactjs';
+	
+import { PrismicLink } from "apollo-link-prismic";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import ApolloClient from "apollo-client";
+import gql from "graphql-tag";
+
 import {getPDdata, getMonthYearNumber, addUniqueVisitor} from '../utils/index';
 import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS, PRISMIC_TOKEN} from '../utils/constants';
 import {UserContext} from '../store/context/userContext';
@@ -264,13 +270,70 @@ export const useMessageBroadcast = () => {
     const apiEndpoint = 'https://padachone.prismic.io/api/v2';
     const fetchMessage = () => {   
         try {     
-            Prismic.api(apiEndpoint, {accessToken: PRISMIC_TOKEN}).then(api => {
+            /*Prismic.api(apiEndpoint, {accessToken: PRISMIC_TOKEN}).then(api => {
                 api.query(Prismic.Predicates.at('document.type', 'message-broadcast')).then(response => {
                 if (response) {
                     // console.log('%c '+JSON.stringify(response), 'color:orange;font-size:20px;');
                     setMsg(RichText.asText(response.results[0].data.message));
                 }
                 });
+            });*/
+            	
+            const client = new ApolloClient({
+                link: PrismicLink({
+                uri: "https://padachone.prismic.io/graphql",
+                accessToken: PRISMIC_TOKEN
+                }),
+                cache: new InMemoryCache()
+            });
+            // query{
+            //     allMessageBroadcasts{
+            //        edges {
+            //         node {
+            //           message
+            //           _linkType
+            //         }
+            //       }
+            //     }
+            //     allNewsletterss {
+            //       edges {
+            //         node {
+            //           title
+            //           date
+            //           body
+            //           _linkType
+            //         }
+            //       }
+            //     }
+            //   }
+            	
+            client.query({
+                query: gql`
+                query{
+                    allMessageBroadcasts {
+                      edges {
+                        node {
+                          message        
+                        }
+                      }
+                    }
+                    allNewsletterss {
+                        edges {
+                          node {
+                            title
+                            date
+                            body
+                            _linkType
+                          }
+                        }
+                    }
+                }                
+                `
+            }).then(response => {
+                console.log('%c GraphQL Journey begins...'+JSON.stringify(response), 'color:lightblue;font-size:30px;');
+                setMsg(RichText.asText(response.data.allMessageBroadcasts.edges[0].node.message));
+            }).catch(error => {
+                console.error(error);
             });
         }
         catch(err) {

@@ -25,7 +25,7 @@ const TitleHeader = (props) => {
         <>
         <Typography color="textPrimary" variant="h1" component="h1" align="left" 
         style={{backgroundImage:`url(${bg})`, backgroundRepeat:'no-repeat',backgroundPosition: 'right top', backgroundSize: 'auto 100%', backgroundColor: '#0c39e3', fontWeight:'bold', fontSize:'4rem', padding:'24px', color: 'rgba(255, 255, 255, 0.7)', marginBottom:0}} gutterBottom>
-                    Know You<span onClick={() => { localStorage.clear();return window.location.reload(); }}>r</span> Prayer times {ffopen && <ForwardIcon className="landing-navs" onClick={handleFF} fontSize="large" style={{color:'#fff', fontSize: '2.8rem', top: '5px', position: 'relative'}} />}
+                    Know Your Prayer times {ffopen && <ForwardIcon className="landing-navs" onClick={handleFF} fontSize="large" style={{color:'#fff', fontSize: '2.8rem', top: '5px', position: 'relative'}} />}
         </Typography>
         
         <Typography color="textSecondary" align="left" variant="body2" component="p" 

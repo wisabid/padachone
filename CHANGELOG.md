@@ -128,6 +128,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Decreased message display time 
 - Disabled music in travel page
 
+## [2.1.0] - 2019-07-..
+### Added
+- Apollo client & graphql for prismic
+
 
 
 
