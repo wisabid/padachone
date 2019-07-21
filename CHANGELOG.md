@@ -128,6 +128,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Decreased message display time 
 - Disabled music in travel page
 
-
+## [2.0.1] - 2019-07-21
+### Changed
+- Put a hot fix for Asia/Calcutta timezone
 
 
