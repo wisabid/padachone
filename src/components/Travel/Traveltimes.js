@@ -160,7 +160,7 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, schoo
                 <Menus drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle}/>
                 <Header 
                     startup={startup} 
-                    place={loc.data.split(',')[0]}
+                    place={loc.data && loc.data.split(',')[0]}
                     pdate={data[0].date.readable}
                     travel={true}
                     address={loc.formattedaddress}
