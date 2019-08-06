@@ -105,8 +105,11 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, schoo
     if (data.length) {
       timings = data[0].timings;
       const {timezone} = (data[0].meta)?data[0].meta:'Europe/AmsterDAM';
+      //hack for Asia/Calcutta tz
+      if (timezone === 'Asia/Kolkata') {
+        timezone = 'Asia/Calcutta';
+      }
       setTz(timezone)
-
     } 
     const classes = useStyles();
     const theme = useTheme();
