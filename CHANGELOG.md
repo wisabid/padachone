@@ -140,4 +140,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Put the hot fix (Asia/Calcutta timezone) in traveller onboard pages
 
+## [2.0.4] - 2019-08-06
+### Added
+- Set Display timer to false after the last prayer of the day as part of fixing the same defect
+
 
