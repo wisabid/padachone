@@ -61,12 +61,13 @@ const Timer = (props) => {
     }
 
     const startTimer = (flg) => {
+        debugger;
         resetAll();
         let timeoptEl = document.querySelector('.timerComp time');
         if (timeoptEl) {
             let timeopt = timeoptEl.innerHTML;
             const currTime = timeopt.split(' ')[1];
-            // const abid = {Fajr: "02:59", Dhuhr: "13:37", Asr: "17:56", Maghrib: "18:46", Isha: "21:00"}
+            // const abid = {Fajr: "02:59", Dhuhr: "04:37", Asr: "05:56", Maghrib: "06:46", Isha: "07:00"}
             const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {                
                 let firstItemTime = parseInt(item[1].split(':')[0]),
                     currTimeSet = parseInt(currTime.split(':')[0]),
@@ -116,6 +117,9 @@ const Timer = (props) => {
                     cb
                 });
                 setAnim([null, upcomingPs[0][0]])
+            }
+            else {
+                setTimerdisplay(false);
             }      
         }
     }

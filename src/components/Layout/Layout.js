@@ -36,7 +36,11 @@ const Layout = ({country, region, place, method, school, pdate, startup}) => {
     const [data, setData] = usePrayer(usePrayerParams);
     useForceTrigger({setModal:setModal, params : {show : true, name : 'Finetune'}, ftname : FT_PRAYER, setData: setData});
     
-    const {timezone} = (data && data.data && data.data.meta)?data.data.meta:'Europe/AmsterDAM';
+    let {timezone} = (data && data.data && data.data.meta)?data.data.meta:'Europe/AmsterDAM';
+    //hack for Asia/Calcutta tz
+    if (timezone === 'Asia/Kolkata') {
+        timezone = 'Asia/Calcutta';
+    }
     setTz(timezone);
     const classes = useStyles();
     

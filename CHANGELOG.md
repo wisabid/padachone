@@ -128,10 +128,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Decreased message display time 
 - Disabled music in travel page
 
+## [2.0.1] - 2019-07-21
+### Changed
+- Put a hot fix for Asia/Calcutta timezone
+
+## [2.0.2] - 2019-07-27
+### Changed
+- Null check for location data in Traveller onboard
+
+## [2.0.3] - 2019-08-06
+### Changed
+- Put the hot fix (Asia/Calcutta timezone) in traveller onboard pages
+
+## [2.0.4] - 2019-08-06
+### Added
+- Set Display timer to false after the last prayer of the day as part of fixing the same defect
+
 ## [2.1.0] - 2019-07-..
 ### Added
 - Apollo client & graphql for prismic
-
-
 
 

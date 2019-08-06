@@ -105,8 +105,11 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, schoo
     if (data.length) {
       timings = data[0].timings;
       const {timezone} = (data[0].meta)?data[0].meta:'Europe/AmsterDAM';
+      //hack for Asia/Calcutta tz
+      if (timezone === 'Asia/Kolkata') {
+        timezone = 'Asia/Calcutta';
+      }
       setTz(timezone)
-
     } 
     const classes = useStyles();
     const theme = useTheme();
@@ -160,7 +163,7 @@ const Traveltimes = ({lat, lon, startup, music, volume, setVolume, method, schoo
                 <Menus drawerOpen={drawerOpen} handleDrawerToggle={handleDrawerToggle}/>
                 <Header 
                     startup={startup} 
-                    place={loc.data.split(',')[0]}
+                    place={loc.data && loc.data.split(',')[0]}
                     pdate={data[0].date.readable}
                     travel={true}
                     address={loc.formattedaddress}
