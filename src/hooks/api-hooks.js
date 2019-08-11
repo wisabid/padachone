@@ -313,7 +313,8 @@ export const useMessageBroadcast = () => {
                     allMessageBroadcasts {
                       edges {
                         node {
-                          message        
+                          message  
+                          timeout      
                         }
                       }
                     }
@@ -331,7 +332,9 @@ export const useMessageBroadcast = () => {
                 `
             }).then(response => {
                 console.log('%c GraphQL Journey begins...'+JSON.stringify(response), 'color:lightblue;font-size:30px;');
-                setMsg(RichText.asText(response.data.allMessageBroadcasts.edges[0].node.message));
+                console.log('GR', response)
+                // setMsg(RichText.asText(response.data.allMessageBroadcasts.edges[0].node.message));
+                setMsg(response);
             }).catch(error => {
                 console.error(error);
             });
