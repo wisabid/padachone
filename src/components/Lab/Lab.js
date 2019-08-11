@@ -17,7 +17,8 @@ import {UserContext} from '../../store/context/userContext';
 import AppPages from '../App/AppPages';
 import Header from '../Layout/Header';
 import Footer from '../Layout/Footer';
-import {db} from '../../config/firebase'
+import {db} from '../../config/firebase';
+import Newsletters from '../Newsletters';
 
 const useStyles = makeStyles(theme => ({
   progress: {
@@ -66,7 +67,7 @@ const Lab = (props) => {
             //   }, {});
             // setOnlyPrayers(justPrayers);
             // Ask user if he wants to fine tune with School and method
-            setModal({show : true, name : 'Finetune'})
+            // setModal({show : true, name : 'Finetune'})
         // }
         db.collection("subscribers")
           .get()
@@ -99,7 +100,6 @@ const Lab = (props) => {
         {/* <Bgmusic bgm={sufi} setPlaying={() => console.log('playing')}/> */}
         <h4 style={{marginTop: '40px'}}>Lab (Alpha Releases)</h4>
 
-        <AppPages />
         {/* <h5>YOU ARE @ - {currentloc.data} {currentloc.error?currentloc.error:''}</h5> */}
         
         <h5>Drawer</h5>
@@ -153,6 +153,8 @@ const Lab = (props) => {
               {/* <Traveltimes lat="52.31406610552598" lon="4.946411339519716" /> */}
               {/* <div style={{width: '100%', height:'90vh'}}><Map lat="52.31406610552598" lon="4.946411339519716" /></div> */}
               {/* <Search lat="52.31406610552598" lon="4.946411339519716" /> */}
+              <h5>Newsletters</h5>
+              <Newsletters />
               <Footer startup={() => console.log('///')}/>
         </>
     )

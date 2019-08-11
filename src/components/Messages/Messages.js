@@ -12,7 +12,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { makeStyles } from '@material-ui/core/styles';
-import {FLASH_MESSAGE_DISPLAY_TIME} from '../../utils/constants'
+import {Link, RichText, Date} from 'prismic-reactjs';
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -78,7 +78,28 @@ const useStyles2 = makeStyles(theme => ({
   },
 }));
 
+const MsgRenderer = ({msg:{message:msgContent}}) => {
+  if (msgContent[0].type === 'paragraph' && msgContent[0].text) {
+    return (
+      <>
+        {RichText.asText(msgContent)}
+      </>
+    )
+  }
+  else if (msgContent[0].type === 'image') {
+    return (
+      <img src={msgContent[0].url} style={{maxWidth:'250px', maxHeight:'400px'}}/>
+    )
+  }
+  else {
+    return (
+      <p>How do you rate your padachone.com experience?</p>
+    )
+  } 
+}
+
 function Messages({msg}) {
+  console.log('QQer', msg)
   const classes = useStyles2();
   const [open, setOpen] = React.useState(true);
 
@@ -103,13 +124,13 @@ function Messages({msg}) {
           horizontal: 'left',
         }}
         open={open}
-        autoHideDuration={FLASH_MESSAGE_DISPLAY_TIME}
+        autoHideDuration={parseInt(msg.timeout)}
         onClose={handleClose}
       >
         <MySnackbarContentWrapper
           onClose={handleClose}
           variant="info"
-          message={msg}
+          message={<MsgRenderer msg={msg}/>}
         />
       </Snackbar>
       

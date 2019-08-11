@@ -19,11 +19,11 @@ import Travel from '../Travel';
 import Subscribe from '../Subscribe';
 import Finetune from '../Finetune';
 import Lab from '../Lab';
-import {FT_PRAYER} from '../../utils/constants';
+import {FT_PRAYER, PRISMIC_MSG_BROADCAST_DOC} from '../../utils/constants';
 import LandingPage from './LandingPage';
 import ConfirmAction from '../ConfirmAction';
 import {useRenderCounts, useVisitorDetails, useMessageBroadcast} from  '../../hooks/api-hooks';
-// import FbChat from '../FbChat/FbChat'
+import Newsletters from '../Newsletters';
 
 const theme = createMuiTheme({
   palette: {
@@ -54,6 +54,7 @@ function App() {
   const [prevScrollpos, setprevScrollpos] = useState(window.pageYOffset);
   const [display, setdisplay] = useState(true);  
   const [forceTrigger, setForceTrigger] = useState({target : ''});
+
 
   const handleForceTrigger = ({target, method, school}) => {
     setForceTrigger(() => {
@@ -189,11 +190,12 @@ function App() {
     localStorage.removeItem('padachone_msg6');
     localStorage.removeItem('padachone_msg7');
     if (msgbroadcast) {
+      console.log('MM', msgbroadcast)
       // const message = `Chat with us and pass in your feedback/comments. `;
       setMsg(() => {
         // localStorage.setItem('padachone_msg9', message)
-        return [true, msgbroadcast]
-      });      
+        return [true, msgbroadcast.data[PRISMIC_MSG_BROADCAST_DOC].edges[0].node]
+      });  
     }
     // Logic for displaying Messages end here
     const padachon_lsfind = Object.keys(localStorage).filter(key => key.startsWith('padachone:') && key !== 'padachone:region' && key !== 'padachone:country' && key !== 'padachone:place' && key !== 'padachone:method' && key !== 'padachone:school');
@@ -222,7 +224,8 @@ function App() {
           forceTrigger : forceTrigger, 
           setForceTrigger : setForceTrigger,
           handleNav: handleNav,
-          visitor : visitor
+          visitor : visitor,
+          cmsContents : msgbroadcast
         }}>
           <ErrorBoundary>
             <CookieConsent location="bottom" style={{ background: "#29b6f6",marginBottom:'30px' }} buttonStyle={{borderRadius: '10px'}}>
@@ -231,6 +234,7 @@ function App() {
             <Zoom in={true}>
                 <SpecialDay display={display} setdisplay={setdisplay}/>
             </Zoom>
+            {page === 'Newsletters' && <Newsletters />}
             {!finished && page === 'Setup' && <LandingPage finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
             {msg[0] && <Messages msg={msg[1]}/>}
             {page === 'Travel' && <Travel method={method} school={school}/>}
