@@ -61,7 +61,6 @@ const Timer = (props) => {
     }
 
     const startTimer = (flg) => {
-        debugger;
         resetAll();
         let timeoptEl = document.querySelector('.timerComp time');
         if (timeoptEl) {
