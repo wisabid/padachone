@@ -145,7 +145,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Set Display timer to false after the last prayer of the day as part of fixing the same defect
 
-## [2.1.0] - 2019-07-..
+## [2.1.0] - 2019-08-12
 ### Added
 - Apollo client & graphql for prismic
 - Materialui LAB for skeleton
@@ -157,6 +157,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Message display to accomodate image as well
 - Removed prismic helper at hooks side
+
+## [2.1.1] - 2019-08-..
+### Added
+
+### Changed
+- Country is now pre populated even after hard reset
 
 
 ### CHECKLIST

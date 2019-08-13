@@ -190,7 +190,6 @@ function App() {
     localStorage.removeItem('padachone_msg6');
     localStorage.removeItem('padachone_msg7');
     if (msgbroadcast) {
-      console.log('MM', msgbroadcast)
       // const message = `Chat with us and pass in your feedback/comments. `;
       setMsg(() => {
         // localStorage.setItem('padachone_msg9', message)
@@ -247,7 +246,7 @@ function App() {
                 Midnight: "01:43",
                 Sunrise: "05:20",
                 Sunset: "22:06"}} />}
-            {page === 'SetMeup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country} region={region} place={place}/>}
+            {page === 'SetMeup' && <Setup setupdata={stepperData} finished={(locationstate) => handlefinished(locationstate)} country={country?country:visitor.country_name?visitor.country_name:''} region={region} place={place}/>}
             {finished && page === 'Home' && <Layout country={country} region={region} pdate={pdtodaysDate} place={place} method={method} school={school} startup={(resetstate) => handlefinished(resetstate)}/>}
             {modal.show && modal.name === 'Subscribe' && <Subscribe modal={modal} setModal={setModal}/>}
             {modal.show && modal.name === 'Finetune' && <Finetune modal={modal} setModal={setModal} method={method} school={school} handleForceTrigger={(obj) => handleForceTrigger(obj)}/>}
