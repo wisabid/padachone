@@ -328,6 +328,13 @@ export const useMessageBroadcast = () => {
                           }
                         }
                     }
+                    allSiteMedias {
+                        edges {
+                          node {
+                            assetImage
+                          }
+                        }
+                    }
                 }                
                 `
             }).then(response => {

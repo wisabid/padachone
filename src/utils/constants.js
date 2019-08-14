@@ -24,3 +24,4 @@ export const IGNORE_HOSTS = ["localhost", ""];
 export const PRISMIC_TOKEN = "MC5YU29vM3hFQUFDVUFJYzZL.77-9QD_vv71L77-977-9K--_ve-_vTtqT--_vWbvv73vv73vv73vv71fTu-_ve-_vTkCC0Jr77-9RO-_vQ4";
 export const PRISMIC_MSG_BROADCAST_DOC = "allMessageBroadcasts";
 export const PRISMIC_NEWSLETTER_DOC = "allNewsletterss";
+export const PRISMIC_SITEMEDIAS_DOC = "allSiteMedias";
