@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,9 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import {P_MENUS, PRISMIC_SITEMEDIAS_DOC} from '../../utils/constants';
+import {P_MENUS, PRISMIC_LANDING_BG} from '../../utils/constants';
 import {UserContext} from '../../store/context/userContext';
-import {useRenderCounts} from  '../../hooks/api-hooks';
+import {useRenderCounts, useCmsAsset} from  '../../hooks/api-hooks';
 
 // import GridListTile from '@material-ui/core/GridListTile';
 // import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -88,15 +88,11 @@ const cards = P_MENUS;
 
 export default function Album() {
   useRenderCounts('AppPages.js');  
-  const [bgimg, setBg] = useState('')
+  const bgimg = useCmsAsset(PRISMIC_LANDING_BG);
   
   const classes = useStyles();
-  const {handleNav, cmsContents} = useContext(UserContext);
-  useEffect(() => {
-    if (cmsContents.data && cmsContents.data.hasOwnProperty(PRISMIC_SITEMEDIAS_DOC)) {
-      setBg(cmsContents.data[PRISMIC_SITEMEDIAS_DOC].edges[0].node.assetImage.url)
-    }
-  }, [cmsContents])
+  const {handleNav} = useContext(UserContext);
+  
   
   return (
     <React.Fragment>      

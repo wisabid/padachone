@@ -25,3 +25,5 @@ export const PRISMIC_TOKEN = "MC5YU29vM3hFQUFDVUFJYzZL.77-9QD_vv71L77-977-9K--_v
 export const PRISMIC_MSG_BROADCAST_DOC = "allMessageBroadcasts";
 export const PRISMIC_NEWSLETTER_DOC = "allNewsletterss";
 export const PRISMIC_SITEMEDIAS_DOC = "allSiteMedias";
+export const PRISMIC_LANDING_BG = "landing-bg";
+export const PRISMIC_TITLE_BG = "title-bg";

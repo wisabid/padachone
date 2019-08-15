@@ -165,6 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Country is now pre populated even after hard reset
 - Bg image of grid menus has been made prismic bound
+- Title bg image is also prismic bound now
 
 
 ### CHECKLIST
