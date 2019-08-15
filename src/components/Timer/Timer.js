@@ -6,12 +6,12 @@ import Zoom from '@material-ui/core/Zoom';
 import moment from 'moment'; 
 import './timer.css';
 import {getPDdata} from '../../utils'
-import angel from '../../assets/images/Prayer-time.jpg'
 import CurrentTime from './CurrentTime';
 import DismissTimer from './DismissTimer';
 import PrayerTime from './PrayerTime';
 import {UserContext} from '../../store/context/userContext';
-import {useRenderCounts} from '../../hooks/api-hooks';
+import {useRenderCounts, useCmsAsset} from '../../hooks/api-hooks';
+import {PRISMIC_PRAYERTIME_BOY_BG} from '../../utils/constants';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,6 +26,7 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const Timer = (props) => {
+    const angel = useCmsAsset(PRISMIC_PRAYERTIME_BOY_BG);
     useRenderCounts('Timer.js'); 
     // console.log('%c IM THE TIMER', 'font-size:20px;');
     useEffect(() => {
@@ -66,7 +67,7 @@ const Timer = (props) => {
         if (timeoptEl) {
             let timeopt = timeoptEl.innerHTML;
             const currTime = timeopt.split(' ')[1];
-            // const abid = {Fajr: "02:59", Dhuhr: "04:37", Asr: "05:56", Maghrib: "06:46", Isha: "07:00"}
+            //const abid = {Fajr: "02:59", Dhuhr: "04:37", Asr: "05:56", Maghrib: "06:46", Isha: "20:58"}
             const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {                
                 let firstItemTime = parseInt(item[1].split(':')[0]),
                     currTimeSet = parseInt(currTime.split(':')[0]),

@@ -27,3 +27,4 @@ export const PRISMIC_NEWSLETTER_DOC = "allNewsletterss";
 export const PRISMIC_SITEMEDIAS_DOC = "allSiteMedias";
 export const PRISMIC_LANDING_BG = "landing-bg";
 export const PRISMIC_TITLE_BG = "title-bg";
+export const PRISMIC_PRAYERTIME_BOY_BG = "prayertime-boy";
