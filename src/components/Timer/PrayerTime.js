@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Zoom from '@material-ui/core/Zoom';
 import LocationText from './LocationText';
 import {useRenderCounts, useCmsAsset} from '../../hooks/api-hooks';
 import Bgmusic from '../Prayers/Bgmusic'
@@ -35,18 +36,20 @@ const PrayerTime = ({anim, setAnim, travel=false, location=''}) => {
     }, [anim])
     return (
         <>
-        <Bgmusic bgm={bgm} volume={volume} setPlaying={() => {setMusic({show: true, playing : true})}}/>
-        <div style={{overflow: 'hidden'}}>                
-                {anim[0] && <div className="Prayer-time" 
-                    style={{...styles, backgroundImage:`url(${angelimage})`}}>
-                        {anim[1]} Time
-                        {travel && <>
-                            <br />
-                            <LocationText location={location}/>
-                        </>}
-                    </div>
-                }
-        </div>
+        {/* <Bgmusic bgm={bgm} volume={volume} setPlaying={() => {setMusic({show: true, playing : true})}}/> */}
+        <Zoom in={anim[0]}>
+            <div style={{overflow: 'hidden'}}>                
+                    {anim[0] && <div className="Prayer-time" 
+                        style={{...styles, backgroundImage:`url(${angelimage})`}}>
+                            {anim[1]} Time
+                            {travel && <>
+                                <br />
+                                <LocationText location={location}/>
+                            </>}
+                        </div>
+                    }
+            </div>
+        </Zoom>
         </>
     )
 }
