@@ -24,16 +24,16 @@ const styles = {
 const PrayerTime = ({anim, setAnim, travel=false, location=''}) => {
     const angelimage = useCmsAsset(PRISMIC_PRAYERTIME_BOY_BG)
     useRenderCounts('PrayerTime.js');
-    const [music, setMusic] = useState({show: false, playing : false});
-    const [volume, setVolume] = React.useState(true);
-    useEffect(() => {
-        if (anim[0]) {
-            setVolume(true);
-        }
-        else {
-            setVolume(false);
-        }
-    }, [anim])
+    // const [music, setMusic] = useState({show: false, playing : false});
+    // const [volume, setVolume] = React.useState(true);
+    // useEffect(() => {
+    //     if (anim[0]) {
+    //         setVolume(true);
+    //     }
+    //     else {
+    //         setVolume(false);
+    //     }
+    // }, [anim])
     return (
         <>
         {/* <Bgmusic bgm={bgm} volume={volume} setPlaying={() => {setMusic({show: true, playing : true})}}/> */}

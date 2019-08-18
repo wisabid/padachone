@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bg image of grid menus has been made prismic bound
 - Title bg image is also prismic bound now
 - Prayertime boy is prismic bound
+- emojis are also prismic tied
+- logo is dynamic but with a fallback option
 ### CHECKLIST
 
 ## [2.1.0] - 2019-08-12

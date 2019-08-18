@@ -28,3 +28,7 @@ export const PRISMIC_SITEMEDIAS_DOC = "allSiteMedias";
 export const PRISMIC_LANDING_BG = "landing-bg";
 export const PRISMIC_TITLE_BG = "title-bg";
 export const PRISMIC_PRAYERTIME_BOY_BG = "prayertime-boy";
+export const PRISMIC_GOOFY_BG = "goofy-image";
+export const PRISMIC_BOO_BG = "boo-image";
+export const PRISMIC_COOL_BG = "cool-image";
+export const PRISMIC_PADACHONE_LOGO = "padachone-logo";

@@ -69,12 +69,14 @@ const Lab = (props) => {
             // Ask user if he wants to fine tune with School and method
             // setModal({show : true, name : 'Finetune'})
         // }
+        let foremail = '';
         db.collection("subscribers")
           .get()
           .then(querySnapshot => {
             const data = querySnapshot.docs.map(doc => doc.data());
             console.log('DB: ', data); // array of cities objects
-            
+            data.map(item => foremail+= item.email+', ');
+            console.log('SUBS',foremail)
           });
 
         db.collection("visitors")
