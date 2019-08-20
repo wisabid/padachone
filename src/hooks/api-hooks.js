@@ -333,6 +333,8 @@ export const useMessageBroadcast = () => {
                           node {
                             assetName
                             assetImage
+                            textColor
+                            bgColor
                           }
                         }
                     }

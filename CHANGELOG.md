@@ -22,6 +22,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - to do : avoid security leak by hiding credentials
 - to do : optimize bundle, cdn
 - to do : admin dashboard
+- to do :log rocket
+- to do : testing & end to end testing using puppeteer
+- to do : skeletons using material ui
+- to do : make text and bg color dynamic with prismic
+
 
 ## [2.1.1] - 2019-08-..
 ### Added
