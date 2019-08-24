@@ -1,6 +1,6 @@
 {
   "name": "padachone_dev",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "homepage": "https://www.padachone.com",
   "private": true,
   "dependencies": {
@@ -35,10 +35,15 @@
     "react-swipeable-views-utils": "^0.13.3",
     "typeface-roboto": "0.0.54"
   },
+  "jest": {
+    "preset": "jest-puppeteer"
+  },
   "scripts": {
+    "codecoverage" : "page-coverage http://localhost:3000",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "e2e": "jest webapp.test.js",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "echo 'WWW.PADACHONE.COM' > ./build/CNAME && gh-pages -d build"
@@ -60,6 +65,11 @@
   },
   "devDependencies": {
     "first-input-delay": "^0.1.3",
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.0.1",
+    "jest": "^24.7.1",
+    "jest-environment-node": "^24.9.0",
+    "jest-puppeteer": "^4.3.0",
+    "page-coverage": "^1.3.0",
+    "puppeteer": "^1.19.0"
   }
 }

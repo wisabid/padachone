@@ -21,85 +21,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - to do  : change git email
 - to do : avoid security leak by hiding credentials
 - to do : optimize bundle, cdn
-- to do : headless cms
 - to do : admin dashboard
+- to do :log rocket
+- to do : testing & end to end testing using puppeteer
+- to do : skeletons using material ui
+- to do : make text and bg color dynamic with prismic
 
 
-## [1.0.0] - 2019-05-19
+## [2.1.1] - 2019-08-..
 ### Added
-- Landing page with Ads and set up phase
-- Homepage with Prayer times listing
-- Settings button for altering the set up configurations
-
-## [1.0.1] - 2019-05-20
+- puppeteer as a dev dependency for end to end testing
+- code coverage using page-coverage dev dependency
 ### Changed
-- Removed errors and aligned time to the right
+- Modified const to let in Travel times Asis/Calcutta hot fix
 
-## [1.0.2] - 2019-05-21
+### CHECKLIST
+
+## [2.1.0] - 2019-08-12
 ### Added
-- Snackbars for info messages to the users
-
-## [1.0.3] - 2019-05-26
-### Added
-- Time left for Prayer with design and dismiss;restricted to own time zone users
-
-## [1.0.4] - 2019-05-27
-### Added
-- Better timezone using moment and design change for timer
-
+- Apollo client & graphql for prismic
+- Materialui LAB for skeleton
+- Newsletters list in Lab
+- added graphql document names as constants
+- Bgm sets in when prayer time boy appears
+- Made timeout display dynamic with Prismic
 ### Changed
-- API based on Gulf region & Shafi madhab
+- Message display to accomodate image as well
+- Removed prismic helper at hooks side
 
-## [1.0.5] - 2019-05-28
+## [2.0.4] - 2019-08-06
 ### Added
-- Bgm
+- Set Display timer to false after the last prayer of the day as part of fixing the same defect
 
-## [1.0.6] - 2019-05-30
-### Added
-- Failed to fetch error message.
-
+## [2.0.3] - 2019-08-06
 ### Changed
-- Disabled bgm from layout
+- Put the hot fix (Asia/Calcutta timezone) in traveller onboard pages
 
-## [1.0.7] - 2019-06-12
-### Added
-- Email Subscription option
-
+## [2.0.2] - 2019-07-27
 ### Changed
-- Disabled copyright text
+- Null check for location data in Traveller onboard
 
-## [1.0.8] - 2019-06-14
+## [2.0.1] - 2019-07-21
 ### Changed
-- Timer logic to rectify the defect of prayer times falling within 1 hour gap difference.
-
-## [1.1.0] - 2019-06-15
-### Added
-- Context API for timezone and page
-
-### Changed
-- Fixed the bug for showing up Isha kid before it ticks 00:00
-
-## [1.1.1] - 2019-06-18
-### Added
-- Prayer times with lat lon (integrated Timer,header, current loc and modified styles on alpha release) 
-- Music and toggle volume button
-
-## [1.2.0] - 2019-06-26
-### Added
-- Side menu options for homepage with Travel Onboard feature
-- New icon for starting over Set up 
-
-### Changed
-- Start over action logic by hoisting it to the context level
-- Subscribe modal action by hoisting it to the context level
-
-
-## [1.2.1] - 2019-06-27
-### Added
-- Fast forward login action
-
-### Changed
-- New icon for starting over
+- Put a hot fix for Asia/Calcutta timezone
 
 ## [2.0.0] - 2019-07-14
 ### Added
@@ -119,7 +83,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Performance monitoring with firebase
 - Fall back on visitor data for geoposition disabled travel page
 - Integrated headless CMS by automating message broadcasting via Prismic
-
 ### Changed
 - Removed subscribe option from homepage footer
 - Slide animation on landingpage navigations and other pages
@@ -130,37 +93,103 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Decreased message display time 
 - Disabled music in travel page
 
-## [2.0.1] - 2019-07-21
-### Changed
-- Put a hot fix for Asia/Calcutta timezone
 
-## [2.0.2] - 2019-07-27
-### Changed
-- Null check for location data in Traveller onboard
-
-## [2.0.3] - 2019-08-06
-### Changed
-- Put the hot fix (Asia/Calcutta timezone) in traveller onboard pages
-
-## [2.0.4] - 2019-08-06
+## [1.2.1] - 2019-06-27
 ### Added
-- Set Display timer to false after the last prayer of the day as part of fixing the same defect
-
-## [2.1.0] - 2019-07-..
-### Added
-- Apollo client & graphql for prismic
-- Materialui LAB for skeleton
-- Newsletters list in Lab
-- added graphql document names as constants
-- Bgm sets in when prayer time boy appears
-- Made timeout display dynamic with Prismic
-
+- Fast forward login action
 ### Changed
-- Message display to accomodate image as well
-- Removed prismic helper at hooks side
+- New icon for starting over
+
+## [1.2.0] - 2019-06-26
+### Added
+- Side menu options for homepage with Travel Onboard feature
+- New icon for starting over Set up 
+### Changed
+- Start over action logic by hoisting it to the context level
+- Subscribe modal action by hoisting it to the context level
+
+## [1.1.1] - 2019-06-18
+### Added
+- Prayer times with lat lon (integrated Timer,header, current loc and modified styles on alpha release) 
+- Music and toggle volume button
+
+## [1.1.0] - 2019-06-15
+### Added
+- Context API for timezone and page
+### Changed
+- Fixed the bug for showing up Isha kid before it ticks 00:00
+
+## [1.0.8] - 2019-06-14
+### Changed
+- Timer logic to rectify the defect of prayer times falling within 1 hour gap difference.
+
+## [1.0.7] - 2019-06-12
+### Added
+- Email Subscription option
+### Changed
+- Disabled copyright text
+
+## [1.0.6] - 2019-05-30
+### Added
+- Failed to fetch error message.
+### Changed
+- Disabled bgm from layout
+
+## [1.0.5] - 2019-05-28
+### Added
+- Bgm
+
+## [1.0.4] - 2019-05-27
+### Added
+- Better timezone using moment and design change for timer
+### Changed
+- API based on Gulf region & Shafi madhab
+
+## [1.0.3] - 2019-05-26
+### Added
+- Time left for Prayer with design and dismiss;restricted to own time zone users
+
+## [1.0.2] - 2019-05-21
+### Added
+- Snackbars for info messages to the users
+
+## [1.0.1] - 2019-05-20
+### Changed
+- Removed errors and aligned time to the right
+
+## [1.0.0] - 2019-05-19
+### Added
+- Landing page with Ads and set up phase
+- Homepage with Prayer times listing
+- Settings button for altering the set up configurations
 
 
-### CHECKLIST
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
