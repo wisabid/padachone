@@ -7,11 +7,13 @@
 
 # testing
 /coverage
+/src/dev/e2e/screenshots
 
 # production
 /build
 
 # misc
+.vscode
 .DS_Store
 .env.local
 .env.development.local

@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const iPhone = puppeteer.devices['iPhone 6'];
 let browser, page;
 
 describe("Padachone webapp", () => {
@@ -12,8 +13,8 @@ describe("Padachone webapp", () => {
 
     await page.goto("http://localhost:3000/", { waitUntil: "networkidle0" });
 
-    await page.setViewport({ width: 375, height: 667 });
-    // await page.emulate(puppeteer.devices["iPhone 6/7/8"]);
+    // await page.setViewport({ width: 375, height: 667 });
+    await page.emulate(iPhone);
   });
 
   afterAll(async () => {
@@ -25,8 +26,10 @@ describe("Padachone webapp", () => {
       await page.click(".admirer-msg .MuiSnackbarContent-action button");
       await page.waitForSelector(".cookieConsent button");
       await page.click(".cookieConsent button");
+      await page.screenshot({path: './src/dev/e2e/landing-page.png'});
       await page.waitForSelector(".App .Home");
       await page.click(".App .Home");
+      await page.screenshot({path: './src/dev/e2e/setup.png'});
 
 
 
