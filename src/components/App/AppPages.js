@@ -104,7 +104,7 @@ export default function Album() {
             {cards.map((card, indx) => (
               <Grid item key={`${indx}-${card.page}`} xs={6} sm={6} md={4} style={{padding:'0px', background:'transparent'}}>
                 <Card className={classes.card}>
-                  <CardContent className={classes.cardContent} 
+                  <CardContent className={`${classes.cardContent} ${card.page}`} 
                     onClick={() => handleNav(card.page === 'Home'?'SetMeup':card.page)}>
                   {/* // <CardMedia
                   //   className={classes.cardMedia}

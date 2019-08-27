@@ -189,7 +189,7 @@ return (
                       variant="contained"
                       color="primary"
                       onClick={handleNext}
-                      className={classes.button}
+                      className={`${classes.button} actionButton${activeStep}`}
                       style={{color: "white"}}
                     >
                       {activeStep === steps.length - 1 ? 'Finish' : (activeStep === 2 && !place) ? 'Skip' : 'Next'}
