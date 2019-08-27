@@ -7,10 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import {P_MENUS} from '../../utils/constants';
+import {P_MENUS, PRISMIC_LANDING_BG} from '../../utils/constants';
 import {UserContext} from '../../store/context/userContext';
-import bg from '../../assets/images/landingBg.png';
-import {useRenderCounts} from  '../../hooks/api-hooks';
+import {useRenderCounts, useCmsAsset} from  '../../hooks/api-hooks';
 
 // import GridListTile from '@material-ui/core/GridListTile';
 // import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -89,8 +88,11 @@ const cards = P_MENUS;
 
 export default function Album() {
   useRenderCounts('AppPages.js');  
+  const bgimg = useCmsAsset(PRISMIC_LANDING_BG);
+  
   const classes = useStyles();
   const {handleNav} = useContext(UserContext);
+  
   
   return (
     <React.Fragment>      
@@ -98,7 +100,7 @@ export default function Album() {
         {/* Hero unit */}        
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={1} style={{backgroundImage: `url(${bg})`, backgroundPosition: 'center',backgroundRepeat:'no-repeat', backgroundColor: '#fff'}}>
+          <Grid container spacing={1} style={{backgroundImage: `url(${bgimg})`, backgroundPosition: 'center',backgroundRepeat:'no-repeat', backgroundColor: '#fff'}}>
             {cards.map((card, indx) => (
               <Grid item key={`${indx}-${card.page}`} xs={6} sm={6} md={4} style={{padding:'0px', background:'transparent'}}>
                 <Card className={classes.card}>

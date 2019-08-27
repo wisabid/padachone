@@ -1,6 +1,6 @@
 {
   "name": "padachone_dev",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "homepage": "https://www.padachone.com",
   "private": true,
   "dependencies": {
@@ -39,7 +39,7 @@
     "preset": "jest-puppeteer"
   },
   "scripts": {
-    "codecoverage" : "page-coverage http://localhost:3000",
+    "codecoverage": "page-coverage http://localhost:3000",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

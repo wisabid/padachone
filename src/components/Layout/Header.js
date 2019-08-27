@@ -14,11 +14,13 @@ import InfoIcon from '@material-ui/icons/Info';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
-import logo from '../../assets/images/logo-sec.png';
+import logoalt from '../../assets/images/logo-sec.png';
 import './layout.css';
 import {UserContext} from '../../store/context/userContext';
 import InfoMessage from './InfoMessage';
 import MusicOption from './MusicOption'
+import { useCmsAsset } from '../../hooks/api-hooks';
+import {PRISMIC_PADACHONE_LOGO} from '../../utils/constants';
 // import Bgmusic from '../Prayers/Bgmusic'
 // import bgm from '../../assets/mp3/2019-04-20_-_Quiet_Time_-_David_Fesliyan.mp3'
 
@@ -55,6 +57,7 @@ import MusicOption from './MusicOption'
 
 const Header = ({startup, place, pdate, travel=false, address='', volume=true, setVolume, playing, handleDrawerToggle}) => {
     const {tz, setPage, iamin, handleExit} = useContext(UserContext);
+    const logo = useCmsAsset(PRISMIC_PADACHONE_LOGO) || logoalt;
     const classes = useStyles();
     const [state, setState] = React.useState({
         checkedA: true
@@ -95,7 +98,7 @@ const Header = ({startup, place, pdate, travel=false, address='', volume=true, s
             >
               <MenuIcon />
             </IconButton>}
-            <a href="/"><img src={logo} width="150" height="30" alt="logo" className="App-logo"  /></a>
+            {logo && <a href="/"><img src={logo} width="150" height="30" alt="Padachone" className="App-logo"  /></a>}
           <div className={classes.grow} />
            
             

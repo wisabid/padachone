@@ -8,7 +8,7 @@ import ApolloClient from "apollo-client";
 import gql from "graphql-tag";
 
 import {getPDdata, getMonthYearNumber, addUniqueVisitor} from '../utils/index';
-import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS, PRISMIC_TOKEN} from '../utils/constants';
+import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS, PRISMIC_TOKEN, PRISMIC_SITEMEDIAS_DOC} from '../utils/constants';
 import {UserContext} from '../store/context/userContext';
 export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0}) => {
     const {forceTrigger} = useContext(UserContext);
@@ -328,6 +328,16 @@ export const useMessageBroadcast = () => {
                           }
                         }
                     }
+                    allSiteMedias {
+                        edges {
+                          node {
+                            assetName
+                            assetImage
+                            textColor
+                            bgColor
+                          }
+                        }
+                    }
                 }                
                 `
             }).then(response => {
@@ -347,6 +357,26 @@ export const useMessageBroadcast = () => {
         fetchMessage();
     }, []);
     return [msg];
+}
+
+export const useCmsAsset = (assetname) => {
+    const {cmsContents} = useContext(UserContext);
+    const [asset, setAsset] = useState('')
+    useEffect(() => {
+        if (cmsContents.data && cmsContents.data.hasOwnProperty(PRISMIC_SITEMEDIAS_DOC)) {
+          let bgimage = cmsContents.data[PRISMIC_SITEMEDIAS_DOC].edges.reduce((all,item, index) => {
+            if (item.node.assetName === assetname) {
+              all = item.node.assetImage;
+            }
+            return all;
+          },'');
+          if (bgimage) {
+            setAsset(bgimage.url);
+          }
+        }
+      }, [cmsContents]);
+
+      return asset;
 }
 
 

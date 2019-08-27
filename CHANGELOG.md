@@ -27,6 +27,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - to do : skeletons using material ui
 - to do : make text and bg color dynamic with prismic
 
+## [2.1.2] - 2019-08-27
+### Changed
+- Country is now pre populated even after hard reset
+- Bg image of grid menus has been made prismic bound
+- Title bg image is also prismic bound now
+- Prayertime boy is prismic bound
+- emojis are also prismic tied
+- logo is dynamic but with a fallback option
 
 ## [2.1.1] - 2019-08-..
 ### Added
@@ -134,11 +142,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Failed to fetch error message.
 ### Changed
 - Disabled bgm from layout
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
 
 ## [1.0.5] - 2019-05-28
 ### Added
 - Bgm
 
+<<<<<<< HEAD
+=======
+
+## [1.0.5] - 2019-05-28
+### Added
+- Bgm
+
+>>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
+=======
+>>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
 ## [1.0.4] - 2019-05-27
 ### Added
 - Better timezone using moment and design change for timer
@@ -188,6 +210,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
+=======
+>>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
 
 
 

@@ -3,10 +3,8 @@ import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import goofy from '../../assets/images/goofy.svg'
-import boo from '../../assets/images/boo.svg'
-import cool from '../../assets/images/cool.svg';
-import {useRenderCounts} from '../../hooks/api-hooks';
+import {PRISMIC_GOOFY_BG, PRISMIC_COOL_BG, PRISMIC_BOO_BG} from '../../utils/constants';
+import {useRenderCounts, useCmsAsset} from '../../hooks/api-hooks';
 
 
 const useStyles = makeStyles(theme => ({
@@ -16,7 +14,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const DismissTimer  = ({dismissMsg, setdismissMsg, anchorEl, setAnchorEl, timerdisplay, setTimerdisplay}) => {    
-    useRenderCounts('DismissTimer.js')
+    useRenderCounts('DismissTimer.js');
+    const goofy = useCmsAsset(PRISMIC_GOOFY_BG);
+    const cool = useCmsAsset(PRISMIC_COOL_BG);
+    const boo = useCmsAsset(PRISMIC_BOO_BG);
     const classes = useStyles();
     const onClose1 = (event) => {
         setAnchorEl(event.currentTarget);

@@ -6,12 +6,12 @@ import Zoom from '@material-ui/core/Zoom';
 import moment from 'moment'; 
 import './timer.css';
 import {getPDdata} from '../../utils'
-import angel from '../../assets/images/Prayer-time.jpg'
+import {PRISMIC_PRAYERTIME_BOY_BG} from '../../utils/constants';
 import CurrentTime from './CurrentTime';
 import DismissTimer from './DismissTimer';
 import PrayerTime from './PrayerTime';
 import {UserContext} from '../../store/context/userContext';
-import {useRenderCounts} from '../../hooks/api-hooks';
+import {useRenderCounts, useCmsAsset} from '../../hooks/api-hooks';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 
 const Timer = (props) => {
     useRenderCounts('Timer.js'); 
+    const angel = useCmsAsset(PRISMIC_PRAYERTIME_BOY_BG);
     // console.log('%c IM THE TIMER', 'font-size:20px;');
     useEffect(() => {
         // console.log('TIMER hellooo');
@@ -66,7 +67,8 @@ const Timer = (props) => {
         if (timeoptEl) {
             let timeopt = timeoptEl.innerHTML;
             const currTime = timeopt.split(' ')[1];
-            // const abid = {Fajr: "02:59", Dhuhr: "04:37", Asr: "05:56", Maghrib: "06:46", Isha: "07:00"}
+            // const abid = {Fajr: "02:59", Dhuhr: "04:37", Asr: "05:56", Maghrib: "06:46", Isha: "23:24"};
+            // props.prayers
             const upcomingPs = Object.entries(props.prayers).reduce((all, item) => {                
                 let firstItemTime = parseInt(item[1].split(':')[0]),
                     currTimeSet = parseInt(currTime.split(':')[0]),
@@ -136,9 +138,8 @@ const Timer = (props) => {
     useEffect(() => {
         console.log('TIMER USEEFFECT buhahaha');
         let spanEl = document.querySelector('.timerComp .MuiSnackbarContent-message div span:nth-child(1)');
-        if (!timerdisplay) {
+        if (!timerdisplay && angel) {
             setAnchorEl(null);  
-            
             if (spanEl && spanEl.innerText === " time expired") {
                 setAnim(() => [angel, anim[1]])      
             }   
@@ -152,7 +153,7 @@ const Timer = (props) => {
             // } 
         }
 
-    }, [timerdisplay])
+    }, [timerdisplay, angel])
 
     
     return (
@@ -186,5 +187,4 @@ const Timer = (props) => {
 }
 
 export default React.memo(Timer);
-
 
