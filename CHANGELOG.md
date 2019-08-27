@@ -143,17 +143,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Disabled bgm from layout
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
 
 ## [1.0.5] - 2019-05-28
 ### Added
 - Bgm
 
+<<<<<<< HEAD
 =======
 
 ## [1.0.5] - 2019-05-28
 ### Added
 - Bgm
 
+>>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
+=======
 >>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
 ## [1.0.4] - 2019-05-27
 ### Added
@@ -205,7 +211,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
 =======
 >>>>>>> aecb4cb43d2a5b551d4b2bccf84654e106602156
 
