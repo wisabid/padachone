@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prayertime boy is prismic bound
 - emojis are also prismic tied
 - logo is dynamic but with a fallback option
+- resoolved e2e bug by deleting unused webapp.test file
 
 ## [2.1.1] - 2019-08-..
 ### Added
