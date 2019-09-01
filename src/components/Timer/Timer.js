@@ -27,7 +27,14 @@ const useStyles = makeStyles(theme => ({
 
 const Timer = (props) => {
     useRenderCounts('Timer.js'); 
-    const angel = useCmsAsset(PRISMIC_PRAYERTIME_BOY_BG);
+    const [angel, setAngel] = useState('')
+    const asset = useCmsAsset(PRISMIC_PRAYERTIME_BOY_BG);
+    useEffect(() => {
+        if (asset.length) {
+            setAngel(asset[0].assetImage.url)
+        }
+      }, [asset])
+
     // console.log('%c IM THE TIMER', 'font-size:20px;');
     useEffect(() => {
         // console.log('TIMER hellooo');

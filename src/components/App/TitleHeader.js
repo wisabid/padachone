@@ -7,9 +7,16 @@ import {PRISMIC_TITLE_BG} from '../../utils/constants';
 import {useCmsAsset} from '../../hooks/api-hooks'
 
 const TitleHeader = (props) => {
-    const bgimg = useCmsAsset(PRISMIC_TITLE_BG);
+    const [bgimg, setBgimg] = useState('')
+    const asset = useCmsAsset(PRISMIC_TITLE_BG);
+    useEffect(() => {
+      if (asset.length) {
+        setBgimg(asset[0].assetImage.url)
+      }
+    }, [asset])
+
     const {country:country_alt, region:region_alt, place: place_alt, referrer} = props;
-    const [state, setState] = React.useState({activeStep : 0, place: place_alt, country : country_alt, region: region_alt})
+    const [state, setState] = useState({activeStep : 0, place: place_alt, country : country_alt, region: region_alt})
     const [ffopen, setFfopen] = useState(false);
     const {page, setPage} = useContext(UserContext);
     useEffect(() => {

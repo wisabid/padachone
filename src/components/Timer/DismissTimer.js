@@ -15,9 +15,33 @@ const useStyles = makeStyles(theme => ({
 
 const DismissTimer  = ({dismissMsg, setdismissMsg, anchorEl, setAnchorEl, timerdisplay, setTimerdisplay}) => {    
     useRenderCounts('DismissTimer.js');
-    const goofy = useCmsAsset(PRISMIC_GOOFY_BG);
-    const cool = useCmsAsset(PRISMIC_COOL_BG);
-    const boo = useCmsAsset(PRISMIC_BOO_BG);
+    const [goofy, setGoofy] = useState('');
+    const [cool, setCool] = useState('');
+    const [boo, setBoo] = useState('');
+    const [emojis, setEmojis] = useState({})
+    const assets = useCmsAsset(PRISMIC_GOOFY_BG, PRISMIC_COOL_BG, PRISMIC_BOO_BG);
+    useEffect(() => {
+        if (assets.length) {
+            //setEmojis(asset[0].assetImage.url)
+            assets.map(it => {
+                switch (it.assetName) {
+                    case PRISMIC_GOOFY_BG:
+                        setGoofy(it.assetImage.url);
+                        break;
+                    case PRISMIC_COOL_BG:
+                        setCool(it.assetImage.url);
+                        break;
+                    case PRISMIC_BOO_BG:
+                        setBoo(it.assetImage.url);
+                        break;
+                    default:
+                }
+                return it;
+            })
+            
+        }
+      }, [assets]);
+      
     const classes = useStyles();
     const onClose1 = (event) => {
         setAnchorEl(event.currentTarget);

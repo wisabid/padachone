@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -57,7 +57,13 @@ import {PRISMIC_PADACHONE_LOGO} from '../../utils/constants';
 
 const Header = ({startup, place, pdate, travel=false, address='', volume=true, setVolume, playing, handleDrawerToggle}) => {
     const {tz, setPage, iamin, handleExit} = useContext(UserContext);
-    const logo = useCmsAsset(PRISMIC_PADACHONE_LOGO) || logoalt;
+    const [logo, setLogo] = useState(logoalt)
+    const asset = useCmsAsset(PRISMIC_PADACHONE_LOGO) || logoalt;
+    useEffect(() => {
+      if (asset.length) {
+        setLogo(asset[0].assetImage.url)
+      }
+    }, [asset])
     const classes = useStyles();
     const [state, setState] = React.useState({
         checkedA: true
