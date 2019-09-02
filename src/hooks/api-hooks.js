@@ -8,7 +8,7 @@ import ApolloClient from "apollo-client";
 import gql from "graphql-tag";
 
 import {getPDdata, getMonthYearNumber, addUniqueVisitor} from '../utils/index';
-import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS, PRISMIC_TOKEN, PRISMIC_SITEMEDIAS_DOC} from '../utils/constants';
+import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS, PRISMIC_TOKEN, PRISMIC_SITEDESCRIPTION_DOC, PRISMIC_SITEMEDIAS_DOC} from '../utils/constants';
 import {UserContext} from '../store/context/userContext';
 export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0}) => {
     const {forceTrigger} = useContext(UserContext);
@@ -338,6 +338,15 @@ export const useMessageBroadcast = () => {
                           }
                         }
                     }
+                    allSiteDescriptions {
+                        edges {
+                          node {
+                            description
+                            textColor
+                            bgColor
+                          }
+                        }
+                    }
                 }                
                 `
             }).then(response => {
@@ -380,6 +389,25 @@ export const useCmsAsset = (...assets) => {
     }, [cmsContents]);
 
       return asset;
+}
+
+export const useSiteTitle = () => {
+    const {cmsContents} = useContext(UserContext);
+    const [sitetitle, setSitetitle] = useState({
+        description : `An easy to use light weight application for knowing your Fajr, Dhuhr, Asr, Maghrib & Isha timings of the day. "Worries end when Salah begins"`,
+        textcolor: '#90949C',
+        bgcolor : '#FAFAFA',
+        showup : false
+      }) 
+    useEffect(() => {
+      cmsContents && setSitetitle({
+        description: cmsContents.data[PRISMIC_SITEDESCRIPTION_DOC].edges[0].node.description,
+        textcolor : cmsContents.data[PRISMIC_SITEDESCRIPTION_DOC].edges[0].node.textColor,
+        bgcolor : cmsContents.data[PRISMIC_SITEDESCRIPTION_DOC].edges[0].node.bgColor,
+        showup : true
+      })
+    }, [cmsContents])
+    return sitetitle;
 }
 
 

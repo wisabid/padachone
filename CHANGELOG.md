@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.1.3] - 2019-09-..
 ### Changed
 - Landing bg image, bg color & font color are prismic bound now
+- Site description is dynamic
 
 ## [2.1.2] - 2019-08-27
 ### Changed
