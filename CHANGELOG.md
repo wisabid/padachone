@@ -27,6 +27,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - to do : skeletons using material ui
 - to do : make text and bg color dynamic with prismic
 
+## [2.1.3] - 2019-09-..
+### Changed
+- Landing bg image, bg color & font color are prismic bound now
+- Site description is dynamic
+- Site footer is prismic bound
+
 ## [2.1.2] - 2019-08-27
 ### Changed
 - Country is now pre populated even after hard reset

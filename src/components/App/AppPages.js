@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -86,9 +86,18 @@ const useStyles = makeStyles(theme => ({
 
 const cards = P_MENUS;
 
-export default function Album() {
+function Album() {
   useRenderCounts('AppPages.js');  
-  const bgimg = useCmsAsset(PRISMIC_LANDING_BG);
+  const [landingGrid, setLandingGrid] = useState({})
+  const asset = useCmsAsset(PRISMIC_LANDING_BG);
+  useEffect(() => {
+    if (asset.length) {
+      setLandingGrid({bg : asset[0].assetImage.url,
+        bgColor: `${asset[0].bgColor}`,
+        fontColor : asset[0].textColor})
+    }
+  }, [asset])
+
   
   const classes = useStyles();
   const {handleNav} = useContext(UserContext);
@@ -100,7 +109,7 @@ export default function Album() {
         {/* Hero unit */}        
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={1} style={{backgroundImage: `url(${bgimg})`, backgroundPosition: 'center',backgroundRepeat:'no-repeat', backgroundColor: '#fff'}}>
+          <Grid container spacing={1} style={{backgroundImage: `url(${landingGrid.bg})`, backgroundPosition: 'center',backgroundRepeat:'no-repeat', backgroundColor: `${landingGrid.bgColor}`}}>
             {cards.map((card, indx) => (
               <Grid item key={`${indx}-${card.page}`} xs={6} sm={6} md={4} style={{padding:'0px', background:'transparent'}}>
                 <Card className={classes.card}>
@@ -114,7 +123,7 @@ export default function Album() {
                   //   onClick={() => handleNav(card.page === 'Home'?'SetMeup':card.page)}
                   // > */}
                     <Button color="primary" className={`${classes.text} landing-navs`} style={{animationDelay: `${indx}s`}}>
-                      <Typography gutterBottom variant="h6" component="h2" style={{fontWeight:'bold'}}>
+                      <Typography gutterBottom variant="h6" component="h2" style={{fontWeight:'bold', color: `${landingGrid.fontColor}`}}>
                         {card.label === 'Home'?'Set me up':card.label}
                       </Typography>
                     </Button>
@@ -151,3 +160,5 @@ export default function Album() {
     </React.Fragment>
   );
 }
+
+export default React.memo(Album);

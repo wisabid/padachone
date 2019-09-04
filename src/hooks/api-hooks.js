@@ -8,7 +8,7 @@ import ApolloClient from "apollo-client";
 import gql from "graphql-tag";
 
 import {getPDdata, getMonthYearNumber, addUniqueVisitor} from '../utils/index';
-import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS, PRISMIC_TOKEN, PRISMIC_SITEMEDIAS_DOC} from '../utils/constants';
+import {BING_API, FT_PRAYER, IPSTACK_API, IGNORE_HOSTS, PRISMIC_TOKEN, PRISMIC_SITEDESCRIPTION_DOC, PRISMIC_SITEMEDIAS_DOC} from '../utils/constants';
 import {UserContext} from '../store/context/userContext';
 export const usePrayer = ({country='Netherlands', place, region="Noord-Holland", date, method=8, school=0}) => {
     const {forceTrigger} = useContext(UserContext);
@@ -338,6 +338,24 @@ export const useMessageBroadcast = () => {
                           }
                         }
                     }
+                    allSiteDescriptions {
+                        edges {
+                          node {
+                            description
+                            textColor
+                            bgColor
+                          }
+                        }
+                    }
+                    allSiteFooters {
+                        edges {
+                            node {
+                                description
+                                textColor
+                                bgColor
+                            }
+                        }
+                    }
                 }                
                 `
             }).then(response => {
@@ -359,24 +377,41 @@ export const useMessageBroadcast = () => {
     return [msg];
 }
 
-export const useCmsAsset = (assetname) => {
+export const useCmsAsset = (...assets) => {
     const {cmsContents} = useContext(UserContext);
-    const [asset, setAsset] = useState('')
+    const [asset, setAsset] = useState([])
     useEffect(() => {
         if (cmsContents.data && cmsContents.data.hasOwnProperty(PRISMIC_SITEMEDIAS_DOC)) {
-          let bgimage = cmsContents.data[PRISMIC_SITEMEDIAS_DOC].edges.reduce((all,item, index) => {
-            if (item.node.assetName === assetname) {
-              all = item.node.assetImage;
-            }
+          let assetsArray = cmsContents.data[PRISMIC_SITEMEDIAS_DOC].edges.reduce((all,item, index) => {
+              assets.map(assetItem => {
+                  if (assetItem === item.node.assetName) {
+                      all.push(item.node);
+                  }
+                  return assetItem;
+              })
             return all;
-          },'');
-          if (bgimage) {
-            setAsset(bgimage.url);
+          },[]);
+          if (assetsArray.length) {
+            setAsset(assetsArray);
           }
         }
-      }, [cmsContents]);
+    }, [cmsContents]);
 
       return asset;
+}
+
+export const useSiteTitle = ({docname, options}) => {
+    const {cmsContents} = useContext(UserContext);
+    const [sitetitle, setSitetitle] = useState(options) 
+    useEffect(() => {
+      cmsContents && setSitetitle({
+        description: cmsContents.data[docname].edges[0].node.description,
+        textcolor : cmsContents.data[docname].edges[0].node.textColor,
+        bgcolor : cmsContents.data[docname].edges[0].node.bgColor,
+        showup : true
+      })
+    }, [cmsContents])
+    return sitetitle;
 }
 
 

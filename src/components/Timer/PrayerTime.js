@@ -22,7 +22,13 @@ const styles = {
 
 
 const PrayerTime = ({anim, setAnim, travel=false, location=''}) => {
-    const angelimage = useCmsAsset(PRISMIC_PRAYERTIME_BOY_BG)
+    const [angelimage, SetAngelimage] = useState('')
+    const asset = useCmsAsset(PRISMIC_PRAYERTIME_BOY_BG);
+    useEffect(() => {
+        if (asset.length) {
+            SetAngelimage(asset[0].assetImage.url)
+        }
+      }, [asset])
     useRenderCounts('PrayerTime.js');
     // const [music, setMusic] = useState({show: false, playing : false});
     // const [volume, setVolume] = React.useState(true);
