@@ -5,11 +5,19 @@ import Button from '@material-ui/core/Button';
 import Zoom from '@material-ui/core/Zoom';
 import {RichText} from 'prismic-reactjs';
 import {UserContext} from '../../store/context/userContext';
-import {PRISMIC_TITLE_BG} from '../../utils/constants';
+import {PRISMIC_TITLE_BG, PRISMIC_SITEDESCRIPTION_DOC} from '../../utils/constants';
 import {useCmsAsset, useSiteTitle} from '../../hooks/api-hooks'
 
 const TitleHeader = (props) => {
-  const sitetitle = useSiteTitle();
+  const sitetitle = useSiteTitle({
+    docname : PRISMIC_SITEDESCRIPTION_DOC,
+    options : {
+      description : `An easy to use light weight application for knowing your Fajr, Dhuhr, Asr, Maghrib & Isha timings of the day. "Worries end when Salah begins"`,
+      textcolor: '#90949C',
+      bgcolor : '#FAFAFA',
+      showup : false
+    }
+  });
     const [bgimg, setBgimg] = useState('')
     const asset = useCmsAsset(PRISMIC_TITLE_BG);
     useEffect(() => {

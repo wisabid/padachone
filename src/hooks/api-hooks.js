@@ -347,6 +347,15 @@ export const useMessageBroadcast = () => {
                           }
                         }
                     }
+                    allSiteFooters {
+                        edges {
+                            node {
+                                description
+                                textColor
+                                bgColor
+                            }
+                        }
+                    }
                 }                
                 `
             }).then(response => {
@@ -391,19 +400,14 @@ export const useCmsAsset = (...assets) => {
       return asset;
 }
 
-export const useSiteTitle = () => {
+export const useSiteTitle = ({docname, options}) => {
     const {cmsContents} = useContext(UserContext);
-    const [sitetitle, setSitetitle] = useState({
-        description : `An easy to use light weight application for knowing your Fajr, Dhuhr, Asr, Maghrib & Isha timings of the day. "Worries end when Salah begins"`,
-        textcolor: '#90949C',
-        bgcolor : '#FAFAFA',
-        showup : false
-      }) 
+    const [sitetitle, setSitetitle] = useState(options) 
     useEffect(() => {
       cmsContents && setSitetitle({
-        description: cmsContents.data[PRISMIC_SITEDESCRIPTION_DOC].edges[0].node.description,
-        textcolor : cmsContents.data[PRISMIC_SITEDESCRIPTION_DOC].edges[0].node.textColor,
-        bgcolor : cmsContents.data[PRISMIC_SITEDESCRIPTION_DOC].edges[0].node.bgColor,
+        description: cmsContents.data[docname].edges[0].node.description,
+        textcolor : cmsContents.data[docname].edges[0].node.textColor,
+        bgcolor : cmsContents.data[docname].edges[0].node.bgColor,
         showup : true
       })
     }, [cmsContents])

@@ -9,6 +9,8 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
+import Zoom from '@material-ui/core/Zoom';
+import {RichText} from 'prismic-reactjs';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Fab from '@material-ui/core/Fab';
@@ -19,6 +21,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 // import Subscribe from '../Subscribe';
 import {UserContext} from '../../store/context/userContext';
+import {useSiteTitle} from '../../hooks/api-hooks';
+import {PRISMIC_SITEFOOTER_DOC} from '../../utils/constants';
+
+
 // const useStyles = makeStyles({
 //     root: {
 //       display: "flex"
@@ -59,7 +65,16 @@ const useStyles = makeStyles(theme => ({
 
 const Footer = ({startup}) => {
     const classes = useStyles();
-    const {modal, setModal} = useContext(UserContext)
+    const {modal, setModal} = useContext(UserContext);
+    const footerText = useSiteTitle({
+      docname : PRISMIC_SITEFOOTER_DOC,
+      options : {
+        description : `Copyright © 2019 WISMIM."`,
+        textcolor: '#555555',
+        bgcolor : '#EFEFEF',
+        showup : false
+      }
+    });
     // const [modal, setModal] = useState(false);
     // const [value, setValue] = React.useState('recents');
     // function handleChange(event, newValue) {
@@ -112,10 +127,18 @@ const Footer = ({startup}) => {
             <MoreIcon />
           </IconButton> */}
         {/* </Toolbar> */}
-        <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px', fontSize:'10px', color: '#555555'
+        {/* <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px', fontSize:'10px', color: '#555555'
 }} align="center">
             Copyright © 2019 WISMIM.
-          </Typography>
+          </Typography> */}
+          <Zoom in={footerText.showup}>
+        <div 
+        style={{textAlign:'center', fontStyle:'italic', color: `${footerText.textcolor}`, background : `${footerText.bgcolor}`, minHeight: '40px'}}>
+            
+              <RichText render={footerText.description}  />
+                        {/* <span onClick={handleTravel} style={{fontWeight:'bold', cursor:'pointer'}}>Click here...</span> (Alpha Release) */}
+          </div> 
+          </Zoom>
       </AppBar>
       </>
     )
