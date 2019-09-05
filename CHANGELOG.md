@@ -27,7 +27,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - to do : skeletons using material ui
 - to do : make text and bg color dynamic with prismic
 
-## [2.1.3] - 2019-09-..
+## [2.2.0] - 2019-09-..
+### Added
+-
+### Changed
+### CHECKLIST
+
+## [2.1.3] - 2019-09-04
 ### Changed
 - Landing bg image, bg color & font color are prismic bound now
 - Site description is dynamic
@@ -49,8 +55,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - code coverage using page-coverage dev dependency
 ### Changed
 - Modified const to let in Travel times Asis/Calcutta hot fix
-
-### CHECKLIST
 
 ## [2.1.0] - 2019-08-12
 ### Added
