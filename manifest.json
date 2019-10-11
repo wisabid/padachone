@@ -16,5 +16,6 @@
   "start_url": "https://www.padachone.com",
   "theme_color": "#ffffff",
   "background_color": "#fff",
-  "display": "standalone"
+  "display": "standalone",
+  "gcm_sender_id": "103953800507"
 }
