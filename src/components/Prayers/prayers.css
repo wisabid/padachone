@@ -1,5 +1,16 @@
 .pdnContainer {
     margin-top: 100px;
 }
+.metadata-container {
+    width: 100%;
+    box-shadow: none;
+
+}
+.prayer-card {
+    display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;     
+}
 
   

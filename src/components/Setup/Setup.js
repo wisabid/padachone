@@ -19,7 +19,7 @@ function Setup(props) {
     return (
       <Slide direction="left" in={true} mountOnEnter unmountOnExit>
         <div className={classes.root}>
-          <TitleHeader {...props} referrer="Setup"/>
+          <TitleHeader {...props} />
           <SetupStepper {...props}/>
         </div>
       </Slide>

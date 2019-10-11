@@ -4,7 +4,6 @@ import {useRenderCounts} from '../../hooks/api-hooks';
 
 const styles = {
     width: '275px',
-    margin: '0 auto',
     lineHeight: '10px', 
     margin: '10px auto',
     background: 'mediumseagreen',
