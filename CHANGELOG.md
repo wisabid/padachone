@@ -31,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - REMOVE DEV while going PROD
 - Add date for changelog release
 
-## [3.0.0] - 2019-10-11
+## [3.0.0] - 2019-10-12
 ### Added
 - FCM
 - Handled firebase push api check for browser (meant for safari)
