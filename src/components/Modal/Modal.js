@@ -29,10 +29,10 @@ export default function FormDialog({htmlmarkup=null, modal, error, setModal, tit
         {loading && <LinearProgress />}
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText style={error?{color:'red'}:null}>
+          {(description || htmlmarkup) && <DialogContentText style={error?{color:'red'}:null}>
             {description && description}
             {htmlmarkup && htmlmarkup}
-          </DialogContentText>
+          </DialogContentText>}
             {children}
         </DialogContent>
         <DialogActions>

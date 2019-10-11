@@ -26,12 +26,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - to do : testing & end to end testing using puppeteer
 - to do : skeletons using material ui
 - to do : make text and bg color dynamic with prismic
-
-## [2.2.0] - 2019-09-..
-### Added
--
-### Changed
+- to do : JWT for api & protect routes
 ### CHECKLIST
+- REMOVE DEV while going PROD
+- Add date for changelog release
+
+## [3.0.0] - 2019-10-11
+### Added
+- FCM
+- Handled firebase push api check for browser (meant for safari)
+- FCM token to firebase
+- Reminder : Hook up notification & easy cron
+- Dev Banner
+- Hook up with timezone
+- Disable reminder on safari
+- Test Alert modal window
+- In App Notification Display Implementation
+- Metadata expansion panel for prayers for showing hijri details
+- Accordion component
+- hid alarm off for ios
+- api for sending FCM notification and hooked it up with test reminder
+- api call for setting scheduling
+- Color block for hijri meta data
+- Twilio Integration for logging
+- Whatsapp logger custom hook & implemented in all important events
+- A unique username generated for all users in addition to hooking up with logger and firebase
+- EMojis in whatsapp logger
+- Hijri to Travel screen
+- Apod for Landing page
+- Conditional fetching of apod based on dynamic source - prismic or application
+- Apod details screen with redirection
+- Moving bg for apod
+- Hooked whatsapp logging to apod and learn more
+- Dynamically (prismic) overridden text and bg color for landing bg for apod sake
+
+### Changed
+- gitignore
+- Appended GCM id in manifest.json
+- Hotfix implementation for hiding blank timer display 
+- Newsletter component uses shared Accordion component
+- Prayer time display rendering style for home screen
+- Hot fix to rectify blank timer display
+- display either timezone or reminder
+- restrict reminder for just prayers
+- changed 1 min test reminder to 2 min reminder
+- Max stackbar is limited to 1 in infomessage of travel
+- Got rid of redundant hijri month display from travel 
+- Made infomessage in travel top center
+- Autohide duration of infomessage to 3s
+- Customized hijri for the travel
+- Also deleted testreminder & apod ls while logging out
+- Example address of Set me up process
 
 ## [2.1.3] - 2019-09-04
 ### Changed
@@ -47,7 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prayertime boy is prismic bound
 - emojis are also prismic tied
 - logo is dynamic but with a fallback option
-- resoolved e2e bug by deleting unused webapp.test file
+- resolved e2e bug by deleting unused webapp.test file
 
 ## [2.1.1] - 2019-08-..
 ### Added

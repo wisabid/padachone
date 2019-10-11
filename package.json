@@ -1,6 +1,6 @@
 {
   "name": "padachone",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "homepage": "https://www.padachone.com",
   "private": true,
   "dependencies": {
@@ -11,6 +11,7 @@
     "apollo-cache-inmemory": "^1.6.2",
     "apollo-client": "^2.6.3",
     "apollo-link-prismic": "^1.0.2",
+    "chance": "^1.1.0",
     "country-state-city": "^0.1.2",
     "emailjs-com": "^2.3.2",
     "firebase": "^6.2.4",

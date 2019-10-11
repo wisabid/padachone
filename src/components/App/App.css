@@ -45,3 +45,8 @@
   width : 80%;
   text-align: left;
 }
+
+@keyframes animatedBackground {
+  from { background-position: 0 0; }
+  to { background-position: center; }
+}

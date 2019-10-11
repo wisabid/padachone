@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import {UserContext} from '../../store/context/userContext';
-import {useRenderCounts} from '../../hooks/api-hooks';
+import {useRenderCounts, useWhatsapplogger} from '../../hooks/api-hooks';
 const useStyles = makeStyles(theme => ({
     root: {
       width: '100%',
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
       case 1:
         return 'You can always re-configure these settings on click of a button';
       case 2:
-        return 'Key in your address (eg : XYZ House, Trivandrum)'
+        return 'Key in your address (eg : 60611, Chicago)'
       // case 3:
       //   return `Wanna know your Ifthar/Prayer time while moving ? Coming Soon!`;
       default:
@@ -75,6 +75,9 @@ const useStyles = makeStyles(theme => ({
 
 const SetupStepper = (props) => {
   useRenderCounts('SetupStepper.js'); 
+  // Whatsapp logger
+  const [log, setLogs] = useWhatsapplogger({});
+  
     const {setPage} = useContext(UserContext);
   const {setupdata, country:country_alt, region:region_alt, place: place_alt} = props;
     const classes = useStyles();
@@ -132,6 +135,10 @@ const SetupStepper = (props) => {
       props.finished(newState);
       return newState;
     })
+    setLogs({
+      action: "Set me Up",
+      message: `just finished set me up`
+    });
   }
 
   useEffect(() => {
