@@ -43,7 +43,7 @@ const TitleHeader = props => {
   });
   const [ffopen, setFfopen] = useState(false);
 
-  const { page, setPage } = useContext(UserContext);
+  const { page, setPage, visitor } = useContext(UserContext);
 
   useEffect(() => {
     if (country_alt && region_alt) {
@@ -76,7 +76,7 @@ const TitleHeader = props => {
         }}
         gutterBottom
       >
-        Know Your Prayer times{" "}
+        Know Yo<span onClick={() => console.log(`%c 👉 You are awesome '${visitor.username}'`, 'font-size:25px;color:tomato;')}>u</span>r Prayer times{" "}
         {ffopen && (
           <ForwardIcon
             className="landing-navs"

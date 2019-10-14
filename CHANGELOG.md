@@ -30,6 +30,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### CHECKLIST
 - REMOVE DEV while going PROD
 - Add date for changelog release
+### NOTES
+- Always look at handleexit when a new ls or ss is added
+- loggin mechanism with prefixes
+
+## [3.0.1] - 2019-10-14
+### Added
+- username display on click of u in Know Your
+
+### Changed
+- username & token would now persist even if you start over from set me up screen
+- Apod is updated when American time changes
 
 ## [3.0.0] - 2019-10-12
 ### Added

@@ -371,3 +371,7 @@ export const addUniqueUser = ({ username, token }) => {
     console.error(err);
   }
 };
+
+export const getDateTimeOf = (tz="America/New_York") => {
+  return moment.tz(tz).format('DD MMM YYYY, H:mm:ss');
+}

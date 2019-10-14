@@ -9,6 +9,7 @@ import gql from "graphql-tag";
 
 import {
   getPDdata,
+  getDateTimeOf,
   getMonthYearNumber,
   addUniqueVisitor,
   loggerUtil,
@@ -517,11 +518,17 @@ export const useWhatsapplogger = ({ user, comp, action = "idle", msg }) => {
       case "APOD":
         emoji = "👩‍🚀";
         break;
+      case "Start Over":
+        emoji = "💣";
+        break;
       default:
         emoji = "💂‍";
         break;
     }
-    const msgPrefix = `${visitor.username} ${emoji} ( ${visitor.city} - ${visitor.postal} ) :  `;
+    let msgPrefix = `${visitor.username} ${emoji}`;
+    msgPrefix+= (visitor.city !== undefined)?`( ${visitor.city}`:'';
+    msgPrefix+= (visitor.postal !== undefined)?` - ${visitor.postal} ) : `:'';
+
     const suffix = ` at ${window.location.hostname}`;
     worker.postMessage({
       type: "logger",
@@ -530,6 +537,7 @@ export const useWhatsapplogger = ({ user, comp, action = "idle", msg }) => {
     setLogs({});
   };
   useEffect(() => {
+    debugger;
     if (logs.hasOwnProperty("action") && worker instanceof Worker) {
       nudgeWorker();
     }
@@ -550,6 +558,10 @@ export const useApod = () => {
   const pdtodaysDate = getPDdata()
     .split(" ")
     .join("");
+  console.log("WORKER AMS", pdtodaysDate);
+  const americanDate = getDateTimeOf("America/New_York").split(',')[0].split(' ').join('');
+  // const americanDate = "15Oct2019";
+  console.log('WORKER', americanDate);
   useEffect(() => {
     if (asset.length) {
       setLandingGrid({
@@ -563,19 +575,24 @@ export const useApod = () => {
       //  Fetch apod only if its 'application' hooked type, so that application has the liberty to fetch it from apod
       if (asset[0].dynamicSource === PRISMIC_DYNAMIC_SOURCE_APP_TYPE) {
         if (
-          !localStorage.getItem(`padachone_apod:${pdtodaysDate}`) &&
-          worker instanceof Worker
+          (!localStorage.getItem(`padachone_apod:${pdtodaysDate}`) &&
+          worker instanceof Worker) || 
+          (pdtodaysDate !== americanDate && !localStorage.getItem(`padachone_apod_FT`))
         ) {
-          setLoading(true);
-
-          console.log(`WORKER Going to call web worker...`);
-          worker.postMessage({
-            type: "apod",
-            msg: {
-              current: localStorage.getItem(`padachone_apod:${pdtodaysDate}`)
+            setLoading(true);
+            // if in America, it ticks 12am, a new apod will be posted..so delete if localstorage for the day already exists
+            if (pdtodaysDate !== americanDate && !localStorage.getItem(`padachone_apod_FT`)) {
+              localStorage.removeItem(`padachone_apod:${pdtodaysDate}`);
+              localStorage.setItem(`padachone_apod_FT`, true);
             }
-          });
-        } else {
+            console.log(`WORKER Going to call web worker...`);
+            worker.postMessage({
+              type: "apod",
+              msg: {
+                current: localStorage.getItem(`padachone_apod:${pdtodaysDate}`)
+              }
+            });
+          } else {
           console.log(
             `WORKER NOT Going to call web worker as the image is already in the ls...`
           );

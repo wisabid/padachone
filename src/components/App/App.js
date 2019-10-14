@@ -225,7 +225,10 @@ function App() {
         key !== "padachone:school" &&
         key !== `padachone_FT-${FT_PRAYER}` &&
         key !== `padachone_apod:${pdtodaysDate}` &&
-        key !== "padachone_testreminder"
+        key !== "padachone_testreminder" &&
+        key !== "padachone_username" &&
+        key !== "padachone_token" && 
+        key !== "padachone_apod_FT"
       ) {
         localStorage.removeItem(key);
       }
