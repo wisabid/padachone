@@ -36,11 +36,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.0.1] - 2019-10-14
 ### Added
-- username display on click of u in Know Your
+- username display on click of u in Know Your with modal display
 
 ### Changed
 - username & token would now persist even if you start over from set me up screen
 - Apod is updated when American time changes
+- Message prefix to  logged in log message
 
 ## [3.0.0] - 2019-10-12
 ### Added

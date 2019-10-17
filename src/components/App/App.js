@@ -28,7 +28,7 @@ import {
   useMessageBroadcast
 } from "../../hooks/api-hooks";
 import Newsletters from "../Newsletters";
-import Notification from "../Notification";
+import Notify from "../Notification/Notify";
 import Banner from "../TopBar";
 import { messaging } from "../../config/firebase";
 import Apod from '../Apod';
@@ -399,7 +399,7 @@ function App() {
             )}
 
             {modal.show && modal.name === "Notification" && (
-              <Notification
+              <Notify
                 modal={modal}
                 setModal={setModal}
                 method={method}

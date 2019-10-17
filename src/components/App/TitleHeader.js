@@ -9,9 +9,11 @@ import {
   PRISMIC_TITLE_BG,
   PRISMIC_SITEDESCRIPTION_DOC
 } from "../../utils/constants";
-import { useCmsAsset, useSiteTitle } from "../../hooks/api-hooks";
+import { useCmsAsset, useSiteTitle, useWhatsapplogger } from "../../hooks/api-hooks";
 
 const TitleHeader = props => {
+  const [log, setLogs] = useWhatsapplogger({});
+
   const sitetitle = useSiteTitle({
     docname: PRISMIC_SITEDESCRIPTION_DOC,
     options: {
@@ -43,7 +45,7 @@ const TitleHeader = props => {
   });
   const [ffopen, setFfopen] = useState(false);
 
-  const { page, setPage, visitor } = useContext(UserContext);
+  const { page, setPage, visitor, setNotification, handleNav } = useContext(UserContext);
 
   useEffect(() => {
     if (country_alt && region_alt) {
@@ -76,7 +78,26 @@ const TitleHeader = props => {
         }}
         gutterBottom
       >
-        Know Yo<span onClick={() => console.log(`%c 👉 You are awesome '${visitor.username}'`, 'font-size:25px;color:tomato;')}>u</span>r Prayer times{" "}
+        Know Yo
+        <span
+          onClick={() => {
+            console.log(
+              `%c 👉 You are awesome '${visitor.username}'`,
+              "font-size:25px;color:tomato;"
+            );
+            setNotification({
+              'username-msg-data' : {greeting : `Hi '${visitor.username}' !`, message: `How are you today? You are awesome!`}
+            });
+            handleNav("setNotifymodal");
+            setLogs({
+              action: "UID",
+              message: `just gotta know what his name is`
+            })
+          }}
+        >
+          u
+        </span>
+        r Prayer times{" "}
         {ffopen && (
           <ForwardIcon
             className="landing-navs"

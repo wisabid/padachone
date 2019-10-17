@@ -220,15 +220,15 @@ export const validateUserTimezone = tz => {
   return false;
 };
 
-export const addAlert = async ({ prayer, time, tz, visitor }) => {
-  return new Promise((resolve, reject) => {
+export const addAlert = ({ prayer, time, tz, visitor }) => {
+  return new Promise(async (resolve, reject) => {
     const splitForCron = time.split(":");
     const cronExpression = encodeURIComponent(
       `${splitForCron[1]} ${splitForCron[0]} * * *`
     );
 
     if (messaging) {
-      // console.log('FCM', await messaging.getToken())
+      console.log('FCM', await messaging.getToken())
       messaging.requestPermission().then(async function() {
         try {
           const token = await messaging.getToken();
@@ -248,15 +248,15 @@ export const addAlert = async ({ prayer, time, tz, visitor }) => {
   });
 };
 
-export const addTestAlert = async ({ prayer, time, tz, visitor }) => {
-  return new Promise((resolve, reject) => {
+export const addTestAlert = ({ prayer, time, tz, visitor }) => {
+  return new Promise(async (resolve, reject) => {
     const splitForCron = time.split(":");
     const cronExpression = encodeURIComponent(
       `${splitForCron[1]} ${splitForCron[0]} * * *`
     );
 
     if (messaging) {
-      // console.log('FCM', await messaging.getToken())
+      console.log('FCM', await messaging.getToken())
       messaging.requestPermission().then(async function() {
         try {
           const token = await messaging.getToken();

@@ -291,12 +291,13 @@ export const useVisitorDetails = dte => {
       addUniqueVisitor(data);
       // Whatsapp Logger
 
+      let msgPrefix;
+      msgPrefix+= (data.city !== undefined)?`( ${data.city}`:'';
+      msgPrefix+= (data.postal !== undefined)?` - ${data.postal} ) : `:'';
       loggerUtil({
         msg: `❤️${localStorage.getItem(
           "padachone_username"
-        )}❤️ : Hi there! 👋 I'm from ${data.city} (${
-          data.postal
-        })..Wazz up!..just logged in`
+        )}❤️ : Hi there! 👋 I'm from ${msgPrefix}..Wazz up!..just logged in`
       });
     }
     setVisitordata(data);
@@ -521,6 +522,9 @@ export const useWhatsapplogger = ({ user, comp, action = "idle", msg }) => {
       case "Start Over":
         emoji = "💣";
         break;
+      case 'UID':
+        emoji = "🧙";
+        break;
       default:
         emoji = "💂‍";
         break;
@@ -537,7 +541,6 @@ export const useWhatsapplogger = ({ user, comp, action = "idle", msg }) => {
     setLogs({});
   };
   useEffect(() => {
-    debugger;
     if (logs.hasOwnProperty("action") && worker instanceof Worker) {
       nudgeWorker();
     }
