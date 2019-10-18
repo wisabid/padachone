@@ -577,31 +577,26 @@ export const useApod = () => {
 
       //  Fetch apod only if its 'application' hooked type, so that application has the liberty to fetch it from apod
       if (asset[0].dynamicSource === PRISMIC_DYNAMIC_SOURCE_APP_TYPE) {
-        if (
-          (!localStorage.getItem(`padachone_apod:${pdtodaysDate}`) &&
-          worker instanceof Worker) || 
-          (pdtodaysDate !== americanDate && !localStorage.getItem(`padachone_apod_FT`))
-        ) {
-            setLoading(true);
-            // if in America, it ticks 12am, a new apod will be posted..so delete if localstorage for the day already exists
-            if (pdtodaysDate !== americanDate && !localStorage.getItem(`padachone_apod_FT`)) {
-              localStorage.removeItem(`padachone_apod:${pdtodaysDate}`);
-              localStorage.setItem(`padachone_apod_FT`, true);
-            }
-            console.log(`WORKER Going to call web worker...`);
-            worker.postMessage({
-              type: "apod",
-              msg: {
-                current: localStorage.getItem(`padachone_apod:${pdtodaysDate}`)
-              }
-            });
-          } else {
+        // the whole apod functionality is bound on american date and not users date
+        if (!localStorage.getItem(`padachone_apod:${americanDate}`) &&
+          worker instanceof Worker)
+         {
+           setLoading(true);
+           
+           console.log(`WORKER Going to call web worker...`);
+           worker.postMessage({
+             type: "apod",
+             msg: {
+               current: localStorage.getItem(`padachone_apod:${americanDate}`)
+             }
+           });
+         } else {
           console.log(
             `WORKER NOT Going to call web worker as the image is already in the ls...`
           );
 
           const apodurl = JSON.parse(
-            localStorage.getItem(`padachone_apod:${pdtodaysDate}`)
+            localStorage.getItem(`padachone_apod:${americanDate}`)
           ).url;
           setLandingGrid(() => {
             return {
@@ -628,30 +623,32 @@ export const useApod = () => {
       !workerData["worker_data"].msg.error &&
       workerData["worker_data"].msg.url
     ) {
-      console.log(`WORKER workerData received... : ${workerData}`);
+        console.log(`WORKER workerData received... : ${workerData}`);
 
-      // console.log(workerData['worker_data'].msg);
-      setLandingGrid({
-        ...landingGrid,
-        bg: workerData["worker_data"].msg.url,
-        bgColor: `${asset[0].bgColorOverride}`,
-        fontColor: asset[0].textColorOverride,
-        type: PRISMIC_DYNAMIC_SOURCE_APP_TYPE
-      });
-      Object.keys(localStorage).map(key => {
-        if (key.startsWith("padachone_apod:")) {
-          localStorage.removeItem(key);
-        }
-        return key;
-      });
-      localStorage.setItem(
-        `padachone_apod:${pdtodaysDate}`,
-        JSON.stringify(workerData["worker_data"].msg)
-      );
-      console.log(`WORKER Set localstorage with ... : ${workerData}`);
-      setWorkerData({});
-      console.log(`WORKER Set workerData null`);
-    } else if (
+        // console.log(workerData['worker_data'].msg);
+        setLandingGrid({
+          ...landingGrid,
+          bg: workerData["worker_data"].msg.url,
+          bgColor: `${asset[0].bgColorOverride}`,
+          fontColor: asset[0].textColorOverride,
+          type: PRISMIC_DYNAMIC_SOURCE_APP_TYPE
+        });
+        Object.keys(localStorage).map(key => {
+          if (key.startsWith("padachone_apod:")) {
+            localStorage.removeItem(key);
+          }
+          return key;
+        });
+        localStorage.setItem(
+          `padachone_apod:${americanDate}`,
+          JSON.stringify(workerData["worker_data"].msg)
+        );
+        localStorage.removeItem(`padachone_apod_FT`); // remove if it exists
+
+        console.log(`WORKER Set localstorage with ... : ${workerData}`);
+        setWorkerData({});
+        console.log(`WORKER Set workerData null`);
+      } else if (
       workerData["worker_data"] &&
       workerData["worker_data"].msg &&
       workerData["worker_data"].msg.error

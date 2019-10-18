@@ -8,7 +8,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import lightBlue from "@material-ui/core/colors/lightBlue";
 import Setup from "../Setup/Setup";
 import stepperData from "../Setup/setup-stepper-data.json";
-import { getPDdata } from "../../utils";
+import { getPDdata, getDateTimeOf } from "../../utils";
 import ErrorBoundary from "../Error/ErrorBoundary";
 import CookieConsent from "react-cookie-consent";
 import Messages from "../Messages";
@@ -139,6 +139,7 @@ function App() {
     pdtodaysDate: getPDdata()
       .split(" ")
       .join(""),
+    americanDate : getDateTimeOf("America/New_York").split(',')[0].split(' ').join(''),
     place: localStorage.getItem("padachone:place"),
     country: localStorage.getItem("padachone:country"),
     region: localStorage.getItem("padachone:region"),
@@ -156,6 +157,7 @@ function App() {
     region,
     pdtodaysDate,
     prayerdata,
+    americanDate,
     place,
     method,
     school
@@ -227,8 +229,7 @@ function App() {
         key !== `padachone_apod:${pdtodaysDate}` &&
         key !== "padachone_testreminder" &&
         key !== "padachone_username" &&
-        key !== "padachone_token" && 
-        key !== "padachone_apod_FT"
+        key !== "padachone_token"
       ) {
         localStorage.removeItem(key);
       }
@@ -363,7 +364,7 @@ function App() {
                 referrer={landingpage}
               />
             )}
-            {page === "Apod" && <Apod pdate={pdtodaysDate} referrer={landingpage}/>}
+            {page === "Apod" && <Apod pdate={americanDate} referrer={landingpage}/>}
             {finished && page === "Home" && (
               <Layout
                 country={country}
