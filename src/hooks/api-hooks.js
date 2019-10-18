@@ -291,9 +291,9 @@ export const useVisitorDetails = dte => {
       addUniqueVisitor(data);
       // Whatsapp Logger
 
-      let msgPrefix;
-      msgPrefix+= (data.city !== undefined)?`( ${data.city}`:'';
-      msgPrefix+= (data.postal !== undefined)?` - ${data.postal} ) : `:'';
+      let msgPrefix='';
+      msgPrefix+= (data.city !== undefined)?`${data.city}`:'';
+      msgPrefix+= (data.postal !== undefined)?` - ${data.postal} : `:'';
       loggerUtil({
         msg: `❤️${localStorage.getItem(
           "padachone_username"
@@ -493,6 +493,10 @@ export const useWhatsapplogger = ({ user, comp, action = "idle", msg }) => {
   const { worker, visitor } = useContext(UserContext);
   const [logs, setLogs] = useState({});
   const nudgeWorker = () => {
+    // do not log from ignore hosts (eg :  localhost)
+    if (IGNORE_HOSTS.indexOf(window.location.hostname) !== -1) {
+      return;
+    }
     let emoji;
     switch (logs.action) {
       case "Finetune Calc Method":

@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Apod is updated when American time changes
 - Message prefix to  logged in log message
 - Apod is now dependent only on American date as user's date is not being passed as current date anymore
+- Ignore hosts for loggers
 
 ## [3.0.0] - 2019-10-12
 ### Added

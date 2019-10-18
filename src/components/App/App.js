@@ -226,7 +226,7 @@ function App() {
         key !== "padachone:method" &&
         key !== "padachone:school" &&
         key !== `padachone_FT-${FT_PRAYER}` &&
-        key !== `padachone_apod:${pdtodaysDate}` &&
+        key !== `padachone_apod:${americanDate}` &&
         key !== "padachone_testreminder" &&
         key !== "padachone_username" &&
         key !== "padachone_token"

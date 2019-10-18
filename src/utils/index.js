@@ -1,6 +1,6 @@
 import * as emailjs from "emailjs-com";
 import moment from "moment";
-import { PRAYERS_ARR } from "./constants";
+import { PRAYERS_ARR, IGNORE_HOSTS } from "./constants";
 import { db } from "../config/firebase";
 import { messaging } from "../config/firebase";
 import Chance from "chance";
@@ -278,6 +278,10 @@ export const addTestAlert = ({ prayer, time, tz, visitor }) => {
 
 export const loggerUtil = async ({ msg }) => {
   const hostname = window.location.hostname;
+  // do not log from ignore hosts (eg :  localhost)
+  if (IGNORE_HOSTS.indexOf(hostname) !== -1) {
+    return;
+  }
   let emoji;
   switch (hostname) {
     case "dev.padachone.com":
