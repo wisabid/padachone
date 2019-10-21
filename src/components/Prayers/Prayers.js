@@ -25,10 +25,18 @@ const useStyles = makeStyles(theme => ({
 
 const Prayers = props => {
   useRenderCounts("Prayers.js");
+
   const { prdata: data } = props;
   const [expanded, setExpanded] = useState(false);
   // Whatsapp logger
   const [log, setLogs] = useWhatsapplogger({});
+  useEffect(() => {
+    // Whatsapp Logger
+    setLogs({
+      action: "Prayer Times",
+      message: `just had a look at the prayer times`
+    });
+  }, [])
   useEffect(() => {
     if (expanded) {
       // Whatsapp Logger

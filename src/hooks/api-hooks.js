@@ -526,8 +526,14 @@ export const useWhatsapplogger = ({ user, comp, action = "idle", msg }) => {
       case "Start Over":
         emoji = "💣";
         break;
-      case 'UID':
+      case "UID":
         emoji = "🧙";
+        break;
+      case "Prayer Times":
+        emoji = "🏋";
+        break;
+      case "Dismiss":
+        emoji = "⛹️‍";
         break;
       default:
         emoji = "💂‍";

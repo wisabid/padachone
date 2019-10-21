@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.1] - 2019-10-14
 ### Added
 - username display on click of u in Know Your with modal display
+- logs for Prayer times & dismiss functionality
 
 ### Changed
 - username & token would now persist even if you start over from set me up screen
