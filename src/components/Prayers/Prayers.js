@@ -8,7 +8,7 @@ import Prayer from "./Prayer";
 import "./prayers.css";
 import Timer from "../Timer";
 import { getJustPrayers } from "../../utils";
-import { useRenderCounts, useWhatsapplogger } from "../../hooks/api-hooks";
+import { useRenderCounts, useWhatsapplogger, useHijriHook } from "../../hooks/api-hooks";
 import Accordion from "../Accordion";
 import Metadata from "./Metadata";
 import TodayIcon from "@material-ui/icons/Today";
@@ -34,18 +34,10 @@ const Prayers = props => {
     // Whatsapp Logger
     setLogs({
       action: "Prayer Times",
-      message: `just had a look at the prayer times`
+      message: `just had a look at the prayer times of ${localStorage.getItem('padachone:place')} - ${localStorage.getItem('padachone:region')}`
     });
   }, [])
-  useEffect(() => {
-    if (expanded) {
-      // Whatsapp Logger
-      setLogs({
-        action: "Hijri Info",
-        message: `just opened up accordion`
-      });
-    }
-  }, [expanded]);
+  useHijriHook({expanded, travelorMain : 'Main'});
 
   const {
     data: { timings }

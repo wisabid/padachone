@@ -20,7 +20,9 @@ import {
   useDrawer,
   useForceTrigger,
   useForceTriggerRefresh,
-  useRenderCounts
+  useRenderCounts,
+  useWhatsapplogger,
+  useHijriHook
 } from "../../hooks/api-hooks";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -91,6 +93,9 @@ const Traveltimes = ({
 }) => {
   useRenderCounts("Traveltimes.js");
   const [expanded, setExpanded] = useState(false);
+  useHijriHook({expanded, travelorMain : 'Travel'});
+
+  const [log, setLogs] = useWhatsapplogger({});
 
   const [drawerOpen, handleDrawerToggle] = useDrawer();
   const [data, setData] = usePrayerOnGo({
@@ -138,6 +143,11 @@ const Traveltimes = ({
       );
       setOnlyPrayers(justPrayers);
       setVolume(); //play music
+      // Whatsapp Logger
+      setLogs({
+        action: "Traveller Onboard",
+        message: `just gotta know the prayer times of ${loc.formattedaddress}`
+      });
     }
   }, [timings]);
 

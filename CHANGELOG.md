@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - username display on click of u in Know Your with modal display
 - logs for Prayer times & dismiss functionality
+- log detected location in Traveller onboard & hijiri from Travel
 
 ### Changed
 - username & token would now persist even if you start over from set me up screen

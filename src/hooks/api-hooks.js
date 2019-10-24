@@ -686,3 +686,17 @@ export const useApod = () => {
   }, [loading]);
   return [landingGrid, loading, showfetching];
 };
+
+export const useHijriHook = ({expanded, travelorMain}) => {
+  const [log, setLogs] = useWhatsapplogger({});
+
+  useEffect(() => {
+    if (expanded) {
+      // Whatsapp Logger
+      setLogs({
+        action: "Hijri Info",
+        message: `(${travelorMain})just opened up accordion new`
+      });
+    }
+  }, [expanded]);
+}
