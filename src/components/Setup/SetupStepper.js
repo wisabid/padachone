@@ -58,14 +58,14 @@ const useStyles = makeStyles(theme => ({
     return ['Where on earth are you?', 'Almost there!', 'Need More Accuracy?'];
   }
   
-  function getStepContent(step) {
+  function getStepContent({index : step, visitor:{city='Chicago',postal='60611'}}) {
     switch (step) {
       case 0:
         return `This will Set up your timezone preferance`;
       case 1:
         return 'You can always re-configure these settings on click of a button';
       case 2:
-        return 'Key in your address (eg : 60611, Chicago)'
+        return `Key in your address (eg : ${postal}, ${city})`
       // case 3:
       //   return `Wanna know your Ifthar/Prayer time while moving ? Coming Soon!`;
       default:
@@ -78,7 +78,7 @@ const SetupStepper = (props) => {
   // Whatsapp logger
   const [log, setLogs] = useWhatsapplogger({});
   
-    const {setPage} = useContext(UserContext);
+    const {setPage, visitor} = useContext(UserContext);
   const {setupdata, country:country_alt, region:region_alt, place: place_alt} = props;
     const classes = useStyles();
     const [state, setState] = React.useState({activeStep : 0, place: place_alt, country : country_alt, region: region_alt})
@@ -182,7 +182,7 @@ return (
                 variant="outlined"
               />}
                   
-                <Typography color="textSecondary" variant="body2" component="p" style={{fontStyle:'italic', fontSize: '1rem', color: colorCode}} gutterBottom>{getStepContent(index)}</Typography>
+                <Typography color="textSecondary" variant="body2" component="p" style={{fontStyle:'italic', fontSize: '1rem', color: colorCode}} gutterBottom>{getStepContent({index, visitor})}</Typography>
                 <div className={classes.actionsContainer}>
                   <div>
                     <Button

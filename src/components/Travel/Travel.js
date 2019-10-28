@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, lazy, Suspense } from "react";
 import { geolocated } from "react-geolocated";
-import Traveltimes from "./Traveltimes";
 import SiteMessage from "../Messages/SiteMessage";
 import { useRenderCounts, useWhatsapplogger } from "../../hooks/api-hooks";
 import { UserContext } from "../../store/context/userContext";
+const Traveltimes = lazy(() => import("./Traveltimes"));
 // import Bgmusic from '../Prayers/Bgmusic'
 // import bgm from '../../assets/mp3/quietTime.mp3'
 
@@ -34,14 +34,16 @@ const Travel = props => {
         />
       ) : !props.isGeolocationEnabled ? (
         latitude && longitude ? (
-          <Traveltimes
-            lat={latitude}
-            lon={longitude}
-            music={music}
-            setMusic={setMusic}
-            volume={volume}
-            setVolume={setVolume}
-          />
+          <Suspense fallback={<h4>Loading...</h4>}>
+            <Traveltimes
+              lat={latitude}
+              lon={longitude}
+              music={music}
+              setMusic={setMusic}
+              volume={volume}
+              setVolume={setVolume}
+            />
+          </Suspense>
         ) : (
           <div>
             <SiteMessage
@@ -54,14 +56,16 @@ const Travel = props => {
         )
       ) : props.coords ? (
         <>
-          <Traveltimes
-            lat={props.coords.latitude}
-            lon={props.coords.longitude}
-            music={music}
-            setMusic={setMusic}
-            volume={volume}
-            setVolume={setVolume}
-          />
+          <Suspense fallback={<h4>Loading....</h4>}>
+            <Traveltimes
+              lat={props.coords.latitude}
+              lon={props.coords.longitude}
+              music={music}
+              setMusic={setMusic}
+              volume={volume}
+              setVolume={setVolume}
+            />
+          </Suspense>
         </>
       ) : (
         <div>Getting the location data&hellip; </div>

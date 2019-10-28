@@ -33,6 +33,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### NOTES
 - Always look at handleexit when a new ls or ss is added
 - loggin mechanism with prefixes
+- simulation of crash is available at Setup.js
+
+## [3.1.0] - 2019-10-28
+### Added
+- Code Splitting with lazy-suspense for Travel
+- Log for crash report
+
+### Changed
+- Replaced APOD word to the apod title
+- Replaced hardcoded place example with visitors city & postal code
 
 ## [3.0.1] - 2019-10-14
 ### Added

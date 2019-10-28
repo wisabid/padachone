@@ -6,11 +6,14 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { P_MENUS, PRISMIC_DYNAMIC_SOURCE_APP_TYPE } from "../../utils/constants";
+import {
+  P_MENUS,
+  PRISMIC_DYNAMIC_SOURCE_APP_TYPE
+} from "../../utils/constants";
+import {addEllipsis} from '../../utils';
 import { UserContext } from "../../store/context/userContext";
 import { useRenderCounts, useApod } from "../../hooks/api-hooks";
-import LinearProgress from '@material-ui/core/LinearProgress';
-
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -26,8 +29,8 @@ const useStyles = makeStyles(theme => ({
   cardGrid: {
     // marginTop: "12px",
     padding: "15px",
-    paddingTop: '0',
-    position:'relative'
+    paddingTop: "0",
+    position: "relative"
   },
   card: {
     height: "100%",
@@ -73,20 +76,25 @@ function Album() {
   useRenderCounts("AppPages.js");
   const [landingGrid, loading, showfetching] = useApod();
   useEffect(() => {
-    console.log('FETCHING', showfetching)
-  }, [showfetching])
+    console.log("FETCHING", showfetching);
+  }, [showfetching]);
   const classes = useStyles();
   const { handleNav, setPage } = useContext(UserContext);
-  
 
   return (
     <React.Fragment>
       {/* <main> */}
       {/* Hero unit */}
       <Container className={classes.cardGrid} maxWidth="md">
-      {loading && <LinearProgress />}
+        {loading && <LinearProgress />}
         {/* End hero unit */}
-        {showfetching.show && <small style={{position:'absolute', left:'25%', color:'#000'}}><i><b>{showfetching.msg}</b></i></small>}
+        {showfetching.show && (
+          <small style={{ position: "absolute", left: "25%", color: "#000" }}>
+            <i>
+              <b>{showfetching.msg}</b>
+            </i>
+          </small>
+        )}
 
         <Grid
           container
@@ -96,14 +104,14 @@ function Album() {
             // backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundColor: `${landingGrid.bgColor}`,
-            transition: 'background-image, background-color,  background-position 1s ease-in-out',
-            transitionDelay: '1s',
-            transitionDuration: '1s',
-            backgroundPosition: '0px 0px',
+            transition:
+              "background-image, background-color,  background-position 1s ease-in-out",
+            transitionDelay: "1s",
+            transitionDuration: "1s",
+            backgroundPosition: "0px 0px",
             // backgroundRepeat: 'repeat-x',
-            animation: 'animatedBackground 40s linear infinite',
-            animationDirection: 'alternate'
-
+            animation: "animatedBackground 40s linear infinite",
+            animationDirection: "alternate"
           }}
         >
           {cards.map((card, indx) => (
@@ -174,7 +182,14 @@ function Album() {
             </Grid>
           ))}
         </Grid>
-        {landingGrid.type === PRISMIC_DYNAMIC_SOURCE_APP_TYPE && <small style={{textDecoration:'underline', fontStyle:'italic'}} onClick={() => setPage('Apod')}><pre>Astronomy Picture of the Day</pre></small>}
+        {landingGrid.type === PRISMIC_DYNAMIC_SOURCE_APP_TYPE && (
+          <small
+            style={{ textDecoration: "underline", fontStyle: "italic" }}
+            onClick={() => setPage("Apod")}
+          >
+            <pre>{addEllipsis({word : landingGrid.title, maxlength : 40})}</pre>
+          </small>
+        )}
       </Container>
       {/* </main>      */}
     </React.Fragment>

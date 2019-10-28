@@ -604,17 +604,19 @@ export const useApod = () => {
           console.log(
             `WORKER NOT Going to call web worker as the image is already in the ls...`
           );
-
-          const apodurl = JSON.parse(
+          const parsedJson = JSON.parse(
             localStorage.getItem(`padachone_apod:${americanDate}`)
-          ).url;
+          )
+          const {url:apodurl, title:apodtitle} = parsedJson;
+
           setLandingGrid(() => {
             return {
               ...landingGrid,
               bg: apodurl,
               bgColor: `${asset[0].bgColorOverride}`,
               fontColor: asset[0].textColorOverride,
-              type: PRISMIC_DYNAMIC_SOURCE_APP_TYPE
+              type: PRISMIC_DYNAMIC_SOURCE_APP_TYPE,
+              title: apodtitle
             };
           });
           console.log(`WORKER Setting bg url for APPPAGES...`);
@@ -641,7 +643,8 @@ export const useApod = () => {
           bg: workerData["worker_data"].msg.url,
           bgColor: `${asset[0].bgColorOverride}`,
           fontColor: asset[0].textColorOverride,
-          type: PRISMIC_DYNAMIC_SOURCE_APP_TYPE
+          type: PRISMIC_DYNAMIC_SOURCE_APP_TYPE,
+          title: workerData["worker_data"].msg.title
         });
         Object.keys(localStorage).map(key => {
           if (key.startsWith("padachone_apod:")) {

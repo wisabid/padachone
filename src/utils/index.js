@@ -379,3 +379,7 @@ export const addUniqueUser = ({ username, token }) => {
 export const getDateTimeOf = (tz="America/New_York") => {
   return moment.tz(tz).format('DD MMM YYYY, H:mm:ss');
 }
+
+export const addEllipsis = ({word, maxlength}) => {
+  return (word.length > maxlength)?`${word}...`:word;
+}
