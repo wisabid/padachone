@@ -38,3 +38,4 @@ export const EASYCRON_TOKEN = "7f8b5800988b8daa158e078123a6f181";
 export const EASYCRON_AUTH_KEY = "AAAA3BtrViw:APA91bHwejU0gjRcivKv4nNjfcvply4dS5NkP_OZqQEaDX0LbQFO76J_1Tu9pod_8eGsP_5_bdZoNGNRH4GFAVYcS7UrDH0eE3A83AUW14lKFp_GZE8LVH9ai4-Xz1irPkn0MFPFb7Zu"; // yet to use
 export const PRISMIC_DYNAMIC_SOURCE_APP_TYPE = "application";
 export const PRISMIC_DYNAMIC_SOURCE_PRISMIC_TYPE = "prismic";
+export const PRISMIC_MEDIALIB_DOC = "allMediaLibraryStacks";

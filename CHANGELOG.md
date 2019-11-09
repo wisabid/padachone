@@ -28,12 +28,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - to do : make text and bg color dynamic with prismic
 - to do : JWT for api & protect routes
 ### CHECKLIST
-- REMOVE DEV while going PROD
+- REMOVE DEV while going PROD (package-lock, package.json)
 - Add date for changelog release
 ### NOTES
 - Always look at handleexit when a new ls or ss is added
 - loggin mechanism with prefixes
 - simulation of crash is available at Setup.js
+- Use `GR` for inspecting graphQL data logs
+
+## [3.2.0] - 2019-11-09
+### Added
+- Media Playback at homescreen (Prayertimes screen) with fullscreen paper
+- Hook up with Prismic
+
+### Changed
+- Modal actions buttons are aligned to left in Media display
 
 ## [3.1.0] - 2019-10-28
 ### Added

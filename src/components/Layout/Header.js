@@ -3,14 +3,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Switch from "@material-ui/core/Switch";
+import Badge from "@material-ui/core/Badge";
+// import Button from "@material-ui/core/Button";
+// import Switch from "@material-ui/core/Switch";
 import Slide from "@material-ui/core/Slide";
 import Clock from "react-live-clock";
-import Avatar from "@material-ui/core/Avatar";
+// import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import SettingsIcon from "@material-ui/icons/SettingsBackupRestore";
-import InfoIcon from "@material-ui/icons/Info";
+// import InfoIcon from "@material-ui/icons/Info";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
@@ -18,9 +19,10 @@ import logoalt from "../../assets/images/logo-sec.png";
 import "./layout.css";
 import { UserContext } from "../../store/context/userContext";
 import InfoMessage from "./InfoMessage";
-import MusicOption from "./MusicOption";
+// import MusicOption from "./MusicOption";
 import { useCmsAsset } from "../../hooks/api-hooks";
 import { PRISMIC_PADACHONE_LOGO } from "../../utils/constants";
+import YouTubeIcon from "@material-ui/icons/VideoLibrary";
 // import Bgmusic from '../Prayers/Bgmusic'
 // import bgm from '../../assets/mp3/2019-04-20_-_Quiet_Time_-_David_Fesliyan.mp3'
 
@@ -60,7 +62,7 @@ const Header = ({
   playing,
   handleDrawerToggle
 }) => {
-  const { tz, setPage, iamin, handleExit } = useContext(UserContext);
+  const { tz, setPage, iamin, handleExit, handleNav } = useContext(UserContext);
   const [logo, setLogo] = useState(logoalt);
   const asset = useCmsAsset(PRISMIC_PADACHONE_LOGO) || logoalt;
   useEffect(() => {
@@ -123,7 +125,22 @@ const Header = ({
             </a>
           )}
           <div className={classes.grow} />
-
+          <div>
+          <Badge
+            variant="standard"
+            badgeContent={`New`}
+            color="error"
+            style={{marginRight: "20px"}}
+            // anchorOrigin={{vertical: 'bottom',
+            // horizontal: 'left',}}
+          >
+            <YouTubeIcon
+              fontSize="default"
+              style={{ color: "#fff" }}
+              onClick={() => handleNav("setMediamodal")}
+            />
+          </Badge>
+          </div>
           {/* <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/> */}
           {/* <Avatar className={classes.avatar}> */}
           {!travel ? (
