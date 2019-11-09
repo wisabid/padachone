@@ -420,6 +420,17 @@ export const useMessageBroadcast = () => {
                   }
                 }
               }
+              allMediaLibraryStacks(sortBy:meta_lastPublicationDate_DESC){
+                edges {
+                  node {
+                    mediaTitle
+                    mediaType
+                    mediaUrl
+                    enabled
+                    allowFullscreen
+                  }
+                }
+              }
             }
           `
         })
@@ -445,6 +456,7 @@ export const useMessageBroadcast = () => {
   return [msg];
 };
 
+/* Custom Hook for Prismic Site media doc */
 export const useCmsAsset = (...assets) => {
   const { cmsContents } = useContext(UserContext);
   const [asset, setAsset] = useState([]);
@@ -534,6 +546,15 @@ export const useWhatsapplogger = ({ user, comp, action = "idle", msg }) => {
         break;
       case "Dismiss":
         emoji = "⛹️‍";
+        break;
+      case "MEDIA":
+        emoji = "🍌";
+        break;
+      case "Likes":
+        emoji = "👍";
+        break;
+      case "Sucks":
+        emoji = "👎";
         break;
       default:
         emoji = "💂‍";

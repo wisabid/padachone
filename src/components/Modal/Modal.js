@@ -7,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-export default function FormDialog({htmlmarkup=null, modal, error, setModal, title, description, children, primaryButton, fullWidth=true, fullScreen=false, handlePrimaryAction, secondaryButton, handleSecondaryAction, loading}) {
+export default function FormDialog({htmlmarkup=null, actionContainerStyle={}, modal, error, setModal, title, description, children, primaryButton, fullWidth=true, fullScreen=false, handlePrimaryAction, secondaryButton, handleSecondaryAction, contentContainerStyle={}, loading}) {
   const [open, setOpen] = React.useState(false);
   useEffect(() => {
     if (modal.hasOwnProperty('show')) {
@@ -28,14 +28,14 @@ export default function FormDialog({htmlmarkup=null, modal, error, setModal, tit
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-titlees" fullWidth={fullWidth} fullScreen={fullScreen}>
         {loading && <LinearProgress />}
         <DialogTitle id="form-dialog-title">{title}</DialogTitle>
-        <DialogContent>
+        <DialogContent style={contentContainerStyle}>
           {(description || htmlmarkup) && <DialogContentText style={error?{color:'red'}:null}>
             {description && description}
             {htmlmarkup && htmlmarkup}
           </DialogContentText>}
             {children}
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={actionContainerStyle}>
           <Button onClick={handleClose} color="primary">
             {secondaryButton}
           </Button>

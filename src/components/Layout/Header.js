@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import Badge from "@material-ui/core/Badge";
 // import Button from "@material-ui/core/Button";
 // import Switch from "@material-ui/core/Switch";
 import Slide from "@material-ui/core/Slide";
@@ -124,7 +125,22 @@ const Header = ({
             </a>
           )}
           <div className={classes.grow} />
-          <YouTubeIcon fontSize="large" style={{ marginRight: "10px", color: "#fff" }} onClick={() => handleNav("setMediamodal")}/>
+          <div>
+          <Badge
+            variant="standard"
+            badgeContent={`New`}
+            color="error"
+            style={{marginRight: "20px"}}
+            // anchorOrigin={{vertical: 'bottom',
+            // horizontal: 'left',}}
+          >
+            <YouTubeIcon
+              fontSize="default"
+              style={{ color: "#fff" }}
+              onClick={() => handleNav("setMediamodal")}
+            />
+          </Badge>
+          </div>
           {/* <Switch checked={state.checkedA} onChange={handleChange('checkedA')} value="checkedA" color="secondary"/> */}
           {/* <Avatar className={classes.avatar}> */}
           {!travel ? (

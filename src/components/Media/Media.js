@@ -1,150 +1,202 @@
-import lightBlue from "@material-ui/core/colors/lightBlue";
-import { makeStyles } from "@material-ui/core/styles";
 import React, { useContext, useEffect, useState, useRef } from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { useCalcMethods, useWhatsapplogger } from "../../hooks/api-hooks";
+import { useWhatsapplogger } from "../../hooks/api-hooks";
 import { UserContext } from "../../store/context/userContext";
 import DialogModal from "../Modal";
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+import CardMedia from "@material-ui/core/CardMedia";
+import Slide from "@material-ui/core/Slide";
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120
-  },
-  group: {
-    margin: theme.spacing(1, 0),
-    flexDirection: "row"
-  },
-  progress: {
-    margin: theme.spacing(2),
-    color: lightBlue[500]
-  },
-  card: {
-    display: 'flex',
-    flexDirection : 'column'
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    flex: '1 0 auto',
-  },
-  cover: {
-    width: 151,
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-}));
+import Skeleton from "@material-ui/lab/Skeleton";
+import Fade from "@material-ui/core/Fade";
+import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import CloseIcon from "@material-ui/icons/Close";
+// import { Link } from "prismic-reactjs";
+import { PRISMIC_MEDIALIB_DOC } from "../../utils/constants";
+
+const MediaTitleComp = ({ children, setModal }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        minHeight: "60px"
+      }}
+    >
+      {children}
+      <CloseIcon
+        color="primary"
+        onClick={() => {
+          return setModal({ show: false, name: "" });
+        }}
+      />
+    </div>
+  );
+};
 
 const Media = props => {
   // All you need for loggin
   // Whatsapp Logger
   const [log, setLogs] = useWhatsapplogger({});
-  const iframeRef =  useRef(null)
-  const [methods] = useCalcMethods();
-  const { setForceTrigger, setModal } = useContext(UserContext);
 
+  const iframeRef = useRef(null);
+  const { cmsContents, setModal } = useContext(UserContext);
+  useEffect(() => {
+    if (
+      cmsContents &&
+      cmsContents.data &&
+      cmsContents.data.hasOwnProperty(PRISMIC_MEDIALIB_DOC)
+    ) {
+      console.log(
+        cmsContents.data[PRISMIC_MEDIALIB_DOC].edges[0].node.mediaUrl
+      );
+      // setMedialibrary({
+      //     type : cmsContents.data[PRISMIC_MEDIALIB_DOC].edges[0].node.mediaType,
+      //     url : cmsContents.data[PRISMIC_MEDIALIB_DOC].edges[0].node.mediaUrl,
+      //     title : cmsContents.data[PRISMIC_MEDIALIB_DOC].edges[0].node.mediaTitle,
+      //     allowfs : cmsContents.data[PRISMIC_MEDIALIB_DOC].edges[0].node.allowFullScreen
+      //   })
+    }
+  }, [cmsContents]);
+  useEffect(() => {
+    setLogs({
+      action: "MEDIA",
+      message: `just launched media modal for watching video`
+    });
+  }, []);
+  // load  skeleton and hide iframe
+  const [iframeloading, setIframeloading] = useState(true);
+  const [iframestyles, setIframestyles] = useState({
+    visibility: "hidden",
+    position: "absolute"
+  });
+  // setMedialibrary({
+  //   type : cmsContents.data[PRISMIC_MEDIALIB_DOC].edges[0].node.mediaType,
+  //   url : cmsContents.data[PRISMIC_MEDIALIB_DOC].edges[0].node.mediaUrl,
+  //   title : cmsContents.data[PRISMIC_MEDIALIB_DOC].edges[0].node.mediaTitle,
+  //   allowfs : cmsContents.data[PRISMIC_MEDIALIB_DOC].edges[0].node.allowFullScreen
+  // })
   const initialState = {
-    description:
-      "",
-    title: "Staying Positive After Hardships",
-    primaryButton: "Like it",
-    secondaryButton: "cancel",
+    description: "",
+    title: (
+      <MediaTitleComp setModal={setModal}>
+        <Skeleton width="100%" />
+      </MediaTitleComp>
+    ),
+    primaryButton: <ThumbUpIcon />,
+    secondaryButton: <ThumbDownIcon />,
     error: false,
     loading: false
   };
   const [modalConfig, setModalConfig] = useState(initialState);
   useEffect(() => {
-    if (methods.hasOwnProperty("error")) {
+    if (!iframeloading) {
+      setIframestyles({ visibility: "visible", position: "static" });
       setModalConfig({
         ...modalConfig,
-        description:
-          "We are experiencing some issues. Please try after sometime.",
-        secondaryButton: "Ok",
-        primaryButton: "",
-        error: true
+        title: (
+          <MediaTitleComp setModal={setModal}>
+            <span>Staying Positive After Hardships</span>
+          </MediaTitleComp>
+        )
       });
     }
-  }, [methods]);
+  }, [iframeloading, modalConfig]);
 
-  useEffect(()   => {
-    setTimeout(() => console.table(iframeRef.current.onReady), 5000)
-    
-  }, [])
-  const classes = useStyles();
-  
-
-  
+  // useEffect(() => {
+  //   if (methods.hasOwnProperty("error")) {
+  //     setModalConfig({
+  //       ...modalConfig,
+  //       description:
+  //         "We are experiencing some issues. Please try after sometime.",
+  //       secondaryButton: "Ok",
+  //       primaryButton: "",
+  //       error: true
+  //     });
+  //   }
+  // }, [methods]);
 
   const handlePrimary = () => {
     setModalConfig({ ...modalConfig, loading: true });
-    
 
-    
-
-    // setForceTrigger(() => {
-    //   return {target: FT_PRAYER, method : calcMethod, school : schoolVal}
-    // });
-    setModal({ show: false, name: "" });
-    //window.location.reload();
+    setLogs(() => {
+      setModal({ show: false, name: "" });
+      return {
+        action: "Likes",
+        message: `just liked the media content`
+      };
+    });
   };
 
   const handleSecondary = () => {
-    setModalConfig(initialState);
+    setLogs({
+      action: "Sucks",
+      message: `just Disliked the media content`
+    });
   };
   return (
-    <DialogModal
-      {...props}
-      error={modalConfig.error}
-      title={modalConfig.title}
-      description={modalConfig.description}
-      primaryButton={
-        modalConfig.primaryButton ? modalConfig.primaryButton : null
-      }
-      handlePrimaryAction={() => handlePrimary()}
-      secondaryButton={modalConfig.secondaryButton}
-      handleSecondaryAction={() => handleSecondary()}
-      loading={modalConfig.loading}
-      fullWidth={true}
-    >
-     
-        <Card className={classes.card}>
-            {/* <div className={classes.details}> */}
-              {/* <CardContent className={classes.content}> */}
-                {/* <Typography component="h5" variant="h5">
-                  Staying Positive After Hardships
-                </Typography> */}
-                {/* <Typography variant="subtitle1" color="textSecondary">
-                  Mac Miller
-                </Typography> */}
-              {/* </CardContent> */}
-              
-            {/* </div> */}
+    <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+      <div>
+      <DialogModal
+        {...props}
+        error={modalConfig.error}
+        title={modalConfig.title}
+        description={modalConfig.description}
+        primaryButton={
+          modalConfig.primaryButton ? modalConfig.primaryButton : null
+        }
+        handlePrimaryAction={() => handlePrimary()}
+        secondaryButton={modalConfig.secondaryButton}
+        handleSecondaryAction={() => handleSecondary()}
+        loading={modalConfig.loading}
+        fullWidth={true}
+        fullScreen={true}
+        contentContainerStyle={{
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex"
+        }}
+        actionContainerStyle={{ justifyContent: "flex-start" }}
+      >
+        <div
+          style={{
+            minHeight: "155px",
+            maxWidth: "100%",
+            maxHeight: "100%",
+            width: "100vw",
+            height: "auto",
+            display:'flex',
+            // webkitOverflowScrolling:'touch',
+            // overflow:'auto' 
+          }}
+        >
+          {iframeloading ? (
+            <div>
+              <Skeleton variant="rect" width={"80vw"} height={145} />
+              {/* <Skeleton width="60%" /> */}
+            </div>
+          ) : null}
+          <Fade in={true} style={{ transitionDelay: "1200ms" }}>
             <CardMedia
               component="iframe"
-              // className={classes.cover}
-              // image="/static/images/cards/live-from-space.jpg"
               title="Staying Positive After Hardships"
               src="https://www.youtube.com/embed/RgGh2hlHbc4?enablejsapi=1&origin=https://www.padachone.com"
               ref={iframeRef}
-              onLoad={() => console.log('HIDE LOADING')}
+              onLoad={() => setIframeloading(false)}
+              onError={() => console.log("ERROR")}
+              style={iframestyles}
+              allowFullScreen
+              // minHeight={'155px'}
+              width={'100vw'}
+              // maxWidth={'100%'}
+              // maxHeight={'100%'}
+              height={'auto'}
             />
-          </Card>
-      
-    </DialogModal>
+          </Fade>
+        </div>
+      </DialogModal>
+      </div>
+    </Slide>
   );
 };
 
