@@ -1,6 +1,6 @@
 {
   "name": "padachone",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "homepage": "https://www.padachone.com",
   "private": true,
   "dependencies": {
@@ -30,7 +30,7 @@
     "react-geolocated": "^2.4.1",
     "react-live-clock": "^3.1.0",
     "react-messenger-customer-chat": "^0.7.2",
-    "react-scripts": "3.0.0",
+    "react-scripts": "^3.4.0",
     "react-sound": "^1.2.0",
     "react-swipeable-views": "^0.13.3",
     "react-swipeable-views-utils": "^0.13.3",

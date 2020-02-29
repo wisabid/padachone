@@ -96,7 +96,7 @@ const Media = props => {
         ...modalConfig,
         title: (
           <MediaTitleComp setModal={setModal}>
-            <span>Staying Positive After Hardships</span>
+            <span>How to Perform Umrah</span>
           </MediaTitleComp>
         )
       });
@@ -179,8 +179,8 @@ const Media = props => {
           <Fade in={true} style={{ transitionDelay: "1200ms" }}>
             <CardMedia
               component="iframe"
-              title="Staying Positive After Hardships"
-              src="https://www.youtube.com/embed/RgGh2hlHbc4?enablejsapi=1&origin=https://www.padachone.com"
+              title="How to Perform Umrah"
+              src="https://www.youtube.com/embed/qZ9n4V9lZkE?enablejsapi=1&origin=https://www.padachone.com"
               ref={iframeRef}
               onLoad={() => setIframeloading(false)}
               onError={() => console.log("ERROR")}

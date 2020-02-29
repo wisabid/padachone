@@ -36,6 +36,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - simulation of crash is available at Setup.js
 - Use `GR` for inspecting graphQL data logs
 
+## [3.2.1] - 2020-02-29
+### Added
+- Youtube media playback to Umrah video
+- New to 1
+- npm audit fix
+
+
 ## [3.2.0] - 2019-11-09
 ### Added
 - Media Playback at homescreen (Prayertimes screen) with fullscreen paper

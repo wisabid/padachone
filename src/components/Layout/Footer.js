@@ -69,7 +69,7 @@ const Footer = ({startup}) => {
     const footerText = useSiteTitle({
       docname : PRISMIC_SITEFOOTER_DOC,
       options : {
-        description : `Copyright © 2019 WISMIM."`,
+        description : `Copyright © 2020 WISMIM."`,
         textcolor: '#555555',
         bgcolor : '#EFEFEF',
         showup : false
@@ -129,7 +129,7 @@ const Footer = ({startup}) => {
         {/* </Toolbar> */}
         {/* <Typography variant="caption" display="block" gutterBottom color="secondary" style={{paddingTop:'10px', fontSize:'10px', color: '#555555'
 }} align="center">
-            Copyright © 2019 WISMIM.
+            Copyright © 2020 WISMIM.
           </Typography> */}
           <Zoom in={footerText.showup}>
         <div 

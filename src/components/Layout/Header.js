@@ -128,7 +128,7 @@ const Header = ({
           <div>
           <Badge
             variant="standard"
-            badgeContent={`New`}
+            badgeContent={`1`}
             color="error"
             style={{marginRight: "20px"}}
             // anchorOrigin={{vertical: 'bottom',
